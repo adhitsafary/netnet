@@ -107,7 +107,7 @@ class PerbaikanController extends Controller
 
         $perbaikan = new Perbaikan();
         $perbaikan->id_plg = $request->id_plg;
-        $perbaikan->nama_plg = $request->nama_plg;
+        $perbaikan->nama_plg = $request->nama_plg; // Menggunakan nama_plg yang diinput
         $perbaikan->alamat_plg = $request->alamat_plg;
         $perbaikan->no_telepon_plg = $request->no_telepon_plg;
         $perbaikan->paket_plg = $request->paket_plg;
@@ -119,7 +119,6 @@ class PerbaikanController extends Controller
 
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
     }
-
 
 
 
