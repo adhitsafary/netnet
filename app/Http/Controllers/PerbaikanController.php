@@ -7,6 +7,7 @@ use App\Models\Perbaikan;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Export\PerbaikanExport;
+use App\Models\Pelanggan;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -21,7 +22,6 @@ class PerbaikanController extends Controller
     {
         return view('auth.login');
     }
-
 
 
 
@@ -93,6 +93,15 @@ class PerbaikanController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'id_plg' => 'required',
+            'nama_plg' => 'required',
+            'alamat_plg' => 'required',
+            'no_telepon_plg' => 'required',
+            'paket_plg' => 'required',
+            'teknisi' => 'required',
+            'keterangan' => 'required',
+        ]);
 
         $perbaikan = new Perbaikan();
         $perbaikan->id_plg = $request->id_plg;
@@ -100,37 +109,80 @@ class PerbaikanController extends Controller
         $perbaikan->alamat_plg = $request->alamat_plg;
         $perbaikan->no_telepon_plg = $request->no_telepon_plg;
         $perbaikan->paket_plg = $request->paket_plg;
-        $perbaikan->odp = $request->odp;
-        $perbaikan->maps = $request->maps;
-        $perbaikan -> save();
+        $perbaikan->odp = $request->odp ?? null; // Menangani jika tidak diisi
+        $perbaikan->maps = $request->maps ?? null; // Menangani jika tidak diisi
+        $perbaikan->keterangan = $request->keterangan;
+        $perbaikan->teknisi = $request->teknisi;
+        $perbaikan->save();
 
-        // Redirect kembali ke halaman pelanggan dengan pesan sukses
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
     }
 
 
 
 
-    /**
-     * Display the specified resource.
-     */
+
+
+
+
+    public function getPelanggan($input)
+    {
+        // Coba cari pelanggan berdasarkan ID atau Nama Pelanggan
+        $pelanggan = Pelanggan::where('id_plg', $input)
+            ->orWhere('nama_plg', 'LIKE', '%' . $input . '%')
+            ->first();
+
+        if ($pelanggan) {
+            return response()->json([
+                'id_plg' => $pelanggan->id_plg,
+                'nama_plg' => $pelanggan->nama_plg,
+                'alamat_plg' => $pelanggan->alamat_plg,
+                'no_telepon_plg' => $pelanggan->no_telepon_plg,
+                'paket_plg' => $pelanggan->paket_plg,
+                'odp' => $pelanggan->odp,
+                'maps' => $pelanggan->maps
+            ]);
+        } else {
+            return response()->json(null);
+        }
+    }
+
+    public function searchPelanggan(Request $request)
+    {
+        $search = $request->input('search');
+
+        $pelanggan = Pelanggan::where('nama_plg', 'like', '%' . $search . '%')
+            ->get(['id_plg', 'nama_plg']); // Pilih kolom yang diperlukan untuk select2
+
+        $results = [];
+
+        foreach ($pelanggan as $p) {
+            $results[] = [
+                'id' => $p->id_plg,  // Ini yang akan menjadi value dari option
+                'text' => $p->nama_plg  // Ini yang akan tampil di dropdown
+            ];
+        }
+
+        return response()->json($results);
+    }
+
+
+
+
+
     public function show(string $id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(string $id)
     {
         $perbaikan = Perbaikan::findOrFail($id);
         return view('perbaikan.edit', compact('perbaikan'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, string $id)
     {
         $perbaikan = Perbaikan::findOrFail($id);
@@ -141,19 +193,66 @@ class PerbaikanController extends Controller
         $perbaikan->paket_plg = $request->paket_plg;
         $perbaikan->odp = $request->odp;
         $perbaikan->maps = $request->maps;
+        $perbaikan->teknisi = $request->teknisi;
+        $perbaikan->keterangan = $request->keterangan;
         $perbaikan->update();
 
         return redirect()->route('perbaikan.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+
+
     public function destroy(string $id)
     {
         $perbaikan = Perbaikan::findOrFail($id);
         $perbaikan->delete();
 
         return redirect()->route('perbaikan.index');
+    }
+
+
+
+    public function teknisi(Request $request)
+    {
+        $query = Perbaikan::query();
+
+        // Filtering
+        if ($request->filled('date')) {
+            $query->whereDate('created_at', $request->date);
+        }
+
+        // Pencarian
+        if ($request->filled('search')) {
+            $query->where('id_plg', 'like', '%' . $request->search . '%')
+                ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+        }
+
+        // Sorting
+        $sort = $request->get('sort', 'asc');
+        $query->orderBy('created_at', $sort);
+
+        $perbaikan = $query->get();
+
+        // Data for charts
+        $weeklyData = $query->selectRaw('WEEK(created_at) as week, COUNT(*) as total')
+            ->groupBy('week')
+            ->pluck('total', 'week');
+
+        $monthlyData = $query->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+            ->groupBy('month')
+            ->pluck('total', 'month');
+
+        $yearlyData = $query->selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+            ->groupBy('year')
+            ->pluck('total', 'year');
+
+        return view('perbaikan.teknisi', compact('perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
+    }
+
+
+    function home2()
+    {
+        return view('home2');
     }
 }

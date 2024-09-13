@@ -1,24 +1,46 @@
 @extends('layout')
 
 @section('konten')
-    <div>
-        <h6 class="text text-center mt-3">Manajemen Pelanggan</h6>
-    </div>
-    <div class="mb-4">
-        <!-- Form Filter dan Pencarian -->
-        <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline mb-4 justify-content-end">
-            <div class="input-group">
-                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
-                    placeholder="Pencarian">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Cari</button>
+<div class="mb-4">
+    <!-- Form Filter dan Pencarian -->
+    <div class="row mb-2 align-items-center">
+        <div class="col-md-3">
+            <!-- Form Pencarian -->
+            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline">
+                <!-- Input Pencarian -->
+                <div class="input-group">
+                    <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}" placeholder="Pencarian">
                 </div>
+                <!-- Tombol Cari -->
+                <button type="submit" name="action" value="search" class="btn btn-primary ml-2">Cari</button>
+            </form>
+        </div>
+
+        <div class="col-md-6 text-center">
+            <!-- Teks Data Pelanggan -->
+            <div class="btn btn-primary btn-lg mt-2" style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
+                Data Pelanggan
             </div>
-        </form>
+        </div>
 
-        <a href="{{ route('pelanggan.create') }}" class="btn btn-primary btn-sm mb-2">Pelanggan Baru</a>
+        <div class="col-md-3 text-right">
+            <!-- Form Filter -->
+            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline">
+                <div class="input-group">
+                    <select name="status_pembayaran" id="status_pembayaran" class="form-control">
+                        <option value="">Semua</option>
+                        <option value="belum_bayar" {{ $status_pembayaran_display == 'belum_bayar' ? 'selected' : '' }}>Belum Bayar</option>
+                        <option value="sudah_bayar" {{ $status_pembayaran_display == 'sudah_bayar' ? 'selected' : '' }}>Sudah Bayar</option>
+                    </select>
+                </div>
+                <!-- Tombol Filter -->
+                <button type="submit" name="action" value="filter" class="btn btn-primary ml-2">Filter</button>
+            </form>
+        </div>
+    </div>
 
-        <table class="table table-striped">
+    <div class="">
+        <table class="table table-striped ">
             <thead class="table table-primary">
                 <tr>
                     <th>No</th>
@@ -31,9 +53,13 @@
                     <th>Harga Paket</th>
                     <th>Tanggal Tagih</th>
                     <th>Status </th>
+                    <th>ODP</th>
+                    <th>Longitude</th>
+                    <th>Latitude</th>
                     <th>Keterangan</th>
-                    <th>Aksi</th>
-                    <th>Perbaikan</th>
+                    <th>Status Pembayaran</th>
+                    <th>Detail</th>
+                    <th>Riwayat pembayaran</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,37 +73,31 @@
                         <td>{{ $item->aktivasi_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->harga_paket }}</td>
-                        <td>{{ $item->tgl_tagih_plg }}</td>
-                        <td>{{ $item->status_plg }}</td>
+                        <td>{{ $item->aktivasi_plg }}</td>
+                        <td>{{ $item->status_pembayaran_display }}</td>
+                        <td>{{ $item->odp }}</td>
+
+                        <td>{{ $item->longitude }}</td>
+                        <td>{{ $item->latitude }}</td>
+
                         <td>{{ $item->keterangan_plg }}</td>
+                        <td>{{ $item->status_pembayaran }}</td>
                         <td>
-                            <a href="{{ route('pelanggan.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('pelanggan.destroy', $item->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                            </form>
+                            <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-sm">Detail</a>
                         </td>
                         <td>
-                            <form action="{{ route('perbaikan.store') }}" method="POST" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="id_plg" value="{{ $item->id_plg }}">
-                                <input type="hidden" name="nama_plg" value="{{ $item->nama_plg }}">
-                                <input type="hidden" name="alamat_plg" value="{{ $item->alamat_plg }}">
-                                <input type="hidden" name="no_telepon_plg" value="{{ $item->no_telepon_plg }}">
-                                <input type="hidden" name="paket_plg" value="{{ $item->paket_plg }}">
-                                <input type="hidden" name="odp" value="{{ $item->odp }}">
-                                <input type="hidden" name="maps" value="{{ $item->maps }}">
-                                <button type="submit" class="btn btn-warning btn-sm">Perbaikan</button>
-                            </form>
+                            <a href="{{ route('pelanggan.historypembayaran', $item->id) }}" class="btn btn-info btn-sm">Riwayat Pembayaran</a>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="13" class="text-center">Tidak ada data ditemukan</td>
+                        <td colspan="19" class="text-center">Tidak ada data ditemukan</td>
                     </tr>
                 @endforelse
             </tbody>
+
         </table>
     </div>
+
+
 @endsection
