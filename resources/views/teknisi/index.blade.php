@@ -18,8 +18,8 @@
                 </ul>
             </div>
        </div>
-    
-    
+
+
 
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-4">
@@ -34,7 +34,7 @@
                     </div>
                 </form>
             </div>
-   
+
             <div class="col-md-3 text-right">
                 <div class="d-flex justify-content-end gap-2" >
                     <button class="btn btn-primary btn-sm" width="500" >Pemasangan dan Perbaikan</button>
@@ -42,11 +42,11 @@
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
-                   
+
                 </div>
             </div>
-            
-           
+
+
         </div>
 
 
@@ -75,7 +75,7 @@
                             @endif
                         </a>
                     </th>
-                   
+
                 </tr>
             </thead>
             <tbody>
@@ -89,10 +89,10 @@
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->maps }}</td>
-                        <td>{{ $item->teknisi }}</td>
+                        <td>Tim {{ $item->teknisi }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->created_at }}</td>
-                       
+
                     </tr>
                 @empty
                     <tr>
@@ -103,5 +103,5 @@
         </table>
     </div>
 
-  
+
 @endsection

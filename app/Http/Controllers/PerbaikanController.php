@@ -254,7 +254,7 @@ class PerbaikanController extends Controller
         return view('home2');
     }
 
-    public function rekapTeknisi()
+    public function rekapTeknisi_asli()
     {
         $today = Carbon::now();
         $startDate = $today->copy()->startOfMonth();
@@ -284,5 +284,50 @@ class PerbaikanController extends Controller
             // Misalnya menghapus atau mereset data tertentu jika diperlukan
             // Bisa menggunakan query builder atau model untuk mereset data
         }
+    }
+
+    public function rekapTeknisi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        return view('perbaikan.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
+    }
+
+    public function printRekapTeknisi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        $pdf = Pdf::loadView('perbaikan.print_rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
+
+        return $pdf->download('rekap_teknisi_' . $startDate->format('Ymd') . '_to_' . $endDate->format('Ymd') . '.pdf');
+    }
+
+
+    public function resetData()
+    {
+        $today = Carbon::now();
+        $startDate = $today->copy()->startOfMonth();
+        $endDate = $today->copy()->endOfMonth();
+
+        // Hapus atau reset data perbaikan dari bulan ini
+        DB::table('perbaikan')->whereBetween('created_at', [$startDate, $endDate])->delete();
+
+        return redirect()->route('perbaikan.rekapTeknisi')->with('status', 'Data perbaikan bulanan telah direset.');
     }
 }

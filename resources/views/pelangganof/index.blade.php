@@ -29,9 +29,10 @@
                     <th>Longitude</th>
                     <th>Atitude</th>
                     <th>Keterangan</th>
+                    <th>Tanggal Off</th>
                     <th>Status Pembayaran</th>
                     <th>Detail</th>
-                    <th>Pembayaran</th>
+
 
                 </tr>
             </thead>
@@ -51,6 +52,7 @@
                         <td>{{ $item->longitude }}</td>
                         <td>{{ $item->latitude }}</td>
                         <td>{{ $item->keterangan_plg }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>{{ $item->status_pembayaran }}</td>
 
                         <td>
@@ -58,27 +60,7 @@
                             </a>
                         </td>
 
-                        <td>
-
-                            <form action="{{ route('pelanggan.store') }}" method="POST" style="display:inline;">
-                                @csrf
-                                <input type="hidden" name="id_plg" value="{{ $item->id_plg }}">
-                                <input type="hidden" name="nama_plg" value="{{ $item->nama_plg }}">
-                                <input type="hidden" name="alamat_plg" value="{{ $item->alamat_plg }}">
-                                <input type="hidden" name="no_telepon_plg" value="{{ $item->no_telepon_plg }}">
-                                <input type="hidden" name="aktivasi_plg" value="{{ $item->aktivasi_plg }}">
-                                <input type="hidden" name="paket_plg" value="{{ $item->paket_plg }}">
-                                <input type="hidden" name="harga_paket" value="{{ $item->harga_paket }}">
-                                <input type="hidden" name="tgl_tagih_plg" value="{{ $item->tgl_tagih_plg }}">
-                                <input type="hidden" name="status_plg" value="{{ $item->status_plg }}">
-                                <input type="hidden" name="keterangan_plg" value="{{ $item->keterangan_plg }}">
-                                <input type="hidden" name="odp" value="{{ $item->odp }}">
-                                <input type="hidden" name="maps" value="{{ $item->maps }}">
-
-                                <button type="submit" class="btn btn-warning btn-sm"
-                                    onclick="return validateForm(this.form)">Perbaikan</button>
-                            </form>
-                        </td>
+                       
 
                         <script>
                             function validateForm(form) {

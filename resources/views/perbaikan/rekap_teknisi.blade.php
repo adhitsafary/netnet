@@ -2,7 +2,39 @@
 
 @section('konten')
     <div class="container mt-4">
-        <h6 class="text-center text-black mt-3">Rekap Data Teknisi Bulanan</h6>
+        <h6 class="text-center text-black mt-3">Rekap Data Teknisi</h6>
+
+        <!-- Filter Tanggal -->
+        <form action="{{ route('perbaikan.rekapTeknisi') }}" method="GET" class="mb-3">
+            @csrf
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="start_date">Tanggal Mulai</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control" value="{{ request('start_date', $startDate->format('Y-m-d')) }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="end_date">Tanggal Akhir</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control" value="{{ request('end_date', $endDate->format('Y-m-d')) }}">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="filter_button">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Menampilkan Total Perbaikan -->
+        <div class="mb-3">
+            <h5>Total Perbaikan: {{ $totalPerbaikan }}</h5>
+        </div>
+
+        <!-- Tabel Rekap Data Teknisi -->
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -19,5 +51,15 @@
                 @endforeach
             </tbody>
         </table>
+
+        <!-- Tombol Cetak PDF -->
+        <div class="text-center mt-4">
+            <form action="{{ route('perbaikan.printRekapTeknisi') }}" method="POST">
+                @csrf
+                <input type="hidden" name="start_date" value="{{ request('start_date', $startDate->format('Y-m-d')) }}">
+                <input type="hidden" name="end_date" value="{{ request('end_date', $endDate->format('Y-m-d')) }}">
+                <button type="submit" class="btn btn-danger">Cetak PDF</button>
+            </form>
+        </div>
     </div>
 @endsection
