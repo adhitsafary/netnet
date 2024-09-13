@@ -394,6 +394,7 @@ class PelangganController extends Controller
         BayarPelanggan::create([
             'pelanggan_id' => $pelanggan->id,        // ID pelanggan
             'nama_plg' => $pelanggan->nama_plg,      // Nama pelanggan
+            'alamat_plg' => $pelanggan->alamat_plg,
             'alamat_plg' => $pelanggan->alamat_plg,  // Alamat pelanggan
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
             'tanggal_pembayaran' => now(),           // Tanggal pembayaran saat ini

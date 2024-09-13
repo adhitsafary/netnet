@@ -21,7 +21,7 @@
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
-                        <td>{{ $bayar->tgl_tagih_plg }}</td>
+                        <td>{{ $bayar->created_at->format('d') }}</td>
                         <td>{{ $bayar->created_at->format('d-m-Y') }}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>
@@ -58,10 +58,10 @@
                     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                         <!-- Logo di sebelah kiri -->
                         <img src="{{ asset('asset/img/netnet.jpg') }}" height="50" width="50">
-                        
+
                         <!-- Teks "NetNet Digital" di tengah -->
                         <h2 style="font-size: 18px; margin: 0; text-align: center;">NetNet Digital</h2>
-                        
+
                         <!-- Logo di sebelah kanan -->
                         <img src="{{ asset('asset/img/logo_hayat.png') }}" height="50" width="100">
                     </div>
@@ -70,7 +70,7 @@
                     <p><strong>Nama Pelanggan:</strong> ${nama}</p>
                     <p><strong>Alamat:</strong> ${alamat}</p>
                     <p><strong>Tanggal Tagih:</strong> ${tglTagih}</p>
-                  
+
                     <p><strong>Tanggal Pembayaran:</strong> ${tglBayar}</p>
                     <p><strong>Jumlah Pembayaran:</strong> Rp ${jumlahBayar}</p>
 

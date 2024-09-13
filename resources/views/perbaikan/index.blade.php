@@ -15,8 +15,9 @@
             </div>
         </form>
     </div>
+
     <div class="col-md-3 text-right">
-        <a href="" class="btn btn-primary btn-sm">Pemasangan dan Perbaikan</a>
+        <a href="/rekap-teknisi" class="btn btn-primary btn-sm">Rekap Bulanan Teknisi</a>
     </div>
 </div>
 

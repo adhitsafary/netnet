@@ -29,7 +29,7 @@
                             <li class="list-group-item">
                                 <strong>Longitude :</strong> {{ $pelanggan->longitude }}
                             </li>
-                           
+
 
                         </ul>
                     </div>
@@ -39,11 +39,12 @@
                             <li class="list-group-item">
                                 <strong>Paket:</strong> {{ $pelanggan->paket_plg }}
                             </li>
-                            <li class="list-group-item">No Telepon
+                            <li class="list-group-item">
                                 <strong>Harga Paket:</strong> {{ $pelanggan->harga_paket }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Tanggal Tagih:</strong> {{ $pelanggan->aktivasi_plg }}
+                                <strong>Tanggal Tagih:</strong>
+                                {{ \Carbon\Carbon::parse($pelanggan->aktivasi_plg)->format('d') }}
                             </li>
                             <li class="list-group-item">
                                 <strong>Keterangan :</strong> {{ $pelanggan->keterangan_plg }}
@@ -54,20 +55,20 @@
                             <li class="list-group-item">
                                 <strong>Latitude:</strong> {{ $pelanggan->Latitude }}
                             </li>
-                            
-                           <!-- <li class="list-group-item">
-                                <strong>Maps:</strong> {{ $pelanggan->maps }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Status:</strong> {{ $pelanggan->status_plg }}
-                            </li>
-                          
-                            <li class="list-group-item">
-                                <strong>Jumlah Port :</strong> {{ $pelanggan->jml_port }}
-                            </li>
-                            <li class="list-group-item">
-                                <strong>Sisa Port :</strong> {{ $pelanggan->sisa_port }}
-                            </li> -->
+
+                            <!-- <li class="list-group-item">
+                                                <strong>Maps:</strong> {{ $pelanggan->maps }}
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Status:</strong> {{ $pelanggan->status_plg }}
+                                            </li>
+
+                                            <li class="list-group-item">
+                                                <strong>Jumlah Port :</strong> {{ $pelanggan->jml_port }}
+                                            </li>
+                                            <li class="list-group-item">
+                                                <strong>Sisa Port :</strong> {{ $pelanggan->sisa_port }}
+                                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -83,9 +84,13 @@
                             <button class="btn btn-danger btn-sm"
                                 onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                         </form>
-                        <a href="{{ route('pelanggan.off', $pelanggan->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Pelanggan Atas Nama {{$pelanggan->nama_plg}} Akan di Non Aktifkan?')" >Pelanggan Off</a>
-                        <a href="{{ route('pelanggan.bayar', $pelanggan->id) }}" class="btn btn-success btn-sm" onclick="return confirm('Apakah {{$pelanggan->nama_plg}} Sudah Membayar sebesar Rp.{{$pelanggan->harga_paket}}?')">Bayar</a>
-                        <a href="{{ route('pelanggan.historypembayaran', $pelanggan->id) }}" class="btn btn-info btn-sm">Riwayat Pembayaran</a>
+                        <a href="{{ route('pelanggan.off', $pelanggan->id) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Pelanggan Atas Nama {{ $pelanggan->nama_plg }} Akan di Non Aktifkan?')">Pelanggan
+                            Off</a>
+                        <a href="{{ route('pelanggan.bayar', $pelanggan->id) }}" class="btn btn-success btn-sm"
+                            onclick="return confirm('Apakah {{ $pelanggan->nama_plg }} Sudah Membayar sebesar Rp.{{ $pelanggan->harga_paket }}?')">Bayar</a>
+                        <a href="{{ route('pelanggan.historypembayaran', $pelanggan->id) }}"
+                            class="btn btn-info btn-sm">Riwayat Pembayaran</a>
 
                     </div>
                     <a href="{{ route('pelanggan.index') }}" class="btn btn-secondary btn-sm">Kembali</a>

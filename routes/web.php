@@ -91,12 +91,12 @@ Route::get('/homebaru', [PelangganController::class, 'home'])->name('index');
 Route::middleware(['auth'])->group(function () {
     //alamat login akhir
     //Route::get('/masuk', [PelangganController::class, 'teknisi']);
-     //alamat login akhir
-     Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->middleware('userAkses:teknisi')->name('perbaikan.teknisi');
-      //alamat login akhir
+    //alamat login akhir
+    Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->middleware('userAkses:teknisi')->name('perbaikan.teknisi');
+    //alamat login akhir
     Route::get('/masuk/admin', [AdminController::class, 'index'])->middleware('userAkses:admin');
-     //alamat login akhir
-     Route::get('/masuk/superadmin', [PelangganController::class, 'home'])->middleware('userAkses:superadmin');
+    //alamat login akhir
+    Route::get('/masuk/superadmin', [PelangganController::class, 'home'])->middleware('userAkses:superadmin');
     //Logout
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
@@ -115,3 +115,4 @@ Route::get('/home2', [PerbaikanController::class, 'home2']);
 
 Route::get('/search-pelanggan', [PerbaikanController::class, 'searchPelanggan']);
 
+Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name('perbaikan.rekapTeknisi');
