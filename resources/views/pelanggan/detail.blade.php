@@ -44,7 +44,8 @@
                             </li>
                             <li class="list-group-item">
                                 <strong>Tanggal Tagih:</strong>
-                                {{ \Carbon\Carbon::parse($pelanggan->aktivasi_plg)->format('d') }}
+                                {{ \Carbon\Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('d') }}
+
                             </li>
                             <li class="list-group-item">
                                 <strong>Keterangan :</strong> {{ $pelanggan->keterangan_plg }}
@@ -55,20 +56,6 @@
                             <li class="list-group-item">
                                 <strong>Latitude:</strong> {{ $pelanggan->Latitude }}
                             </li>
-
-                            <!-- <li class="list-group-item">
-                                                <strong>Maps:</strong> {{ $pelanggan->maps }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <strong>Status:</strong> {{ $pelanggan->status_plg }}
-                                            </li>
-
-                                            <li class="list-group-item">
-                                                <strong>Jumlah Port :</strong> {{ $pelanggan->jml_port }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <strong>Sisa Port :</strong> {{ $pelanggan->sisa_port }}
-                                            </li> -->
                         </ul>
                     </div>
                 </div>

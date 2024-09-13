@@ -25,13 +25,9 @@
                     <th>Paket</th>
                     <th>Harga Paket</th>
                     <th>Tanggal Tagih</th>
-                    <th>Status </th>
                     <th>ODP</th>
-                    <th>Jumlah Port</th>
-                    <th>Sisa Port</th>
                     <th>Longitude</th>
                     <th>Atitude</th>
-                    <th>MAPS</th>
                     <th>Keterangan</th>
                     <th>Status Pembayaran</th>
                     <th>Detail</th>
@@ -50,14 +46,10 @@
                         <td>{{ $item->aktivasi_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->harga_paket }}</td>
-                        <td>{{ $item->aktivasi_plg }}</td>
-                        <td>{{ $item->status_plg }}</td>
+                        <td>{{ \Carbon\Carbon::createFromFormat('d/m/Y', $item->aktivasi_plg)->format('d') }}</td>
                         <td>{{ $item->odp }}</td>
-                        <td>{{ $item->jml_port}}</td>
-                        <td>{{ $item->sisa_port}}</td>
                         <td>{{ $item->longitude }}</td>
                         <td>{{ $item->latitude }}</td>
-                        <td>{{ $item->maps }}</td>
                         <td>{{ $item->keterangan_plg }}</td>
                         <td>{{ $item->status_pembayaran }}</td>
 
@@ -82,7 +74,7 @@
                                 <input type="hidden" name="keterangan_plg" value="{{ $item->keterangan_plg }}">
                                 <input type="hidden" name="odp" value="{{ $item->odp }}">
                                 <input type="hidden" name="maps" value="{{ $item->maps }}">
-                                
+
                                 <button type="submit" class="btn btn-warning btn-sm"
                                     onclick="return validateForm(this.form)">Perbaikan</button>
                             </form>
