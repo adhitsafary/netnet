@@ -56,7 +56,6 @@
                         <th>Paket</th>
                         <th>Harga Paket</th>
                         <th>Tanggal Tagih</th>
-                        <th>Status </th>
                         <th>ODP</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
@@ -80,14 +79,25 @@
                             <td>
                                 @if (!empty($item->aktivasi_plg))
                                     @php
-                                        // Trim white spaces and remove any unwanted characters
                                         $dateString = trim($item->aktivasi_plg);
+                                        $date = null;
 
-                                        // Check if the date format is correct
+                                        // Try parsing the date in 'Y-m-d' format first
                                         try {
-                                            $date = \Carbon\Carbon::createFromFormat('d/m/Y', $dateString);
-                                            echo $date->format('d');
+                                            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
                                         } catch (\Exception $e) {
+                                            // If parsing fails, try 'd/m/Y' format
+                                            try {
+                                                $date = \Carbon\Carbon::createFromFormat('d/m/Y', $dateString);
+                                            } catch (\Exception $e) {
+                                                $date = null;
+                                            }
+                                        }
+
+                                        // Display the date if successfully parsed, otherwise show an error message
+                                        if ($date) {
+                                            echo $date->format('d'); // You can change this to any format you prefer
+                                        } else {
                                             echo '<em>Invalid date format</em>';
                                         }
                                     @endphp
@@ -96,8 +106,6 @@
                                 @endif
                             </td>
 
-
-                            <td>{{ $item->status_pembayaran_display }}</td>
                             <td>{{ $item->odp }}</td>
 
                             <td>{{ $item->longitude }}</td>

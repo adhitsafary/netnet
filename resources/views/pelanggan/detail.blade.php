@@ -44,9 +44,35 @@
                             </li>
                             <li class="list-group-item">
                                 <strong>Tanggal Tagih:</strong>
-                                {{ \Carbon\Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('d') }}
+                                @if (!empty($pelanggan->aktivasi_plg))
+                                    @php
+                                        $dateString = trim($pelanggan->aktivasi_plg);
+                                        $date = null;
 
+                                        // Try parsing the date in 'Y-m-d' format first
+                                        try {
+                                            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
+                                        } catch (\Exception $e) {
+                                            // If parsing fails, try 'd/m/Y' format
+                                            try {
+                                                $date = \Carbon\Carbon::createFromFormat('d/m/Y', $dateString);
+                                            } catch (\Exception $e) {
+                                                $date = null;
+                                            }
+                                        }
+
+                                        // Display the date if successfully parsed, otherwise show an error message
+                                        if ($date) {
+                                            echo $date->format('d'); // You can change this to any format you prefer
+                                        } else {
+                                            echo '<em>Invalid date format</em>';
+                                        }
+                                    @endphp
+                                @else
+                                    <em>No date available</em>
+                                @endif
                             </li>
+
                             <li class="list-group-item">
                                 <strong>Keterangan :</strong> {{ $pelanggan->keterangan_plg }}
                             </li>
