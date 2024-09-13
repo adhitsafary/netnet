@@ -40,7 +40,7 @@
                                 <strong>Paket:</strong> {{ $pelangganof->paket_plg }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Harga Paket:</strong> {{ $pelangganof->harga_paket }}
+                                <strong>Harga Paket:</strong>{{ number_format($pelangganof->harga_paket, 0, ',', '.') }}
                             </li>
                             <li class="list-group-item">
                                 <strong>Tanggal Tagih:</strong>

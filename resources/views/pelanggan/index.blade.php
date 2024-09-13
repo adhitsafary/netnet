@@ -75,7 +75,7 @@
                             <td>{{ $item->no_telepon_plg }}</td>
                             <td>{{ $item->aktivasi_plg }}</td>
                             <td>{{ $item->paket_plg }}</td>
-                            <td>{{ $item->harga_paket }}</td>
+                            <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
                             <td>
                                 @if (!empty($item->aktivasi_plg))
                                     @php

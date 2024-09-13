@@ -45,7 +45,7 @@
                         <td>{{ $item->no_telepon_plg }}</td>
                         <td>{{ $item->aktivasi_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
-                        <td>{{ $item->harga_paket }}</td>
+                        <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
                         <td>{{ \Carbon\Carbon::createFromFormat('d/m/Y', $item->aktivasi_plg)->format('d') }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->longitude }}</td>
