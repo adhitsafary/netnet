@@ -29,42 +29,43 @@ class PerbaikanController extends Controller
     {
         $query = Perbaikan::query();
 
-        // Filtering
+        // Filter berdasarkan tanggal
         if ($request->filled('date')) {
             $query->whereDate('created_at', $request->date);
         }
 
-        // Pencarian
+        // Pencarian berdasarkan ID pelanggan atau nama pelanggan
         if ($request->filled('search')) {
-            $query->where('id_plg', 'like', '%' . $request->search . '%')
-                ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('id_plg', 'like', '%' . $request->search . '%')
+                    ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            });
         }
 
-        // Sorting
+        // Sorting berdasarkan tanggal pembuatan
         $sort = $request->get('sort', 'asc');
         $query->orderBy('created_at', $sort);
 
-        $perbaikan = $query->get();
+        // Ambil data perbaikan yang statusnya pending
+        $perbaikan = $query->where('status', 'pending')->get();
 
-        // Data for charts
-        $weeklyData = $query->selectRaw('WEEK(created_at) as week, COUNT(*) as total')
+        // Data untuk chart mingguan
+        $weeklyData = Perbaikan::selectRaw('WEEK(created_at) as week, COUNT(*) as total')
             ->groupBy('week')
             ->pluck('total', 'week');
 
-        $monthlyData = $query->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        // Data untuk chart bulanan
+        $monthlyData = Perbaikan::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->groupBy('month')
             ->pluck('total', 'month');
 
-        $yearlyData = $query->selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+        // Data untuk chart tahunan
+        $yearlyData = Perbaikan::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
             ->groupBy('year')
             ->pluck('total', 'year');
 
-
-        $perbaikans = Perbaikan::where('status', 'pending')->get();
-
-        return view('perbaikan.index', compact('perbaikans', 'perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
+        return view('perbaikan.index', compact('perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
     }
-
 
 
     public function exportPdf(Request $request)
