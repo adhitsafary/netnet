@@ -48,6 +48,7 @@
                         </a>
                     </th>
                     <th>Aksi</th>
+                    <th>Selesai</th>
                 </tr>
             </thead>
             <tbody>
@@ -61,7 +62,7 @@
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->maps }}</td>
-                        <td>{{ $item->teknisi }}</td>
+                        <td>Tim {{ $item->teknisi }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
@@ -72,6 +73,15 @@
                                 <button class="btn btn-danger btn-sm"
                                     onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
+                        </td>
+                        <td>{{ ucfirst($item->status) }}</td> <!-- Menampilkan status -->
+                        <td>
+                            @if($item->status == 'pending') <!-- Hanya tampilkan tombol jika statusnya pending -->
+                                <form action="{{ route('perbaikan.selesai', $item->id) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Selesai</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @empty

@@ -59,7 +59,10 @@ class PerbaikanController extends Controller
             ->groupBy('year')
             ->pluck('total', 'year');
 
-        return view('perbaikan.index', compact('perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
+
+        $perbaikans = Perbaikan::where('status', 'pending')->get();
+
+        return view('perbaikan.index', compact('perbaikans', 'perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
     }
 
 
@@ -328,5 +331,14 @@ class PerbaikanController extends Controller
         DB::table('perbaikan')->whereBetween('created_at', [$startDate, $endDate])->delete();
 
         return redirect()->route('perbaikan.rekapTeknisi')->with('status', 'Data perbaikan bulanan telah direset.');
+    }
+
+    public function selesai($id)
+    {
+        $perbaikan = Perbaikan::findOrFail($id);
+        $perbaikan->status = 'selesai'; // Ubah status menjadi 'selesai'
+        $perbaikan->save();
+
+        return redirect()->route('perbaikan.index')->with('success', 'Perbaikan telah ditandai selesai');
     }
 }
