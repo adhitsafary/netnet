@@ -471,7 +471,7 @@ class PelangganController extends Controller
             })
             ->get();
 
-        return Excel::download(new PembayaranExport($pembayaran), 'pembayaran.xlsx');
+        return Excel::download(new PelangganController($pembayaran), 'pembayaran.xlsx');
     }
 
 
