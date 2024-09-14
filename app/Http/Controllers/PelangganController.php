@@ -423,18 +423,60 @@ class PelangganController extends Controller
 
     public function index_bayar(Request $request)
     {
-        // Ambil nilai pencarian dari request
         $search = $request->input('search');
+        $date_start = $request->input('date_start');
+        $date_end = $request->input('date_end');
 
-        // Query untuk mengambil data dari bayar_pelanggan dengan pencarian
         $pembayaran = BayarPelanggan::when($search, function ($query, $search) {
             return $query->where('id', $search)
                 ->orWhere('nama_plg', 'like', "%{$search}%");
+        })
+            ->when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
+                return $query->whereBetween('created_at', [$date_start, $date_end]);
+            })
+            ->get();
+
+        return view('pembayaran.index', compact('pembayaran', 'search', 'date_start', 'date_end'));
+    }
+
+    public function export(Request $request, $format)
+    {
+        $date_start = $request->input('date_start');
+        $date_end = $request->input('date_end');
+
+        $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
+            return $query->whereBetween('created_at', [$date_start, $date_end]);
         })->get();
 
-        // Tampilkan ke view index
-        return view('pembayaran.index', compact('pembayaran', 'search'));
+        if ($format === 'pdf') {
+            $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
+            return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new PelangganController($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
+        }
     }
+
+    public function exportExcel(Request $request)
+    {
+        $search = $request->input('search');
+        $date_start = $request->input('date_start');
+        $date_end = $request->input('date_end');
+
+        $pembayaran = BayarPelanggan::when($search, function ($query, $search) {
+            return $query->where('id', $search)
+                ->orWhere('nama_plg', 'like', "%{$search}%");
+        })
+            ->when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
+                return $query->whereBetween('created_at', [$date_start, $date_end]);
+            })
+            ->get();
+
+        return Excel::download(new PembayaranExport($pembayaran), 'pembayaran.xlsx');
+    }
+
+
+
+
 
 
     public function plg_blm_byr(Request $request)

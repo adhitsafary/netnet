@@ -9,23 +9,22 @@
                     <th>No</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
-                    <th>Tanggal Tagih</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Print</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($pembayaran as $no => $bayar)
+                @foreach ($pembayaran as $no => $bayar)
                     <tr>
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
-                        <td>{{ $bayar->created_at->format('d') }}</td>
                         <td>{{ $bayar->created_at->format('d-m-Y') }}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>
-                            <button class="btn btn-info btn-sm" onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>
+                            <button class="btn btn-info btn-sm"
+                                onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>
                         </td>
                     </tr>
                 @endforeach
@@ -42,9 +41,8 @@
             var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
             var nama = row.cells[1].innerText;
             var alamat = row.cells[2].innerText;
-            var tglTagih = row.cells[3].innerText;
-            var tglBayar = row.cells[4].innerText;
-            var jumlahBayar = row.cells[5].innerText;
+            var tglBayar = row.cells[3].innerText;
+            var jumlahBayar = row.cells[4].innerText;
 
             // Format teks untuk dicetak menyerupai struk pembayaran dengan border dan tata letak di tengah
             var printContent = `
@@ -69,7 +67,6 @@
                     <!-- Informasi pelanggan -->
                     <p><strong>Nama Pelanggan:</strong> ${nama}</p>
                     <p><strong>Alamat:</strong> ${alamat}</p>
-                    <p><strong>Tanggal Tagih:</strong> ${tglTagih}</p>
 
                     <p><strong>Tanggal Pembayaran:</strong> ${tglBayar}</p>
                     <p><strong>Jumlah Pembayaran:</strong> Rp ${jumlahBayar}</p>

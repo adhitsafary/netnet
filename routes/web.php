@@ -59,8 +59,10 @@ Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->
 
 Route::get('/pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
-Route::get('/bayar-pelanggan', [PelangganController::class, 'index_bayar'])->name('pembayaran.index');
 
+//index pembayaran semua user  atau global
+Route::get('/bayar-pelanggan', [PelangganController::class, 'index_bayar'])->name('pembayaran.index');
+Route::get('/bayar-pelanggan/export/{format}', [PelangganController::class, 'export'])->name('pembayaran.export');
 
 Route::get('/broadcast', [BroadcastController::class, 'index'])->name('broadcast.index');
 Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broadcast.send');
