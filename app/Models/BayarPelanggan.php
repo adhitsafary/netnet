@@ -13,11 +13,16 @@ class BayarPelanggan extends Model
 
     protected $fillable = [
         'pelanggan_id',
+        'id_plg',          // Tambahkan kolom id_plg
         'nama_plg',
         'alamat_plg',
-        'tgl_tagih_plg',
+        'no_telepon_plg',
         'tanggal_pembayaran',
         'jumlah_pembayaran',
+        'metode_transaksi',
+        'updated_at',
+        'created_at',
+        'paket_plg',
     ];
 
     public function pelanggan()

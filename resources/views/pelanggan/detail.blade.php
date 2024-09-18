@@ -44,34 +44,8 @@
 
                             </li>
                             <li class="list-group-item">
-                                <strong>Tanggal Tagih:</strong>
-                                @if (!empty($pelanggan->aktivasi_plg))
-                                    @php
-                                        $dateString = trim($pelanggan->aktivasi_plg);
-                                        $date = null;
-
-                                        // Try parsing the date in 'Y-m-d' format first
-                                        try {
-                                            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
-                                        } catch (\Exception $e) {
-                                            // If parsing fails, try 'd/m/Y' format
-                                            try {
-                                                $date = \Carbon\Carbon::createFromFormat('d/m/Y', $dateString);
-                                            } catch (\Exception $e) {
-                                                $date = null;
-                                            }
-                                        }
-
-                                        // Display the date if successfully parsed, otherwise show an error message
-                                        if ($date) {
-                                            echo $date->format('d'); // You can change this to any format you prefer
-                                        } else {
-                                            echo '<em>Invalid date format</em>';
-                                        }
-                                    @endphp
-                                @else
-                                    <em>No date available</em>
-                                @endif
+                                <strong>Tanggal Tagih : </strong>
+                               {{ $pelanggan->tgl_tagih_plg }}
                             </li>
 
                             <li class="list-group-item">
@@ -81,7 +55,7 @@
                                 <strong>ODP :</strong> {{ $pelanggan->odp }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Latitude:</strong> {{ $pelanggan->Latitude }}
+                                <strong>Latitude:</strong> {{ $pelanggan->latitude}}
                             </li>
                         </ul>
                     </div>
@@ -101,15 +75,80 @@
                         <a href="{{ route('pelanggan.off', $pelanggan->id) }}" class="btn btn-danger btn-sm"
                             onclick="return confirm('Pelanggan Atas Nama {{ $pelanggan->nama_plg }} Akan di Non Aktifkan?')">Pelanggan
                             Off</a>
-                        <a href="{{ route('pelanggan.bayar', $pelanggan->id) }}" class="btn btn-success btn-sm"
-                            onclick="return confirm('Apakah {{ $pelanggan->nama_plg }} Sudah Membayar sebesar Rp.{{ $pelanggan->harga_paket }}?')">Bayar</a>
+                        <a href="#" class="btn btn-success btn-sm"
+                            onclick="showBayarModal({{ $pelanggan->id }}, '{{ $pelanggan->nama_plg }}', {{ $pelanggan->harga_paket }})">Bayar</a>
+
+                        <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="bayarModalLabel">Pembayaran</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <!-- Modal Form -->
+                                    <form id="bayarForm" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" id="pelangganId">
+                                        <div class="modal-body">
+                                            <!-- Input Tanggal Pembayaran -->
+                                            <div class="mb-3">
+                                                <label for="tanggalPembayaran" class="form-label">Tanggal
+                                                    Pembayaran</label>
+                                                <input type="date" class="form-control" id="tanggalPembayaran"
+                                                    name="tanggal_pembayaran" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="metodeTransaksi" class="form-label">Metode Transaksi</label>
+                                                <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
+                                                    required>
+                                                    <option value="">Pilih metode</option>
+                                                    <option value="Cash Kantor">Cash Kantor</option>
+                                                    <option value="Cash Pickup">Cash Pickup</option>
+                                                    <option value="Transfer Bca">Transfer Via BCA</option>
+                                                    <option value="Transfer Dana">Transfer Via Dana</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Detail Pembayaran -->
+                                            <div class="mb-3">
+                                                <p id="pembayaranDetails"></p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Bayar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <a href="{{ route('pelanggan.historypembayaran', $pelanggan->id) }}"
                             class="btn btn-info btn-sm">Riwayat Pembayaran</a>
 
                     </div>
-                    <a href="{{ route('pelanggan.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
+                    <div>
+                        <a href="{{ route('pelanggan.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+<script>
+    function showBayarModal(id, namaPlg, hargaPaket) {
+        document.getElementById('pelangganId').value = id;
+        document.getElementById('pembayaranDetails').innerText =
+            `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
+
+        var form = document.getElementById('bayarForm');
+        form.action = `/pelanggan/${id}/bayar`; // Set action URL with the ID
+
+        var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
+        bayarModal.show();
+    }
+</script>

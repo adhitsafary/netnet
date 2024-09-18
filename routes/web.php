@@ -56,8 +56,8 @@ Route::post('/pelanggan/{id}/pembayaran', [PelangganController::class, 'pembayar
 
 Route::patch('/pelanggan/{id}/toggle-visibility', [PelangganController::class, 'toggleVisibility'])->name('pelanggan.toggleVisibility');
 Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->name('pelanggan.history');
-
-Route::get('/pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
+//ini untuk pembayaran
+Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 
 //index pembayaran semua user  atau global
@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function () {
     //alamat login akhir
     Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->middleware('userAkses:teknisi')->name('perbaikan.teknisi');
     //alamat login akhir
-    Route::get('/masuk/admin', [AdminController::class, 'index'])->middleware('userAkses:admin');
+    Route::get('/masuk/admin', [AdminController::class, 'home'])->middleware('userAkses:admin');
     //alamat login akhir
     Route::get('/masuk/superadmin', [PelangganController::class, 'home'])->middleware('userAkses:superadmin');
     //Logout
@@ -111,14 +111,14 @@ Route::get('/get-pelanggan/{id}', [PelangganController::class, 'getPelanggan']);
 
 
 Route::get('/cekdulu', [CobaController::class, 'create']);
-
-Route::get('/get-pelanggan/{id}', [PerbaikanController::class, 'getPelanggan']);
+//landing page
 Route::get('/home2', [PerbaikanController::class, 'home2']);
 
 Route::get('/search-pelanggan', [PerbaikanController::class, 'searchPelanggan']);
+Route::get('/get-pelanggan/{id}', [PerbaikanController::class, 'getPelanggan']);
+
 
 Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name('perbaikan.rekapTeknisi');
 Route::post('/rekap-teknisi/print', [PerbaikanController::class, 'printRekapTeknisi'])->name('perbaikan.printRekapTeknisi');
 
 Route::post('/perbaikan/{id}/selesai', [PerbaikanController::class, 'selesai'])->name('perbaikan.selesai');
-

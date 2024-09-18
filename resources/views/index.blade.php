@@ -340,11 +340,12 @@
                                             <div class="text-xs font-weight-bold text-uppercase mb-1">Pendapatan
                                                 (Bulanan)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Rp
-                                                {{ number_format($totalPendapatanBulanan, 0, ',', '.') }}</div>
+                                                {{ number_format($dataPendapatanbulan, 0, ',', '.') }}</div>
+                                            <!-- Menampilkan pendapatan dengan format rupiah -->
                                             <div class="mt-2 mb-0 text-muted text-xs">
                                                 <span
                                                     class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
-                                                        class="fa fa-arrow-up "></i>
+                                                        class="fa fa-arrow-up"></i>
                                                     {{ $totalJumlahPengguna }}</span>
                                                 <span class="text-xs font-weight-bold text-uppercase">Jumlah
                                                     Pelanggan</span>
@@ -357,6 +358,7 @@
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Earnings (Annual) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
@@ -555,81 +557,54 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </div> <br>
                         </div>
                         <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card mb-3">
+                        <div class="col-xl-4 col-lg-8">
+                            <div class="card p-4">
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Pendapatan Harian</h6>
                                 </div>
                                 <div class="card-body">
+                                    <!-- Form filter tanggal mulai dan akhir -->
+                                    <form action="{{ route('index') }}" method="GET">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label for="tanggal_mulai">Tanggal Mulai:</label>
+                                                <input type="date" id="tanggal_mulai" name="tanggal_mulai"
+                                                    class="form-control" value="{{ request('tanggal_mulai') }}">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="tanggal_akhir">Tanggal Akhir:</label>
+                                                <input type="date" id="tanggal_akhir" name="tanggal_akhir"
+                                                    class="form-control" value="{{ request('tanggal_akhir') }}">
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn btn-primary">Filter</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <br>
+
+                                    <!-- Informasi pendapatan harian -->
                                     <div class="">
-                                        <div class="small text-gray-500">Total Pendapatan Hari Ini:
-                                            <div class="small float-right"><b>Rp
-                                                    {{ number_format($totalPendapatan, 0, ',', '.') }}</b></div>
+                                        <div class="text font-weight-bold text-black">Total Pendapatan :
+                                            <div class="h6 float-right"><b>Rp
+                                                    {{ number_format($totalPendapatanharian, 0, ',', '.') }}</b></div>
                                         </div>
-                                        <div class="small text-gray-500">Jumlah User Membayar Hari Ini:
-                                            <div class="small float-right"><b>{{ $totalUserHarian }} User</b></div>
+                                        <div class="text font-weight-bold mt-2">Jumlah User Yang Membayar :
+                                            <div class="h6 float-right"><b>{{ $totalUserHarian }} User</b></div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="card mb-4">
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Paket Terjual</h6>
-                                </div>
-                                <div class="card-body">
-                                    @foreach ($paketTop5 as $paket)
-                                        @php
-                                            // Hitung persentase user dari total user
-                                            $percentage = ($paket->total_user / $totalUsers) * 100;
-                                        @endphp
-                                        <div class="mb-3">
-                                            <div class="small text-gray-500">Harga
-                                                {{ number_format($paket->harga_paket, 0, ',', '.') }}
-                                                <div class="small float-right"><b>{{ $paket->total_user }} User</b>
-                                                </div>
-                                            </div>
-                                            <div class="progress" style="height: 12px;">
-                                                <div class="progress-bar bg-primary" role="progressbar"
-                                                    style="width: {{ $percentage }}%"
-                                                    aria-valuenow="{{ $paket->total_user }}" aria-valuemin="0"
-                                                    aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-
-                                    <div id="extraPaket" style="display:none;">
-                                        @foreach ($paketRemaining as $paket)
-                                            @php
-                                                // Hitung persentase user dari total user
-                                                $percentage = ($paket->total_user / $totalUsers) * 100;
-                                            @endphp
-                                            <div class="mb-3">
-                                                <div class="small text-gray-500">Paket {{ $paket->harga_paket }}
-                                                    <div class="small float-right"><b>{{ $paket->total_user }}
-                                                            User</b></div>
-                                                </div>
-                                                <div class="progress" style="height: 12px;">
-                                                    <div class="progress-bar bg-primary" role="progressbar"
-                                                        style="width: {{ $percentage }}%"
-                                                        aria-valuenow="{{ $paket->total_user }}" aria-valuemin="0"
-                                                        aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="card-footer text-center">
-                                    <a class="m-0 small text-primary card-link" href="#" id="showMoreBtn">Lihat
-                                        Lebih Banyak <i class="fas fa-chevron-right"></i></a>
-                                </div>
+                                    <br>
+                                </div><br>
                             </div>
                         </div>
+
+
 
                         <script>
                             document.getElementById('showMoreBtn').addEventListener('click', function(event) {
@@ -659,34 +634,45 @@
                                             class="fas fa-chevron-right"></i></a>
                                 </div>
                                 <div class="table-responsive">
-                                    <table class="table align-items-center table-flush">
-                                        <thead class="thead-light">
+                                    <!-- Tabel Perbaikan -->
+                                    <table class="table table-bordered">
+                                        <thead class="table table-primary">
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Nama Pelanggan</th>
-                                                <th>No Telpon</th>
-                                                <th>Kasus</th>
-                                                <th>Teknisi</th>
+                                                <th>No</th>
+                                                <th>ID Pel</th>
+                                                <th>Nama Pel</th>
                                                 <th>Alamat</th>
-                                                <th>ODP</th>
-                                                <th>maps</th>
+                                                <th>No Hp</th>
+                                                <th>Paket</th>
+                                                <th>Odp</th>
+                                                <th>Maps</th>
+                                                <th>Teknisi</th>
+                                                <th>Keterangan</th>
+                                                <th>Tanggal</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($perbaikans as $perbaikan)
+                                            @forelse ($perbaikans as $no => $item)
                                                 <tr>
-                                                    <td>{{ $perbaikan->id_plg }}</td>
-                                                    <td>{{ $perbaikan->nama_plg }}</td>
-                                                    <td>{{ $perbaikan->no_telepon_plg }}</td>
-                                                    <td>{{ $perbaikan->keterangan }}</td>
-                                                    <td>{{ $perbaikan->teknisi }}</td>
-                                                    <td>{{ $perbaikan->alamat_plg }}</td>
-                                                    <td>{{ $perbaikan->odp }}</td>
-                                                    <td>{{ $perbaikan->maps }}</td>
-
+                                                    <td>{{ $no + 1 }}</td>
+                                                    <td>{{ $item->id_plg }}</td>
+                                                    <td>{{ $item->nama_plg }}</td>
+                                                    <td>{{ $item->alamat_plg }}</td>
+                                                    <td>{{ $item->no_telepon_plg }}</td>
+                                                    <td>{{ $item->paket_plg }}</td>
+                                                    <td>{{ $item->odp }}</td>
+                                                    <td>{{ $item->maps }}</td>
+                                                    <td>Tim {{ $item->teknisi }}</td>
+                                                    <td>{{ $item->keterangan }}</td>
+                                                    <td>{{ $item->created_at }}</td>
                                                 </tr>
-                                            @endforeach
+                                            @empty
+                                                <tr>
+                                                    <td colspan="12" class="text-center">Tidak ada data ditemukan
+                                                    </td>
+                                                </tr>
+                                            @endforelse
                                         </tbody>
                                     </table>
                                 </div>
@@ -731,7 +717,7 @@
                                 <script>
                                     document.write(new Date().getFullYear());
                                 </script> - developed by
-                                <b><a href="" target="_blank">Adit Safari</a></b>
+                                <b><a href="" target="_blank">NetNet Digital Group</a></b>
                             </span>
                         </div>
                     </div>

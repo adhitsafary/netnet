@@ -44,12 +44,29 @@
         </div>
 
         <div class="">
-            <table class="table table-striped ">
+            <table class="table table-bordered ">
                 <thead class="table table-primary">
                     <tr>
                         <th>No</th>
                         <th>ID</th>
-                        <th>Nama</th>
+                        <th>
+                            <a
+                                href="{{ route('pelanggan.index', [
+                                    'sort_by' => 'nama_plg',
+                                    'sort_direction' => $sortBy == 'nama_plg' && $sortDirection == 'asc' ? 'desc' : 'asc',
+                                ]) }}">
+                                Nama
+                                @if ($sortBy == 'nama_plg')
+                                    @if ($sortDirection == 'asc')
+                                        ↑
+                                    @else
+                                        ↓
+                                    @endif
+                                @endif
+                            </a>`
+                        </th>
+
+
                         <th>Alamat</th>
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
@@ -76,35 +93,7 @@
                             <td>{{ $item->aktivasi_plg }}</td>
                             <td>{{ $item->paket_plg }}</td>
                             <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
-                            <td>
-                                @if (!empty($item->aktivasi_plg))
-                                    @php
-                                        $dateString = trim($item->aktivasi_plg);
-                                        $date = null;
-
-                                        // Try parsing the date in 'Y-m-d' format first
-                                        try {
-                                            $date = \Carbon\Carbon::createFromFormat('Y-m-d', $dateString);
-                                        } catch (\Exception $e) {
-                                            // If parsing fails, try 'd/m/Y' format
-                                            try {
-                                                $date = \Carbon\Carbon::createFromFormat('d/m/Y', $dateString);
-                                            } catch (\Exception $e) {
-                                                $date = null;
-                                            }
-                                        }
-
-                                        // Display the date if successfully parsed, otherwise show an error message
-                                        if ($date) {
-                                            echo $date->format('d'); // You can change this to any format you prefer
-                                        } else {
-                                            echo '<em>Invalid date format</em>';
-                                        }
-                                    @endphp
-                                @else
-                                    <em>No date available</em>
-                                @endif
-                            </td>
+                            <td>{{ $item->tgl_tagih_plg }}</td>
 
                             <td>{{ $item->odp }}</td>
 
@@ -117,10 +106,60 @@
                                 <a href="{{ route('pelanggan.detail', $item->id) }}"
                                     class="btn btn-warning btn-sm">Detail</a>
                             </td>
+                            <!-- Tombol Bayar -->
                             <td>
-                                <a href="{{ route('pelanggan.historypembayaran', $item->id) }}"
-                                    class="btn btn-info btn-sm">Riwayat Pembayaran</a>
+                                <a href="#" class="btn btn-success btn-sm"
+                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
                             </td>
+                            <!-- Modal Bayar -->
+                            <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="bayarModalLabel">Pembayaran</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <!-- Modal Form -->
+                                        <form id="bayarForm" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" id="pelangganId">
+                                            <div class="modal-body">
+                                                <!-- Input Tanggal Pembayaran -->
+                                                <div class="mb-3">
+                                                    <label for="tanggalPembayaran" class="form-label">Tanggal
+                                                        Pembayaran</label>
+                                                    <input type="date" class="form-control" id="tanggalPembayaran"
+                                                        name="tanggal_pembayaran" required>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="metodeTransaksi" class="form-label">Metode Transaksi</label>
+                                                    <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
+                                                        required>
+                                                        <option value="">Pilih metode</option>
+                                                        <option value="Cash Kantor">Cash Kantor</option>
+                                                        <option value="Cash Pickup">Cash Pickup</option>
+                                                        <option value="Transfer Bca">Transfer Via BCA</option>
+                                                        <option value="Transfer Dana">Transfer Via Dana</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Detail Pembayaran -->
+                                                <div class="mb-3">
+                                                    <p id="pembayaranDetails"></p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal Footer -->
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Bayar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </tr>
                     @empty
                         <tr>
@@ -132,3 +171,16 @@
             </table>
         </div>
     @endsection
+    <script>
+        function showBayarModal(id, namaPlg, hargaPaket) {
+            document.getElementById('pelangganId').value = id;
+            document.getElementById('pembayaranDetails').innerText =
+                `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
+
+            var form = document.getElementById('bayarForm');
+            form.action = `/pelanggan/${id}/bayar`; // Set action URL with the ID
+
+            var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
+            bayarModal.show();
+        }
+    </script>

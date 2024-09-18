@@ -3,12 +3,14 @@
 @section('konten')
     <div class="container mt-4">
         <h4>Riwayat Pembayaran - {{ $pelanggan->nama_plg }}</h4>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
+        <table class="table table-bordered mt-3">
+            <thead class="table table-primary">
+                <tr class="">
                     <th>No</th>
+                    <th>ID PEL</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
+                    <th>Metode Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Print</th>
@@ -18,9 +20,11 @@
                 @foreach ($pembayaran as $no => $bayar)
                     <tr>
                         <td>{{ $no + 1 }}</td>
+                        <td>{{$bayar ->id_plg }}</td>
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
-                        <td>{{ $bayar->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $bayar ->metode_transaksi}}</td>
+                        <td>{{ $bayar->tanggal_pembayaran}}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>
                             <button class="btn btn-info btn-sm"
@@ -39,10 +43,12 @@
         function printPayment(rowNumber, namaPelanggan) {
             // Ambil data dari baris yang sesuai
             var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
-            var nama = row.cells[1].innerText;
-            var alamat = row.cells[2].innerText;
-            var tglBayar = row.cells[3].innerText;
-            var jumlahBayar = row.cells[4].innerText;
+            var id = row.cells[1].innerText;
+            var nama = row.cells[2].innerText;
+            var alamat = row.cells[3].innerText;
+            var metode_transaksi = row.cells[4].innerText;
+            var tglBayar = row.cells[5].innerText;
+            var jumlahBayar = row.cells[6].innerText;
 
             // Format teks untuk dicetak menyerupai struk pembayaran dengan border dan tata letak di tengah
             var printContent = `
@@ -65,9 +71,10 @@
                     </div>
 
                     <!-- Informasi pelanggan -->
+                    <p><strong>ID Pelanggan:</strong> ${id}</p>
                     <p><strong>Nama Pelanggan:</strong> ${nama}</p>
                     <p><strong>Alamat:</strong> ${alamat}</p>
-
+                      <p><strong>Metode Pembayaran:</strong> ${metode_transaksi}</p>
                     <p><strong>Tanggal Pembayaran:</strong> ${tglBayar}</p>
                     <p><strong>Jumlah Pembayaran:</strong> Rp ${jumlahBayar}</p>
 

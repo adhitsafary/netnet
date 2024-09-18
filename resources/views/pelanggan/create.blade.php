@@ -5,55 +5,55 @@
         <h6 class="text text-center text-black mt-3">Tambah Data Pelanggan</h6>
         <form id="pelangganForm" action="{{ route('pelanggan.store') }}" method="POST">
             @csrf
-            <label for="">ID</label>
-            <input type="text" name="id_plg" class="form-control mt-2" id="id_plg">
+            <label for="" class=" mt-2">ID</label>
+            <input type="text" name="id_plg" class="form-control" id="id_plg">
             <div class="invalid-feedback" id="id_plgError">Field ID tidak boleh kosong.</div>
 
-            <label for="">Nama Pelanggan</label>
-            <input type="text" name="nama_plg" class="form-control mt-2" id="nama_plg">
+            <label for="" class=" mt-2">Nama Pelanggan</label>
+            <input type="text" name="nama_plg" class="form-control" id="nama_plg">
             <div class="invalid-feedback" id="nama_plgError">Field Nama Pelanggan tidak boleh kosong.</div>
 
-            <label for="">Alamat</label>
-            <input type="text" name="alamat_plg" class="form-control mt-2" id="alamat_plg">
+            <label for="" class=" mt-2">Alamat</label>
+            <input type="text" name="alamat_plg" class="form-control " id="alamat_plg">
             <div class="invalid-feedback" id="alamat_plgError">Field Alamat tidak boleh kosong.</div>
 
-            <label for="">No Telpon</label>
-            <input type="text" name="no_telepon_plg" class="form-control mt-2" id="no_telepon_plg">
+            <label for="" class=" mt-2">No Telpon</label>
+            <input type="text" name="no_telepon_plg" class="form-control" id="no_telepon_plg">
             <div class="invalid-feedback" id="no_telepon_plgError">Field No Telpon tidak boleh kosong.</div>
 
-            <label for="">Aktivasi</label>
-            <input type="date" name="aktivasi_plg" class="form-control mt-2" id="aktivasi_plg">
+            <label for="" class=" mt-2">Aktivasi</label>
+            <input type="date" name="aktivasi_plg" class="form-control" id="aktivasi_plg">
             <div class="invalid-feedback" id="aktivasi_plgError">Field Aktivasi tidak boleh kosong.</div>
 
-            <label for="">Paket</label>
-            <select name="paket_plg" id="paket_plg" class="form-control mt-2" onchange="setHargaPaket()">
+            <label for="" class=" mt-2">Paket</label>
+            <select name="paket_plg" id="paket_plg" class="form-control" onchange="setHargaPaket()">
                 <option value="" disabled selected>Pilih Paket</option>
-                <option value="paket 1">Paket 1 - Rp 125.000</option>
-                <option value="paket 2">Paket 2 - Rp 165.000</option>
-                <option value="paket 3">Paket 3 - Rp 205.000</option>
-                <option value="paket 4">Paket 4 - Rp 305.000</option>
-                <option value="paket 5">Paket 5 - Rp 120.000</option>
-                <option value="paket 6">Paket 6 - Rp 175.000</option>
+                <option value="1">Paket 1 - Rp 125.000</option>
+                <option value="2">Paket 2 - Rp 165.000</option>
+                <option value="3">Paket 3 - Rp 205.000</option>
+                <option value="4">Paket 4 - Rp 305.000</option>
+                <option value="5">Paket 5 - Rp 120.000</option>
+                <option value="6">Paket 6 - Rp 175.000</option>
             </select>
             <div class="invalid-feedback" id="paket_plgError">Field Paket tidak boleh kosong.</div>
 
-            <label for="">Harga Paket</label>
-            <input type="text" name="harga_paket" id="harga_paket" class="form-control mt-2" readonly>
+            <label for="" class=" mt-2">Harga Paket</label>
+            <input type="text" name="harga_paket" id="harga_paket" class="form-control " readonly>
 
-            <label for="">ODP</label>
-            <input type="text" name="odp" class="form-control mt-2" id="odp">
+            <label for="" class=" mt-2">ODP</label>
+            <input type="text" name="odp" class="form-control" id="odp">
             <div class="invalid-feedback" id="odpError">Field ODP tidak boleh kosong.</div>
 
-            <label for="">Latitude</label>
-            <input type="text" name="latitude" class="form-control mt-2" id="latitude">
+            <label for="" class=" mt-2">Latitude</label>
+            <input type="text" name="latitude" class="form-control " id="latitude">
             <div class="invalid-feedback" id="latitudeError">Field Latitude tidak boleh kosong.</div>
 
-            <label for="">Longitude</label>
-            <input type="text" name="longitude" class="form-control mt-2" id="longitude">
+            <label for="" class=" mt-2">Longitude</label>
+            <input type="text" name="longitude" class="form-control " id="longitude">
             <div class="invalid-feedback" id="longitudeError">Field Longitude tidak boleh kosong.</div>
 
-            <label for="">Keterangan</label>
-            <input type="text" name="keterangan_plg" class="form-control mt-2" id="keterangan_plg">
+            <label for="" class=" mt-2">Keterangan</label>
+            <input type="text" name="keterangan_plg" class="form-control " id="keterangan_plg">
             <div class="invalid-feedback" id="keterangan_plgError">Field Keterangan tidak boleh kosong.</div>
             <br>
             <button type="submit" class="btn btn-primary btn-sm">Simpan</button><br><br>
@@ -66,12 +66,12 @@
             const hargaPaket = document.getElementById('harga_paket');
 
             const hargaList = {
-                'paket 1': '125.000',
-                'paket 2': '165.000',
-                'paket 3': '205.000',
-                'paket 4': '305.000',
-                'paket 5': '120.000',
-                'paket 6': '175.000'
+                '1': '125000',
+                '2': '165000',
+                '3': '205000',
+                '4': '305000',
+                '5': '120000',
+                '6': '175000'
             };
 
             // Set harga sesuai pilihan paket

@@ -90,7 +90,7 @@
                             $('#odp').val(pelanggan.odp);
                             $('#maps').val(pelanggan.maps);
                             $('#nama_plg').val(data
-                            .text); // Simpan nama pelanggan ke input tersembunyi
+                                .text); // Simpan nama pelanggan ke input tersembunyi
                         }
                     });
                 });

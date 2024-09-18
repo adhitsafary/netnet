@@ -24,7 +24,7 @@
     </style>
 </head>
 <body>
-    <h1 class="text-center">Rekap Data Teknisi</h1>
+  
     <h4 class="text-center">Dari {{ $startDate->format('d/m/Y') }} sampai {{ $endDate->format('d/m/Y') }}</h4>
     <table>
         <thead>

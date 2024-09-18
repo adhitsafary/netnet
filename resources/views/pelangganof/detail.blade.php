@@ -43,23 +43,7 @@
                                 <strong>Harga Paket:</strong>{{ number_format($pelangganof->harga_paket, 0, ',', '.') }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Tanggal Tagih:</strong>
-                                @if (!empty($pelangganof->aktivasi_plg))
-                                    @php
-                                        try {
-                                            // Parsing the date from the format 'd/m/Y'
-                                            $date = \Carbon\Carbon::createFromFormat(
-                                                'd/m/Y',
-                                                $pelangganof->aktivasi_plg,
-                                            );
-                                            echo $date->format('d'); // Format it to the same format or any other format you prefer
-                                        } catch (\Exception $e) {
-                                            echo '<em>Invalid date format</em>'; // Handle any parsing errors
-                                        }
-                                    @endphp
-                                @else
-                                    <em>No date available</em>
-                                @endif
+                                <strong>Tanggal Tagih:</strong>{{$pelangganof->tgl_tagih_plg}}
                             </li>
 
                             <li class="list-group-item">
@@ -69,7 +53,7 @@
                                 <strong>ODP :</strong> {{ $pelangganof->odp }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Latitude:</strong> {{ $pelangganof->Latitude }}
+                                <strong>Latitude:</strong> {{ $pelangganof->latitude }}
                             </li>
                         </ul>
                     </div>
