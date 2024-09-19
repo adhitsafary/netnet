@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
@@ -128,8 +129,6 @@ Route::post('/rekap-teknisi/print', [PerbaikanController::class, 'printRekapTekn
 Route::post('/perbaikan/{id}/selesai', [PerbaikanController::class, 'selesai'])->name('perbaikan.selesai');
 
 //Alamat Karyawan
-
-//Pelangan Off
 Route::get('/masuk/superadmin/karyawan', [KaryawanController::class, 'home'])->name('karyawan.index');
 Route::get('/masuk/superadmin/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
 Route::post('/masuk/superadmin/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
@@ -138,3 +137,12 @@ Route::post('/masuk/superadmin/karyawan/update/{id}', [KaryawanController::class
 Route::delete('/masuk/superadmin/karyawan/delete/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
 Route::get('/masuk/superadmin/karyawan/{id}/detail', [KaryawanController::class, 'detail'])->name('karyawan.detail');
 Route::get('/masuk/superadmin/karyawan/aktifkan/{id}', [KaryawanController::class, 'showOff'])->name('karyawan.non_aktifkan');
+
+//Alamat Kasbon
+Route::get('/masuk/superadmin/kasbon', [KasbonController::class, 'home'])->name('kasbon.index');
+Route::get('/masuk/superadmin/kasbon/create', [KasbonController::class, 'create'])->name('kasbon.create');
+Route::post('/masuk/superadmin/kasbon/store', [KasbonController::class, 'store'])->name('kasbon.store');
+Route::get('/masuk/superadmin/kasbon/edit/{id}', [KasbonController::class, 'edit'])->name('kasbon.edit');
+Route::post('/masuk/superadmin/kasbon/update/{id}', [KasbonController::class, 'update'])->name('kasbon.update');
+Route::delete('/masuk/superadmin/kasbon/delete/{id}', [KasbonController::class, 'destroy'])->name('kasbon.destroy');
+

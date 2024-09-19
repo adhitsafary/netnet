@@ -4,7 +4,7 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Detail Pelanggan Off</h4>
+                <h4 class="mb-0">Detail Karyawan</h4>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -32,7 +32,7 @@
                                 <strong>Posisi :</strong> {{ $karyawan->posisi }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Mulai Kerja :</strong>{{$karyawan->mulai_kerja}}
+                                <strong>Mulai Kerja :</strong>{{ $karyawan->mulai_kerja }}
                             </li>
 
                             <li class="list-group-item">
@@ -47,8 +47,10 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <a href="{{ route('karyawan.non_aktifkan', $karyawan->id) }}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Apakah {{ $karyawan->nama_plg }} Akan di Aktifkan kembali?')">Non Aktifkan Karyawan</a>
+                            onclick="return confirm('Apakah {{ $karyawan->nama_plg }} Akan di Aktifkan kembali?')">Non
+                            Aktifkan Karyawan</a>
                         <a href="{{ route('karyawan.edit', $karyawan->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('karyawan.edit', $karyawan->id) }}" class="btn btn-warning btn-sm">Kasbon</a>
                         <form action="{{ route('karyawan.destroy', $karyawan->id) }}" method="POST"
                             class="d-inline-block">
                             @csrf

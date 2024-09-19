@@ -34,17 +34,11 @@
 
             <div class="form-group">
                 <label for="teknisi">Teknisi</label>
-<<<<<<< HEAD
-                <input type="text" id="teknisi" name="teknisi" class="form-control mt-2">
-                <div class="invalid-feedback" id="teknisiError">Field Teknisi tidak boleh kosong, bila tidak ada tulis " 0
-                    ".</div>
-=======
                 <select id="teknisi" name="teknisi" class="form-control mt-2">
                     <option value="1">Tim 1</option>
                     <option value="2">Tim 2</option>
                     <option value="3">Tim 3</option>
                 </select>
->>>>>>> 3b6d51184f02ea36027c5ffdfcd83bd5d7f91788
             </div>
 
             <div class="mb-3">
@@ -84,21 +78,6 @@
                 $('#nama_plg_select').on('select2:select', function(e) {
                     var data = e.params.data;
 
-<<<<<<< HEAD
-                $.ajax({
-                    url: '/get-pelanggan/' + data.id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(pelanggan) {
-                        $('#id_plg').val(pelanggan.id_plg);
-                        $('#alamat_plg').val(pelanggan.alamat_plg);
-                        $('#no_telepon_plg').val(pelanggan.no_telepon_plg);
-                        $('#paket_plg').val(pelanggan.paket_plg);
-                        $('#odp').val(pelanggan.odp);
-                        $('#maps').val(pelanggan.maps);
-                        $('#nama_plg_hidden').val(data
-                            .text); // Simpan nama pelanggan ke input hidden
-=======
                     $.ajax({
                         url: '/get-pelanggan/' + data.id,
                         type: 'GET',
@@ -165,7 +144,6 @@
 
                     if (!isValid) {
                         e.preventDefault(); // Mencegah pengiriman form jika tidak valid
->>>>>>> 3b6d51184f02ea36027c5ffdfcd83bd5d7f91788
                     }
                 });
             });
