@@ -6,6 +6,7 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\TeknisiController;
@@ -61,8 +62,9 @@ Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 
 //index pembayaran semua user  atau global
-Route::get('/bayar-pelanggan', [PelangganController::class, 'index_bayar'])->name('pembayaran.index');
-Route::get('/bayar-pelanggan/export/{format}', [PelangganController::class, 'export'])->name('pembayaran.export');
+Route::get('/bayar-pelanggan', [PembayaranController::class, 'index'])->name('pembayaran.index');
+Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pembayaran.export');
+Route::post('/pembayaran/hapus/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
 Route::get('/broadcast', [BroadcastController::class, 'index'])->name('broadcast.index');
 Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broadcast.send');

@@ -41,7 +41,7 @@
                     <th>No</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
-                    <th>Tanggal Pembayaran2</th>
+                    <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Hapus</th>
                     <th>Print</th>
@@ -56,7 +56,7 @@
                         <td>{{ $item->tanggal_pembayaran }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>
-                            <form action="{{ route('pelanggan.destroy', $item->id) }}" method="POST"
+                            <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
 

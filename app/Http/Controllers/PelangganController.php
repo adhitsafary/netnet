@@ -461,40 +461,9 @@ class PelangganController extends Controller
     }
 
 
-    public function index_bayar(Request $request)
-    {
-        $search = $request->input('search');
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
 
-        $pembayaran = BayarPelanggan::when($search, function ($query, $search) {
-            return $query->where('id', $search)
-                ->orWhere('nama_plg', 'like', "%{$search}%");
-        })
-            ->when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-                return $query->whereBetween('created_at', [$date_start, $date_end]);
-            })
-            ->get();
 
-        return view('pembayaran.index', compact('pembayaran', 'search', 'date_start', 'date_end'));
-    }
 
-    public function export(Request $request, $format)
-    {
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
-
-        $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-            return $query->whereBetween('created_at', [$date_start, $date_end]);
-        })->get();
-
-        if ($format === 'pdf') {
-            $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
-            return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
-        } elseif ($format === 'excel') {
-            return Excel::download(new PelangganController($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
-        }
-    }
 
     public function exportExcel(Request $request)
     {
