@@ -3,12 +3,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TeknisiController;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
@@ -100,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
     //alamat login akhir
     Route::get('/masuk/admin', [AdminController::class, 'home'])->middleware('userAkses:admin');
     //alamat login akhir
-    Route::get('/masuk/superadmin', [PelangganController::class, 'home'])->middleware('userAkses:superadmin');
+    Route::get('/masuk/superadmin', [SuperAdminController::class, 'home'])->middleware('userAkses:superadmin');
     //Logout
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
@@ -124,3 +126,15 @@ Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name
 Route::post('/rekap-teknisi/print', [PerbaikanController::class, 'printRekapTeknisi'])->name('perbaikan.printRekapTeknisi');
 
 Route::post('/perbaikan/{id}/selesai', [PerbaikanController::class, 'selesai'])->name('perbaikan.selesai');
+
+//Alamat Karyawan
+
+//Pelangan Off
+Route::get('/masuk/superadmin/karyawan', [KaryawanController::class, 'home'])->name('karyawan.index');
+Route::get('/masuk/superadmin/karyawan/create', [KaryawanController::class, 'create'])->name('karyawan.create');
+Route::post('/masuk/superadmin/karyawan/store', [KaryawanController::class, 'store'])->name('karyawan.store');
+Route::get('/masuk/superadmin/karyawan/edit/{id}', [KaryawanController::class, 'edit'])->name('karyawan.edit');
+Route::post('/masuk/superadmin/karyawan/update/{id}', [KaryawanController::class, 'update'])->name('karyawan.update');
+Route::delete('/masuk/superadmin/karyawan/delete/{id}', [KaryawanController::class, 'destroy'])->name('karyawan.destroy');
+Route::get('/masuk/superadmin/karyawan/{id}/detail', [KaryawanController::class, 'detail'])->name('karyawan.detail');
+Route::get('/masuk/superadmin/karyawan/aktifkan/{id}', [KaryawanController::class, 'showOff'])->name('karyawan.non_aktifkan');

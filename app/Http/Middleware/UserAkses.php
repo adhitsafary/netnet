@@ -18,7 +18,7 @@ class UserAkses
         if(auth()->user()->role == $role){
             return $next($request);
         }
-        //return response()->json(['Anda tidak di perbolehkan Akses Halaman ini']);
-        return redirect('admin');
+        return response()->json(['Anda tidak di perbolehkan Akses Halaman ini']);
+        return redirect('teknisi');
     }
 }
