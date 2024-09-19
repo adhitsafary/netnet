@@ -10,7 +10,7 @@ use App\Export\PerbaikanExport;
 use App\Models\Pelanggan;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Illuminate\Support\Facades\DB;
 
 class PerbaikanController extends Controller
 {
@@ -29,39 +29,43 @@ class PerbaikanController extends Controller
     {
         $query = Perbaikan::query();
 
-        // Filtering
+        // Filter berdasarkan tanggal
         if ($request->filled('date')) {
             $query->whereDate('created_at', $request->date);
         }
 
-        // Pencarian
+        // Pencarian berdasarkan ID pelanggan atau nama pelanggan
         if ($request->filled('search')) {
-            $query->where('id_plg', 'like', '%' . $request->search . '%')
-                ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('id_plg', 'like', '%' . $request->search . '%')
+                    ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            });
         }
 
-        // Sorting
+        // Sorting berdasarkan tanggal pembuatan
         $sort = $request->get('sort', 'asc');
         $query->orderBy('created_at', $sort);
 
-        $perbaikan = $query->get();
+        // Ambil data perbaikan yang statusnya pending
+        $perbaikan = $query->where('status', 'pending')->get();
 
-        // Data for charts
-        $weeklyData = $query->selectRaw('WEEK(created_at) as week, COUNT(*) as total')
+        // Data untuk chart mingguan
+        $weeklyData = Perbaikan::selectRaw('WEEK(created_at) as week, COUNT(*) as total')
             ->groupBy('week')
             ->pluck('total', 'week');
 
-        $monthlyData = $query->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        // Data untuk chart bulanan
+        $monthlyData = Perbaikan::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->groupBy('month')
             ->pluck('total', 'month');
 
-        $yearlyData = $query->selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+        // Data untuk chart tahunan
+        $yearlyData = Perbaikan::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
             ->groupBy('year')
             ->pluck('total', 'year');
 
         return view('perbaikan.index', compact('perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
     }
-
 
 
     public function exportPdf(Request $request)
@@ -99,28 +103,26 @@ class PerbaikanController extends Controller
             'alamat_plg' => 'required',
             'no_telepon_plg' => 'required',
             'paket_plg' => 'required',
-            'teknisi' => 'required',
             'keterangan' => 'required',
         ]);
 
+        // Pilih tim teknisi secara acak
+        $teknisiTim = rand(1, 3); // Menghasilkan angka antara 1 hingga 3
+
         $perbaikan = new Perbaikan();
         $perbaikan->id_plg = $request->id_plg;
-        $perbaikan->nama_plg = $request->nama_plg;
+        $perbaikan->nama_plg = $request->nama_plg; // Menggunakan nama_plg yang diinput
         $perbaikan->alamat_plg = $request->alamat_plg;
         $perbaikan->no_telepon_plg = $request->no_telepon_plg;
         $perbaikan->paket_plg = $request->paket_plg;
         $perbaikan->odp = $request->odp ?? null; // Menangani jika tidak diisi
         $perbaikan->maps = $request->maps ?? null; // Menangani jika tidak diisi
         $perbaikan->keterangan = $request->keterangan;
-        $perbaikan->teknisi = $request->teknisi;
+        $perbaikan->teknisi = $teknisiTim; // Menyimpan tim teknisi yang dipilih secara acak
         $perbaikan->save();
 
         return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
     }
-
-
-
-
 
 
 
@@ -193,15 +195,12 @@ class PerbaikanController extends Controller
         $perbaikan->paket_plg = $request->paket_plg;
         $perbaikan->odp = $request->odp;
         $perbaikan->maps = $request->maps;
-        $perbaikan->teknisi = $request->teknisi;
+        $perbaikan->teknisi = $request->teknisi; // Biarkan user memilih teknisi saat update
         $perbaikan->keterangan = $request->keterangan;
         $perbaikan->update();
 
         return redirect()->route('perbaikan.index');
     }
-
-
-
 
     public function destroy(string $id)
     {
@@ -254,5 +253,91 @@ class PerbaikanController extends Controller
     function home2()
     {
         return view('home2');
+    }
+
+    public function rekapTeknisi_asli()
+    {
+        $today = Carbon::now();
+        $startDate = $today->copy()->startOfMonth();
+        $endDate = $today->copy()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        // Reset rekap pada tanggal 25
+        if ($today->day == 25) {
+            // Hapus atau reset data rekap jika perlu
+            // Misalnya dengan menambahkan kode reset di sini
+        }
+
+        return view('perbaikan.rekap_teknisi', compact('rekap'));
+    }
+
+    // Menambahkan schedule untuk reset data setiap tanggal 25
+    public function resetTeknisiData()
+    {
+        $today = Carbon::now();
+
+        if ($today->day == 25) {
+            // Reset data teknisi
+            // Misalnya menghapus atau mereset data tertentu jika diperlukan
+            // Bisa menggunakan query builder atau model untuk mereset data
+        }
+    }
+
+    public function rekapTeknisi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        return view('perbaikan.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
+    }
+
+    public function printRekapTeknisi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        $pdf = Pdf::loadView('perbaikan.print_rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
+
+        return $pdf->download('rekap_teknisi_' . $startDate->format('Ymd') . '_to_' . $endDate->format('Ymd') . '.pdf');
+    }
+
+
+    public function resetData()
+    {
+        $today = Carbon::now();
+        $startDate = $today->copy()->startOfMonth();
+        $endDate = $today->copy()->endOfMonth();
+
+        // Hapus atau reset data perbaikan dari bulan ini
+        DB::table('perbaikan')->whereBetween('created_at', [$startDate, $endDate])->delete();
+
+        return redirect()->route('perbaikan.rekapTeknisi')->with('status', 'Data perbaikan bulanan telah direset.');
+    }
+
+    public function selesai($id)
+    {
+        $perbaikan = Perbaikan::findOrFail($id);
+        $perbaikan->status = 'selesai'; // Ubah status menjadi 'selesai'
+        $perbaikan->save();
+
+        return redirect()->route('perbaikan.index')->with('success', 'Perbaikan telah ditandai selesai');
     }
 }

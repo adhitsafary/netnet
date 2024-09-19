@@ -3,29 +3,32 @@
 @section('konten')
     <div class="container mt-4">
         <h4>Riwayat Pembayaran - {{ $pelanggan->nama_plg }}</h4>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
+        <table class="table table-bordered mt-3">
+            <thead class="table table-primary">
+                <tr class="">
                     <th>No</th>
+                    <th>ID PEL</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
-                    <th>Tanggal Tagih</th>
+                    <th>Metode Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Print</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach($pembayaran as $no => $bayar)
+                @foreach ($pembayaran as $no => $bayar)
                     <tr>
                         <td>{{ $no + 1 }}</td>
+                        <td>{{$bayar ->id_plg }}</td>
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
-                        <td>{{ $bayar->tgl_tagih_plg }}</td>
-                        <td>{{ $bayar->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $bayar ->metode_transaksi}}</td>
+                        <td>{{ $bayar->tanggal_pembayaran}}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>
-                            <button class="btn btn-info btn-sm" onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>
+                            <button class="btn btn-info btn-sm"
+                                onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>
                         </td>
                     </tr>
                 @endforeach
@@ -40,11 +43,12 @@
         function printPayment(rowNumber, namaPelanggan) {
             // Ambil data dari baris yang sesuai
             var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
-            var nama = row.cells[1].innerText;
-            var alamat = row.cells[2].innerText;
-            var tglTagih = row.cells[3].innerText;
-            var tglBayar = row.cells[4].innerText;
-            var jumlahBayar = row.cells[5].innerText;
+            var id = row.cells[1].innerText;
+            var nama = row.cells[2].innerText;
+            var alamat = row.cells[3].innerText;
+            var metode_transaksi = row.cells[4].innerText;
+            var tglBayar = row.cells[5].innerText;
+            var jumlahBayar = row.cells[6].innerText;
 
             // Format teks untuk dicetak menyerupai struk pembayaran dengan border dan tata letak di tengah
             var printContent = `
@@ -58,19 +62,19 @@
                     <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
                         <!-- Logo di sebelah kiri -->
                         <img src="{{ asset('asset/img/netnet.jpg') }}" height="50" width="50">
-                        
+
                         <!-- Teks "NetNet Digital" di tengah -->
                         <h2 style="font-size: 18px; margin: 0; text-align: center;">NetNet Digital</h2>
-                        
+
                         <!-- Logo di sebelah kanan -->
                         <img src="{{ asset('asset/img/logo_hayat.png') }}" height="50" width="100">
                     </div>
 
                     <!-- Informasi pelanggan -->
+                    <p><strong>ID Pelanggan:</strong> ${id}</p>
                     <p><strong>Nama Pelanggan:</strong> ${nama}</p>
                     <p><strong>Alamat:</strong> ${alamat}</p>
-                    <p><strong>Tanggal Tagih:</strong> ${tglTagih}</p>
-                  
+                      <p><strong>Metode Pembayaran:</strong> ${metode_transaksi}</p>
                     <p><strong>Tanggal Pembayaran:</strong> ${tglBayar}</p>
                     <p><strong>Jumlah Pembayaran:</strong> Rp ${jumlahBayar}</p>
 

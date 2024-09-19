@@ -14,7 +14,7 @@
             </div>
         </form>
 
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <thead class="table table-primary">
                 <tr>
                     <th>ID</th>

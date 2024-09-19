@@ -29,7 +29,7 @@
                             <li class="list-group-item">
                                 <strong>Longitude :</strong> {{ $pelangganof->longitude }}
                             </li>
-                           
+
 
                         </ul>
                     </div>
@@ -39,12 +39,13 @@
                             <li class="list-group-item">
                                 <strong>Paket:</strong> {{ $pelangganof->paket_plg }}
                             </li>
-                            <li class="list-group-item">No Telepon
-                                <strong>Harga Paket:</strong> {{ $pelangganof->harga_paket }}
+                            <li class="list-group-item">
+                                <strong>Harga Paket:</strong>{{ number_format($pelangganof->harga_paket, 0, ',', '.') }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Tanggal Tagih:</strong> {{ $pelangganof->aktivasi_plg }}
+                                <strong>Tanggal Tagih:</strong>{{$pelangganof->tgl_tagih_plg}}
                             </li>
+
                             <li class="list-group-item">
                                 <strong>Keterangan :</strong> {{ $pelangganof->keterangan_plg }}
                             </li>
@@ -52,7 +53,7 @@
                                 <strong>ODP :</strong> {{ $pelangganof->odp }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Latitude:</strong> {{ $pelangganof->Latitude }}
+                                <strong>Latitude:</strong> {{ $pelangganof->latitude }}
                             </li>
                         </ul>
                     </div>
@@ -61,7 +62,8 @@
             <div class="card-footer text-right">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <a href="{{ route('aktifkan_pelanggan', $pelangganof->id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah {{$pelangganof->nama_plg}} Akan di Aktifkan kembali?')">Aktifkan</a>
+                        <a href="{{ route('aktifkan_pelanggan', $pelangganof->id) }}" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Apakah {{ $pelangganof->nama_plg }} Akan di Aktifkan kembali?')">Aktifkan</a>
                         <a href="{{ route('pelangganof.edit', $pelangganof->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         <form action="{{ route('pelangganof.destroy', $pelangganof->id) }}" method="POST"
                             class="d-inline-block">
@@ -70,7 +72,7 @@
                             <button class="btn btn-danger btn-sm"
                                 onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                         </form>
-                       </div>
+                    </div>
                     <a href="{{ route('pelangganof.index') }}" class="btn btn-secondary btn-sm">Kembali</a>
                 </div>
             </div>

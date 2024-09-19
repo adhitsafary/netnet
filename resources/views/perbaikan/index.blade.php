@@ -3,25 +3,26 @@
 @section('konten')
     <div class="mb-4">
         <!-- Form Filter dan Pencarian -->
-<div class="row mb-4">
-    <div class="col-md-9">
-        <form action="{{ route('perbaikan.index') }}" method="GET" class="form-inline">
-            <div class="input-group">
-                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
-                    placeholder="Pencarian">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
+        <div class="row mb-4">
+            <div class="col-md-9">
+                <form action="{{ route('perbaikan.index') }}" method="GET" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" name="search" id="search" class="form-control"
+                            value="{{ request('search') }}" placeholder="Pencarian">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div class="col-md-3 text-right">
-        <a href="" class="btn btn-primary btn-sm">Pemasangan dan Perbaikan</a>
-    </div>
-</div>
 
+            <div class="col-md-3 text-right">
+                <a href="/rekap-teknisi" class="btn btn-primary btn-sm">Rekap Bulanan Teknisi</a>
+            </div>
+        </div>
 
-        <table class="table table-striped">
+        <!-- Tabel Perbaikan -->
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>No</th>
@@ -47,6 +48,7 @@
                         </a>
                     </th>
                     <th>Aksi</th>
+                    <th>Selesai</th>
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +62,7 @@
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->maps }}</td>
-                        <td>{{ $item->teknisi }}</td>
+                        <td>Tim {{ $item->teknisi }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
@@ -72,15 +74,24 @@
                                     onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
+                        <td>{{ ucfirst($item->status) }}</td> <!-- Menampilkan status -->
+                        <td>
+                            @if ($item->status == 'pending')
+                                <!-- Hanya tampilkan tombol jika statusnya pending -->
+                                <form action="{{ route('perbaikan.selesai', $item->id) }}" method="POST"
+                                    class="d-inline-block">
+                                    @csrf
+                                    <button type="submit" class="btn btn-success btn-sm">Selesai</button>
+                                </form>
+                            @endif
+                        </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="9" class="text-center">Tidak ada data ditemukan</td>
+                        <td colspan="12" class="text-center">Tidak ada data ditemukan</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
-
-
 @endsection

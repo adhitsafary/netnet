@@ -21,8 +21,8 @@
             <a href="" class="btn btn-primary btn-sm">Pemasangan dan Perbaikan</a>
         </div>
     </div>
-    
-            <table class="table table-striped">
+
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>No</th>
