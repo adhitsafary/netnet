@@ -33,13 +33,15 @@
             <div class="mb-3">
                 <label for="teknisi">Teknisi</label>
                 <input type="text" id="teknisi" name="teknisi" class="form-control mt-2">
-                <div class="invalid-feedback" id="teknisiError">Field Teknisi tidak boleh kosong, bila tidak ada tulis " 0 ".</div>
+                <div class="invalid-feedback" id="teknisiError">Field Teknisi tidak boleh kosong, bila tidak ada tulis " 0
+                    ".</div>
             </div>
 
             <div class="mb-3">
                 <label for="keterangan">Keterangan</label>
                 <input type="text" id="keterangan" name="keterangan" class="form-control mt-2">
-                <div class="invalid-feedback" id="keteranganError">Field Keterangan tidak boleh kosong, bila tidak ada tulis " 0 ".</div>
+                <div class="invalid-feedback" id="keteranganError">Field Keterangan tidak boleh kosong, bila tidak ada tulis
+                    " 0 ".</div>
             </div>
 
             <br>
@@ -85,7 +87,7 @@
                         $('#odp').val(pelanggan.odp);
                         $('#maps').val(pelanggan.maps);
                         $('#nama_plg_hidden').val(data
-                        .text); // Simpan nama pelanggan ke input hidden
+                            .text); // Simpan nama pelanggan ke input hidden
                     }
                 });
             });
