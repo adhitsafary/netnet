@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('superadmin.layout_superadmin')
 
 @section('konten')
     <div class="mb-4">
@@ -22,6 +22,10 @@
                     <th>No Telpon</th>
                     <th>Posisi</th>
                     <th>Mulai Kerja</th>
+
+                    <th>Gaji</th>
+                    <th>Tanggal Gajihan</th>
+
                     <th>Keterangan</th>
                     <th>Aksi</th>
 
@@ -33,9 +37,11 @@
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->alamat }}</td>
-                        <td>{{ $item->no_telepon }}</td>
+                        <td>{{ $item->no_telpon }}</td>
                         <td>{{ $item->posisi }}</td>
                         <td>{{ $item->mulai_kerja }}</td>
+                        <td>{{ $item->gaji }}</td>
+                        <td>{{ $item->tgl_gajihan }}</td>
                         <td>{{ $item->keterangan}}</td>
 
                         <td>

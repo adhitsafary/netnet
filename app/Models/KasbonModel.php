@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class KasbonModel extends Model
 {
+    
     use HasFactory;
     protected $table = "kasbon";
 }

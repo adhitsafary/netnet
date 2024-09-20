@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KaryawanModel;
 use App\Models\KasbonModel;
 use App\Models\Netnet;
 use Illuminate\Http\Request;
@@ -54,27 +55,40 @@ class KasbonController extends Controller
         return view('karyawan.kasbon.index', compact('kasbon'));
     }
 
-    public function create()
+    public function create($id)
     {
-        return view('karyawan.kasbon.create');
-    }
+        // Cari karyawan berdasarkan ID yang diterima dari URL
+        $karyawan = KaryawanModel::findOrFail($id);
+
+        // Kirim data karyawan ke view
+        return view('karyawan.kasbon.create', compact('karyawan'));    }
 
 
     public function store(Request $request)
     {
+        // Ambil id_karyawan dari input hidden di form
+        $id_karyawan = $request->input('id_karyawan');
 
+        // Cari karyawan berdasarkan id_karyawan
+        $karyawan = KaryawanModel::findOrFail($id_karyawan);
+
+        // Membuat instance baru dari model Kasbon
         $kasbon = new KasbonModel();
 
-        $kasbon->nama = $request->nama;
+        // Isi data kasbon
+        $kasbon->id_karyawan = $karyawan->id;
+        $kasbon->nama = $request->nama; // Nama dari form input
         $kasbon->jumlah = $request->jumlah;
         $kasbon->tanggal = $request->tanggal;
         $kasbon->keterangan = $request->keterangan;
 
-
+        // Simpan data kasbon ke database
         $kasbon->save();
 
-        return redirect()->route('kasbon.index');
+        // Redirect ke halaman kasbon index setelah penyimpanan berhasil
+        return redirect()->route('kasbon.index')->with('success', 'Data kasbon berhasil disimpan.');
     }
+
 
 
     public function show(string $id) {}

@@ -110,22 +110,20 @@
                 Karyawan
             </div>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
-                    aria-expanded="true" aria-controls="collapsePage">
-                    <i class="fas fa-fw fa-columns"></i>
-                    <span>Management Karyawan</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap11"
+                    aria-expanded="true" aria-controls="collapseBootstrap1">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Karyawan</span>
                 </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+                <div id="collapseBootstrap11" class="collapse" aria-labelledby="headingBootstrap11"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="{{route('karyawan.index')}}">Data Karyawan</a>
-                        <a class="collapse-item" href="{{route('karyawan.non_aktifkan')}}">Karyawan OFF</a>
-                        <a class="collapse-item" href="{{route('karyawan.non_aktifkan')}}">Karyawan OFF</a>
-                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a>  -->
-
+                        <a class="collapse-item" href="{{route('karyawan.create')}}">Tambah Data Karyawan</a>
                     </div>
                 </div>
             </li>
+            <hr class="sidebar-divider">
 
         </ul>
         <!-- Sidebar -->

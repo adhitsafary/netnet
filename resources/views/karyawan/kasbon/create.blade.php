@@ -1,21 +1,33 @@
-@extends('layout')
+@extends('superadmin.layout_superadmin')
 
 @section('konten')
     <div class="container mt-4">
         <h6 class="text text-center text-black mt-3"> Tambah Data Karyawan</h6>
         <form action="{{ route('kasbon.store') }}" method="POST">
             @csrf
-            <label for="">Nama </label>
-            <input type="text" name="nama" class="form-control mt-2">
-            <label for="">Jumlah</label>
-            <input type="text" name="jumlah" class="form-control mt-2">
-            <label for="">Tanggal</label>
-            <input type="date" name="tanggal" class="form-control mt-2">
-            <label for="">Keterangan</label>
-            <input type="text" name="keterangan" class="form-control mt-2"> <br>
+            <!-- Input hidden untuk id_karyawan -->
+            <input type="hidden" name="id_karyawan" value="{{ $karyawan->id }}"  class="form-control">
 
-            <button class="btn btn-primary btn-sm">Simpan</button>
+            <!-- Nama karyawan -->
+            <label for="nama" class=" mt-2">Nama Karyawan:</label>
+            <input type="text" name="nama" value="{{ $karyawan->nama }}" readonly class="form-control">
+
+            <!-- Input jumlah -->
+            <label for="jumlah" class=" mt-2">Jumlah:</label>
+            <input type="number" name="jumlah" required class="form-control">
+
+            <!-- Input tanggal -->
+            <label for="tanggal" class=" mt-2">Tanggal:</label>
+            <input type="date" name="tanggal" required class="form-control ">
+
+            <!-- Input keterangan -->
+            <label for="keterangan" class=" mt-2">Keterangan:</label>
+            <input type="text" name="keterangan" required class="form-control"> <br>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
         </form>
-    </div>
 
+
+    </div>
 @endsection

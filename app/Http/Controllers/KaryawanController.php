@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KaryawanModel;
+use App\Models\KasbonModel;
 use App\Models\Netnet;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -31,11 +32,23 @@ class KaryawanController extends Controller
     }
 
 
+
+
     public function detail($id)
     {
+        // Cari karyawan berdasarkan ID
         $karyawan = KaryawanModel::findOrFail($id);
-        return view('karyawan.detail', compact('karyawan'));
+
+        // Ambil data kasbon yang terkait dengan karyawan ini
+        $kasbon = KasbonModel::where('id_karyawan', $id)->get();
+
+        // Hitung total kasbon
+        $totalKasbon = $kasbon->sum('jumlah');
+
+        // Kirim data karyawan, kasbon, dan totalKasbon ke view
+        return view('karyawan.detail', compact('karyawan', 'kasbon', 'totalKasbon'));
     }
+
 
 
     public function index(Request $request)
@@ -69,9 +82,11 @@ class KaryawanController extends Controller
 
         $karyawan->nama = $request->nama;
         $karyawan->alamat = $request->alamat;
-        $karyawan->no_telpon = $request->no_telepon;
+        $karyawan->no_telpon = $request->no_telpon;
         $karyawan->posisi = $request->posisi;
         $karyawan->mulai_kerja = $request->mulai_kerja;
+        $karyawan->gaji = $request->gaji;
+        $karyawan->tgl_gajihan = $request->tgl_gajihan;
         $karyawan->keterangan = $request->keterangan;
 
 
@@ -95,12 +110,16 @@ class KaryawanController extends Controller
     {
         $karyawan = KaryawanModel::findOrFail($id_plg);
 
+
         $karyawan->nama = $request->nama;
         $karyawan->alamat = $request->alamat;
         $karyawan->no_telpon = $request->no_telpon;
         $karyawan->posisi = $request->posisi;
         $karyawan->mulai_kerja = $request->mulai_kerja;
+        $karyawan->gaji = $request->gaji;
+        $karyawan->tgl_gajihan = $request->tgl_gajihan;
         $karyawan->keterangan = $request->keterangan;
+
 
         $karyawan->save();
 

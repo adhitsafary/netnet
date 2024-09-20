@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('superadmin.layout_superadmin')
 
 @section('konten')
     <div class="mb-4">

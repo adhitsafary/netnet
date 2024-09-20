@@ -113,8 +113,6 @@ Route::get('coba', [TeknisiController::class, 'coba']);
 Route::get('/pelanggan/belum_bayar', [PelangganController::class, 'belumBayar'])->name('pelanggan.belum_bayar');
 Route::get('/get-pelanggan/{id}', [PelangganController::class, 'getPelanggan']);
 
-
-
 Route::get('/cekdulu', [CobaController::class, 'create']);
 //landing page
 Route::get('/home2', [PerbaikanController::class, 'home2']);
@@ -139,10 +137,10 @@ Route::get('/masuk/superadmin/karyawan/{id}/detail', [KaryawanController::class,
 Route::get('/masuk/superadmin/karyawan/aktifkan/{id}', [KaryawanController::class, 'showOff'])->name('karyawan.non_aktifkan');
 
 //Alamat Kasbon
-Route::get('/masuk/superadmin/kasbon', [KasbonController::class, 'home'])->name('kasbon.index');
-Route::get('/masuk/superadmin/kasbon/create', [KasbonController::class, 'create'])->name('kasbon.create');
-Route::post('/masuk/superadmin/kasbon/store', [KasbonController::class, 'store'])->name('kasbon.store');
-Route::get('/masuk/superadmin/kasbon/edit/{id}', [KasbonController::class, 'edit'])->name('kasbon.edit');
-Route::post('/masuk/superadmin/kasbon/update/{id}', [KasbonController::class, 'update'])->name('kasbon.update');
-Route::delete('/masuk/superadmin/kasbon/delete/{id}', [KasbonController::class, 'destroy'])->name('kasbon.destroy');
+Route::get('/masuk/superadmin/karyawan/kasbon', [KasbonController::class, 'home'])->name('kasbon.index');
+Route::get('/masuk/superadmin/karyawan/{id}/kasbon/create', [KasbonController::class, 'create'])->name('kasbon.create');
+Route::post('/masuk/superadmin/karyawan/kasbon/store', [KasbonController::class, 'store'])->name('kasbon.store');
+Route::get('/masuk/superadmin/karyawan/kasbon/edit/{id}', [KasbonController::class, 'edit'])->name('kasbon.edit');
+Route::post('/masuk/superadmin/karyawan/kasbon/update/{id}', [KasbonController::class, 'update'])->name('kasbon.update');
+Route::delete('/masuk/superadmin/karyawan/kasbon/delete/{id}', [KasbonController::class, 'destroy'])->name('kasbon.destroy');
 

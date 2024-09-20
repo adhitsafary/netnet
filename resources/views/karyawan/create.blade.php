@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('superadmin.layout_superadmin')
 
 @section('konten')
     <div class="container mt-4">
@@ -13,8 +13,12 @@
             <input type="text" name="no_telepon" class="form-control mt-2">
             <label for="">Posisi</label>
             <input type="text" name="posisi" class="form-control mt-2">
+            <label for="">Gaji</label>
+            <input type="text" name="gaji" class="form-control mt-2">
+            <label for="">Tanggal Gajihan</label>
+            <input type="date" name="tgl_gajihan" class="form-control mt-2">
             <label for="">Mulai Kerja</label>
-            <input type="text" name="mulai_kerja" class="form-control mt-2">
+            <input type="date" name="mulai_kerja" class="form-control mt-2">
             <label for="">Keterangan</label>
             <input type="text" name="keterangan" class="form-control mt-2"> <br>
 

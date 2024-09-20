@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('superadmin.layout_superadmin')
 
 @section('konten')
 
@@ -10,9 +10,9 @@
         <label for="">Nama</label>
         <input type="text" name="nama" value="{{$kasbon -> nama}}"  class="form-control mt-2">
         <label for="">Jumlah</label>
-        <input type="text" name="jumlah" value="{{$kasbon -> alamat}}" class="form-control mt-2">
+        <input type="text" name="jumlah" value="{{$kasbon -> jumlah}}" class="form-control mt-2">
         <label for="">Tanggal</label>
-        <input type="text" name="tanggal" value="{{$kasbon -> no_telpon}}" class="form-control mt-2">
+        <input type="text" name="tanggal" value="{{$kasbon -> tanggal}}" class="form-control mt-2">
         <label for="">Keterangan</label>
         <input type="text" name="tanggal" value="{{$kasbon -> keterangan}}" class="form-control mt-2">
 
