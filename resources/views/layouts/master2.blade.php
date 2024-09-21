@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="{{asset('template2/img/logo/logo.png')}}" rel="icon">
-    <title>NetNet - Blank Page</title>
+    <title>NetNet Digital Group</title>
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -104,7 +104,7 @@
                         <a class="collapse-item" href="login.html">Login</a>
                         <a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item active" href="blank.html">Blank Page</a>
+                        <a class="collapse-item active" href="blank.html">NetNet Digital Group</a>
                     </div>
                 </div>
             </li>
@@ -323,11 +323,11 @@
                 <!-- Container Fluid-->
                 <div class="container-fluid" id="container-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Blank Page</h1>
+                        <h1 class="h3 mb-0 text-gray-800">NetNet Digital Group</h1>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="./">Home</a></li>
                             <li class="breadcrumb-item">Pages</li>
-                            <li class="breadcrumb-item active" aria-current="page">Blank Page</li>
+                            <li class="breadcrumb-item active" aria-current="page">NetNet Digital Group</li>
                         </ol>
                     </div>
 

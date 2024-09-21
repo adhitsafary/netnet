@@ -37,7 +37,7 @@
                     <td>{{ $no + 1 }}</td>
                     <td>{{ $item->nama_plg }}</td>
                     <td>{{ $item->alamat_plg }}</td>
-                    <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $item->tanggal_pembayaran}}</td>
                     <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                 </tr>
             @endforeach

@@ -107,7 +107,7 @@ class PembayaranController extends Controller
         $date_end = $request->input('date_end');
 
         $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-            return $query->whereBetween('created_at', [$date_start, $date_end]);
+            return $query->whereBetween('tanggal_pembayaran', [$date_start, $date_end]);
         })->get();
 
         if ($format === 'pdf') {
