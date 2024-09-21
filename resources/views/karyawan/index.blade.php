@@ -1,7 +1,7 @@
 @extends('superadmin.layout_superadmin')
 
 @section('konten')
-    <div class="mb-4">
+    <div class="container mb-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('karyawan.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">

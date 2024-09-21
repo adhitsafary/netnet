@@ -11,6 +11,9 @@ use App\Http\Controllers\PelangganOfController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PerbaikanController;
+use App\Http\Controllers\RekapMutasiHarianController;
+use App\Http\Controllers\RekapPemasanganController;
+use App\Http\Controllers\RekapPemasanganControlller;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TeknisiController;
@@ -148,8 +151,19 @@ Route::delete('/masuk/superadmin/karyawan/kasbon/delete/{id}', [KasbonController
 //pengeluaran lainya
 Route::get('/pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran.index');
 Route::get('/pengeluaran/create', [PengeluaranController::class, 'create'])->name('pengeluaran.create');
-
 Route::post('/pengeluaran/store', [PengeluaranController::class, 'store'])->name('pengeluaran.store');
 Route::get('/pengeluaran/edit/{id}', [PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
 Route::post('/pengeluaran/update/{id}', [PengeluaranController::class, 'update'])->name('pengeluaran.update');
 Route::post('/pengeluaran/hapus/{id}', [PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
+
+//Rekap Pemasangan
+Route::get('/rekap_pemasangan', [RekapPemasanganController::class, 'index'])->name('rekap_pemasangan.index');
+Route::get('/rekap_pemasangan/create', [RekapPemasanganController::class, 'create'])->name('rekap_pemasangan.create');
+Route::post('/rekap_pemasangan/store', [RekapPemasanganController::class, 'store'])->name('rekap_pemasangan.store');
+Route::get('/rekap_pemasangan/edit/{id}', [RekapPemasanganController::class, 'edit'])->name('rekap_pemasangan.edit');
+Route::post('/rekap_pemasangan/update/{id}', [RekapPemasanganController::class, 'update'])->name('rekap_pemasangan.update');
+Route::post('/rekap_pemasangan/hapus/{id}', [RekapPemasanganController::class, 'destroy'])->name('rekap_pemasangan.destroy');
+
+
+//rekap mutasi harian
+Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index'])->name('rekap.mutasi.harian');

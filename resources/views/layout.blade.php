@@ -8,31 +8,17 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="{{ asset('template2/img/logo/logo.png') }}" rel="icon">
-    <title>NetNet - Digital</title>
+    <title>NetNet - Digital Group</title>
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-
-
-
-
-
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/admin">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -40,7 +26,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/masuk/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -57,10 +43,11 @@
                 <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
+                        <h6 class="collapse-header">Pelanggan</h6>
                         <a class="collapse-item" href="/pelanggan">Pelanggan</a>
                         <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
                         <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
+
                     </div>
                 </div>
             </li>
@@ -100,8 +87,46 @@
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="/bayar-pelanggan">Riwayat Pembayaran</a>
                         <a class="collapse-item" href="/send-message">Peringatan Chat</a>
-                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a>  -->
+                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a> -->
 
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Pengeluaran
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Pengeluaran</span>
+                </a>
+                <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/pengeluaran/">Pengeluaran</a>
+                        <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Rekap Pemasangan
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Rekap Pemasangan</span>
+                </a>
+                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/rekap_pemasangan/">Rekap Pemasangan</a>
+                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Rekap Pemasangan</a>
                     </div>
                 </div>
             </li>
@@ -110,6 +135,7 @@
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
+                <!-- TopBar -->
                 <!-- TopBar -->
                 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
                     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
@@ -308,12 +334,7 @@
                 <!-- Topbar -->
 
                 <!-- Container Fluid-->
-
-                <div class="container d-flex justify-content-center " style="min-height: 100vh;">
-                    @yield('konten')
-                </div>
-
-
+                @yield('konten')
                 <!-- Footer -->
             </div>
         </div>
@@ -329,14 +350,6 @@
         <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
         <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
         <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-
 </body>
 
 </html>

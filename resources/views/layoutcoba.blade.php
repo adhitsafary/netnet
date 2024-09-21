@@ -18,7 +18,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/superadmin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -26,7 +26,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/masuk/superadmin">
+                <a class="nav-link" href="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -92,26 +92,6 @@
                     </div>
                 </div>
             </li>
-
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Karyawan
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap11" aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Karyawan</span>
-                </a>
-                <div id="collapseBootstrap11" class="collapse" aria-labelledby="headingBootstrap11"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('karyawan.index') }}">Data Karyawan</a>
-                        <a class="collapse-item" href="{{ route('karyawan.create') }}">Tambah Data Karyawan</a>
-                    </div>
-                </div>
-            </li>
-            <hr class="sidebar-divider">
         </ul>
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">

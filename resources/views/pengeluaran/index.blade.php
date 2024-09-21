@@ -1,7 +1,7 @@
-@extends('superadmin.layout_superadmin')
+@extends('layout')
 
 @section('konten')
-    <div class="mb-4">
+    <div class="container mb-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('pengeluaran.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
@@ -33,7 +33,8 @@
                         <td>{{ $item->created_at }}</td>
                         <td> <a href="{{ route('pengeluaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
 
-                            <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST" class="d-inline-block">
+                            <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST"
+                                class="d-inline-block">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-danger btn-sm"
