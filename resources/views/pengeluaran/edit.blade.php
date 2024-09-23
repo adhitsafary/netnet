@@ -11,7 +11,7 @@
         <input type="text" name="jumlah" value="{{$pengeluaran -> jumlah}}" class="form-control mt-2">
 
         <label for="">Keterangan</label>
-        <input type="text" name="tanggal" value="{{$pengeluaran -> keterangan}}" class="form-control mt-2">
+        <input type="text" name="keterangan" value="{{$pengeluaran -> keterangan}}" class="form-control mt-2">
 
         <button class="btn btn-primary btn-sm">Simpan</button>
     </form>

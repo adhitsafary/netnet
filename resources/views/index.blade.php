@@ -17,14 +17,14 @@
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Pendapatan Total
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Pendapatan Total Harian
                                 </div>
                                 <div class="h5 mb-0 mr-0 font-weight-bold text-gray-800">Rp
-                                    {{ number_format($totalpendapatanakhir, 0, ',', '.') }}</div>
+                                    {{ number_format($totaljumlahsaldo, 0, ',', '.') }}</div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
                                             class="fas fa-arrow-up"></i>
-                                        {{ $totaluser }}</span>
+                                        {{ $totalUserHarian }}</span>
                                     <span class="text-xs font-weight-bold text-uppercase">Total User</span>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
@@ -43,10 +43,10 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Pendapatan
-                                    (Bulanan)</div>
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">Total USer Membayar harian
+                                    </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp
-                                    {{ number_format($dataPendapatanbulan, 0, ',', '.') }}</div>
+                                    {{ number_format($totalPendapatanharian, 0, ',', '.') }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
@@ -72,9 +72,9 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-uppercase mb-1">Total
-                                    Pelanggan off</div>
+                                    Registrasi Baru</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp
-                                    {{ number_format($pelangganofuang, 0, ',', '.') }}</div>
+                                    {{ number_format($totalRegistrasi, 0, ',', '.') }}</div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
                                             class="fas fa-arrow-up"></i>
@@ -96,11 +96,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Pelanggan Off
-                                    Bulan Kemarin
+                                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                    Pemasukan Lain-lain
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    {{ number_format($pelanggan_of_uang, 0, ',', '.') }}</div>
+                                    {{ number_format($totalPemasukan, 0, ',', '.') }}</div>
                                 <div class="mt-2 mb-0 text-muted text-xs">
                                     <span class="text-danger mr-2 text-xs font-weight-bold text-uppercase"><i
                                             class="fas fa-arrow-down"></i>

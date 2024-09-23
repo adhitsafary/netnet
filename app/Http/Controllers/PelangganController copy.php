@@ -9,11 +9,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
-use App\Models\PemasukanModel;
 use App\Models\PembayaranPelanggan;
-use App\Models\PengeluaranModel;
 use App\Models\Perbaikan;
-use App\Models\RekapPemasanganModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
@@ -143,27 +140,6 @@ class PelangganController extends Controller
         // Hitung total user yang membayar hari ini
         $totalUserHarian = $pembayaranHarian->count();
 
-        //INI BARU TOTAL HARIAN
-        $tanggalHariIni = Carbon::now()->format('Y-m-d');
-        // Mengambil total pemasukan dan pengeluaran untuk hari ini
-        $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
-        $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
-        $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $tanggalHariIni)->get();
-        // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
-        $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
-            ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
-            ->get();
-        // Hitung total pendapatan harian dari pembayaran
-        $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
-        $pemasukantotal = $totalPemasukan - $totalPengeluaran;
-        $totalsaldo = $totalPendapatanHarian + $pemasukantotal;
-        $totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
-        // Hitung total user yang membayar hari ini
-        $totalUserHarian = $pembayaranHarian->count();
-
-
-
 
 
         // Kirim data ke view
@@ -189,16 +165,7 @@ class PelangganController extends Controller
             'pelangganoforang',
             'totalPendapatanBulanan',
             'totalJumlahPengguna',
-            'dataChart',
-            // HARIAN BARU
-            'totalRegistrasi',
-            'totalsaldo',
-            'totaljumlahsaldo',
-            'totalPemasukan',
-            'totalPengeluaran',
-            'totalPendapatanHarian',
-            'totalUserHarian',
-            'tanggalHariIni'
+            'dataChart' // Tambahkan data chart di sini
         ));
     }
 
@@ -231,38 +198,9 @@ class PelangganController extends Controller
 
     public function index(Request $request)
     {
-        $query = Pelanggan::query();
 
-        // Pengecekan status pembayaran otomatis berdasarkan tanggal tagihan
-        $pelanggan_all = Pelanggan::all();
-        foreach ($pelanggan_all as $pelanggan) {
-            // Ambil tanggal tagih (hari saja)
-            $hari_tagih = intval($pelanggan->aktivasi_plg);  // Misal: "25"
-
-            // Ambil bulan dan tahun saat ini
-            $currentMonth = now()->month;
-            $currentYear = now()->year;
-
-            // Validasi hari tagih agar nilainya valid (antara 1 dan 31)
-            if ($hari_tagih >= 1 && $hari_tagih <= 31) {
-                // Buat tanggal tagih lengkap (menggabungkan hari, bulan, dan tahun)
-                $tgl_tagih = Carbon::createFromDate($currentYear, $currentMonth, $hari_tagih);
-
-                // Jika tanggal tagih sudah lewat di bulan ini, pindahkan ke bulan berikutnya
-                if (now()->gt($tgl_tagih)) {
-                    $tgl_tagih = $tgl_tagih->addMonth();
-                }
-
-                // Bandingkan tgl_tagih dengan waktu sekarang
-                if (now()->gt($tgl_tagih) && $pelanggan->status_pembayaran === 'Sudah Bayar') {
-                    $pelanggan->status_pembayaran = 'Belum Bayar';
-                    $pelanggan->save();
-                }
-            } else {
-                // Log error jika hari tidak valid
-                Log::error("Hari tagih tidak valid untuk pelanggan ID: " . $pelanggan->id_plg);
-            }
-        }
+        // Panggil fungsi untuk memeriksa status isolir
+        $this->checkIsolirStatus();
 
         $query = Pelanggan::query();
 
@@ -272,14 +210,12 @@ class PelangganController extends Controller
             'sudah_bayar' => 'Sudah Bayar'
         ];
 
-        // Mapping status database ke URL
-        $reverseStatusMapping = array_flip($statusMapping);
-
         // Filter berdasarkan pencarian jika tombol Cari diklik
         if ($request->input('action') === 'search' && $request->filled('search')) {
             $query->where('nama_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('alamat_plg', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('harga_paket', 'LIKE', '%' . $request->search . '%');
+                ->orWhere('harga_paket', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('paket_plg', 'LIKE', '%' . $request->search . '%');
         }
 
         // Filter berdasarkan status pembayaran jika tombol Filter diklik
@@ -291,22 +227,86 @@ class PelangganController extends Controller
                 $query->where('status_pembayaran', $status_db);
             }
         }
+        // Filter berdasarkan tanggal tagih
+        if ($request->filled('tanggal')) {
+            $tanggal = $request->tanggal;
+            $query->whereRaw('DAY(tgl_tagih_plg) = ?', [$tanggal]);
+        }
 
-        $pelanggan = $query->get();
-        $status_pembayaran_display = $request->input('status_pembayaran', '');
-        // Ambil parameter sorting dari request, default ke 'nama_plg' dan 'asc' jika tidak ada parameter
+        // Menghitung jumlah pelanggan per tanggal tagih
+        $jumlah_per_tanggal = $query->selectRaw('DAY(tgl_tagih_plg) as tanggal, COUNT(*) as total')
+            ->groupBy('tanggal')
+            ->get();
+
+
+
+        // Sorting
         $sortBy = $request->input('sort_by', 'nama_plg');
         $sortDirection = $request->input('sort_direction', 'asc');
-
-        // Pastikan bahwa sort_direction hanya 'asc' atau 'desc'
         $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : 'asc';
 
-        // Query data pelanggan dan tambahkan orderBy berdasarkan input sorting
-        $bayarpelanggan = Pelanggan::orderBy($sortBy, $sortDirection)->get();
+        // Ambil data pelanggan dengan filter dan sorting
+        $pelanggan = $query->orderBy($sortBy, $sortDirection)->get();
 
+        // Ambil parameter untuk tampilan
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
 
-        return view('pelanggan.index', compact('pelanggan', 'status_pembayaran_display', 'bayarpelanggan', 'sortBy', 'sortDirection'));
+        return view('pelanggan.index', compact('pelanggan', 'jumlah_per_tanggal', 'status_pembayaran_display', 'sortBy', 'sortDirection'));
     }
+
+
+    // Fungsi untuk mengecek apakah pelanggan perlu dipindahkan ke tabel isolir
+    public function checkIsolirStatus()
+    {
+        $pelanggan_all = Pelanggan::all();
+
+        foreach ($pelanggan_all as $pelanggan) {
+            // Ambil tanggal tagih (hari saja)
+            $hari_tagih = intval($pelanggan->tgl_tagih_plg);
+
+            // Ambil bulan dan tahun saat ini
+            $currentMonth = now()->month;
+            $currentYear = now()->year;
+
+            // Validasi hari tagih agar nilainya valid (antara 1 dan 31)
+            if ($hari_tagih >= 1 && $hari_tagih <= 31) {
+                // Buat tanggal tagih lengkap (menggabungkan hari, bulan, dan tahun)
+                $tgl_tagih = Carbon::createFromDate($currentYear, $currentMonth, $hari_tagih);
+
+                // Cek apakah tanggal tagih sudah lewat
+                if (now()->gt($tgl_tagih)) {
+                    // Cek status pembayaran
+                    if ($pelanggan->status_pembayaran === 'Belum Bayar') {
+                        // Pindahkan data pelanggan ke tabel isolir
+                        IsolirModel::create([
+                            'id_plg' => $pelanggan->id_plg,
+                            'nama_plg' => $pelanggan->nama_plg,
+                            'alamat_plg' => $pelanggan->alamat_plg,
+                            'no_telepon_plg' => $pelanggan->no_telepon_plg,
+                            'aktivasi_plg' => $pelanggan->aktivasi_plg,
+                            'paket_plg' => $pelanggan->paket_plg,
+                            'harga_paket' => $pelanggan->harga_paket,
+                            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
+                            'keterangan_plg' => $pelanggan->keterangan_plg,
+                            'odp' => $pelanggan->odp,
+                            'longitude' => $pelanggan->longitude,
+                            'latitude' => $pelanggan->latitude,
+                            'status_pembayaran' => 'Belum Bayar',
+                        ]);
+
+                        // Hapus pelanggan dari tabel pelanggan setelah dipindahkan ke isolir
+                        $pelanggan->delete();
+                    }
+                }
+            } else {
+                Log::error("Hari tagih tidak valid untuk pelanggan ID: " . $pelanggan->id_plg);
+            }
+        }
+    }
+
+
+
+
 
 
     public function create()
@@ -341,7 +341,8 @@ class PelangganController extends Controller
         $pelanggan->odp = $request->odp;
         $pelanggan->longitude = $request->longitude;
         $pelanggan->latitude = $request->latitude;
-        $pelanggan->tgl_tagih_plg = $request->aktivasi_plg;
+        $pelanggan->tgl_tagih_plg = \Carbon\Carbon::parse($request->aktivasi_plg)->format('d');
+
 
         // Set status pembayaran awal sebagai 'belum bayar'
         $pelanggan->status_pembayaran = 'belum bayar';
@@ -384,9 +385,6 @@ class PelangganController extends Controller
 
         return redirect()->route('pelanggan.index');
     }
-
-
-
 
 
     public function destroy(string $id_plg)
@@ -489,11 +487,6 @@ class PelangganController extends Controller
         return view('pelanggan.historypembayaran', compact('pelanggan', 'pembayaran'));
     }
 
-
-
-
-
-
     public function exportExcel(Request $request)
     {
         $search = $request->input('search');
@@ -511,11 +504,6 @@ class PelangganController extends Controller
 
         return Excel::download(new PelangganController($pembayaran), 'pembayaran.xlsx');
     }
-
-
-
-
-
 
     public function plg_blm_byr(Request $request)
     {
@@ -626,30 +614,6 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.index')->with('success', 'Status pembayaran berhasil diperbarui.');
     }
 
-    public function toIsolir($id)
-    {
-        $pelanggan = Pelanggan::findOrFail($id);
 
-        // Pindahkan data ke tabel pelanggan
-        IsolirModel::create([
-            'id_plg' => $pelanggan->id_plg,
-            'nama_plg' => $pelanggan->nama_plg,
-            'alamat_plg' => $pelanggan->alamat_plg,
-            'no_telepon_plg' => $pelanggan->no_telepon_plg,
-            'aktivasi_plg' => $pelanggan->aktivasi_plg,
-            'paket_plg' => $pelanggan->paket_plg,
-            'harga_paket' => $pelanggan->harga_paket,
-            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-            'keterangan_plg' => $pelanggan->keterangan_plg,
-            'odp' => $pelanggan->odp,
-            'longitude' => $pelanggan->longitude,
-            'latitude' => $pelanggan->latitude,
-            'status_pembayaran' => $pelanggan->status_pembayaran,
-        ]);
 
-        // Hapus dari tabel isolir
-        $pelanggan->delete();
-
-        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil diaktifkan kembali.');
-    }
 }

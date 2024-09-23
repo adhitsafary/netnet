@@ -63,7 +63,7 @@
                                         ↓
                                     @endif
                                 @endif
-                            </a>`
+                            </a>
                         </th>
 
 
@@ -77,9 +77,9 @@
                         <th>Longitude</th>
                         <th>Latitude</th>
                         <th>Keterangan</th>
-                        <th>Status Pembayaran</th>
+                        <th>Status</th>
                         <th>Detail</th>
-                        <th>Riwayat pembayaran</th>
+                       <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -101,16 +101,37 @@
                             <td>{{ $item->latitude }}</td>
 
                             <td>{{ $item->keterangan_plg }}</td>
-                            <td>{{ $item->status_pembayaran }}</td>
+                            <td>
+                                <form action="{{ route('pelanggan.updateStatus', $item->id) }}" method="POST"
+                                    class="form-inline">
+                                    @csrf
+                                    <select name="status_pembayaran" class="form-control" onchange="this.form.submit()">
+                                        <option value="Belum Bayar"
+                                            {{ $item->status_pembayaran === 'belum bayar' ? 'selected' : '' }}>
+                                            Belum Bayar
+                                        </option>
+                                        <option value="Sudah Bayar"
+                                            {{ $item->status_pembayaran === 'sudah bayar' ? 'selected' : '' }}>
+                                            Sudah Bayar
+                                        </option>
+                                    </select>
+                                </form>
+                                <span
+                                    class="badge {{ $item->status_pembayaran === 'Sudah Bayar' ? 'bg-success' : 'bg-danger' }} text-white ml-2"
+                                    style="padding: 0.5em 1em; font-size: 1.1em;">
+                                    {{ $item->status_pembayaran }}
+                                </span>
+                            </td>
+
                             <td>
                                 <a href="{{ route('pelanggan.detail', $item->id) }}"
                                     class="btn btn-warning btn-sm">Detail</a>
                             </td>
                             <!-- Tombol Bayar -->
-                            <td>
+                             <!--<td>
                                 <a href="#" class="btn btn-success btn-sm"
                                     onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-                            </td>
+                            </td> -->
                             <!-- Modal Bayar -->
                             <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
                                 aria-hidden="true">
@@ -139,10 +160,8 @@
                                                     <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
                                                         required>
                                                         <option value="">Pilih metode</option>
-                                                        <option value="Cash Kantor">Cash Kantor</option>
-                                                        <option value="Cash Pickup">Cash Pickup</option>
-                                                        <option value="Transfer Bca">Transfer Via BCA</option>
-                                                        <option value="Transfer Dana">Transfer Via Dana</option>
+                                                        <option value="CASH">Cash</option>
+                                                        <option value="TF">Transfer</option>
                                                     </select>
                                                 </div>
 
@@ -175,10 +194,18 @@
         function showBayarModal(id, namaPlg, hargaPaket) {
             document.getElementById('pelangganId').value = id;
             document.getElementById('pembayaranDetails').innerText =
-                `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
+                Nama Pelanggan: $ {
+                    namaPlg
+                }\
+            nHarga Paket: Rp.$ {
+                hargaPaket
+            };
 
             var form = document.getElementById('bayarForm');
-            form.action = `/pelanggan/${id}/bayar`; // Set action URL with the ID
+            form.action = /pelanggan/$ {
+                id
+            }
+            /bayar; / / Set action URL with the ID
 
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();

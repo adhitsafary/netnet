@@ -31,7 +31,7 @@
                     <span>Dashboard</span></a>
             </li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
+            <div class="sidebar-heading bg-primary">
                 Pelanggan
             </div>
             <li class="nav-item">
@@ -130,6 +130,63 @@
                     </div>
                 </div>
             </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Pelanggan ISOLIR
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap14" aria-expanded="true" aria-controls="collapseBootstrap14">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Pelanggan ISOLIR</span>
+                </a>
+                <div id="collapseBootstrap14" class="collapse" aria-labelledby="headingBootstrap14"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/isolir/">Pelanggan ISOLIR</a>
+                        <a class="collapse-item" href="/isolir/create">Buat Data Pelanggan ISOLIR</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Pemasukan
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap15" aria-expanded="true" aria-controls="collapseBootstrap15">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Pemasukan</span>
+                </a>
+                <div id="collapseBootstrap15" class="collapse" aria-labelledby="headingBootstrap15"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/pemasukan/">Pemasukan</a>
+                        <a class="collapse-item" href="/pemasukan/create">Buat Data Pemasukan</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Rekap harian
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap16" aria-expanded="true" aria-controls="collapseBootstrap16">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Rekap harian</span>
+                </a>
+                <div id="collapseBootstrap16" class="collapse" aria-labelledby="headingBootstrap16"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
+                    </div>
+                </div>
+            </li>
+
 
         </ul>
         <!-- Sidebar -->

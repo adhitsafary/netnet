@@ -43,6 +43,7 @@
                     <th>Alamat</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
+                    <th>Metode Pembayaran</th>
                     <th>Hapus</th>
                     <th>Print</th>
                 </tr>
@@ -55,6 +56,7 @@
                         <td>{{ $item->alamat_plg }}</td>
                         <td>{{ $item->tanggal_pembayaran }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
+                        <td>{{ $item->metode_transaksi }}</td>
                         <td>
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">

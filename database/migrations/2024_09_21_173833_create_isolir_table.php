@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('alamat_plg');
             $table->string('no_telepon_plg');
             $table->string('aktivasi_plg');
-            $table->string('paket_plg');
-            $table->string('harga_paket');
+            $table->integer('paket_plg');
+            $table->integer('harga_paket');
             $table->string('tgl_tagih_plg');
             $table->string('keterangan_plg');
             $table->string('odp');

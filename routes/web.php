@@ -3,11 +3,14 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\IsolirController;
+use App\Http\Controllers\JumlahLainLainController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KasbonController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
+use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PerbaikanController;
@@ -164,6 +167,39 @@ Route::get('/rekap_pemasangan/edit/{id}', [RekapPemasanganController::class, 'ed
 Route::post('/rekap_pemasangan/update/{id}', [RekapPemasanganController::class, 'update'])->name('rekap_pemasangan.update');
 Route::post('/rekap_pemasangan/hapus/{id}', [RekapPemasanganController::class, 'destroy'])->name('rekap_pemasangan.destroy');
 
+//pemasukan lainya
+Route::get('/pemasukan', [PemasukanController::class, 'index'])->name('pemasukan.index');
+Route::get('/pemasukan/create', [PemasukanController::class, 'create'])->name('pemasukan.create');
+Route::post('/pemasukan/store', [PemasukanController::class, 'store'])->name('pemasukan.store');
+Route::get('/pemasukan/edit/{id}', [PemasukanController::class, 'edit'])->name('pemasukan.edit');
+Route::post('/pemasukan/update/{id}', [PemasukanController::class, 'update'])->name('pemasukan.update');
+Route::post('/pemasukan/hapus/{id}', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
+
+// Routes untuk isolir
+
+//Isolir
+Route::get('/isolir', [IsolirController::class, 'index'])->name('isolir.index');
+Route::get('/isolir/edit/{id}', [IsolirController::class, 'edit'])->name('isolir.edit');
+Route::post('/isolir/update/{id}', [IsolirController::class, 'update'])->name('isolir.update');
+Route::delete('/isolir/delete/{id}', [IsolirController::class, 'destroy'])->name('isolir.destroy');
+Route::get('/isolir/{id}/detail', [IsolirController::class, 'detail'])->name('isolir.detail');
+Route::get('/isolir/aktifkan/{id}', [IsolirController::class, 'showOff'])->name('isolir.aktifkan_pelanggan');
+
+// web.php
+Route::post('/isolir/reactivate/{id}', [IsolirController::class, 'reactivatePelanggan'])->name('pelanggan.reactivate');
+
+
+Route::post('/isolir/{id}/activate', [IsolirController::class, 'activate'])->name('isolir.activate');
+Route::get('/isolir/cleanup', [IsolirController::class, 'cleanUp'])->name('isolir.cleanup');
+
+// web.php
+Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir');
 
 //rekap mutasi harian
 Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index'])->name('rekap.mutasi.harian');
+
+
+Route::post('pelanggan/{id}/update-status', [PelangganController::class, 'updateStatus'])->name('pelanggan.updateStatus');
+
+Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'])->name('keuangan.rekapHarian');
+

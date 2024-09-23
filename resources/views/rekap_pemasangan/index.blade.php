@@ -17,7 +17,7 @@
             <thead class="table table-primary">
                 <tr>
                     <th>No</th>
-                    <th>Nik</th>
+                    <th>Identitas</th>
                     <th>Nama</th>
                     <th>Alamat</th>
                     <th>No Telepon</th>

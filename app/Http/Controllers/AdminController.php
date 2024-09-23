@@ -3,18 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\BayarPelanggan;
+use App\Models\IsolirModel;
 use App\Models\Netnet;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
+use App\Models\PemasukanModel;
 use App\Models\PembayaranPelanggan;
+use App\Models\PengeluaranModel;
 use App\Models\Perbaikan;
+use App\Models\RekapPemasanganModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 
 
 
@@ -142,6 +145,25 @@ class AdminController extends Controller
         // Hitung total user yang membayar hari ini
         $totalUserHarian = $pembayaranHarian->count();
 
+        //INI BARU TOTAL HARIAN
+        $tanggalHariIni = Carbon::now()->format('Y-m-d');
+        // Mengambil total pemasukan dan pengeluaran untuk hari ini
+        $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
+        $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
+        $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
+        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $tanggalHariIni)->get();
+        // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
+        $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
+            ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
+            ->get();
+        // Hitung total pendapatan harian dari pembayaran
+        $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
+        $pemasukantotal = $totalPemasukan - $totalPengeluaran;
+        $totalsaldo = $totalPendapatanHarian + $pemasukantotal;
+        $totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
+        // Hitung total user yang membayar hari ini
+        $totalUserHarian = $pembayaranHarian->count();
+
 
 
 
@@ -169,7 +191,16 @@ class AdminController extends Controller
             'pelangganoforang',
             'totalPendapatanBulanan',
             'totalJumlahPengguna',
-            'dataChart' // Tambahkan data chart di sini
+            'dataChart',
+            // HARIAN BARU
+            'totalRegistrasi',
+            'totalsaldo',
+            'totaljumlahsaldo',
+            'totalPemasukan',
+            'totalPengeluaran',
+            'totalPendapatanHarian',
+            'totalUserHarian',
+            'tanggalHariIni'
         ));
     }
 
