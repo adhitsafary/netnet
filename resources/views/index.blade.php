@@ -13,19 +13,19 @@
         <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
+                <div class="card-biru h-100">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Pendapatan Total Harian
+                                <div class="text text-white font-weight-bold text-uppercase mb-1">Pendapatan Total Harian
                                 </div>
-                                <div class="h5 mb-0 mr-0 font-weight-bold text-gray-800">Rp
+                                <div class=" h5 mb-0 mr-0 font-weight-bold text-white font-bold">Rp
                                     {{ number_format($totaljumlahsaldo, 0, ',', '.') }}</div>
-                                <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
-                                            class="fas fa-arrow-up"></i>
+                                <div class="mt-2 mb-0 text-muted">
+                                    <span class="mr-2 text-bold font-bold text-white text-uppercase"><i
+                                            class="text text-white text-bold fas fa-arrow-up"></i>
                                         {{ $totalUserHarian }}</span>
-                                    <span class="text-xs font-weight-bold text-uppercase">Total User</span>
+                                    <span class="text text-white font-weight-bold text-uppercase">Total User</span>
                                 </div>
                             </div>
                             <div class="col-auto">
@@ -39,20 +39,20 @@
 
             <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
+                <div class="card-hijau h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Total USer Membayar harian
+                                <div class=" text text-white font-weight-bold text-uppercase mb-1">Total USer Membayar harian
                                     </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp
+                                <div class="h5 mb-0 font-weight-bold text text-white">Rp
                                     {{ number_format($totalPendapatanharian, 0, ',', '.') }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
-                                <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
-                                            class="fa fa-arrow-up"></i>
+                                <div class="mt-2 mb-0 text-muted">
+                                    <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
+                                            class="text text-white fa fa-arrow-up"></i>
                                         {{ $totalJumlahPengguna }}</span>
-                                    <span class="text-xs font-weight-bold text-uppercase">Jumlah
+                                    <span class="text text-white  font-weight-bold text-uppercase">Jumlah
                                         Pelanggan</span>
                                 </div>
                             </div>
@@ -67,24 +67,24 @@
 
             <!-- Earnings (Annual) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
+                <div class="card-kuning h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">Total
+                                <div class="text-white font-weight-bold text-uppercase mb-1">Total
                                     Registrasi Baru</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">Rp
+                                <div class="h5 mb-0 font-weight-bold text-white">Rp
                                     {{ number_format($totalRegistrasi, 0, ',', '.') }}</div>
-                                <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-success mr-2 text-xs font-weight-bold text-uppercase"><i
+                                <div class="mt-2 mb-0 text-muted text-white">
+                                    <span class=" mr-2 text-white font-weight-bold text-uppercase"><i
                                             class="fas fa-arrow-up"></i>
                                         {{ $pelangganoforang }}</span>
-                                    <span class="text-xs font-weight-bold text-uppercase">Jumlah Pelanggan
+                                    <span class="text-white font-weight-bold text-uppercase">Jumlah Pelanggan
                                         Off</span>
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-shopping-cart fa-2x text-success"></i>
+                                <i class="fas fa-shopping-cart fa-2x text-white"></i>
                             </div>
                         </div>
                     </div>
@@ -92,20 +92,20 @@
             </div>
             <!-- Pending Requests Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100">
+                <div class="card-merah h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                                <div class="text-white font-weight-bold text-uppercase mb-1">
                                     Pemasukan Lain-lain
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <div class="text-white h5 mb-0 font-weight-bold">
                                     {{ number_format($totalPemasukan, 0, ',', '.') }}</div>
-                                <div class="mt-2 mb-0 text-muted text-xs">
-                                    <span class="text-danger mr-2 text-xs font-weight-bold text-uppercase"><i
-                                            class="fas fa-arrow-down"></i>
+                                <div class="mt-2 mb-0 text-muted text-white">
+                                    <span class="text-white mr-2  font-weight-bold text-uppercase"><i
+                                            class="text-white fas fa-arrow-down"></i>
                                         {{ $pelanggan_of }}</span>
-                                    <span class="text-xs font-weight-bold text-uppercase ">Pelanggan
+                                    <span class="text-white font-weight-bold text-uppercase ">Pelanggan
                                         Off</span>
                                 </div>
                             </div>
