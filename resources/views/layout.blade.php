@@ -31,7 +31,7 @@
                     <span>Dashboard</span></a>
             </li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading bg-primary">
+            <div class="sidebar-heading">
                 Pelanggan
             </div>
             <li class="nav-item">

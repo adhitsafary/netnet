@@ -1096,15 +1096,15 @@ a:focus {
 }
 
 .sidebar-light hr.sidebar-divider {
-  border-top: 1px solid #eaecf4
+  border-top: 1px solid #000000
 }
 
 .sidebar-light .sidebar-heading {
-  color: #b7b9cc
+  color: #070707
 }
 
 .sidebar-light .nav-item .nav-link {
-  color: #858796
+  color: #000000
 }
 
 .sidebar-light .nav-item .nav-link i {
