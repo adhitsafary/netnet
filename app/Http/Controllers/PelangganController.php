@@ -156,27 +156,23 @@ class PelangganController extends Controller
             ->sum('jumlah_pembayaran'); // Pastikan 'jumlah_pembayaran' adalah kolom yang menyimpan jumlah pembayaran
 
 
-        //persentase lingkaran
-        // Ambil tanggal hari ini
-        $today = Carbon::today()->format('Y-m-d');
+        //AMBIL TANGGAL TAGIH * JUMLAH PEMBAYARAN USER
+        $todayDay = Carbon::today()->day;
+        // Ambil semua pelanggan yang memiliki tgl_tagih_plg sama dengan hari ini (angka)
+        $pembayaranHariiniPelanggan = Pelanggan::where('tgl_tagih_plg', $todayDay)->get();
 
-        // Ambil semua pelanggan yang memiliki tgl_tagih_plg hari ini
-        $pelanggan = Pelanggan::where('tgl_tagih_plg', $today)->get();
+        // Hitung total tagihan dari pelanggan yang harus membayar hari ini
+        $totalTagihanHariIni = $pembayaranHariiniPelanggan->sum('harga_paket');
 
-        // Hitung total pendapatan dari pelanggan yang memiliki tgl_tagih_plg hari ini
-        $totalPendapatan = $pelanggan->sum('harga_paket');
+        // Hitung jumlah pelanggan yang membayar hari ini
+        $jumlahPelangganMembayarHariIni = $pembayaranHariiniPelanggan->count();
 
-        // Ambil semua pembayaran yang dilakukan hari ini
-        $pembayaranHariIni = BayarPelanggan::whereDate('tanggal_pembayaran', $today)->get();
 
-        // Hitung jumlah pengguna yang membayar hari ini
-        $jumlahUserMembayarHariIni = $pembayaranHariIni->count();
+        $totalTagihanTertagih = $totalTagihanHariIni - $totalPendapatanharian_semua;
+        $totalUserTertagih = $jumlahPelangganMembayarHariIni - $totalUserHarian_semua;
+        
 
-        // Hitung jumlah total pelanggan yang seharusnya membayar
-        $totalPelanggan = $pelanggan->count();
-
-        // Hitung persentase
-        $persentasePembayaran = $totalPelanggan > 0 ? ($jumlahUserMembayarHariIni / $totalPelanggan) * 100 : 0;
+        //lingkaran
 
 
 
@@ -203,6 +199,7 @@ class PelangganController extends Controller
             'pelangganoforang',
             'totalPendapatanBulanan',
             'dataChart',
+            //data baru
             'totalRegistrasi',
             'totalsaldo',
             'totaljumlahsaldo',
@@ -212,9 +209,16 @@ class PelangganController extends Controller
             'totalUserHarian_semua',
             'totalPendapatanharian_semua',
             'totaluserhasilfilter',
-            'totalPendapatan',
-            'jumlahUserMembayarHariIni',
-            'persentasePembayaran',
+
+            //data pelanggan
+            'pembayaranHariiniPelanggan',
+            'jumlahPelangganMembayarHariIni',
+            'totalTagihanHariIni',
+            //Total Tertagih
+            'totalTagihanTertagih',
+            'totalUserTertagih',
+
+
         ));
     }
 

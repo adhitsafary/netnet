@@ -108,7 +108,7 @@ Route::middleware(['auth'])->group(function () {
     //alamat login akhir
     Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->middleware('userAkses:teknisi')->name('perbaikan.teknisi');
     //alamat login akhir
-    Route::get('/masuk/admin', [AdminController::class, 'home'])->middleware('userAkses:admin');
+    Route::get('/masuk/admin', [PelangganController::class, 'home'])->middleware('userAkses:admin');
     //alamat login akhir
     Route::get('/masuk/superadmin', [SuperAdminController::class, 'home'])->middleware('userAkses:superadmin');
     //Logout
@@ -208,5 +208,7 @@ Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'
 
 //filter pelanggan harian tgl_tagih_plg
 Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTagih'])->name('pelanggan.filterTagih');
-
+//filter di index  pelanggan
 Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
+//filter di pembayaran
+Route::get('/pembayaran/filter/', [PembayaranController::class, 'pembayaran_filter'])->name('pembayaran.filter');

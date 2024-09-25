@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="  p-5 mb-4">
+    <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-2 align-items-center">
             <div class="col-md-3">
@@ -99,10 +99,10 @@
         </div>
 
         <div class="">
-            <table class="table table-bordered ">
-                <thead class="table table-primary">
+            <table class="table table-bordered " style="color: black;">
+                <thead class="table table-primary " style="color: black;">
                     <tr>
-                        <th>No</th>
+                        <th class="">No</th>
                         <th>ID</th>
                         <th>Nama</th>
                         <th>Alamat</th>

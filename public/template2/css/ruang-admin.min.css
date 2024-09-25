@@ -20,11 +20,24 @@ a:focus {
     display: -ms-flexbox;
     display: flex;
 }
+#wrapper-index {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
 #wrapper #content-wrapper {
     background-color: #ffffff;
     width: 100%;
     overflow-x: hidden;
 }
+
+#wrapper-index #content-wrapper {
+    background-color: #cbcbcb;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+
 #wrapper #content-wrapper #content {
     -webkit-box-flex: 1;
     -ms-flex: 1 0 auto;
@@ -231,7 +244,7 @@ a:focus {
     background-color: #000000 !important;
 }
 .bg-gray-200 {
-    background-color: #eaecf4 !important;
+    background-color: #000000 !important;
 }
 .bg-gray-300 {
     background-color: #dddfeb !important;
@@ -264,16 +277,16 @@ a:focus {
     font-size: 1.2rem;
 }
 .text-gray-100 {
-    color: #f8f9fc !important;
+    color: #000000 !important;
 }
 .text-gray-200 {
-    color: #eaecf4 !important;
+    color: #000000 !important;
 }
 .text-gray-300 {
-    color: #dddfeb !important;
+    color: #000000 !important;
 }
 .text-gray-400 {
-    color: #d1d3e2 !important;
+    color: #000000 !important;
 }
 .text-gray-500 {
     color: #000000 !important;
@@ -409,7 +422,7 @@ a:focus {
 .topbar .nav-item .nav-link .img-profile {
     height: 2rem;
     width: 2rem;
-    border: 1px solid #000000;
+    border: 1px solid #dedede;
 }
 .topbar {
     height: 4.375rem;
@@ -424,7 +437,7 @@ a:focus {
     box-shadow: 0 0 !important;
 }
 .topbar #sidebarToggleTop:hover {
-    background-color: #000000;
+    background-color: #cbcbcb;
 }
 .topbar #sidebarToggleTop:active {
     background-color: #dddfeb;
@@ -495,20 +508,20 @@ a:focus {
     width: 2.5rem;
 }
 .topbar .dropdown-list .dropdown-item .dropdown-list-image .status-indicator {
-    background-color: #eaecf4;
+    background-color: #000000;
     height: 0.75rem;
     width: 0.75rem;
     border-radius: 100%;
     position: absolute;
     bottom: 0;
     right: 0;
-    border: 0.125rem solid #fff;
+    border: 0.125rem solid #000000;
 }
 .topbar .dropdown-list .dropdown-item .text-truncate {
     max-width: 10rem;
 }
 .topbar .dropdown-list .dropdown-item:active {
-    background-color: #eaecf4;
+    background-color: #000000;
     color: #3a3b45;
 }
 @media (min-width: 576px) {
@@ -641,17 +654,17 @@ a:focus {
 }
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
-    background-color: #eaecf4;
+    background-color: #cbcbcb;
     transition: all 0.3s ease-in-out;
     -webkit-transition: all 0.3s ease-in-out;
 }
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
-    background-color: #dddfeb;
+    background-color: #000000;
 }
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-    color: #3a3b45;
+    color: #000000;
     font-weight: 800;
 }
 .sidebar #sidebarToggle {
@@ -893,7 +906,7 @@ a:focus {
         .collapsing
         .collapse-inner
         .collapse-item:hover {
-        background-color: #eaecf4;
+        background-color: #000000;
         transition: all 0.3s ease-in-out;
         -webkit-transition: all 0.3s ease-in-out;
     }
@@ -1639,3 +1652,13 @@ body.sidebar-toggled footer.sticky-footer {
     width: 100%; /* Tabel akan tampil penuh */
     white-space: nowrap; /* Tabel tidak akan membungkus kontennya */
 }
+
+.text-white {
+    color: white !important; /* Pastikan warna teks putih */
+}
+
+
+.text-black {
+    color: black !important;
+}
+

@@ -366,6 +366,35 @@
                         </li>
                     </ul>
                 </nav>
+
+                <div class="mr-4 d-sm-flex align-items-center justify-content-between mb-2">
+                    <h4 class="h2 mb-0" style="color: black;"></h4>
+                    <ol class="breadcrumb">
+                        <!-- Jam Berjalan -->
+                        <div class="h6 font-weight-bold mr-3" style="color: black;">
+                            JAM : <span id="liveClock"></span>
+                        </div>
+                        <div class="h6 font-weight-bold" style="color: black;">
+                            TANGGAL : {{ now()->format('d/m/Y') }}
+                        </div>
+
+                        <script>
+                            function updateClock() {
+                                const now = new Date();
+                                const hours = String(now.getHours()).padStart(2, '0');
+                                const minutes = String(now.getMinutes()).padStart(2, '0');
+                                const seconds = String(now.getSeconds()).padStart(2, '0');
+                                const formattedTime = `${hours}:${minutes}:${seconds}`;
+                                document.getElementById('liveClock').textContent = formattedTime;
+                            }
+
+                            // Update jam setiap detik
+                            setInterval(updateClock, 1000);
+                            updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+                        </script>
+                    </ol>
+                </div>
+
                 <!-- Topbar -->
 
                 <!-- Container Fluid-->

@@ -394,7 +394,7 @@ a:focus {
 .dropdown .dropdown-menu .dropdown-header {
   font-weight: 800;
   font-size: .65rem;
-  color: #b7b9cc
+  color: #000000
 }
 
 .dropdown.no-arrow .dropdown-toggle::after {
@@ -438,7 +438,7 @@ a:focus {
 .topbar .nav-item .nav-link .img-profile {
   height: 2rem;
   width: 2rem;
-  border: 1px solid #fafafa
+  border: 1px solid #000000
 }
 
 .topbar {
@@ -1918,3 +1918,8 @@ body.sidebar-toggled footer.sticky-footer {
   background-color: #ff0000;
   border-color: #ff0000
 }
+
+.text-black {
+    color: black !important;
+}
+

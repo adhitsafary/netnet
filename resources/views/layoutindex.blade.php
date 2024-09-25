@@ -12,13 +12,14 @@
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
-    <div id="wrapper">
+    <div id="wrapper-index">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/admin">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -26,24 +27,24 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="/masuk/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
+            <div class="sidebar-heading font-weight-bold">
                 Pelanggan
             </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
                     aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pelanggan</span>
+                    <span class=" font-weight-bold">Pelanggan</span>
                 </a>
                 <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Pelanggan</h6>
+                        <h6 class="collapse-header font-weight-bold">Pelanggan</h6>
                         <a class="collapse-item" href="/pelanggan">Pelanggan</a>
                         <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
                         <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
@@ -52,15 +53,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Perbaikan
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                     aria-expanded="true" aria-controls="collapseBootstrap1">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Perbaikan</span>
+                    <span class=" font-weight-bold">Perbaikan</span>
                 </a>
                 <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap1"
                     data-parent="#accordionSidebar">
@@ -72,15 +70,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pembayaran
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
                     aria-expanded="true" aria-controls="collapsePage">
                     <i class="fas fa-fw fa-columns"></i>
-                    <span>History Pembayaran</span>
+                    <span class=" font-weight-bold">History Pembayaran</span>
                 </a>
                 <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -92,6 +87,85 @@
                     </div>
                 </div>
             </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Pengeluaran</span>
+                </a>
+                <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/pengeluaran/">Pengeluaran</a>
+                        <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Rekap Pemasangan</span>
+                </a>
+                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/rekap_pemasangan/">Rekap Pemasangan</a>
+                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Rekap Pemasangan</a>
+                    </div>
+                </div>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap14" aria-expanded="true" aria-controls="collapseBootstrap14">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Pelanggan ISOLIR</span>
+                </a>
+                <div id="collapseBootstrap14" class="collapse" aria-labelledby="headingBootstrap14"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/isolir/">Pelanggan ISOLIR</a>
+                        <a class="collapse-item" href="/isolir/create">Buat Data Pelanggan ISOLIR</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap15" aria-expanded="true" aria-controls="collapseBootstrap15">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Pemasukan</span>
+                </a>
+                <div id="collapseBootstrap15" class="collapse" aria-labelledby="headingBootstrap15"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/pemasukan/">Pemasukan</a>
+                        <a class="collapse-item" href="/pemasukan/create">Buat Data Pemasukan</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap16" aria-expanded="true" aria-controls="collapseBootstrap16">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Rekap harian</span>
+                </a>
+                <div id="collapseBootstrap16" class="collapse" aria-labelledby="headingBootstrap16"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
+                    </div>
+                </div>
+            </li>
+
+
         </ul>
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -292,6 +366,37 @@
                         </li>
                     </ul>
                 </nav>
+
+                <div class="mr-4 d-sm-flex align-items-center justify-content-between mb-2">
+                    <h4 class="h2 mb-0" style="color: black;"></h4>
+                    <ol class="breadcrumb">
+                        <!-- Jam Berjalan -->
+                        <div class="h6 font-weight-bold mr-3" style="color: black;">
+                            JAM : <span id="liveClock"></span>
+                        </div>
+                        <div class="h6 font-weight-bold" style="color: black;">
+                            TANGGAL : {{ now()->format('d/m/Y') }}
+                        </div>
+
+                        <script>
+                            function updateClock() {
+                                const now = new Date();
+                                const hours = String(now.getHours()).padStart(2, '0');
+                                const minutes = String(now.getMinutes()).padStart(2, '0');
+                                const seconds = String(now.getSeconds()).padStart(2, '0');
+                                const formattedTime = `${hours}:${minutes}:${seconds}`;
+                                document.getElementById('liveClock').textContent = formattedTime;
+                            }
+
+                            // Update jam setiap detik
+                            setInterval(updateClock, 1000);
+                            updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+                        </script>
+                    </ol>
+                </div>
+
+
+
                 <!-- Topbar -->
 
                 <!-- Container Fluid-->
@@ -311,6 +416,9 @@
         <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
         <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
         <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
 </body>
 
 </html>
