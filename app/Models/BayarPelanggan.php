@@ -23,6 +23,7 @@ class BayarPelanggan extends Model
         'updated_at',
         'created_at',
         'paket_plg',
+        'keterangan_plg',
     ];
 
     public function pelanggan()

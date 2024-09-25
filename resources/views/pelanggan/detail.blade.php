@@ -105,10 +105,8 @@
                                                 <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
                                                     required>
                                                     <option value="">Pilih metode</option>
-                                                    <option value="Cash Kantor">Cash Kantor</option>
-                                                    <option value="Cash Pickup">Cash Pickup</option>
-                                                    <option value="Transfer Bca">Transfer Via BCA</option>
-                                                    <option value="Transfer Dana">Transfer Via Dana</option>
+                                                    <option value="CASH">Cash</option>
+                                                    <option value="TF">Transfer</option>
                                                 </select>
                                             </div>
 

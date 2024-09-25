@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="mb-4">
+    <div class=" p-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-4">
             <div class="col-md-9">

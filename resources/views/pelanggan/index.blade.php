@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="mb-4">
+    <div class="  p-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-2 align-items-center">
             <div class="col-md-3">
@@ -19,10 +19,63 @@
 
             <div class="col-md-6 text-center">
                 <!-- Teks Data Pelanggan -->
-                <div class="btn btn-primary btn-lg mt-2"
+                <div class="btn btn-primary btn-lg mt-2" data-toggle="modal" data-target="#filterModal"
                     style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
                     Data Pelanggan
                 </div>
+                <!-- Modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="filterModalLabel">Filter Pelanggan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                    <div class="form-group">
+                                        <label for="paket_plg">Paket</label>
+                                        <select name="paket_plg" id="paket_plg">
+                                            <option value="">Pilih Paket</option>
+                                            @for ($i = 1; $i <= 7; $i++)
+                                                <option value="{{ $i }}"
+                                                    {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                            <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                                                vcr
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tgl_tagih_plg">Tanggal Tagih</label>
+                                        <select name="tgl_tagih_plg" id="tgl_tagih_plg">
+                                            <option value="">Pilih Tanggal Tagih</option>
+                                            @for ($i = 1; $i <= 32; $i++)
+                                                <option value="{{ $i }}"
+                                                    {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('.filterForm').submit();">Terapkan Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-md-3 text-right">
@@ -31,9 +84,11 @@
                     <div class="input-group">
                         <select name="status_pembayaran" id="status_pembayaran" class="form-control">
                             <option value="">Semua</option>
-                            <option value="belum_bayar" {{ $status_pembayaran_display == 'belum_bayar' ? 'selected' : '' }}>
+                            <option value="belum_bayar"
+                                {{ $status_pembayaran_display == 'belum_bayar' ? 'selected' : '' }}>
                                 Belum Bayar</option>
-                            <option value="sudah_bayar" {{ $status_pembayaran_display == 'sudah_bayar' ? 'selected' : '' }}>
+                            <option value="sudah_bayar"
+                                {{ $status_pembayaran_display == 'sudah_bayar' ? 'selected' : '' }}>
                                 Sudah Bayar</option>
                         </select>
                     </div>
@@ -49,43 +104,85 @@
                     <tr>
                         <th>No</th>
                         <th>ID</th>
-                        <th>
-                            <a
-                                href="{{ route('pelanggan.index', [
-                                    'sort_by' => 'nama_plg',
-                                    'sort_direction' => $sortBy == 'nama_plg' && $sortDirection == 'asc' ? 'desc' : 'asc',
-                                ]) }}">
-                                Nama
-                                @if ($sortBy == 'nama_plg')
-                                    @if ($sortDirection == 'asc')
-                                        ↑
-                                    @else
-                                        ↓
-                                    @endif
-                                @endif
-                            </a>
-                        </th>
-
-
+                        <th>Nama</th>
                         <th>Alamat</th>
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
-                        <th>Paket</th>
-                        <th>Harga Paket</th>
-                        <th>Tanggal Tagih</th>
+                        <th>
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                <div class="form-group">
+                                    <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
+                                        <option value="">Paket</option>
+                                        @for ($i = 1; $i <= 7; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                                {{ $i }}
+                                            </option>
+                                        @endfor
+                                        <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                                            vcr
+                                        </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </th>
+
+                        <th>
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                <div class="form-group">
+                                    <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
+                                        <option value="">Harga</option>
+                                        <option value="125000" {{ request('harga_paket') == '125000' ? 'selected' : '' }}>
+                                            125000
+                                        </option>
+                                        <option value="150000" {{ request('harga_paket') == '150000' ? 'selected' : '' }}>
+                                            150000
+                                        </option>
+                                        <option value="175000" {{ request('harga_paket') == '175000' ? 'selected' : '' }}>
+                                            175000
+                                        </option>
+                                        <option value="225000" {{ request('harga_paket') == '225000' ? 'selected' : '' }}>
+                                            225000
+                                        </option>
+                                        <option value="250000" {{ request('harga_paket') == '250000' ? 'selected' : '' }}>
+                                            250000
+                                        </option>
+                                    </select>
+                                </div>
+                            </form>
+                        </th>
+
+                        <th>
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                <div class="form-group">
+                                    <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
+                                        <option value="">Tanggal Tagih</option>
+                                        @for ($i = 1; $i <= 32; $i++)
+                                            <option value="{{ $i }}"
+                                                {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                                {{ $i }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </div>
+                            </form>
+                        </th>
+
                         <th>ODP</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
                         <th>Keterangan</th>
                         <th>Status</th>
                         <th>Detail</th>
-                       <!-- <th>Riwayat pembayaran</th> -->
+                        <th>Bayar</th>
+                        <th>Isolir</th>
+                        <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($pelanggan as $no => $item)
                         <tr>
-                            <td>{{ $no + 1 }}</td>
+                            <td>{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
                             <td>{{ $item->alamat_plg }}</td>
@@ -128,10 +225,10 @@
                                     class="btn btn-warning btn-sm">Detail</a>
                             </td>
                             <!-- Tombol Bayar -->
-                             <!--<td>
+                            <td>
                                 <a href="#" class="btn btn-success btn-sm"
                                     onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-                            </td> -->
+                            </td>
                             <!-- Modal Bayar -->
                             <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
                                 aria-hidden="true">
@@ -156,13 +253,21 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label for="metodeTransaksi" class="form-label">Metode Transaksi</label>
-                                                    <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
-                                                        required>
+                                                    <label for="metodeTransaksi" class="form-label">Metode
+                                                        Transaksi</label>
+                                                    <select class="form-select" id="metodeTransaksi"
+                                                        name="metode_transaksi" required>
                                                         <option value="">Pilih metode</option>
                                                         <option value="CASH">Cash</option>
                                                         <option value="TF">Transfer</option>
                                                     </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="keterangan_plg" class="form-label">Keterangan
+                                                        Pembayaran Pelanggan</label>
+                                                    <input type="text" class="form-control" id="keterangan_plg"
+                                                        name="keterangan_plg">
                                                 </div>
 
                                                 <!-- Detail Pembayaran -->
@@ -176,10 +281,22 @@
                                                 <button type="submit" class="btn btn-primary">Bayar</button>
                                             </div>
                                         </form>
+
+
                                     </div>
                                 </div>
                             </div>
+
+                            <td>
+                                <form action="{{ route('pelanggan.toIsolir', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    <button type="submit" class="btn btn-warning btn-sm">Isolir</button>
+                                </form>
+                            </td>
+
                         </tr>
+
                     @empty
                         <tr>
                             <td colspan="19" class="text-center">Tidak ada data ditemukan</td>
@@ -188,24 +305,20 @@
                 </tbody>
 
             </table>
+
+        </div>
+        <div class="d-flex justify-content-center">
+            {{ $pelanggan->links('pagination::bootstrap-4') }}
         </div>
     @endsection
     <script>
         function showBayarModal(id, namaPlg, hargaPaket) {
             document.getElementById('pelangganId').value = id;
             document.getElementById('pembayaranDetails').innerText =
-                Nama Pelanggan: $ {
-                    namaPlg
-                }\
-            nHarga Paket: Rp.$ {
-                hargaPaket
-            };
+                `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
 
             var form = document.getElementById('bayarForm');
-            form.action = /pelanggan/$ {
-                id
-            }
-            /bayar; / / Set action URL with the ID
+            form.action = `/pelanggan/${id}/bayar`; // Set action URL with the ID
 
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();

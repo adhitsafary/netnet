@@ -12,6 +12,7 @@
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -31,19 +32,19 @@
                     <span>Dashboard</span></a>
             </li>
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
+            <div class="sidebar-heading font-weight-bold">
                 Pelanggan
             </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
                     aria-expanded="true" aria-controls="collapseBootstrap">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pelanggan</span>
+                    <span class=" font-weight-bold">Pelanggan</span>
                 </a>
                 <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Pelanggan</h6>
+                        <h6 class="collapse-header font-weight-bold">Pelanggan</h6>
                         <a class="collapse-item" href="/pelanggan">Pelanggan</a>
                         <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
                         <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
@@ -52,15 +53,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Perbaikan
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                     aria-expanded="true" aria-controls="collapseBootstrap1">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Perbaikan</span>
+                    <span class=" font-weight-bold">Perbaikan</span>
                 </a>
                 <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap1"
                     data-parent="#accordionSidebar">
@@ -72,15 +70,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pembayaran
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
                     aria-expanded="true" aria-controls="collapsePage">
                     <i class="fas fa-fw fa-columns"></i>
-                    <span>History Pembayaran</span>
+                    <span class=" font-weight-bold">History Pembayaran</span>
                 </a>
                 <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
@@ -93,15 +88,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pengeluaran
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pengeluaran</span>
+                    <span class=" font-weight-bold">Pengeluaran</span>
                 </a>
                 <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
                     data-parent="#accordionSidebar">
@@ -112,15 +104,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Rekap Pemasangan
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Rekap Pemasangan</span>
+                    <span class=" font-weight-bold">Rekap Pemasangan</span>
                 </a>
                 <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
                     data-parent="#accordionSidebar">
@@ -131,15 +120,12 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pelanggan ISOLIR
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap14" aria-expanded="true" aria-controls="collapseBootstrap14">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pelanggan ISOLIR</span>
+                    <span class=" font-weight-bold">Pelanggan ISOLIR</span>
                 </a>
                 <div id="collapseBootstrap14" class="collapse" aria-labelledby="headingBootstrap14"
                     data-parent="#accordionSidebar">
@@ -150,15 +136,11 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pemasukan
-            </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap15" aria-expanded="true" aria-controls="collapseBootstrap15">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pemasukan</span>
+                    <span class=" font-weight-bold">Pemasukan</span>
                 </a>
                 <div id="collapseBootstrap15" class="collapse" aria-labelledby="headingBootstrap15"
                     data-parent="#accordionSidebar">
@@ -169,15 +151,11 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Rekap harian
-            </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap16" aria-expanded="true" aria-controls="collapseBootstrap16">
                     <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Rekap harian</span>
+                    <span class=" font-weight-bold">Rekap harian</span>
                 </a>
                 <div id="collapseBootstrap16" class="collapse" aria-labelledby="headingBootstrap16"
                     data-parent="#accordionSidebar">
@@ -407,6 +385,9 @@
         <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
         <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
         <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
 </body>
 
 </html>

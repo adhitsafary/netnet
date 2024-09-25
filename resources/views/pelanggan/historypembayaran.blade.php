@@ -13,6 +13,7 @@
                     <th>Metode Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
+                    <th>Keterangan Pembayaran</th>
                     <th>Print</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                         <td>{{ $bayar ->metode_transaksi}}</td>
                         <td>{{ $bayar->tanggal_pembayaran}}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
+                        <td>{{ $bayar->keterangan_plg}}</td>
                         <td>
                             <button class="btn btn-info btn-sm"
                                 onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>

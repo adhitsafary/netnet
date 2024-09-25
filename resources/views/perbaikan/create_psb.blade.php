@@ -6,23 +6,21 @@
         <form id="perbaikanForm" action="{{ route('perbaikan.store') }}" method="POST">
             @csrf
 
-            <label for="nama_plg">Cari Nama Pelanggan</label>
-            <select id="nama_plg_select" name="nama_plg_select" class="form-control mt-2"></select> <br><br>
 
             <!-- Input tersembunyi untuk nama pelanggan -->
             <input type="hidden" id="nama_plg" name="nama_plg">
 
             <label for="id_plg">ID Pelanggan</label>
-            <input type="text" id="id_plg" name="id_plg" class="form-control mt-2" readonly>
+            <input type="text" id="id_plg" name="id_plg" class="form-control mt-2" >
 
             <label for="alamat_plg">Alamat</label>
-            <input type="text" id="alamat_plg" name="alamat_plg" class="form-control mt-2" readonly>
+            <input type="text" id="alamat_plg" name="alamat_plg" class="form-control mt-2" >
 
             <label for="no_telepon_plg">No Telpon</label>
-            <input type="text" id="no_telepon_plg" name="no_telepon_plg" class="form-control mt-2" readonly>
+            <input type="text" id="no_telepon_plg" name="no_telepon_plg" class="form-control mt-2" >
 
             <label for="paket_plg">Paket</label>
-            <input type="text" id="paket_plg" name="paket_plg" class="form-control mt-2" readonly>
+            <input type="text" id="paket_plg" name="paket_plg" class="form-control mt-2" >
 
             <label for="odp">ODP</label>
             <input type="text" id="odp" name="odp" class="form-control mt-2">
@@ -35,9 +33,9 @@
             <div class="form-group">
                 <label for="teknisi">Teknisi</label>
                 <select id="teknisi" name="teknisi" class="form-control mt-2">
-                    <option value="1">Tim 1</option>
-                    <option value="2">Tim 2</option>
-                    <option value="3">Tim 3</option>
+                    <option value="1 Deden dan Agis">Tim 1</option>
+                    <option value="2 Mursidi dan Dindin">Tim 2</option>
+                    <option value="3 Isep dan Indra">Tim 3</option>
                 </select>
             </div>
 
@@ -52,7 +50,10 @@
                     " 0 ".</div>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-sm">Simpan</button> <br> <br>
+
+
+            <br>
+            <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
         </form>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

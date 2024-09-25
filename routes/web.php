@@ -124,8 +124,9 @@ Route::get('/cekdulu', [CobaController::class, 'create']);
 //landing page
 Route::get('/home2', [PerbaikanController::class, 'home2']);
 
-Route::get('/search-pelanggan', [PerbaikanController::class, 'searchPelanggan']);
-Route::get('/get-pelanggan/{id}', [PerbaikanController::class, 'getPelanggan']);
+Route::get('/search-pelanggan', [PelangganController::class, 'searchPelanggan'])->name('pelanggan.search');
+Route::get('/get-pelanggan/{id}', [PelangganController::class, 'getPelanggan'])->name('pelanggan.get');
+
 
 
 Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name('perbaikan.rekapTeknisi');
@@ -195,6 +196,8 @@ Route::get('/isolir/cleanup', [IsolirController::class, 'cleanUp'])->name('isoli
 // web.php
 Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir');
 
+
+
 //rekap mutasi harian
 Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index'])->name('rekap.mutasi.harian');
 
@@ -203,3 +206,7 @@ Route::post('pelanggan/{id}/update-status', [PelangganController::class, 'update
 
 Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'])->name('keuangan.rekapHarian');
 
+//filter pelanggan harian tgl_tagih_plg
+Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTagih'])->name('pelanggan.filterTagih');
+
+Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');

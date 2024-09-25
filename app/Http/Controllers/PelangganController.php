@@ -120,28 +120,14 @@ class PelangganController extends Controller
             ->sum('jumlah_pembayaran'); // Menjumlahkan total pembayaran di bulan yang sama
 
 
-        //======================FILTER hari bln taun
-        // Ambil filter hari, bulan, dan tahun dari request, default ke tanggal sekarang jika kosong
-        // $filterTanggal = $request->input('tanggal') ?? now()->format('Y-m-d');
-        // $filterBulan = $request->input('bulan') ?? now()->format('m');
-        // $filterTahun = $request->input('tahun') ?? now()->format('Y');
-
-        // Pembayaran harian
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $filterTanggal)->get();
-
-        // Hitung total pendapatan dan jumlah user yang membayar pada hari yang difilter
-        // $totalPendapatanharian = $pembayaranHarian->sum('jumlah_pembayaran');
-        // $totalUserHarian = $pembayaranHarian->count();
-
-        // Ambil tanggal mulai dan akhir dari request atau default ke hari ini
         $tanggalMulai = $request->input('tanggal_mulai', now()->format('Y-m-d')); // Default ke hari ini
         $tanggalAkhir = $request->input('tanggal_akhir', now()->format('Y-m-d')); // Default ke hari ini
         // Ambil data pembayaran yang dilakukan antara tanggal mulai dan akhir (default hari ini)
         $pembayaranHarian = BayarPelanggan::whereBetween('tanggal_pembayaran', [$tanggalMulai, $tanggalAkhir])->get();
         // Hitung total pendapatan harian
         $totalPendapatanharian = $pembayaranHarian->sum('jumlah_pembayaran');
-        // Hitung total user yang membayar hari ini
-        $totalUserHarian = $pembayaranHarian->count();
+        // Hitung total pendapatan harian
+        $totaluserhasilfilter = $pembayaranHarian->count();
 
         //INI BARU TOTAL HARIAN
         $tanggalHariIni = Carbon::now()->format('Y-m-d');
@@ -149,29 +135,58 @@ class PelangganController extends Controller
         $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $tanggalHariIni)->get();
-        // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
+
         $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
             ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
             ->get();
-        // Hitung total pendapatan harian dari pembayaran
+
+        $totalUserHarian = $pembayaranHarian->count();
+
+
         $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
         $pemasukantotal = $totalPemasukan - $totalPengeluaran;
         $totalsaldo = $totalPendapatanHarian + $pemasukantotal;
         $totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
-        // Hitung total user yang membayar hari ini
-        $totalUserHarian = $pembayaranHarian->count();
+
+        // Menghitung total jumlah pengguna yang membayar hari ini dari semua metode transaksi
+        $totalUserHarian_semua = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())->count();
+
+        // Hitung total pendapatan harian dari pembayaran
+        $totalPendapatanharian_semua = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
+            ->sum('jumlah_pembayaran'); // Pastikan 'jumlah_pembayaran' adalah kolom yang menyimpan jumlah pembayaran
 
 
+        //persentase lingkaran
+        // Ambil tanggal hari ini
+        $today = Carbon::today()->format('Y-m-d');
+
+        // Ambil semua pelanggan yang memiliki tgl_tagih_plg hari ini
+        $pelanggan = Pelanggan::where('tgl_tagih_plg', $today)->get();
+
+        // Hitung total pendapatan dari pelanggan yang memiliki tgl_tagih_plg hari ini
+        $totalPendapatan = $pelanggan->sum('harga_paket');
+
+        // Ambil semua pembayaran yang dilakukan hari ini
+        $pembayaranHariIni = BayarPelanggan::whereDate('tanggal_pembayaran', $today)->get();
+
+        // Hitung jumlah pengguna yang membayar hari ini
+        $jumlahUserMembayarHariIni = $pembayaranHariIni->count();
+
+        // Hitung jumlah total pelanggan yang seharusnya membayar
+        $totalPelanggan = $pelanggan->count();
+
+        // Hitung persentase
+        $persentasePembayaran = $totalPelanggan > 0 ? ($jumlahUserMembayarHariIni / $totalPelanggan) * 100 : 0;
 
 
 
         // Kirim data ke view
         return view('index', compact(
+            'pelanggan',
             'tanggalMulai',
             'tanggalAkhir',
             'dataPendapatanbulan',
-            'totalJumlahPengguna',
+            'totalJumlahPengguna', // Hanya dikirimkan sekali
             'dataPendapatan',
             'totalUserHarian',
             'totalPendapatanharian',
@@ -180,7 +195,6 @@ class PelangganController extends Controller
             'paketTop5',
             'paketRemaining',
             'paketData',
-            'pelanggan',
             'pelanggan_of',
             'pelanggan_of_uang',
             'totalpendapatanakhir',
@@ -188,17 +202,19 @@ class PelangganController extends Controller
             'pelangganofuang',
             'pelangganoforang',
             'totalPendapatanBulanan',
-            'totalJumlahPengguna',
             'dataChart',
-            // HARIAN BARU
             'totalRegistrasi',
             'totalsaldo',
             'totaljumlahsaldo',
             'totalPemasukan',
             'totalPengeluaran',
-            'totalPendapatanHarian',
-            'totalUserHarian',
-            'tanggalHariIni'
+            'tanggalHariIni',
+            'totalUserHarian_semua',
+            'totalPendapatanharian_semua',
+            'totaluserhasilfilter',
+            'totalPendapatan',
+            'jumlahUserMembayarHariIni',
+            'persentasePembayaran',
         ));
     }
 
@@ -303,6 +319,11 @@ class PelangganController extends Controller
 
         // Query data pelanggan dan tambahkan orderBy berdasarkan input sorting
         $bayarpelanggan = Pelanggan::orderBy($sortBy, $sortDirection)->get();
+
+        //pagination
+        $pelanggan = $query->paginate(200);  // Pagination di sini, bukan setelah get()
+        // $pelanggan = Pelanggan::paginate(10); // Mengambil 10 data per halaman
+
 
 
         return view('pelanggan.index', compact('pelanggan', 'status_pembayaran_display', 'bayarpelanggan', 'sortBy', 'sortDirection'));
@@ -443,11 +464,6 @@ class PelangganController extends Controller
 
     public function bayar(Request $request)
     {
-        // Ambil input dari form
-        $id = $request->input('id');
-        $tanggalPembayaran = $request->input('tanggal_pembayaran');
-        $metodeTransaksi = $request->input('metode_transaksi'); // Ambil metode transaksi dari form
-
         // Validasi input
         $request->validate([
             'id' => 'required|exists:pelanggan,id',
@@ -456,7 +472,8 @@ class PelangganController extends Controller
         ]);
 
         // Ambil data pelanggan berdasarkan id
-        $pelanggan = Pelanggan::findOrFail($id);
+        $pelanggan = Pelanggan::findOrFail($request->id);
+        //dd($pelanggan);
 
         // Simpan data ke tabel bayar_pelanggan
         BayarPelanggan::create([
@@ -465,10 +482,11 @@ class PelangganController extends Controller
             'nama_plg' => $pelanggan->nama_plg,
             'alamat_plg' => $pelanggan->alamat_plg,
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
-            'tanggal_pembayaran' => $tanggalPembayaran, // Tanggal pembayaran yang dikirim dari form
+            'tanggal_pembayaran' => $request->tanggal_pembayaran,
             'jumlah_pembayaran' => $pelanggan->harga_paket,
-            'metode_transaksi' => $metodeTransaksi, // Simpan metode transaksi yang dipilih
+            'metode_transaksi' => $request->metode_transaksi,
             'no_telepon_plg' => $pelanggan->no_telepon_plg,
+            'keterangan_plg' => $request->keterangan_plg,
             'paket_plg' => $pelanggan->paket_plg,
         ]);
 
@@ -476,9 +494,12 @@ class PelangganController extends Controller
         $pelanggan->status_pembayaran = 'Sudah Bayar';
         $pelanggan->save();
 
-        // Redirect ke halaman detail pelanggan dengan pesan sukses
-        return redirect()->route('pelanggan.historypembayaran', $id)->with('success', 'Pembayaran berhasil dilakukan.');
+        // Redirect ke halaman history pembayaran dengan pesan sukses
+        return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
+            ->with('success', 'Pembayaran berhasil dilakukan.');
     }
+
+
 
 
     public function historypembayaran($id_plg)
@@ -650,6 +671,78 @@ class PelangganController extends Controller
         // Hapus dari tabel isolir
         $pelanggan->delete();
 
-        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil diaktifkan kembali.');
+        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil di masukan ke Isolir.');
+    }
+
+    public function filterByTanggalTagih(Request $request)
+    {
+        // Ambil nilai filter status pembayaran dari request
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
+
+        // Ambil tanggal tagih dan paket dari request
+        $tanggal = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+
+        // Mulai query
+        $query = Pelanggan::query();
+
+        // Filter berdasarkan status pembayaran jika ada
+        if ($status_pembayaran_display) {
+            $query->where('status_pembayaran', $status_pembayaran_display);
+        }
+
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($tanggal) {
+            $query->where('tgl_tagih_plg', $tanggal);
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+
+        // Lakukan pagination pada query
+        $pelanggan = $query->paginate(100);
+
+        // Kembalikan data pelanggan ke view
+        return view('pelanggan.index_tagih', compact('pelanggan', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
+    }
+    public function filterByTanggalTagihindex(Request $request)
+    {
+        // Ambil nilai filter status pembayaran dari request
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
+
+        // Ambil tanggal tagih dan paket dari request
+        $tanggal = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+
+        // Mulai query
+        $query = Pelanggan::query();
+
+        // Filter berdasarkan status pembayaran jika ada
+        if ($status_pembayaran_display) {
+            $query->where('status_pembayaran', $status_pembayaran_display);
+        }
+
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($tanggal) {
+            $query->where('tgl_tagih_plg', $tanggal);
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+        if ($harga_paket) {
+            $query->where('harga_paket', $harga_paket);
+        }
+
+
+        // Lakukan pagination pada query
+        $pelanggan = $query->paginate(100);
+
+        // Kembalikan data pelanggan ke view
+        return view('pelanggan.index', compact('pelanggan', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
     }
 }

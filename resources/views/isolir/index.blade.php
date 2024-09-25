@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="mb-4">
+    <div class="p-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-2 align-items-center">
             <div class="col-md-3">
@@ -52,6 +52,7 @@
                     <th>ODP</th>
                     <th>Longitude</th>
                     <th>Latitude</th>
+                    <th>Tanggal Isolir</th>
                     <th>Status Pembayaran</th>
                     <th>Aksi</th>
                 </tr>
@@ -72,11 +73,12 @@
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->longitude }}</td>
                         <td>{{ $item->latitude }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>
                             @if ($item->status_pembayaran === 'Sudah Bayar')
-                                <span class="badge badge-success">Sudah Bayar</span>
+                                <span class="badge badge-success p-3">Sudah Bayar</span>
                             @else
-                                <span class="badge badge-danger">Belum Bayar</span>
+                                <span class="badge badge-danger p-3">Belum Bayar</span>
                             @endif
                         </td>
                         <td>

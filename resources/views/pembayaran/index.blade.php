@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="container mt-4">
+    <div class=" p-5 mt-4">
         <div class="row mb-4">
             <div class="col-md-9">
                 <form action="{{ route('pembayaran.index') }}" method="GET" class="form-inline">
@@ -44,6 +44,7 @@
                     <th>Tanggal Pembayaran</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Metode Pembayaran</th>
+                    <th>Keterangan</th>
                     <th>Hapus</th>
                     <th>Print</th>
                 </tr>
@@ -54,9 +55,10 @@
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nama_plg }}</td>
                         <td>{{ $item->alamat_plg }}</td>
-                        <td>{{ $item->tanggal_pembayaran }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $item->metode_transaksi }}</td>
+                        <td>{{ $item->keterangan_plg }}</td>
                         <td>
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">

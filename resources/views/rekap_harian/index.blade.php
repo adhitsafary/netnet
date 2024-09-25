@@ -1,10 +1,10 @@
 @extends('layout')
 
 @section('konten')
-    <div class="container mt-4">
+    <div class="mb-3 p-5 mt-4">
         <div class="card">
             <div class="card-header">
-                <h2>Rekap Pendapatan Harian ({{ $tanggalHariIni }})</h2>
+                <h4 class="text mb-3 font-weight-bold">Rekap Pendapatan Harian ({{ $tanggalHariIni }})</h4>
             </div>
             <div class="card-body">
                 <table class="table table-bordered">

@@ -79,7 +79,7 @@ class JumlahLainLainController extends Controller
         $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
             ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
             ->get();
-            
+
         // Hitung total pendapatan harian dari pembayaran
         $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
 

@@ -2,8 +2,6 @@
 
 @section('konten')
     <div class="container mt-4">
-        <h6 class="text-center text-black mt-3">Rekap Data Teknisi</h6>
-
         <!-- Filter Tanggal -->
         <form action="{{ route('perbaikan.rekapTeknisi') }}" method="GET" class="mb-3">
             @csrf
@@ -39,7 +37,7 @@
             <thead>
                 <tr>
                     <th>Teknisi</th>
-                    <th>Total Perbaikan</th>
+                    <th class="text text-black">Total Perbaikan</th>
                 </tr>
             </thead>
             <tbody>

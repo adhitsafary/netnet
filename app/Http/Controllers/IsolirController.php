@@ -25,37 +25,6 @@ class IsolirController extends Controller
         return view('isolir.index', compact('isolir'));
     }
 
-    // Aktifkan kembali pelanggan
-    public function activate($id)
-    {
-        $pelanggan = IsolirModel::find($id);
-
-        if ($pelanggan) {
-            // Kembalikan pelanggan ke tabel pelanggan
-            Pelanggan::create([
-                'id_plg' => $pelanggan->id_plg,
-                'nama_plg' => $pelanggan->nama_plg,
-                'alamat_plg' => $pelanggan->alamat_plg,
-                'no_telepon_plg' => $pelanggan->no_telepon_plg,
-                'aktivasi_plg' => $pelanggan->aktivasi_plg,
-                'paket_plg' => $pelanggan->paket_plg,
-                'harga_paket' => $pelanggan->harga_paket,
-                'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-                'keterangan_plg' => $pelanggan->keterangan_plg,
-                'odp' => $pelanggan->odp,
-                'longitude' => $pelanggan->longitude,
-                'latitude' => $pelanggan->latitude,
-                'status_pembayaran' => 'Sudah Bayar',
-            ]);
-
-            // Hapus pelanggan dari tabel isolir
-            $pelanggan->delete();
-
-            return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil diaktifkan kembali.');
-        }
-
-        return redirect()->route('isolir.index')->with('error', 'Pelanggan tidak ditemukan.');
-    }
 
     // Hapus pelanggan yang tidak aktif selama lebih dari 60 hari
     public function cleanUp()
@@ -129,29 +98,29 @@ class IsolirController extends Controller
 
     public function reactivatePelanggan($id)
     {
-        $pelanggan = IsolirModel::findOrFail($id);
+        $isolir = IsolirModel::findOrFail($id);
 
         // Pindahkan data ke tabel pelanggan
         Pelanggan::create([
-            'id_plg' => $pelanggan->id_plg,
-            'nama_plg' => $pelanggan->nama_plg,
-            'alamat_plg' => $pelanggan->alamat_plg,
-            'no_telepon_plg' => $pelanggan->no_telepon_plg,
-            'aktivasi_plg' => $pelanggan->aktivasi_plg,
-            'paket_plg' => $pelanggan->paket_plg,
-            'harga_paket' => $pelanggan->harga_paket,
-            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-            'keterangan_plg' => $pelanggan->keterangan_plg,
-            'odp' => $pelanggan->odp,
-            'longitude' => $pelanggan->longitude,
-            'latitude' => $pelanggan->latitude,
-            'status_pembayaran' => $pelanggan->status_pembayaran,
+            'id_plg' => $isolir->id_plg,
+            'nama_plg' => $isolir->nama_plg,
+            'alamat_plg' => $isolir->alamat_plg,
+            'no_telepon_plg' => $isolir->no_telepon_plg,
+            'aktivasi_plg' => $isolir->aktivasi_plg,
+            'paket_plg' => $isolir->paket_plg,
+            'harga_paket' => $isolir->harga_paket,
+            'tgl_tagih_plg' => $isolir->tgl_tagih_plg,
+            'keterangan_plg' => $isolir->keterangan_plg,
+            'odp' => $isolir->odp,
+            'longitude' => $isolir->longitude,
+            'latitude' => $isolir->latitude,
+            'status_pembayaran' => $isolir->status_pembayaran,
         ]);
 
         // Hapus dari tabel isolir
-        $pelanggan->delete();
+        $isolir->delete();
 
-        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil diaktifkan kembali.');
+        return redirect()->route('isolir.index')->with('success', 'Pelanggan Isolir berhasil diaktifkan kembali.');
     }
 
 

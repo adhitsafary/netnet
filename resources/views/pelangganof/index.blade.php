@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="mb-4">
+    <div class=" p-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('pelangganof.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">

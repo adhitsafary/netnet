@@ -3,10 +3,13 @@
 @section('konten')
     <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-2">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h4 class="h2\ mb-0 text-black">Dashboard</h4>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                <!-- Jam Berjalan -->
+                <div class="h5 text font-weight-bold">
+                    JAM : <span id="liveClock"></span>
+                </div>
+
             </ol>
         </div>
 
@@ -43,15 +46,17 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class=" text text-white font-weight-bold text-uppercase mb-1">Total USer Membayar harian
-                                    </div>
+                                <div class=" text text-white font-weight-bold text-uppercase mb-1">Total Semua USer yang
+                                    Membayar
+                                    hari ini
+                                </div>
                                 <div class="h5 mb-0 font-weight-bold text text-white">Rp
-                                    {{ number_format($totalPendapatanharian, 0, ',', '.') }}</div>
+                                    {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
                                 <div class="mt-2 mb-0 text-muted">
                                     <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
                                             class="text text-white fa fa-arrow-up"></i>
-                                        {{ $totalJumlahPengguna }}</span>
+                                        {{ $totalUserHarian_semua }}</span>
                                     <span class="text text-white  font-weight-bold text-uppercase">Jumlah
                                         Pelanggan</span>
                                 </div>
@@ -262,12 +267,111 @@
             </div>
             <!-- Pie Chart -->
             <div class="col-xl-4 col-lg-8">
-                <div class="card p-4">
+                <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-primary">Pendapatan Harian</h6>
                     </div>
                     <div class="card-body">
-                        <!-- Form filter tanggal mulai dan akhir -->
+                        <!-- Form filter tanggal dan jam mulai serta akhir -->
+                        <div class="col mr-2">
+                            <div class="text text-white font-weight-bold text-uppercase mb-1">Total Pendapatan Hari Ini
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text text-white">Rp
+                                {{ number_format($totalPendapatan, 0, ',', '.') }}</div>
+
+                            <div class="mt-2 mb-0 text-muted">
+                                <span class="text text-white mr-2 font-weight-bold text-uppercase">
+                                    <i class="text text-white fa fa-arrow-up"></i>
+                                    {{ $jumlahUserMembayarHariIni }} Pembayaran Hari Ini
+                                </span>
+                                <span class="text text-white font-weight-bold text-uppercase">Jumlah Pelanggan:
+                                    {{ $totalPendapatanharian_semua }}</span>
+                            </div>
+
+                            <div>
+                                <canvas id="persentaseLingkaran"></canvas>
+                            </div>
+                        </div>
+
+                        <script>
+                            var ctx = document.getElementById('persentaseLingkaran').getContext('2d');
+                            var persentase = {{ $persentasePembayaran }};
+                            var chart = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['Pembayaran', 'Belum Pembayaran'],
+                                    datasets: [{
+                                        label: 'Persentase Pembayaran',
+                                        data: [persentase, 100 - persentase],
+                                        backgroundColor: ['#36A2EB', '#FF6384'],
+                                        borderColor: ['#FFFFFF', '#FFFFFF'],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                }
+                            });
+                        </script>
+
+                        <br>
+
+                        <!-- Informasi pendapatan harian -->
+                        <div class="">
+                            <div class="text font-weight-bold">
+                                Tanggal: {{ now()->format('d/m/Y') }}
+                            </div>
+
+
+
+                            <div class="text font-weight-bold text-black">Total Pendapatan:
+                                <div class="h6 float-right"><b>Rp
+                                        {{ number_format($totalPendapatanharian, 0, ',', '.') }}</b></div>
+                            </div>
+                            <div class="text font-weight-bold mt-2">Jumlah User Yang Membayar:
+                                <div class="h6 float-right"><b>{{ $totaluserhasilfilter }} User</b></div>
+                            </div>
+                        </div>
+
+                        <!-- JavaScript untuk Jam Berjalan -->
+                        <script>
+                            function updateClock() {
+                                const now = new Date();
+                                const hours = String(now.getHours()).padStart(2, '0');
+                                const minutes = String(now.getMinutes()).padStart(2, '0');
+                                const seconds = String(now.getSeconds()).padStart(2, '0');
+                                const currentTime = hours + ':' + minutes + ':' + seconds;
+                                document.getElementById('liveClock').textContent = currentTime;
+                            }
+
+                            setInterval(updateClock, 1000); // Update setiap 1 detik
+                            updateClock(); // Panggil fungsi saat halaman dimuat
+                        </script>
+
+
+                        <br>
+                    </div><br>
+                </div>
+            </div>
+
+
+
+
+
+
+
+            <!-- Teknisi Perbaikan -->
+            <div class="col-xl-8 col-lg-3">
+                <div class="card">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Persentase Pembayaran
+                        </h6>
+                        <a class="m-0 float-right btn btn-danger btn-sm" href="/bayar-pelanggan">Lihat Semua <i
+                                class="fas fa-chevron-right"></i></a>
+                    </div>
+
+                    <div class="p-3">
                         <form action="{{ route('index') }}" method="GET">
                             <div class="row">
                                 <div class="col-md-6">
@@ -281,101 +385,30 @@
                                         value="{{ request('tanggal_akhir') }}">
                                 </div>
                             </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <label for="jam_mulai">Jam Mulai:</label>
+                                    <input type="time" id="jam_mulai" name="jam_mulai" class="form-control"
+                                        value="{{ request('jam_mulai') }}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="jam_akhir">Jam Akhir:</label>
+                                    <input type="time" id="jam_akhir" name="jam_akhir" class="form-control"
+                                        value="{{ request('jam_akhir') }}">
+                                </div>
+                            </div>
+
                             <div class="row mt-3">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>
                             </div>
                         </form>
-                        <br>
-
-                        <!-- Informasi pendapatan harian -->
-                        <div class="">
-                            <div class="text font-weight-bold text-black">Total Pendapatan :
-                                <div class="h6 float-right"><b>Rp
-                                        {{ number_format($totalPendapatanharian, 0, ',', '.') }}</b></div>
-                            </div>
-                            <div class="text font-weight-bold mt-2">Jumlah User Yang Membayar :
-                                <div class="h6 float-right"><b>{{ $totalUserHarian }} User</b></div>
-                            </div>
-                        </div>
-                        <br>
-                    </div><br>
-                </div>
-            </div>
-
-
-
-            <script>
-                document.getElementById('showMoreBtn').addEventListener('click', function(event) {
-                    event.preventDefault();
-                    var extraPaket = document.getElementById('extraPaket');
-                    if (extraPaket.style.display === "none") {
-                        extraPaket.style.display = "block";
-                        this.textContent = "Sembunyikan Data";
-                    } else {
-                        extraPaket.style.display = "none";
-                        this.textContent = "Lihat Lebih Banyak";
-                    }
-                });
-            </script>
-
-
-
-
-            <!-- Teknisi Perbaikan -->
-            <div class="col-xl-12 col-lg-7 mb-4">
-                <div class="card">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">TEKNISI - Pemasangan dan Perbaikan
-                        </h6>
-                        <a class="m-0 float-right btn btn-danger btn-sm" href="/perbaikan">Lihat Semua <i
-                                class="fas fa-chevron-right"></i></a>
                     </div>
-                    <div class="table-responsive">
-                        <!-- Tabel Perbaikan -->
-                        <table class="table table-bordered">
-                            <thead class="table table-primary">
-                                <tr>
-                                    <th>No</th>
-                                    <th>ID Pel</th>
-                                    <th>Nama Pel</th>
-                                    <th>Alamat</th>
-                                    <th>No Hp</th>
-                                    <th>Paket</th>
-                                    <th>Odp</th>
-                                    <th>Maps</th>
-                                    <th>Teknisi</th>
-                                    <th>Keterangan</th>
-                                    <th>Tanggal</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($perbaikans as $no => $item)
-                                    <tr>
-                                        <td>{{ $no + 1 }}</td>
-                                        <td>{{ $item->id_plg }}</td>
-                                        <td>{{ $item->nama_plg }}</td>
-                                        <td>{{ $item->alamat_plg }}</td>
-                                        <td>{{ $item->no_telepon_plg }}</td>
-                                        <td>{{ $item->paket_plg }}</td>
-                                        <td>{{ $item->odp }}</td>
-                                        <td>{{ $item->maps }}</td>
-                                        <td>Tim {{ $item->teknisi }}</td>
-                                        <td>{{ $item->keterangan }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="12" class="text-center">Tidak ada data ditemukan
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="card-footer"></div>
+
+
                 </div>
             </div>
             <!--Row-->
