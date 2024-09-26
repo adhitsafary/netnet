@@ -126,7 +126,7 @@
             <div class="col-xl-8 col-lg-8">
                 <div class="pt-5  pb-5 card mb-20">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Pendapatan Perbulan</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Pendapatan Harian</h6>
                         <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

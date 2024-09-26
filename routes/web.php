@@ -225,5 +225,3 @@ Route::get('/update-payment-status', [PelangganController::class, 'updatePayment
 //reactive bayar
 Route::post('/reactivate-bayar', [IsolirController::class, 'reactivateAndBayar'])->name('pelanggan.reactivateAndBayar');
 
-Route::post('/isolir-bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
-
