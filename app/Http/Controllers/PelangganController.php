@@ -300,76 +300,14 @@ class PelangganController extends Controller
                     $pelanggan->save();
                 }
             } else {
-                // Log error jika hari tidak valid
                 Log::error("Hari tagih tidak valid untuk pelanggan ID: " . $pelanggan->id_plg);
             }
         }
 
-        // Mapping status URL ke status database
-        $statusMapping = [
-            'belum_bayar' => 'Belum Bayar',
-            'sudah_bayar' => 'Sudah Bayar'
-        ];
-
-        // Filter berdasarkan pencarian jika tombol Cari diklik
-        if ($request->input('action') === 'search' && $request->filled('search')) {
-            $query->where('nama_plg', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('alamat_plg', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('harga_paket', 'LIKE', '%' . $request->search . '%');
-        }
-
-        // Filter berdasarkan status pembayaran jika tombol Filter diklik
-        if ($request->input('action') === 'filter' && $request->filled('status_pembayaran')) {
-            $status = $request->status_pembayaran;
-            if (array_key_exists($status, $statusMapping)) {
-                // Konversi status URL ke format database
-                $status_db = $statusMapping[$status];
-                $query->where('status_pembayaran', $status_db);
-            }
-        }
-
-        // Lakukan paginasi
-        $pelanggan = $query->paginate(200);
-
-        // Ambil parameter sorting dari request, default ke 'nama_plg' dan 'asc' jika tidak ada parameter
-        $sortBy = $request->input('sort_by', 'nama_plg');
-        $sortDirection = $request->input('sort_direction', 'asc');
-
-        // Pastikan bahwa sort_direction hanya 'asc' atau 'desc'
-        $sortDirection = in_array($sortDirection, ['asc', 'desc']) ? $sortDirection : 'asc';
-
-        // Pindahkan pelanggan yang belum bayar ke tabel isolir
-        $pelangganList = Pelanggan::where('status_pembayaran', '!=', 'sudah bayar')->get();
-        $today = Carbon::now()->day;
-
-        foreach ($pelangganList as $pelanggan) {
-            $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
-            $maxTglTagih = max($tglTagihArray); // Ambil batas maksimum tanggal tagih
-
-            if ($today > $maxTglTagih) {
-                IsolirModel::create([
-                    'id_plg' => $pelanggan->id_plg,
-                    'nama_plg' => $pelanggan->nama_plg,
-                    'alamat_plg' => $pelanggan->alamat_plg,
-                    'no_telepon_plg' => $pelanggan->no_telepon_plg,
-                    'aktivasi_plg' => $pelanggan->aktivasi_plg,
-                    'paket_plg' => $pelanggan->paket_plg,
-                    'harga_paket' => $pelanggan->harga_paket,
-                    'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-                    'keterangan_plg' => $pelanggan->keterangan_plg,
-                    'odp' => $pelanggan->odp,
-                    'longitude' => $pelanggan->longitude,
-                    'latitude' => $pelanggan->latitude,
-                    'status_pembayaran' => $pelanggan->status_pembayaran,
-                ]);
-                $pelanggan->delete();
-            }
-        }
-
-        // Update status pembayaran untuk pelanggan yang sudah bayar
+        // UPDATE PAYMENT STATUS
         $pelanggans = Pelanggan::where('status_pembayaran', 'sudah bayar')->get();
-
         foreach ($pelanggans as $pelanggan) {
+            // Pisahkan tanggal tagihan menjadi array dan ambil tanggal terakhir
             $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
             $tglTagihTerakhir = end($tglTagihArray); // Ambil tanggal terakhir dari array
 
@@ -381,26 +319,54 @@ class PelangganController extends Controller
                 // Hitung H-15 dari tgl_tagih_plg
                 $tanggalH15 = $tglTagihPlg->subDays(15);
 
-                // Jika sudah H-15, ubah status pembayaran jadi 'belum bayar'
+                // Jika sudah H-15 dan status sebelumnya belum bayar
                 if (Carbon::now()->greaterThanOrEqualTo($tanggalH15)) {
-                    $pelanggan->status_pembayaran = 'belum bayar';
-                    $pelanggan->save();
+                    if ($pelanggan->status_pembayaran === 'Belum Bayar') {
+                        $pelanggan->status_pembayaran = 'belum bayar';
+                        $pelanggan->save();
+                    }
                 }
             } else {
                 // Tangani kasus di mana tanggal tidak valid (opsional)
             }
         }
 
-        // Pagination
-        $pelanggan = $query->paginate(200); // Pastikan ini adalah objek paginasi
-
-        // Mendefinisikan variabel status_pembayaran_display
+        // Logika pagination dan mengembalikan view
+        $pelanggan = $query->paginate(200);
         $status_pembayaran_display = $request->input('status_pembayaran', '');
 
-
-        return view('pelanggan.index', compact('pelanggan', 'sortBy', 'sortDirection', 'status_pembayaran_display',))
+        return view('pelanggan.index', compact('pelanggan', 'status_pembayaran_display'))
             ->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
     }
+
+
+    private function checkAndMoveToIsolirr($pelanggan)
+    {
+        // Isolir pelanggan jika sudah lewat batas tagihan
+        if ($pelanggan->status_pembayaran === 'Belum Bayar') {
+            IsolirModel::create([
+                'id_plg' => $pelanggan->id_plg,
+                'nama_plg' => $pelanggan->nama_plg,
+                'alamat_plg' => $pelanggan->alamat_plg,
+                'no_telepon_plg' => $pelanggan->no_telepon_plg,
+                'aktivasi_plg' => $pelanggan->aktivasi_plg,
+                'paket_plg' => $pelanggan->paket_plg,
+                'harga_paket' => $pelanggan->harga_paket,
+                'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
+                'keterangan_plg' => $pelanggan->keterangan_plg,
+                'odp' => $pelanggan->odp,
+                'longitude' => $pelanggan->longitude,
+                'latitude' => $pelanggan->latitude,
+                'status_pembayaran' => $pelanggan->status_pembayaran,
+            ]);
+
+            // Hapus pelanggan dari tabel pelanggan
+            $pelanggan->delete();
+        }
+    }
+
+
+
 
 
 
@@ -573,9 +539,6 @@ class PelangganController extends Controller
             ->with('success', 'Pembayaran berhasil dilakukan.');
     }
 
-
-
-
     public function historypembayaran($id_plg)
     {
         $pelanggan = Pelanggan::findOrFail($id_plg);
@@ -583,10 +546,6 @@ class PelangganController extends Controller
 
         return view('pelanggan.historypembayaran', compact('pelanggan', 'pembayaran'));
     }
-
-
-
-
 
 
     public function exportExcel(Request $request)
@@ -606,10 +565,6 @@ class PelangganController extends Controller
 
         return Excel::download(new PelangganController($pembayaran), 'pembayaran.xlsx');
     }
-
-
-
-
 
 
     public function plg_blm_byr(Request $request)

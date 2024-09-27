@@ -140,4 +140,42 @@ class IsolirController extends Controller
             $pelanggan->delete();
         }
     }
+
+
+    public function bayar(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'id' => 'required|exists:pelanggan,id',
+            'tanggal_pembayaran' => 'required|date',
+            'metode_transaksi' => 'required|string',
+        ]);
+
+        // Ambil data pelanggan berdasarkan id
+        $pelanggan = Pelanggan::findOrFail($request->id);
+        //dd($pelanggan);
+
+        // Simpan data ke tabel bayar_pelanggan
+        BayarPelanggan::create([
+            'pelanggan_id' => $pelanggan->id,
+            'id_plg' => $pelanggan->id_plg ?? null,
+            'nama_plg' => $pelanggan->nama_plg,
+            'alamat_plg' => $pelanggan->alamat_plg,
+            'aktivasi_plg' => $pelanggan->aktivasi_plg,
+            'tanggal_pembayaran' => $request->tanggal_pembayaran,
+            'jumlah_pembayaran' => $pelanggan->harga_paket,
+            'metode_transaksi' => $request->metode_transaksi,
+            'no_telepon_plg' => $pelanggan->no_telepon_plg,
+            'keterangan_plg' => $request->keterangan_plg,
+            'paket_plg' => $pelanggan->paket_plg,
+        ]);
+
+        // Update status pembayaran pelanggan menjadi 'sudah bayar'
+        $pelanggan->status_pembayaran = 'Sudah Bayar';
+        $pelanggan->save();
+
+        // Redirect ke halaman history pembayaran dengan pesan sukses
+        return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
+            ->with('success', 'Pembayaran berhasil dilakukan.');
+    }
 }

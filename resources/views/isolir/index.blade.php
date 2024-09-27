@@ -49,12 +49,13 @@
                     <th>Harga Paket</th>
                     <th>Tanggal Tagih</th>
                     <th>Keterangan</th>
+                    <th>Status orang</th>
                     <th>ODP</th>
                     <th>Longitude</th>
                     <th>Latitude</th>
                     <th>Tanggal Isolir</th>
                     <th>Status Pembayaran</th>
-                    <th>Aksi</th>
+                    <th>Bayar / Aktivkan</th>
                 </tr>
             </thead>
             <tbody>
@@ -69,6 +70,7 @@
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->harga_paket }}</td>
                         <td>{{ $item->tgl_tagih_plg }}</td>
+                        <td>{{ $item->keterangan_plg }}</td>
                         <td>{{ $item->keterangan_plg }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->longitude }}</td>
@@ -87,6 +89,69 @@
                                 <button type="submit" class="btn btn-primary">Aktifkan Kembali</button>
                             </form>
                         </td>
+
+                        <td>
+                            <a href="#" class="btn btn-success btn-sm"
+                                onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+                        </td>
+                        <!-- Modal Bayar -->
+                        <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="bayarModalLabel">Pembayaran</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <!-- Modal Form -->
+                                    <form id="bayarForm" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" id="pelangganId">
+                                        <div class="modal-body">
+                                            <!-- Input Tanggal Pembayaran -->
+                                            <div class="mb-3">
+                                                <label for="tanggalPembayaran" class="form-label">Tanggal
+                                                    Pembayaran</label>
+                                                <input type="date" class="form-control" id="tanggalPembayaran"
+                                                    name="tanggal_pembayaran" required>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="metodeTransaksi" class="form-label">Metode
+                                                    Transaksi</label>
+                                                <select class="form-select" id="metodeTransaksi" name="metode_transaksi"
+                                                    required>
+                                                    <option value="">Pilih metode</option>
+                                                    <option value="CASH">Cash</option>
+                                                    <option value="TF">Transfer</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="keterangan_plg" class="form-label">Keterangan
+                                                    Pembayaran Pelanggan</label>
+                                                <input type="text" class="form-control" id="keterangan_plg"
+                                                    name="keterangan_plg">
+                                            </div>
+
+                                            <!-- Detail Pembayaran -->
+                                            <div class="mb-3">
+                                                <p id="pembayaranDetails"></p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Modal Footer -->
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Bayar</button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+
                     </tr>
                 @empty
                     <tr>
@@ -96,3 +161,17 @@
             </tbody>
         </table>
     @endsection
+
+    <script>
+        function showBayarModal(id, namaPlg, hargaPaket) {
+            document.getElementById('pelangganId').value = id;
+            document.getElementById('pembayaranDetails').innerText =
+                `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
+
+            var form = document.getElementById('bayarForm');
+            form.action = `/isolir/${id}/bayar`; // Set action URL with the ID
+
+            var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
+            bayarModal.show();
+        }
+    </script>

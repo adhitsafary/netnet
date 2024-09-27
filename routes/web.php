@@ -67,8 +67,10 @@ Route::post('/pelanggan/{id}/pembayaran', [PelangganController::class, 'pembayar
 
 Route::patch('/pelanggan/{id}/toggle-visibility', [PelangganController::class, 'toggleVisibility'])->name('pelanggan.toggleVisibility');
 Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->name('pelanggan.history');
-//ini untuk pembayaran
+
+//===========ini untuk pembayaran pelanggan=====================
 Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
+Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 
 //index pembayaran semua user  atau global
