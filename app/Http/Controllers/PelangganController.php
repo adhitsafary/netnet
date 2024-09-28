@@ -331,11 +331,39 @@ class PelangganController extends Controller
             }
         }
 
+        if ($request->filled('status_pembayaran')) {
+            $status = $request->input('status_pembayaran');
+            if ($status === 'belum_bayar') {
+                $query->where('status_pembayaran', 'Belum Bayar');
+            } elseif ($status === 'sudah_bayar') {
+                $query->where('status_pembayaran', 'Sudah Bayar');
+            }
+        }
+
+        // Cek pencarian
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%");
+            });
+        }
+
+
         // Logika pagination dan mengembalikan view
         $pelanggan = $query->paginate(200);
         $status_pembayaran_display = $request->input('status_pembayaran', '');
 
-        return view('pelanggan.index', compact('pelanggan', 'status_pembayaran_display'))
+        //search
+        $search = $request->input('search');
+        $pembayaran = Pelanggan::when($search, function ($query, $search) {
+            return $query->where('id', $search)
+                ->orWhere('nama_plg', 'like', "%{$search}%");
+        });
+
+
+
+        return view('pelanggan.index', compact('search', 'pelanggan', 'status_pembayaran_display'))
             ->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
     }
 

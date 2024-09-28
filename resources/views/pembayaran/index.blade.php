@@ -35,8 +35,8 @@
         </div>
 
         <!-- Tabel Pembayaran -->
-        <table class="table table-bordered">
-            <thead class="table table-primary">
+        <table class="table table-bordered " style="color: black;">
+            <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Nama Pelanggan</th>
@@ -65,49 +65,62 @@
                                     <option value="75000" {{ request('jumlah_pembayaran') == '75000' ? 'selected' : '' }}>
                                         {{ number_format(75000, 0, ',', '.') }}
                                     </option>
-                                    <option value="100000" {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
+                                    <option value="100000"
+                                        {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
                                         {{ number_format(100000, 0, ',', '.') }}
                                     </option>
-                                    <option value="105000" {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
+                                    <option value="105000"
+                                        {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
                                         {{ number_format(105000, 0, ',', '.') }}
                                     </option>
-                                    <option value="115000" {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
+                                    <option value="115000"
+                                        {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
                                         {{ number_format(115000, 0, ',', '.') }}
                                     </option>
-                                    <option value="120000" {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
+                                    <option value="120000"
+                                        {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
                                         {{ number_format(120000, 0, ',', '.') }}
                                     </option>
-                                    <option value="125000" {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
+                                    <option value="125000"
+                                        {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
                                         {{ number_format(125000, 0, ',', '.') }}
                                     </option>
-                                    <option value="150000" {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
+                                    <option value="150000"
+                                        {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
                                         {{ number_format(150000, 0, ',', '.') }}
                                     </option>
-                                    <option value="165000" {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
+                                    <option value="165000"
+                                        {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
                                         {{ number_format(165000, 0, ',', '.') }}
                                     </option>
-                                    <option value="175000" {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
+                                    <option value="175000"
+                                        {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
                                         {{ number_format(175000, 0, ',', '.') }}
                                     </option>
-                                    <option value="205000" {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
+                                    <option value="205000"
+                                        {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
                                         {{ number_format(205000, 0, ',', '.') }}
                                     </option>
-                                    <option value="250000" {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
+                                    <option value="250000"
+                                        {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
                                         {{ number_format(250000, 0, ',', '.') }}
                                     </option>
-                                    <option value="265000" {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
+                                    <option value="265000"
+                                        {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
                                         {{ number_format(265000, 0, ',', '.') }}
                                     </option>
-                                    <option value="305000" {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
+                                    <option value="305000"
+                                        {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
                                         {{ number_format(305000, 0, ',', '.') }}
                                     </option>
-                                    <option value="750000" {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
+                                    <option value="750000"
+                                        {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
                                         {{ number_format(750000, 0, ',', '.') }}
                                     </option>
                                     <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
                                         vcr
                                     </option>
-                                  
+
 
                                 </select>
                             </div>
@@ -126,7 +139,7 @@
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nama_plg }}</td>
                         <td>{{ $item->alamat_plg }}</td>
-                        <td>{{$item ->paket_plg}}</td>
+                        <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->tanggal_pembayaran }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $item->metode_transaksi }}</td>

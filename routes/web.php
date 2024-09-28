@@ -214,10 +214,16 @@ Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTa
 Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
 //filter di pembayaran
 Route::get('/pembayaran/filter/', [PembayaranController::class, 'pembayaran_filter'])->name('pembayaran.filter');
+//filter di isolir  pelanggan
+Route::get('/isolir/tagihan/index', [IsolirController::class, 'filterByTanggalTagihindex'])->name('isolir.filterTagihindex');
 
 
 //isolir asli
 Route::get('/check-isolir', [PelangganController::class, 'checkAndMoveToIsolir'])->name('check.isolir');
 //cek payment asli
 Route::get('/update-payment-status', [PelangganController::class, 'updatePaymentStatus'])->name('update.payment.status');
+//reactive bayar
+Route::post('/reactivate-bayar', [IsolirController::class, 'reactivateAndBayar'])->name('pelanggan.reactivateAndBayar');
+
+Route::post('/isolir-bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 

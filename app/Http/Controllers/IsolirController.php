@@ -19,11 +19,41 @@ use Illuminate\Support\Facades\Log;
 class IsolirController extends Controller
 {
     // Tampilkan daftar pelanggan yang diisolir
-    public function index()
+    public function index(Request $request)
     {
-        $isolir = IsolirModel::all();
-        return view('isolir.index', compact('isolir'));
+        // Mulai dengan query builder
+        $query = IsolirModel::query();
+
+        // Filter berdasarkan status pembayaran
+        if ($request->filled('status_pembayaran')) {
+            $status = $request->input('status_pembayaran');
+            if ($status === 'belum_bayar') {
+                $query->where('status_pembayaran', 'Belum Bayar');
+            } elseif ($status === 'sudah_bayar') {
+                $query->where('status_pembayaran', 'Sudah Bayar');
+            }
+        }
+
+        // Pencarian
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%");
+            });
+        }
+
+        // Eksekusi query dan ambil data
+        $isolir = $query->paginate(200); // Ubah pagination jika perlu
+
+        // Status pembayaran untuk keperluan view
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
+
+        // Kembalikan view dengan data yang sudah difilter
+        return view('isolir.index', compact('isolir', 'search', 'status_pembayaran_display'))
+            ->with('success', 'Data isolir berhasil difilter.');
     }
+
 
 
     // Hapus pelanggan yang tidak aktif selama lebih dari 60 hari
@@ -177,5 +207,44 @@ class IsolirController extends Controller
         // Redirect ke halaman history pembayaran dengan pesan sukses
         return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan.');
+    }
+
+    public function filterByTanggalTagihindex(Request $request)
+    {
+        // Ambil nilai filter status pembayaran dari request
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
+
+        // Ambil tanggal tagih dan paket dari request
+        $tanggal = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+
+        // Mulai query
+        $query = Pelanggan::query();
+
+        // Filter berdasarkan status pembayaran jika ada
+        if ($status_pembayaran_display) {
+            $query->where('status_pembayaran', $status_pembayaran_display);
+        }
+
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($tanggal) {
+            $query->where('tgl_tagih_plg', $tanggal);
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+        if ($harga_paket) {
+            $query->where('harga_paket', $harga_paket);
+        }
+
+
+        // Lakukan pagination pada query
+        $pelanggan = $query->paginate(100);
+
+        // Kembalikan data pelanggan ke view
+        return view('pelanggan.index', compact('pelanggan', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
     }
 }

@@ -78,27 +78,7 @@
 
             </div>
 
-            <div class="col-md-3 text-right">
-                <!-- Form Filter -->
-                <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline">
-                    <div class="input-group">
-                        <select name="status_pembayaran" id="status_pembayaran" class="form-control">
-                            <option value="">Semua</option>
-                            <option value="belum_bayar"
-                                {{ $status_pembayaran_display == 'belum_bayar' ? 'selected' : '' }}>
-                                Belum Bayar
-                            </option>
-                            <option value="sudah_bayar"
-                                {{ $status_pembayaran_display == 'sudah_bayar' ? 'selected' : '' }}>
-                                Sudah Bayar
-                            </option>
-                        </select>
-                    </div>
-                    <!-- Tombol Filter -->
-                    <button type="submit" name="action" value="filter" class="btn btn-primary ml-2">Filter</button>
-                </form>
-            </div>
-
+           
         </div>
 
         @if (session('success'))
@@ -184,7 +164,33 @@
                         <th>Longitude</th>
                         <th>Latitude</th>
                         <th>Keterangan</th>
-                        <th>Status</th>
+                        <th>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Label Status -->
+                                <span>Status</span>
+
+                                <!-- Form Filter -->
+                                <div class="col-md-3 text-right" style="margin-left: 10px;">
+                                    <form action="{{ route('isolir.index') }}" method="GET" class="form-inline"
+                                        id="filterForm">
+                                        <div class="input-group">
+                                            <select name="status_pembayaran" id="status_pembayaran" class="form-control"
+                                                onchange="document.getElementById('filterForm').submit();">
+                                                <option value="">Semua</option>
+                                                <option value="belum_bayar"
+                                                    {{ request('status_pembayaran') == 'belum_bayar' ? 'selected' : '' }}>
+                                                    Belum
+                                                    Bayar</option>
+                                                <option value="sudah_bayar"
+                                                    {{ request('status_pembayaran') == 'sudah_bayar' ? 'selected' : '' }}>
+                                                    Sudah
+                                                    Bayar</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </th>
                         <th>Detail</th>
                         <th>Bayar</th>
                         <th>Isolir</th>
