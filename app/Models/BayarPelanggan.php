@@ -29,6 +29,8 @@ class BayarPelanggan extends Model
 
     ];
 
+    protected $dates = ['tanggal_pembayaran'];
+
     public function pelanggan()
     {
         return $this->belongsTo(Pelanggan::class);

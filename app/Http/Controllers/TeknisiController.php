@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pelanggan;
 use App\Models\Perbaikan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TeknisiController extends Controller
@@ -11,45 +12,62 @@ class TeknisiController extends Controller
     public function index(Request $request)
     {
         $query = Perbaikan::query();
-        $queryplg = Pelanggan::query();
-    
-        // Filtering
+
+        // Filter berdasarkan tanggal
         if ($request->filled('date')) {
             $query->whereDate('created_at', $request->date);
         }
-    
-        // Pencarian
+
+        // Pencarian berdasarkan ID pelanggan atau nama pelanggan
         if ($request->filled('search')) {
-            $query->where('id_plg', 'like', '%' . $request->search . '%')
-                ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            $query->where(function ($q) use ($request) {
+                $q->where('id_plg', 'like', '%' . $request->search . '%')
+                    ->orWhere('nama_plg', 'like', '%' . $request->search . '%');
+            });
         }
-    
-        // Sorting
+
+        // Sorting berdasarkan tanggal pembuatan
         $sort = $request->get('sort', 'asc');
         $query->orderBy('created_at', $sort);
-    
-        $perbaikan = $query->get();
-        
-        // Mengambil semua id_plg dari tabel pelanggan
-        $data = $queryplg->pluck('id_plg');
-    
-        // Data for charts
-        $weeklyData = $query->selectRaw('WEEK(created_at) as week, COUNT(*) as total')
+
+        // Ambil data perbaikan yang statusnya pending
+        $perbaikan = $query->where('status', 'pending')->get();
+
+        // Data untuk chart mingguan
+        $weeklyData = Perbaikan::selectRaw('WEEK(created_at) as week, COUNT(*) as total')
             ->groupBy('week')
             ->pluck('total', 'week');
-    
-        $monthlyData = $query->selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+
+        // Data untuk chart bulanan
+        $monthlyData = Perbaikan::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->groupBy('month')
             ->pluck('total', 'month');
-    
-        $yearlyData = $query->selectRaw('YEAR(created_at) as year, COUNT(*) as total')
+
+        // Data untuk chart tahunan
+        $yearlyData = Perbaikan::selectRaw('YEAR(created_at) as year, COUNT(*) as total')
             ->groupBy('year')
             ->pluck('total', 'year');
-    
-        return view('teknisi.index', compact('perbaikan', 'data', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
+
+        return view('teknisi.index', compact('perbaikan', 'sort', 'weeklyData', 'monthlyData', 'yearlyData'));
+    }
+    function coba()
+    {
+        return view('coba');
     }
 
-    function coba () {
-        return view('coba');
+
+    public function rekapTeknisi(Request $request)
+    {
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        return view('teknisi.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
     }
 }

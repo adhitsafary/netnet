@@ -9,8 +9,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Informasi Pelanggan</h5>
-                        <ul class="list-group">
+                        <h5 style="color: black" class="fotn font-weight-bold">Informasi Pelanggan</h5>
+                        <ul class="list-group font-weight-bold" style="color: black">
                             <li class="list-group-item">
                                 <strong>ID:</strong> {{ $pelanggan->id_plg }}
                             </li>
@@ -34,8 +34,8 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h5>Detail Paket</h5>
-                        <ul class="list-group">
+                        <h5 style="color: black" class="font-weight-bold">Detail Paket</h5>
+                        <ul class="list-group font-weight-bold"  style="color: black">
                             <li class="list-group-item">
                                 <strong>Paket:</strong> {{ $pelanggan->paket_plg }}
                             </li>
@@ -72,9 +72,7 @@
                             <button class="btn btn-danger btn-sm"
                                 onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                         </form>
-                        <a href="{{ route('pelanggan.off', $pelanggan->id) }}" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Pelanggan Atas Nama {{ $pelanggan->nama_plg }} Akan di Non Aktifkan?')">Pelanggan
-                            Off</a>
+
                         <a href="#" class="btn btn-success btn-sm"
                             onclick="showBayarModal({{ $pelanggan->id }}, '{{ $pelanggan->nama_plg }}', {{ $pelanggan->harga_paket }})">Bayar</a>
 

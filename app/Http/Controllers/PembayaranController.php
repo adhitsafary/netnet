@@ -19,23 +19,6 @@ class PembayaranController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
-    {
-        $search = $request->input('search');
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
-
-        $pembayaran = BayarPelanggan::when($search, function ($query, $search) {
-            return $query->where('id', $search)
-                ->orWhere('nama_plg', 'like', "%{$search}%");
-        })
-            ->when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-                return $query->whereBetween('tanggal_pembayaran', [$date_start, $date_end]);
-            })
-            ->get();
-
-        return view('pembayaran.index', compact('pembayaran', 'search', 'date_start', 'date_end'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -107,7 +90,7 @@ class PembayaranController extends Controller
         $date_end = $request->input('date_end');
 
         $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-            return $query->whereBetween('tanggal_pembayaran', [$date_start, $date_end]);
+            return $query->whereBetween('created_at', [$date_start, $date_end]);
         })->get();
 
         if ($format === 'pdf') {
@@ -118,16 +101,21 @@ class PembayaranController extends Controller
         }
     }
 
-    public function pembayaran_filter(Request $request)
+    public function index(Request $request)
     {
         // Ambil nilai filter status pembayaran dari request
         $status_pembayaran_display = $request->input('status_pembayaran', '');
 
-        // Ambil tanggal tagih, paket, harga_paket, dan tanggal pembayaran dari request
+        // Ambil tanggal tagih, paket, harga_paket, tanggal pembayaran, bulan, tanggal mulai dan tanggal akhir dari request
         $tanggal = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $jumlah_pembayaran = $request->input('jumlah_pembayaran');
         $tanggal_pembayaran = $request->input('tanggal_pembayaran');
+        $created_at = $request->input('created_at');
+        $bulan = $request->input('bulan'); // Ambil bulan dari request
+        $date_start = $request->input('date_start'); // Ambil tanggal mulai dari request
+        $date_end = $request->input('date_end'); // Ambil tanggal akhir dari request
+        $search = $request->input('search'); // Ambil input pencarian dari request
 
         // Mulai query
         $query = BayarPelanggan::query(); // Ganti Pelanggan dengan BayarPelanggan
@@ -153,16 +141,55 @@ class PembayaranController extends Controller
         }
 
         // Filter berdasarkan tanggal pembayaran (format Y-m-d) jika ada
-        if ($tanggal_pembayaran) {
-            $query->whereDate('tanggal_pembayaran', $tanggal_pembayaran);
+        if ($created_at) {
+            $query->whereDate('created_at', $created_at);
+        }
+
+        // Filter berdasarkan bulan jika ada
+        if ($bulan) {
+            $query->whereMonth('created_at', $bulan);
+        }
+
+        // Filter berdasarkan tanggal mulai dan tanggal akhir jika ada
+        if ($date_start && $date_end) {
+            $query->whereBetween('created_at', [$date_start, $date_end]);
+        }
+
+        // Filter berdasarkan pencarian jika ada
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('metode_transaksi', 'like', "%{$search}%");
+            });
         }
 
         // Ambil hasil query
         $pembayaran = $query->paginate(100); // Ambil data yang telah difilter
 
+        // Hitung total jumlah pembayaran yang telah difilter
+        $totalJumlahPembayaran = $query->sum('jumlah_pembayaran');
+
+        // Hitung total jumlah pelanggan yang telah difilter
+        $totalPelanggan = $query->count(); // Menghitung jumlah pelanggan
+
         // Kembalikan data pembayaran ke view
-        return view('pembayaran.index', compact('pembayaran', 'jumlah_pembayaran', 'paket_plg', 'tanggal', 'status_pembayaran_display', 'tanggal_pembayaran'));
+        return view('pembayaran.index', compact(
+            'pembayaran',
+            'totalJumlahPembayaran',
+            'totalPelanggan',
+            'jumlah_pembayaran',
+            'paket_plg',
+            'tanggal',
+            'status_pembayaran_display',
+            'tanggal_pembayaran',
+            'bulan',
+            'date_start',
+            'date_end',
+            'search',
+            'created_at'
+        ));
     }
-
-
 }

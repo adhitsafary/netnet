@@ -12,8 +12,8 @@
                 </div>
             </div>
         </form>
-        <h5>Data Pengeluaran</h5>
-        <table class="table table-bordered " style="color: black;">
+        <h5 class="font font-weight-bold" style="color: black">Data Pengeluaran</h5>
+        <table class="table table-bordered" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>

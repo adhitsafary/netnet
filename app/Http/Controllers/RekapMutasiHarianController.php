@@ -20,6 +20,7 @@ class RekapMutasiHarianController extends Controller
             ->groupBy('pelanggan_id', 'nama_plg', 'paket_plg', 'tgl_tagih_plg')
             ->get();
 
+ 
         // Inisialisasi array untuk menampung hasil rekap
         $rekapMutasiHarian = [];
 

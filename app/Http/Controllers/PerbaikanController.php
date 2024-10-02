@@ -92,9 +92,6 @@ class PerbaikanController extends Controller
         return view('perbaikan.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -105,6 +102,73 @@ class PerbaikanController extends Controller
             'paket_plg' => 'required',
             'keterangan' => 'required',
         ]);
+
+        // Daftar teknisi berdasarkan tim
+        $daftarTeknisi = [
+            1 => 'Tim 1 Deden - Agis',
+            2 => 'Tim 2 Mursidi - Dindin',
+            3 => 'Tim 3 Isep - Indra'
+        ];
+
+        // Cari teknisi yang tidak memiliki pekerjaan "pending"
+        $teknisiTersedia = Perbaikan::where('status', '!=', 'pending')
+            ->pluck('teknisi')
+            ->toArray();
+
+        if (empty($teknisiTersedia)) {
+            // Jika tidak ada teknisi yang tersedia (semua masih pending), maka acak
+            $teknisiAcak = array_rand($daftarTeknisi);
+            $teknisiDipilih = $daftarTeknisi[$teknisiAcak];
+        } else {
+            // Ambil teknisi yang tidak memiliki status pending
+            $teknisiDipilih = $daftarTeknisi[array_search($teknisiTersedia, $daftarTeknisi)];
+        }
+
+        $perbaikan = new Perbaikan();
+        $perbaikan->id_plg = $request->id_plg;
+        $perbaikan->nama_plg = $request->nama_plg; // Menggunakan nama_plg yang diinput
+        $perbaikan->alamat_plg = $request->alamat_plg;
+        $perbaikan->no_telepon_plg = $request->no_telepon_plg;
+        $perbaikan->paket_plg = $request->paket_plg;
+        $perbaikan->odp = $request->odp ?? null; // Menangani jika tidak diisi
+        $perbaikan->maps = $request->maps ?? null; // Menangani jika tidak diisi
+        $perbaikan->keterangan = $request->keterangan;
+
+        // Simpan teknisi yang dipilih
+        $perbaikan->teknisi = $teknisiDipilih;
+        $perbaikan->status = 'pending'; // Set status awal sebagai pending
+        $perbaikan->save();
+
+        return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
+    }
+
+
+    //PSB
+    public function create_psb()
+    {
+        return view('perbaikan.create_psb');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store_psb(Request $request)
+    {
+        $request->validate([
+            'id_plg' => 'required',
+            'nama_plg' => 'required',
+            'alamat_plg' => 'required',
+            'no_telepon_plg' => 'required',
+            'paket_plg' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        // Daftar teknisi berdasarkan tim
+        $daftarTeknisi = [
+            1 => 'Tim 1 Deden - Agis',
+            2 => 'Tim 2 Mursidi - Dindin',
+            3 => 'Tim 3 Isep - Indra'
+        ];
 
         // Pilih tim teknisi secara acak
         $teknisiTim = rand(1, 3); // Menghasilkan angka antara 1 hingga 3
@@ -118,11 +182,15 @@ class PerbaikanController extends Controller
         $perbaikan->odp = $request->odp ?? null; // Menangani jika tidak diisi
         $perbaikan->maps = $request->maps ?? null; // Menangani jika tidak diisi
         $perbaikan->keterangan = $request->keterangan;
-        $perbaikan->teknisi = $teknisiTim; // Menyimpan tim teknisi yang dipilih secara acak
+
+        // Simpan nama teknisi yang dipilih secara acak
+        $perbaikan->teknisi = $daftarTeknisi[$teknisiTim];
+
         $perbaikan->save();
 
-        return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
+        return redirect()->route('perbaikan.index')->with('success', 'Data PSB berhasil ditambahkan');
     }
+
 
 
 
@@ -260,6 +328,7 @@ class PerbaikanController extends Controller
         $today = Carbon::now();
         $startDate = $today->copy()->startOfMonth();
         $endDate = $today->copy()->endOfMonth();
+        $perbaikan = Perbaikan::findOrFail();
 
         $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
             ->whereBetween('created_at', [$startDate, $endDate])
@@ -274,6 +343,8 @@ class PerbaikanController extends Controller
 
         return view('perbaikan.rekap_teknisi', compact('rekap'));
     }
+
+
 
     // Menambahkan schedule untuk reset data setiap tanggal 25
     public function resetTeknisiData()

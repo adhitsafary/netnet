@@ -18,7 +18,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/superadmin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/homebaru">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -26,66 +26,87 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/masuk/superadmin">
+                <a class="nav-link" href="/homebaru">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pelanggan
-            </div>
-            <li class="nav-item">
+
+
+            <li class="nav-item" style="color: black">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    aria-expanded="true" aria-controls="collapseBootstrap">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Pelanggan</span>
+                    style="color: black" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <img src="{{ asset('asset/img/pelanggan.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+
+                    <span class="font-weight-bold " style="color: black">Pelanggan</span>
+                    <!-- Gambar dari aset di samping teks -->
+
                 </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" style="color: black"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Pelanggan</h6>
-                        <a class="collapse-item" href="/pelanggan">Pelanggan</a>
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pelanggan">Pelanggan Aktif</a>
+                        <a class="collapse-item" href="/isolir/">Pelanggan ISOLIR</a>
                         <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
                         <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
-
+                        <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
                     </div>
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Perbaikan
-            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
+                    <img src="{{ asset('asset/img/man.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Karyawan</span>
+                </a>
+                <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="{{ route('karyawan.index') }}">Data Karyawan</a>
+                        <a class="collapse-item" href="{{ route('karyawan.create') }}">Tambah Data Karyawan</a>
+                        <a class="collapse-item" href="{{ route('kasbon.index') }}">Data kasbon</a>
+                    </div>
+
+                </div>
+            </li>
+
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                     aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Perbaikan</span>
+                    <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">PSB dan Perbaikan</span>
                 </a>
                 <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap1"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
 
-                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat Pemasangan / Perbaikan</a>
-                        <a class="collapse-item" href="/perbaikan/">Pemasangan / Perbaikan</a>
+                        <a class="collapse-item" href="/perbaikan/">Pemasangan - Perbaikan</a>
+                        <a class="collapse-item" href="{{ route('psb.create') }}">Buat Pemasangan Baru</a>
+                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat Perbaikan</a>
+
                     </div>
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Pembayaran
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
                     aria-expanded="true" aria-controls="collapsePage">
-                    <i class="fas fa-fw fa-columns"></i>
-                    <span>History Pembayaran</span>
+                    <img src="{{ asset('asset/img/pembayaran.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">RIWAYAT</span>
                 </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="/bayar-pelanggan">Riwayat Pembayaran</a>
+                        <a class="collapse-item" href="/pembayaran">Riwayat Pembayaran</a>
+                        <a class="collapse-item" href="/rekap_pemasangan/">Riwayat Pemasangan</a>
+                        <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
                         <a class="collapse-item" href="/send-message">Peringatan Chat</a>
                         <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a> -->
 
@@ -93,26 +114,67 @@
                 </div>
             </li>
 
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Karyawan
-            </div>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap11" aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span>Karyawan</span>
+                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
+                    <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Pgeluarn Pmsukan</span>
                 </a>
-                <div id="collapseBootstrap11" class="collapse" aria-labelledby="headingBootstrap11"
+                <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ route('karyawan.index') }}">Data Karyawan</a>
-                        <a class="collapse-item" href="{{ route('karyawan.create') }}">Tambah Data Karyawan</a>
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pemasukan/">Data Pemasukan</a>
+                        <a class="collapse-item" href="/pengeluaran/">Data Pengeluaran</a>
+
+
                     </div>
                 </div>
             </li>
-            <hr class="sidebar-divider">
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
+                    <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Buat Data Baru</span>
+                </a>
+                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pemasukan/create">Buat Data Pemasukan</a>
+                        <a class="collapse-item" href="/pengeluaran/create">Buat Data Pengeluaran</a>
+
+                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Rekap Pemasangan Baru</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
+                    <img src="{{ asset('asset/img/update.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Update DATA</span>
+                </a>
+                <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/check-isolir/">UPDATE ISOLIR</a>
+                        <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
+                    </div>
+
+                </div>
+            </li>
+
         </ul>
+
+
+
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
@@ -270,22 +332,42 @@
                                     style="max-width: 60px">
                                 <div class="ml-2 d-none d-lg-inline text-white small">
                                     <ul class="list-group list-group-flush" style="background-color: transparent;">
-                                        @if (Auth::user()->role == 'teknisi')
+                                        @if (Auth::check())
+                                            {{-- Mengecek apakah pengguna sudah login --}}
+                                            @if (Auth::user()->role == 'teknisi')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu Teknisi
+                                                </li>
+                                            @endif
+
+                                            @if (Auth::user()->role == 'admin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu Admin
+                                                </li>
+                                            @endif
+
+                                            @if (Auth::user()->role == 'superadmin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu SuperAdmin
+                                                </li>
+                                            @endif
+                                        @else
+                                            {{-- Pengalihan atau pesan error jika pengguna belum login --}}
                                             <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu Teknisi</li>
-                                        @endif
-                                        @if (Auth::user()->role == 'admin')
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu Admin</li>
-                                        @endif
-                                        @if (Auth::user()->role == 'superadmin')
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu SuperAdmin</li>
+                                                style="background-color: transparent; border: none; color: red;">
+                                                Silakan login untuk melihat menu.
+                                            </li>
+                                            {{-- Bisa juga dialihkan ke halaman login --}}
+                                            <script>
+                                                window.location.href = "{{ route('login') }}";
+                                                {{-- Mengalihkan ke halaman login --}}
+                                            </script>
                                         @endif
                                     </ul>
+
                                 </div>
                             </a>
 

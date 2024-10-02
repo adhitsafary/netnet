@@ -13,6 +13,7 @@
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('template2/css/ruang-admin.min.css') }}">
 </head>
 
 <body id="page-top">
@@ -31,75 +32,72 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading font-weight-bold">
-                Pelanggan
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    aria-expanded="true" aria-controls="collapseBootstrap">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Pelanggan</span>
-                </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header font-weight-bold">Pelanggan</h6>
-                        <a class="collapse-item" href="/pelanggan">Pelanggan</a>
-                        <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
-                        <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
 
+
+            <li class="nav-item" style="color: black">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+                    style="color: black" aria-expanded="true" aria-controls="collapseBootstrap">
+                    <img src="{{ asset('asset/img/pelanggan.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+
+                    <span class="font-weight-bold " style="color: black">PELANGGAN</span>
+                    <!-- Gambar dari aset di samping teks -->
+
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" style="color: black"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
+                        <a class="collapse-item" href="/isolir/">PELANGGAN ISOLIR</a>
+                        <a class="collapse-item" href="/pelangganof">PELANGGAN OFF</a>
+                        <a class="collapse-item" href="{{ route('pelanggan.create') }}">TAMBAH PELANGGAN BARU</a>
+                        <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
                     </div>
                 </div>
             </li>
+
 
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
                     aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Perbaikan</span>
+                    <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">PSB dan Perbaikan</span>
                 </a>
                 <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap1"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
 
-                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat Pemasangan / Perbaikan</a>
-                        <a class="collapse-item" href="/perbaikan/">Pemasangan / Perbaikan</a>
+                        <a class="collapse-item" href="/perbaikan/">Pemasangan - Perbaikan</a>
+                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat PERBAIKAN</a>
+                        <a class="collapse-item" href="{{ route('psb.create') }}">Buat PSB</a>
+
+
                     </div>
                 </div>
             </li>
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
-                    aria-expanded="true" aria-controls="collapsePage">
-                    <i class="fas fa-fw fa-columns"></i>
-                    <span class=" font-weight-bold">History Pembayaran</span>
-                </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="/bayar-pelanggan">Riwayat Pembayaran</a>
-                        <a class="collapse-item" href="/send-message">Peringatan Chat</a>
-                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a> -->
 
-                    </div>
-                </div>
-            </li>
 
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Pengeluaran</span>
+                    <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Pgeluarn Pmsukan</span>
                 </a>
                 <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/pengeluaran/">Pengeluaran</a>
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pemasukan/">Riwayat Pemasukan</a>
+                        <a class="collapse-item" href="/pengeluaran/">Riwayat Pengeluaran</a>
+                        <a class="collapse-item" href="/pemasukan/create">Buat Pemasukan</a>
                         <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
+
+
                     </div>
                 </div>
             </li>
@@ -108,76 +106,54 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Rekap Pemasangan</span>
+                    <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Form PSB</span>
                 </a>
                 <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/rekap_pemasangan/">Rekap Pemasangan</a>
-                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Rekap Pemasangan</a>
-                    </div>
-                </div>
-            </li>
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap14" aria-expanded="true" aria-controls="collapseBootstrap14">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Pelanggan ISOLIR</span>
-                </a>
-                <div id="collapseBootstrap14" class="collapse" aria-labelledby="headingBootstrap14"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/isolir/">Pelanggan ISOLIR</a>
-                        <a class="collapse-item" href="/isolir/create">Buat Data Pelanggan ISOLIR</a>
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/rekap_pemasangan/">Riwayat PSB</a>
+                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat PSB</a>
                     </div>
                 </div>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap15" aria-expanded="true" aria-controls="collapseBootstrap15">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Pemasukan</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
+                    aria-expanded="true" aria-controls="collapsePage">
+                    <img src="{{ asset('asset/img/pembayaran.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">RIWAYAT</span>
                 </a>
-                <div id="collapseBootstrap15" class="collapse" aria-labelledby="headingBootstrap15"
+                <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/pemasukan/">Pemasukan</a>
-                        <a class="collapse-item" href="/pemasukan/create">Buat Data Pemasukan</a>
-                    </div>
-                </div>
-            </li>
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <h6 class="collapse-header"></h6>
+                        <a class="collapse-item" href="/pembayaran">Riwayat Pembayaran</a>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap16" aria-expanded="true" aria-controls="collapseBootstrap16">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Rekap harian</span>
-                </a>
-                <div id="collapseBootstrap16" class="collapse" aria-labelledby="headingBootstrap16"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
+                        <a class="collapse-item" href="/send-message">Peringatan Chat</a>
+                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a> -->
+
                     </div>
                 </div>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
-                    <i class="far fa-fw fa-window-maximize"></i>
-                    <span class=" font-weight-bold">Update ISOLIR DAN PEMBAYARAN</span>
+                    <img src="{{ asset('asset/img/update.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Update DATA</span>
                 </a>
                 <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/check-isolir/">UPDATE ISOLIR</a>
-                    </div>
-                    <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
                     </div>
+
                 </div>
             </li>
 
@@ -198,7 +174,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right  shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="navbar-search">
                                     <div class="input-group">
@@ -232,9 +208,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">November 12, 2024 </div>
-                                        <span class="font-weight-bold">A new monthly report is ready to
-                                            download!</span>
+                                        <div class="small text-gray-500">NET DIGITAL GROUP </div>
+                                        <span class="font-weight-bold">NET DIGITAL GROUP</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -244,8 +219,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">November 12, 2024 9</div>
-                                        Spending Alert: We've noticed unusually high
+                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
+                                        NET DIGITAL GROUP
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -255,12 +230,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">November 12, 2024 </div>
-                                        Spending Alert: We've noticed unusually high
+                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
+                                        NET DIGITAL GROUP
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
-                                    Alerts</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">NET DIGITAL
+                                    GROUP</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -281,10 +256,8 @@
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been
-                                            having.</div>
-                                        <div class="small text-gray-500">Udin Cilok · 58m</div>
+                                        <div class="text-truncate">NET DIGITAL GROUP.</div>
+                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -294,14 +267,12 @@
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people
-                                            say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Jaenab · 2w</div>
+                                        <div class="text-truncate">NET DIGITAL GROUP</div>
+                                        <div class="small text-gray-500">JNET DIGITAL GROUP</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More
-                                    Messages</a>
+                                </a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -340,22 +311,39 @@
                                     style="max-width: 60px">
                                 <div class="ml-2 d-none d-lg-inline text-white small">
                                     <ul class="list-group list-group-flush" style="background-color: transparent;">
-                                        @if (Auth::user()->role == 'teknisi')
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu Teknisi</li>
-                                        @endif
-                                        @if (Auth::user()->role == 'admin')
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu Admin</li>
-                                        @endif
-                                        @if (Auth::user()->role == 'superadmin')
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                Menu SuperAdmin</li>
+                                        @if (Auth::check()) {{-- Mengecek apakah pengguna sudah login --}}
+                                            @if (Auth::user()->role == 'teknisi')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu Teknisi
+                                                </li>
+                                            @endif
+
+                                            @if (Auth::user()->role == 'admin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu Admin
+                                                </li>
+                                            @endif
+
+                                            @if (Auth::user()->role == 'superadmin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                                    Menu SuperAdmin
+                                                </li>
+                                            @endif
+                                        @else
+                                            {{-- Pengalihan atau pesan error jika pengguna belum login --}}
+                                            <li class="list-group-item" style="background-color: transparent; border: none; color: red;">
+                                                Silakan login untuk melihat menu.
+                                            </li>
+                                            {{-- Bisa juga dialihkan ke halaman login --}}
+                                            <script>
+                                                window.location.href = "{{ route('login') }}"; {{-- Mengalihkan ke halaman login --}}
+                                            </script>
                                         @endif
                                     </ul>
+
                                 </div>
                             </a>
 
@@ -383,16 +371,19 @@
                     </ul>
                 </nav>
 
-                <div class="mr-4 d-sm-flex align-items-center justify-content-between mb-2">
-                    <h4 class="h2 mb-0" style="color: black;"></h4>
+
+
+                <div class="mr-4 d-sm-flex align-items-center justify-content-between">
+                    <h4 class="h2" style="color: black;"></h4>
                     <ol class="breadcrumb">
                         <!-- Jam Berjalan -->
                         <div class="h6 font-weight-bold mr-3" style="color: black;">
-                            JAM : <span id="liveClock"></span>
+                           <span id="liveClock"></span>
                         </div>
                         <div class="h6 font-weight-bold" style="color: black;">
-                            TANGGAL : {{ now()->format('d/m/Y') }}
+                            {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
                         </div>
+
 
                         <script>
                             function updateClock() {
@@ -432,8 +423,11 @@
         <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="{{ asset('js/script.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     </div>
-  
+
 
 </body>
 

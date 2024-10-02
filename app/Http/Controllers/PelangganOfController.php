@@ -44,6 +44,7 @@ class PelangganOfController extends Controller
 
         if ($request->has('search')) {
             $query->where('nama_plg', 'LIKE', '%' . $request->search . '%')
+                ->orWhere('id_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('alamat_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('no_telepon_plg', 'LIKE', '%' . $request->search . '%');
         }
@@ -207,5 +208,73 @@ class PelangganOfController extends Controller
         } else {
             return redirect()->route('pelangganof.index')->with('error', 'Pelanggan tidak ditemukan.');
         }
+    }
+
+    public function filterByTanggalTagihindex(Request $request)
+    {
+        // Ambil nilai filter dari request
+        $status_pembayaran_display = $request->input('status_pembayaran', '');
+        $tanggal_tagih = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $filter = $request->input('filter');
+        $tanggal_pembayaran = $request->input('tanggal');
+
+        // Mulai query dasar pada model Pelanggan
+        $query = Pelangganof::query();
+
+        // Filter berdasarkan status pembayaran (menggunakan strcasecmp untuk case-insensitive comparison)
+        if ($status_pembayaran_display) {
+            $query->whereRaw('strcasecmp(status_pembayaran, ?) = 0', [$status_pembayaran_display]);
+        }
+
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($tanggal_tagih) {
+            $query->where('tgl_tagih_plg', $tanggal_tagih);
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+
+        // Filter berdasarkan harga paket jika ada
+        if ($harga_paket) {
+            $query->where('harga_paket', $harga_paket);
+        }
+
+        // Filter status pembayaran: Sudah Bayar atau Belum Bayar
+        if ($filter == 'sudah_bayar') {
+            $query->whereNotNull('pembayaranTerakhir');
+        } elseif ($filter == 'belum_bayar') {
+            $query->whereNull('pembayaranTerakhir');
+        }
+
+        // Urutkan berdasarkan pembayaran terbaru atau terlama
+        if ($filter == 'terbaru') {
+            $query->orderBy('pembayaranTerakhir', 'desc');
+        } elseif ($filter == 'terlama') {
+            $query->orderBy('pembayaranTerakhir', 'asc');
+        }
+
+        // Filter berdasarkan tanggal pembayaran tertentu jika ada
+        if ($tanggal_pembayaran) {
+            $query->whereDate('pembayaranTerakhir', '=', $tanggal_pembayaran);
+        }
+
+        // Ambil data yang sudah difilter
+        $items = $query->get();
+
+        // Hitung jumlah item pada tanggal tertentu jika filter tanggal digunakan
+        $jumlahPadaTanggal = null;
+        if ($tanggal_pembayaran) {
+            $jumlahPadaTanggal = $query->count();
+        }
+
+        // Lakukan pagination pada query dan tambahkan query string dari filter
+        $pelanggan = $query->paginate(100)->appends($request->all());
+
+        // Kembalikan data pelanggan ke view dengan filter
+        return view('pelangganof.index', compact('items', 'jumlahPadaTanggal', 'pelangganof', 'harga_paket', 'paket_plg', 'tanggal_tagih', 'status_pembayaran_display', 'tanggal_pembayaran'));
     }
 }

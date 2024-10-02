@@ -7,7 +7,7 @@
                 <h4 class="text mb-3 font-weight-bold" style="color: black;">Rekap Pendapatan Harian ({{ $tanggalHariIni }})</h4>
             </div>
             <div class="card-body" style="color: black;">
-                <table class="table table-bordered" style="color: black;">
+                <table class="table table-bordered table-responsive" style="color: black;">
                     <thead class="thead-light">
                         <tr>
                             <th>Keterangan</th>
@@ -15,6 +15,12 @@
                         </tr>
                     </thead>
                     <tbody>
+
+                        <tr>
+                            <td>Total Pendapatan dari Pembayaran Hari Ini</td>
+                            <td>Rp. {{ number_format($totalPendapatanHarian) }} | Cash :
+                                {{ $totalUserHarian }} Orang </td>
+                        </tr>
                         <tr>
                             <td>Total Pemasukan Hari Ini</td>
                             <td>Rp. {{ number_format($totalPemasukan) }}</td>
@@ -24,11 +30,6 @@
                             <td>Rp. {{ number_format($totalPengeluaran) }}</td>
                         </tr>
 
-                        <tr>
-                            <td>Total Pendapatan dari Pembayaran Hari Ini</td>
-                            <td>Rp. {{ number_format($totalPendapatanHarian) }} || User Membayar Cash :
-                                {{ $totalUserHarian }} Orang</td>
-                        </tr>
                         <tr>
                             <td>Registrasi Pelanggan Baru</td>
                             <td>Rp. {{ number_format($totalRegistrasi) }}</td>

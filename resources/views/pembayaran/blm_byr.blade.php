@@ -14,7 +14,7 @@
             </div>
         </form>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead class="table table-primary">
                 <tr>
                     <th>ID</th>

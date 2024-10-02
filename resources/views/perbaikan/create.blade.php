@@ -35,17 +35,20 @@
             <div class="form-group">
                 <label for="teknisi">Teknisi</label>
                 <select id="teknisi" name="teknisi" class="form-control mt-2">
-                    <option value="1">Tim 1</option>
-                    <option value="2">Tim 2</option>
-                    <option value="3">Tim 3</option>
+                    <option>Pilih Teknisi</option>
+                    <option value="1">Tim 1 Deden - Agis</option>
+                    <option value="2">Tim 2 Mursidi - Dindin</option>
+                    <option value="3">Tim 3 Isep - Indra</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="keterangan">keterangan</label>
                 <select id="keterangan" name="keterangan" class="form-control mt-2">
+                    <option>Pilih Ganguan</option>
                     <option value="Modem error / matot">Modem error / matot</option>
                     <option value="Los / modem merah">Los / modem merah</option>
+                    <option value="PSB">PSB</option>
 
                 </select>
                 <div class="invalid-feedback" id="keteranganError">Field Keterangan tidak boleh kosong, bila tidak ada tulis
@@ -86,14 +89,22 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(pelanggan) {
-                            $('#id_plg').val(pelanggan.id_plg);
-                            $('#alamat_plg').val(pelanggan.alamat_plg);
-                            $('#no_telepon_plg').val(pelanggan.no_telepon_plg);
-                            $('#paket_plg').val(pelanggan.paket_plg);
-                            $('#odp').val(pelanggan.odp);
-                            $('#maps').val(pelanggan.maps);
-                            $('#nama_plg').val(data
+                            if (pelanggan) { // Pastikan data pelanggan tidak kosong
+                                $('#id_plg').val(pelanggan.id_plg);
+                                $('#alamat_plg').val(pelanggan.alamat_plg);
+                                $('#no_telepon_plg').val(pelanggan.no_telepon_plg);
+                                $('#paket_plg').val(pelanggan.paket_plg);
+                                $('#odp').val(pelanggan.odp);
+                                $('#maps').val(pelanggan.maps);
+                                $('#nama_plg').val(data
                                 .text); // Simpan nama pelanggan ke input tersembunyi
+                            } else {
+                                // Tampilkan pesan kesalahan jika tidak ada data pelanggan
+                                alert('Data pelanggan tidak ditemukan.');
+                            }
+                        },
+                        error: function() {
+                            alert('Terjadi kesalahan saat mengambil data pelanggan.');
                         }
                     });
                 });
@@ -103,7 +114,7 @@
 
                     // Validasi field teknisi
                     var teknisi = $('#teknisi').val();
-                    if (teknisi === "") {
+                    if (!teknisi) { // Ubah dari === "" ke !teknisi untuk memeriksa kebenaran
                         $('#teknisi').addClass('is-invalid');
                         $('#teknisiError').show();
                         isValid = false;
@@ -114,7 +125,7 @@
 
                     // Validasi field keterangan
                     var keterangan = $('#keterangan').val();
-                    if (keterangan === "") {
+                    if (!keterangan) { // Ubah dari === "" ke !keterangan untuk memeriksa kebenaran
                         $('#keterangan').addClass('is-invalid');
                         $('#keteranganError').show();
                         isValid = false;
@@ -125,7 +136,7 @@
 
                     // Validasi field odp
                     var odp = $('#odp').val();
-                    if (odp === "") {
+                    if (!odp) { // Ubah dari === "" ke !odp untuk memeriksa kebenaran
                         $('#odp').addClass('is-invalid');
                         $('#odpError').show();
                         isValid = false;
@@ -136,7 +147,7 @@
 
                     // Validasi field maps
                     var maps = $('#maps').val();
-                    if (maps === "") {
+                    if (!maps) { // Ubah dari === "" ke !maps untuk memeriksa kebenaran
                         $('#maps').addClass('is-invalid');
                         $('#mapsError').show();
                         isValid = false;

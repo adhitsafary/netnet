@@ -37,7 +37,7 @@
 
         @if (isset($pelanggan) && count($pelanggan) > 0)
             <h2 class="mt-5">Hasil Filter Tanggal Tagih: {{ $tanggal }}</h2>
-            <table class="table table-bordered">
+            <table class="table table-bordered table-responsive">
                 <thead>
                     <tr>
                         <th>ID</th>

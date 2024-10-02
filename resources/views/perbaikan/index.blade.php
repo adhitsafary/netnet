@@ -1,29 +1,40 @@
 @extends('layout')
 
 @section('konten')
-    <div class=" p-5 mb-4">
-        <!-- Form Filter dan Pencarian -->
-        <div class="row mb-4">
-            <div class="col-md-9">
-                <form action="{{ route('perbaikan.index') }}" method="GET" class="form-inline">
-                    <div class="input-group">
-                        <input type="text" name="search" id="search" class="form-control"
-                            value="{{ request('search') }}" placeholder="Pencarian">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary">Cari</button>
+    <div class="pl-5 pr-5">
+        <div class="mb-4">
+            <!-- Form Filter dan Pencarian -->
+            <div class="row mb-4">
+                <div class="col-md-9">
+                    <form action="{{ route('perbaikan.index') }}" method="GET" class="form-inline">
+                        <div class="input-group" style="color: black;">
+                            <input style="color: black;" type="text" name="search" id="search"
+                                class="form-control font-weight-bold" value="{{ request('search') }}"
+                                placeholder="Pencarian">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-danger">Cari</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
 
-            <div class="col-md-3 text-right">
-                <a href="/rekap-teknisi" class="btn btn-primary btn-sm">Rekap Bulanan Teknisi</a>
+                <div class="col-md-3 text-right">
+                    <a href="/rekap-teknisi" class="btn btn-danger btn-sm">Rekap Bulanan Teknisi</a>
+                </div>
             </div>
         </div>
 
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
         <!-- Tabel Perbaikan -->
-        <table class="table table-bordered" style="color: black;">
-            <thead>
+        <table class="table table-bordered " style="color: black;">
+            <thead class="table table-danger" style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>ID Pel</th>
@@ -48,6 +59,7 @@
                         </a>
                     </th>
                     <th>Aksi</th>
+                    <th>Status</th>
                     <th>Selesai</th>
                 </tr>
             </thead>
@@ -62,7 +74,7 @@
                         <td>{{ $item->paket_plg }}</td>
                         <td>{{ $item->odp }}</td>
                         <td>{{ $item->maps }}</td>
-                        <td>Tim {{ $item->teknisi }}</td>
+                        <td>{{ $item->teknisi }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>
@@ -93,5 +105,6 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
     </div>
 @endsection

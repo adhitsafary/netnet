@@ -70,9 +70,9 @@ body {
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
-    color: #757575;
+    color: #000000;
     text-align: left;
-    background-color: #fff;
+    background-color: #d5d5d5;
 }
 [tabindex="-1"]:focus {
     outline: 0 !important;
@@ -4637,7 +4637,7 @@ input[type="submit"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #20a4d8;
+    background-color: #007fff;
     background-clip: border-box;
     border-radius: 0.375rem;
 }
@@ -4669,7 +4669,7 @@ input[type="submit"].btn-block {
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fbc23d;
+    background-color: #FFBB00;
     background-clip: border-box;
     border-radius: 0.375rem;
 }
@@ -4689,6 +4689,75 @@ input[type="submit"].btn-block {
     background-clip: border-box;
     border-radius: 0.375rem;
 }
+
+.card-violet {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #8A2BE8;
+    background-clip: border-box;
+    border-radius: 0.375rem;
+}
+
+.card-magenta {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #4F0E8C;
+    background-clip: border-box;
+    border-radius: 0.375rem;
+}
+.card-biru_tua {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #17409d;
+    background-clip: border-box;
+    border-radius: 0.375rem;
+}
+
+.card-hijau_tua {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #086600;
+    background-clip: border-box;
+    border-radius: 0.375rem;
+}
+
+
+
+
+
+
 
 .card > hr {
     margin-right: 0;

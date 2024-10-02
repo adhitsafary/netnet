@@ -4,14 +4,18 @@
     <div class=" p-5 mt-4">
         <div class="row mb-4">
             <div class="col-md-9">
-                <form action="{{ route('pembayaran.index') }}" method="GET" class="form-inline">
+                <form method="GET" action="{{ route('pembayaran.filter') }}" class="form-inline">
                     <div class="input-group">
                         <input type="text" name="search" id="search" class="form-control"
                             value="{{ request('search') }}" placeholder="Pencarian">
-                        <input type="date" name="date_start" id="date_start" class="form-control ml-2"
-                            value="{{ request('date_start') }}" placeholder="Tanggal Mulai">
-                        <input type="date" name="date_end" id="date_end" class="form-control ml-2"
-                            value="{{ request('date_end') }}" placeholder="Tanggal Akhir">
+                        <div class="form-group">
+                            <input type="date" name="date_start" id="date_start" class="form-control"
+                                value="{{ $date_start }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="date_end" id="date_end" class="form-control"
+                                value="{{ $date_end }}">
+                        </div>
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-primary">Cari</button>
                         </div>
@@ -33,27 +37,83 @@
                 </div>
             </div>
         </div>
-
+        <div style="color: black" class="h6 font-weight-bold">
+            <strong>Total Jumlah Pembayaran : </strong> {{ number_format($totalJumlahPembayaran) }}
+            <strong class="mr-5"></strong>
+            <strong>Total Jumlah Pelanggan Bayar : </strong> {{ $totalPelanggan }}
+        </div>
         <!-- Tabel Pembayaran -->
-        <table class="table table-bordered " style="color: black;">
+        <table class="table table-bordered table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Nama Pelanggan</th>
+                    <th>No Telp</th>
                     <th>Alamat</th>
-                    <th>Paket</th>
+                    <th>
+                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
+                            <div class="form-group">
+                                <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
+                                    <option value="">Paket</option>
+                                    @for ($i = 1; $i <= 7; $i++)
+                                        <option value="{{ $i }}"
+                                            {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                            {{ $i }}
+                                        </option>
+                                    @endfor
+                                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                                        vcr
+                                    </option>
+                                </select>
+                            </div>
+                        </form>
+                        Paket
+                    </th>
+                    <th>
+                        <form id="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
+                            <div class="form-group">
+
+                                <select name="bulan" id="bulan"
+                                    onchange="document.getElementById('filterForm').submit();">
+                                    <option value="">Pilih Bulan</option>
+                                    @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $index => $bulan)
+                                        <option value="{{ $index + 1 }}"
+                                            {{ request('bulan') == $index + 1 ? 'selected' : '' }}>
+                                            {{ $bulan }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </form>
+                        <label for="bulan">Bulan Bayar Terakhir</label>
+                    </th>
+
                     <th>
 
                         <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
                             <div class="form-group">
-                                <input type="date" name="tanggal_pembayaran" id="tanggal_pembayaran"
-                                    value="{{ request('tanggal_pembayaran') }}" onchange="this.form.submit();">
+                                <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}"
+                                    onchange="this.form.submit();">
                             </div>
                         </form>
                         Tanggal Pembayaran
                     </th>
-                    <th>Tanggal Tagih</th>
-
+                    <th>
+                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
+                            <div class="form-group">
+                                <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
+                                    <option value="">Tanggal Tagih</option>
+                                    @for ($i = 1; $i <= 33; $i++)
+                                        <option value="{{ $i }}"
+                                            {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                            {{ $i }}
+                                        </option>
+                                    @endfor
+                                </select>
+                            </div>
+                        </form>
+                        Tanggal Tagih
+                    </th>
                     <th>
                         <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
                             <div class="form-group">
@@ -78,6 +138,7 @@
                                         {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
                                         {{ number_format(115000, 0, ',', '.') }}
                                     </option>
+
                                     <option value="120000"
                                         {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
                                         {{ number_format(120000, 0, ',', '.') }}
@@ -122,7 +183,6 @@
                                         vcr
                                     </option>
 
-
                                 </select>
                             </div>
                         </form>
@@ -137,10 +197,13 @@
             <tbody>
                 @forelse ($pembayaran as $no => $item)
                     <tr>
-                        <td>{{ $no + 1 }}</td>
+                        <td>{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
                         <td>{{ $item->nama_plg }}</td>
+                        <td>{{ $item->no_telepon_plg }}</td>
                         <td>{{ $item->alamat_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
+                        <!-- ambil bulan saja dan convert ke text misal bulan 09 jadi september -->
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('F') }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->tgl_tagih_plg }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
@@ -167,6 +230,9 @@
                 @endforelse
             </tbody>
         </table>
+    </div>
+    <div class="d-flex justify-content-center">
+        {{ $pembayaran->links('pagination::bootstrap-4') }}
     </div>
 
     <script>

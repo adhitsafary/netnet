@@ -13,8 +13,8 @@
             </div>
         </form>
 
-        <table class="table table-bordered " style="color: black;">
-            <thead class="table table-primary " style="color: black;">
+        <table class="table table-bordered font-weight-bold" style="color: black;">
+            <thead class="table table-primary font-weight-bold" style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
@@ -26,7 +26,7 @@
                     <th>Gaji</th>
                     <th>Tanggal Gajihan</th>
 
-                    <th>Keterangan</th>
+                    <th>Posisi</th>
                     <th>Aksi</th>
 
                 </tr>
@@ -42,7 +42,7 @@
                         <td>{{ $item->mulai_kerja }}</td>
                         <td>{{ $item->gaji }}</td>
                         <td>{{ $item->tgl_gajihan }}</td>
-                        <td>{{ $item->keterangan}}</td>
+                        <td>{{ $item->posisi}}</td>
 
                         <td>
                             <a href="{{ route('karyawan.detail', $item->id) }}" class="btn btn-warning btn-sm">Detail

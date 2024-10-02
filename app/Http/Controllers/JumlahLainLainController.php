@@ -76,12 +76,14 @@ class JumlahLainLainController extends Controller
 
         // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
         // Ambil data pembayaran yang dilakukan hari ini, kecuali metode 'TF'
-        $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
+        // Ambil data paket pelanggan yang membayar hari ini ada berapa orang dan paketnya yang berapa aja
+        $pembayaranHarian = BayarPelanggan::whereDate('created_at', Carbon::today())
             ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
             ->get();
 
         // Hitung total pendapatan harian dari pembayaran
         $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
+        $paket_plg = $pembayaranHarian->sum('peket_plg');
 
         $pemasukantotal = $totalPemasukan - $totalPengeluaran;
 
@@ -92,6 +94,6 @@ class JumlahLainLainController extends Controller
         // Hitung total user yang membayar hari ini
         $totalUserHarian = $pembayaranHarian->count();
 
-        return view('rekap_harian.index', compact('totalRegistrasi', 'totalsaldo', 'totaljumlahsaldo', 'totalPemasukan', 'totalPengeluaran', 'totalPendapatanHarian', 'totalUserHarian', 'tanggalHariIni'));
+        return view('rekap_harian.index', compact('paket_plg', 'totalRegistrasi', 'totalsaldo', 'totaljumlahsaldo', 'totalPemasukan', 'totalPengeluaran', 'totalPendapatanHarian', 'totalUserHarian', 'tanggalHariIni'));
     }
 }

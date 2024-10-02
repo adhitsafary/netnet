@@ -45,13 +45,13 @@
                                     hari ini
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text text-white">Rp
-                                    {{ number_format($total_user_bayar, 0, ',', '.') }}</div>
+                                    {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
                                 <div class="mt-2 mb-0 text-muted">
                                     <span class="text text-white font-weight-bold text-uppercase">Semua :</span>
                                     <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
                                             class="text text-white"></i>
-                                        {{ $total_jml_user }}</span>
+                                        {{ $totalUserHarian_semua }}</span>
                                     <span class="text text-white  font-weight-bold text-uppercase">User
                                     </span>
                                 </div>
@@ -69,28 +69,22 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="bg-danger p-2">
-                                    <div class="text-white font-weight-bold text-uppercase">
-                                        Total Tagihan Hari ini
-                                    </div>
-                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                    <div class="text-white h5 mb-0 font-weight-bold">
-                                        Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} || User :
+                                <div class="text-white font-weight-bold text-uppercase mb-1">
+                                    Total Tagihan Hari ini
+                                </div>
+                                <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                <div class="text-white h5 mb-0 font-weight-bold">
+                                    Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }}
+                                </div>
+
+                                <div class="mt-2 mb-0 text-muted text-white">
+                                    <span class="mr-2 text-white font-weight-bold text-uppercase">
+                                        <span class="text text-white font-weight-bold text-uppercase">Total :</span>
                                         {{ $jumlahPelangganMembayarHariIni }}
-                                    </div>
+                                    </span>
+                                    <span class="text-white font-weight-bold text-uppercase">User
+                                    </span>
                                 </div>
-                                <div class="bg-success p-2">
-                                    <div class="text-white font-weight-bold text-uppercase ">
-                                        Tagihan Tertagih
-                                    </div>
-                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                    <div class="text-white h5 mb-0 font-weight-bold">
-                                        Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User :
-                                        {{ $totalUserHarian_semua }}
-                                    </div>
-                                </div>
-
-
                             </div>
 
                         </div>

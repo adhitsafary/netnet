@@ -26,13 +26,13 @@ a:focus {
     display: flex;
 }
 #wrapper #content-wrapper {
-    background-color: #ffffff;
+    background-color: #d6d6d6;
     width: 100%;
     overflow-x: hidden;
 }
 
 #wrapper-index #content-wrapper {
-    background-color: #cbcbcb;
+    background-color: #8c8c8c;
     width: 100%;
     overflow-x: hidden;
 }
@@ -1668,4 +1668,27 @@ body.sidebar-toggled footer.sticky-footer {
 /* Mengatur card agar lebih lebar dan tinggi */
 .card {
     padding: 20px; /* Menambahkan padding untuk memperluas ruang dalam */
+}
+
+/* Kursor default */
+body {
+    cursor: default;
+}
+
+/* Kursor custom saat hover */
+.element-hover:hover {
+    cursor: url("path-to-your-custom-cursor.png"), auto; /* Kursor khusus */
+    /* atau gunakan gaya bawaan browser dengan ukuran yang lebih besar */
+    cursor: pointer; /* Gaya default, bisa diganti */
+}
+/* Membuat kursor besar */
+.element-hover:hover {
+    cursor: url("/images/big-cursor.png"), auto;
+}
+.element-hover {
+    transition: transform 0.2s ease; /* Animasi lembut */
+}
+
+.element-hover:hover {
+    transform: scale(1.5); /* Memperbesar elemen */
 }

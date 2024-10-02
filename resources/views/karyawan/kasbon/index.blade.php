@@ -1,7 +1,7 @@
 @extends('superadmin.layout_superadmin')
 
 @section('konten')
-    <div class="mb-4">
+    <div class="mb-4 m-r-4 ml-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('kasbon.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
@@ -12,9 +12,9 @@
                 </div>
             </div>
         </form>
-        <h5>Data Kasbon</h5>
-        <table class="table table-bordered " style="color: black;">
-            <thead class="table table-primary " style="color: black;">
+        <h5 class="font font-weight-bold" style="color: black">Data Kasbon</h5>
+        <table class=" table table-bordered  font-weight-bold" style="color: black;">
+            <thead class="table table-primary font font-weight-bold" style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Nama</th>

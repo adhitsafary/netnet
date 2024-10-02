@@ -13,7 +13,7 @@
             </div>
         </form>
         <h5>Data rekap pemasangan</h5>
-        <table class="table table-bordered " style="color: black;">
+        <table class="table table-bordered  table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>

@@ -4,47 +4,44 @@
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-2 align-items-center">
-            <div class="col-md-3" style="color: black">
+            <div class="col-md-3">
                 <!-- Form Pencarian -->
-                <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline" style="color: black">
+                <form action="{{ route('isolir.index') }}" method="GET" class="form-inline">
                     <!-- Input Pencarian -->
-                    <div class="input-group" style="color: black">
-                        <input type="text" name="search" id="search" class="form-control font-weight-bold"
-                            style="color: black" value="{{ request('search') }}" placeholder="Pencarian">
+                    <div class="input-group">
+                        <input type="text" name="search" id="search" class="form-control"
+                            value="{{ request('search') }}" placeholder="Pencarian">
                     </div>
                     <!-- Tombol Cari -->
-                    <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
+                    <button type="submit" name="action" value="search" class="btn btn-primary ml-2">Cari</button>
                 </form>
             </div>
 
             <div class="col-md-6 text-center">
-                <!-- Teks Data Pelanggan -->
-
                 <!-- Teks Data isolir -->
-                <a href="/isolir" class="btn btn-primary btn-lg mt-2"
+                <a href="/pelanggan" class="btn btn-primary btn-lg mt-2"
                     style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                    Data Isolir</a>
-                <div class="btn btn-danger btn-lg mt-2" data-toggle="modal" data-target="#filterModal"
-                    style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff;">
-                    Data Pelanggan
+                    Data Pelanggan</a>
+                <div class="btn btn-primary btn-lg mt-2" data-toggle="modal" data-target="#filterModal"
+                    style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
+                    Data Isolir
                 </div>
                 <a href="/pelangganof" class="btn btn-primary btn-lg mt-2"
                     style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
                     Data Pelanggan Off</a>
-
                 <!-- Modal -->
                 <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="filterModalLabel">Filter Pelanggan</h5>
+                                <h5 class="modal-title" id="filterModalLabel">Filter Isolir</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                <form class="filterForm" method="GET" action="{{ route('isolir.filterTagihindex') }}">
                                     <div class="form-group">
                                         <label for="paket_plg">Paket</label>
                                         <select name="paket_plg" id="paket_plg">
@@ -101,7 +98,7 @@
         <div class="">
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">
-                    <tr class="font-weight-bold">
+                    <tr>
                         <th class="">No</th>
                         <th>ID</th>
                         <th>Nama</th>
@@ -109,7 +106,7 @@
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                            <form class="filterForm" method="GET" action="{{ route('isolir.filterTagihindex') }}">
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -128,7 +125,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                            <form class="filterForm" method="GET" action="{{ route('isolir.filterTagihindex') }}">
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -203,11 +200,11 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                            <form class="filterForm" method="GET" action="{{ route('isolir.filterTagihindex') }}">
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>
-                                        @for ($i = 1; $i <= 33; $i++)
+                                        @for ($i = 1; $i <= 32; $i++)
                                             <option value="{{ $i }}"
                                                 {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
                                                 {{ $i }}
@@ -217,19 +214,20 @@
                                 </div>
                             </form>
                         </th>
-                        <th>Keterangan</th>
-                        <th>
-                            Terakhir Bayar
-                        </th>
 
+                        <th>ODP</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
+                        <th>Keterangan</th>
+                        <th>Tanggal Isolir</th>
                         <th>
                             <div class="d-flex justify-content-between align-items-center">
                                 <!-- Label Status -->
                                 <span>Status</span>
 
                                 <!-- Form Filter -->
-                                <div class="col-md-3 text-right">
-                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
+                                <div class="col-md-3 text-right" style="margin-left: 10px;">
+                                    <form action="{{ route('isolir.index') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -237,31 +235,28 @@
                                                 <option value="">Semua</option>
                                                 <option value="belum_bayar"
                                                     {{ request('status_pembayaran') == 'belum_bayar' ? 'selected' : '' }}>
-                                                    Belum Bayar
-                                                </option>
+                                                    Belum
+                                                    Bayar</option>
                                                 <option value="sudah_bayar"
                                                     {{ request('status_pembayaran') == 'sudah_bayar' ? 'selected' : '' }}>
-                                                    Sudah Bayar
-                                                </option>
+                                                    Sudah
+                                                    Bayar</option>
                                             </select>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </th>
-
-                        <th>Detail</th>
                         <th>Bayar</th>
-                        <th>Isolir</th>
+                        <th>Aktivkan Kembali</th>
+
                         <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($pelanggan as $no => $item)
-                        <tr class="font-weight-bold">
-
-                            <td>{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
-
+                    @forelse ($isolir as $no => $item)
+                    <tr class="font-weight-bold">
+                            <td>{{ ($isolir->currentPage() - 1) * $isolir->perPage() + $loop->iteration }}</td>
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
                             <td>{{ $item->alamat_plg }}</td>
@@ -271,41 +266,22 @@
                             <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
                             <td>{{ $item->tgl_tagih_plg }}</td>
 
+                            <td>{{ $item->odp }}</td>
+
+                            <td>{{ $item->longitude }}</td>
+                            <td>{{ $item->latitude }}</td>
+
                             <td>{{ $item->keterangan_plg }}</td>
+                            <td>{{$item ->created_at}}</td>
                             <td>
-                                {{ optional($item->pembayaranTerakhir)->created_at
-                                    ? \Carbon\Carbon::parse($item->pembayaranTerakhir->created_at)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                    : 'Belum Ada pembayaran' }}
-                            </td>
-
-                            <td>
-                                <form action="{{ route('pelanggan.updateStatus', $item->id) }}" method="POST"
-                                    class="form-inline">
-                                    @csrf
-                                    <select name="status_pembayaran" class="form-control" onchange="this.form.submit()">
-                                        <option value="Belum Bayar"
-                                            {{ strcasecmp($item->status_pembayaran, 'belum bayar') === 0 ? 'selected' : '' }}>
-                                            Belum Bayar
-                                        </option>
-                                        <option value="Sudah Bayar"
-                                            {{ strcasecmp($item->status_pembayaran, 'sudah bayar') === 0 ? 'selected' : '' }}>
-                                            Sudah Bayar
-                                        </option>
-                                    </select>
-                                </form>
-
-                                <span
-                                    class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2"
-                                    style="padding: 0.5em 1em; font-size: 1.1em;">
-                                    {{ $item->status_pembayaran }}
-                                </span>
+                                @if ($item->status_pembayaran === 'Sudah Bayar')
+                                    <span class="badge badge-success p-3">Sudah Bayar</span>
+                                @else
+                                    <span class="badge badge-danger p-3">Belum Bayar</span>
+                                @endif
                             </td>
 
 
-                            <td>
-                                <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                    class="btn btn-warning btn-sm">Detail</a>
-                            </td>
                             <!-- Tombol Bayar -->
                             <td>
                                 <a href="#" class="btn btn-success btn-sm"
@@ -327,7 +303,12 @@
                                             <input type="hidden" name="id" id="pelangganId">
                                             <div class="modal-body">
                                                 <!-- Input Tanggal Pembayaran -->
-
+                                                <div class="mb-3">
+                                                    <label for="tanggalPembayaran" class="form-label">Tanggal
+                                                        Pembayaran</label>
+                                                    <input type="date" class="form-control" id="tanggalPembayaran"
+                                                        name="tanggal_pembayaran" required>
+                                                </div>
 
                                                 <div class="mb-3">
                                                     <label for="metodeTransaksi" class="form-label">Metode
@@ -342,7 +323,7 @@
 
                                                 <div class="mb-3">
                                                     <label for="keterangan_plg" class="form-label">Keterangan
-                                                        Pembayaran Pelanggan</label>
+                                                        Pembayaran isolir</label>
                                                     <input type="text" class="form-control" id="keterangan_plg"
                                                         name="keterangan_plg">
                                                 </div>
@@ -365,10 +346,11 @@
                             </div>
 
                             <td>
-                                <form action="{{ route('pelanggan.toIsolir', $item->id) }}" method="POST"
-                                    style="display: inline;">
+                                <form action="{{ route('pelanggan.reactivate', $item->id) }}" method="POST">
                                     @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Isolir</button>
+                                    <button type="submit" class="btn btn-primary"
+                                        onclick="return confirm('Pelanggan Atas Nama : {{ $item->nama_plg }} Akan di  Aktifkan Kembali?')">Aktifkan
+                                        Kembali</button>
                                 </form>
                             </td>
 
@@ -385,7 +367,7 @@
 
         </div>
         <div class="d-flex justify-content-center">
-            {{ $pelanggan->links('pagination::bootstrap-4') }}
+            {{ $isolir->links('pagination::bootstrap-4') }}
         </div>
     @endsection
     <script>
@@ -395,7 +377,7 @@
                 `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
 
             var form = document.getElementById('bayarForm');
-            form.action = `/pelanggan/${id}/bayar`; // Set action URL with the ID
+            form.action = `/isolir/${id}/bayar`; // Set action URL with the ID
 
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();

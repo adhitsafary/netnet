@@ -15,10 +15,11 @@
 <body>
     <div>
         <div class="container d-flex justify-content-center " style="min-height: 100vh;">
-           <div>
-           @yield('konten')
-           </div>
+            <div>
+                @yield('konten')
+            </div>
         </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     </div>
 </body>
 

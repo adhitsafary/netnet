@@ -9,8 +9,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <h5>Informasi Karyawan</h5>
-                        <ul class="list-group">
+                        <h5 style="color: black" class="fotn font-weight-bold">Informasi Karyawan</h5>
+                        <ul class="list-group  font-weight-bold" style="color: black">
                             <li class="list-group-item">
                                 <strong>Nama :</strong> {{ $karyawan->nama }}
                             </li>
@@ -26,8 +26,8 @@
                         </ul>
                     </div>
                     <div class="col-md-6">
-                        <h5>Detail Karyawan</h5>
-                        <ul class="list-group">
+                        <h5  style="color: black" class=" font-weight-bold">Detail Karyawan</h5>
+                        <ul class="list-group  font-weight-bold" style="color: black">
                             <li class="list-group-item">
                                 <strong>Posisi :</strong> {{ $karyawan->posisi }}
                             </li>
@@ -45,8 +45,8 @@
                 </div>
 
                 <!-- Tabel Riwayat Kasbon -->
-                <h5 class="mt-4">Riwayat Kasbon</h5>
-                <table class="table table-bordered">
+                <h5 class="mt-4 font-weight-bold" style=" color: black">Riwayat Kasbon</h5>
+                <table class="table table-bordered font-weight-bold" style="color: black">
                     <thead>
                         <tr>
                             <th>Tanggal</th>
@@ -65,10 +65,27 @@
                     </tbody>
                 </table>
 
-                <!-- Total Kasbon -->
-                <div class="mt-3">
-                    <strong>Total Kasbon:</strong> Rp {{ number_format($totalKasbon, 0, ',', '.') }}
-                </div>
+                    <!-- Tabel Riwayat Kasbon -->
+                    <h5 class="mt-4 font-weight-bold" style=" color: black">Hitungan Gaji</h5>
+                    <table class="table table-bordered font-weight-bold" style="color: black">
+                        <thead>
+                            <tr>
+                                <th>Total Gaji</th>
+                                <th>Total Kasbon</th>
+                                <th>Gaji Akhir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kasbon as $item)
+                                <tr>
+                                    <td>{{ number_format($karyawan->gaji, 0, ',', '.') }}</td>
+                                    <td style="color: darkred" class="font font-weight-bold"> {{ number_format($totalKasbon, 0, ',', '.') }}</td>
+                                    <td> {{ number_format($total, 0, ',', '.') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
             </div>
             <div class="card-footer text-right">
                 <div class="d-flex justify-content-between">

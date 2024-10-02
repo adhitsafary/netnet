@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Log;
 
 class IsolirController extends Controller
 {
-    // Tampilkan daftar pelanggan yang diisolir
     public function index(Request $request)
     {
         // Mulai dengan query builder
@@ -38,9 +37,23 @@ class IsolirController extends Controller
         $search = $request->input('search');
         if ($search) {
             $query->where(function ($query) use ($search) {
-                $query->where('id', $search)
-                    ->orWhere('nama_plg', 'like', "%{$search}%");
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('aktivasi_plg', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('tgl_tagih_plg', 'like', "%{$search}%");
             });
+        }
+
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($request->filled('tgl_tagih_plg')) {
+            $query->where('tgl_tagih_plg', $request->input('tgl_tagih_plg'));
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($request->filled('paket_plg')) {
+            $query->where('paket_plg', $request->input('paket_plg'));
         }
 
         // Eksekusi query dan ambil data
@@ -53,6 +66,7 @@ class IsolirController extends Controller
         return view('isolir.index', compact('isolir', 'search', 'status_pembayaran_display'))
             ->with('success', 'Data isolir berhasil difilter.');
     }
+
 
 
 
@@ -163,6 +177,7 @@ class IsolirController extends Controller
             Pelangganof::create([
                 'id_plg' => $pelanggan->id_plg,
                 'nama_plg' => $pelanggan->nama_plg,
+
                 // Tambahkan semua kolom yang diperlukan
             ]);
 
@@ -220,7 +235,7 @@ class IsolirController extends Controller
         $harga_paket = $request->input('harga_paket');
 
         // Mulai query
-        $query = Pelanggan::query();
+        $query = IsolirModel::query();
 
         // Filter berdasarkan status pembayaran jika ada
         if ($status_pembayaran_display) {
@@ -242,9 +257,9 @@ class IsolirController extends Controller
 
 
         // Lakukan pagination pada query
-        $pelanggan = $query->paginate(100);
+        $isolir = $query->paginate(100);
 
         // Kembalikan data pelanggan ke view
-        return view('pelanggan.index', compact('pelanggan', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
+        return view('isolir.index', compact('isolir', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
     }
 }

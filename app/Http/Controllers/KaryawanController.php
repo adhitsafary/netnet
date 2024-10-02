@@ -44,9 +44,11 @@ class KaryawanController extends Controller
 
         // Hitung total kasbon
         $totalKasbon = $kasbon->sum('jumlah');
+        $gaji = $karyawan->sum('gaji');
+        $total =  $gaji - $totalKasbon;
 
         // Kirim data karyawan, kasbon, dan totalKasbon ke view
-        return view('karyawan.detail', compact('karyawan', 'kasbon', 'totalKasbon'));
+        return view('karyawan.detail', compact('karyawan', 'kasbon', 'totalKasbon', 'total' ));
     }
 
 
@@ -82,7 +84,7 @@ class KaryawanController extends Controller
 
         $karyawan->nama = $request->nama;
         $karyawan->alamat = $request->alamat;
-        $karyawan->no_telpon = $request->no_telpon;
+        $karyawan->no_telepon = $request->no_telepon;
         $karyawan->posisi = $request->posisi;
         $karyawan->mulai_kerja = $request->mulai_kerja;
         $karyawan->gaji = $request->gaji;

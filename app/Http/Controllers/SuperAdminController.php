@@ -118,28 +118,14 @@ class SuperAdminController extends Controller
             ->sum('jumlah_pembayaran'); // Menjumlahkan total pembayaran di bulan yang sama
 
 
-        //======================FILTER hari bln taun
-        // Ambil filter hari, bulan, dan tahun dari request, default ke tanggal sekarang jika kosong
-        // $filterTanggal = $request->input('tanggal') ?? now()->format('Y-m-d');
-        // $filterBulan = $request->input('bulan') ?? now()->format('m');
-        // $filterTahun = $request->input('tahun') ?? now()->format('Y');
-
-        // Pembayaran harian
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $filterTanggal)->get();
-
-        // Hitung total pendapatan dan jumlah user yang membayar pada hari yang difilter
-        // $totalPendapatanharian = $pembayaranHarian->sum('jumlah_pembayaran');
-        // $totalUserHarian = $pembayaranHarian->count();
-
-        // Ambil tanggal mulai dan akhir dari request atau default ke hari ini
         $tanggalMulai = $request->input('tanggal_mulai', now()->format('Y-m-d')); // Default ke hari ini
         $tanggalAkhir = $request->input('tanggal_akhir', now()->format('Y-m-d')); // Default ke hari ini
         // Ambil data pembayaran yang dilakukan antara tanggal mulai dan akhir (default hari ini)
         $pembayaranHarian = BayarPelanggan::whereBetween('tanggal_pembayaran', [$tanggalMulai, $tanggalAkhir])->get();
         // Hitung total pendapatan harian
         $totalPendapatanharian = $pembayaranHarian->sum('jumlah_pembayaran');
-        // Hitung total user yang membayar hari ini
-        $totalUserHarian = $pembayaranHarian->count();
+        // Hitung total pendapatan harian
+        $totaluserhasilfilter = $pembayaranHarian->count();
 
         //INI BARU TOTAL HARIAN
         $tanggalHariIni = Carbon::now()->format('Y-m-d');
@@ -147,29 +133,75 @@ class SuperAdminController extends Controller
         $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $tanggalHariIni)->get();
-        // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
+
         $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
             ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
             ->get();
-        // Hitung total pendapatan harian dari pembayaran
-        $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
+
+        $pembayaranHarian_created_at = BayarPelanggan::whereDate('created_at', Carbon::today())
+            ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
+            ->get();
+
+
+        // $totalUserHarian = $pembayaranHarian->count(); ini harian tanggal
+        $totalUserHarian = $pembayaranHarian_created_at->count();
+        $totalPendapatanHarian = $pembayaranHarian_created_at->sum('jumlah_pembayaran');
         $pemasukantotal = $totalPemasukan - $totalPengeluaran;
-        $totalsaldo = $totalPendapatanHarian + $pemasukantotal;
-        $totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
-        // Hitung total user yang membayar hari ini
-        $totalUserHarian = $pembayaranHarian->count();
+        $totaljumlahsaldo = $totalPendapatanHarian + $pemasukantotal + $totalRegistrasi;
+        //$totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
+
+        // Menghitung total jumlah pengguna yang membayar hari ini dari semua metode transaksi
+        $totalUserHarian_semua = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())->count();
+
+        // Hitung total pendapatan harian dari pembayaran
+        $totalPendapatanharian_semua = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
+            ->sum('jumlah_pembayaran'); // Pastikan 'jumlah_pembayaran' adalah kolom yang menyimpan jumlah pembayaran
 
 
+        //AMBIL TANGGAL TAGIH * JUMLAH PEMBAYARAN USER
+        $todayDay = Carbon::today()->day;
+        // Ambil semua pelanggan yang memiliki tgl_tagih_plg sama dengan hari ini (angka)
+        $pembayaranHariiniPelanggan = Pelanggan::where('tgl_tagih_plg', $todayDay)->get();
+
+        // Hitung total tagihan dari pelanggan yang harus membayar hari ini
+        $totalTagihanHariIni = $pembayaranHariiniPelanggan->sum('harga_paket');
+
+        // Hitung jumlah pelanggan yang membayar hari ini
+        $jumlahPelangganMembayarHariIni = $pembayaranHariiniPelanggan->count();
+
+        //total jumlah yang tertagih harian
+        $totalTagihanTertagih = $totalTagihanHariIni - $totalPendapatanharian_semua;
+        //total user yang tertagih harian
+        $totalUserTertagih = $jumlahPelangganMembayarHariIni - $totalUserHarian_semua;
+
+        //INI CHART
+        // Ambil data dari tabel bayar_pelanggan, kelompokkan berdasarkan tanggal, dan hitung jumlah pembayaran
+        $pembayaranData = DB::table('bayar_pelanggan')
+            ->select(DB::raw('DATE(tanggal_pembayaran) as tanggal'), DB::raw('COUNT(id) as total_user'), DB::raw('SUM(jumlah_pembayaran) as total_pembayaran'))
+            ->groupBy('tanggal')
+            ->orderBy('tanggal', 'asc')
+            ->get();
+
+        // Format data agar bisa digunakan di Chart.js
+        $labels = [];
+        $totalUsers = [];
+        $totalPembayaran = [];
+
+        foreach ($pembayaranData as $data) {
+            $labels[] = $data->tanggal; // Menyimpan tanggal untuk label sumbu X
+            $totalUsers[] = $data->total_user; // Jumlah user per tanggal
+            $totalPembayaran[] = $data->total_pembayaran; // Total pembayaran per tanggal
+        }
 
 
 
         // Kirim data ke view
-        return view('index', compact(
+        return view('superadmin.index', compact(
+            'pelanggan',
             'tanggalMulai',
             'tanggalAkhir',
             'dataPendapatanbulan',
-            'totalJumlahPengguna',
+            'totalJumlahPengguna', // Hanya dikirimkan sekali
             'dataPendapatan',
             'totalUserHarian',
             'totalPendapatanharian',
@@ -178,7 +210,6 @@ class SuperAdminController extends Controller
             'paketTop5',
             'paketRemaining',
             'paketData',
-            'pelanggan',
             'pelanggan_of',
             'pelanggan_of_uang',
             'totalpendapatanakhir',
@@ -186,17 +217,31 @@ class SuperAdminController extends Controller
             'pelangganofuang',
             'pelangganoforang',
             'totalPendapatanBulanan',
-            'totalJumlahPengguna',
             'dataChart',
-            // HARIAN BARU
+            //data baru
             'totalRegistrasi',
-            'totalsaldo',
+            //'totalsaldo',
             'totaljumlahsaldo',
             'totalPemasukan',
             'totalPengeluaran',
-            'totalPendapatanHarian',
-            'totalUserHarian',
-            'tanggalHariIni'
+            'tanggalHariIni',
+            'totalUserHarian_semua',
+            'totalPendapatanharian_semua',
+            'totaluserhasilfilter',
+
+            //data pelanggan
+            'pembayaranHariiniPelanggan',
+            'jumlahPelangganMembayarHariIni',
+            'totalTagihanHariIni',
+            //Total Tertagih
+            'totalTagihanTertagih',
+            'totalUserTertagih',
+            //chart baru
+            'labels',
+            'totalUsers',
+            'totalPembayaran',
+
+
         ));
     }
     private function getBulan($bulan)

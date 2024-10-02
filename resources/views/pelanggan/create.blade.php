@@ -2,10 +2,10 @@
 
 @section('konten')
     <div class="container mt-4">
-        <h6 class="text text-center text-black mt-3">Tambah Data Pelanggan</h6>
-        <form id="pelangganForm" action="{{ route('pelanggan.store') }}" method="POST">
+        <h5 class="text text-center text-black mt-3 font-weight-bold">TAMBAH PELANGGAN BARU</h5>
+        <form id="pelangganForm" action="{{ route('pelanggan.store') }}" method="POST" class="font font-weight-bold" style="color: black">
             @csrf
-            <label for="" class=" mt-2">ID</label>
+            <label for="" class=" mt-2">ID Pelanggan Baru</label>
             <input type="text" name="id_plg" class="form-control" id="id_plg">
             <div class="invalid-feedback" id="id_plgError">Field ID tidak boleh kosong.</div>
 

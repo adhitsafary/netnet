@@ -4,7 +4,7 @@
     <div class="container">
         <h1>Mutasi Harian Periode {{ now()->format('F Y') }}</h1>
 
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead class="table table-primary">
                 <tr>
                     <th>Tanggal</th>

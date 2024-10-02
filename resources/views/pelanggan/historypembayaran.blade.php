@@ -2,18 +2,19 @@
 
 @section('konten')
     <div class="container mt-4">
-        <h4>Riwayat Pembayaran - {{ $pelanggan->nama_plg }}</h4>
-        <table class="table table-bordered mt-3">
-            <thead class="table table-primary">
+        <h4  style="color: black">Riwayat Pembayaran - {{ $pelanggan->nama_plg }}</h4>
+        <table class="table table-bordered table-responsive mt-3"  style="color: black">
+            <thead class="table table-primary"  style="color: black">
                 <tr class="">
                     <th>No</th>
                     <th>ID PEL</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
                     <th>Metode Pembayaran</th>
-                    <th>Tanggal Pembayaran</th>
                     <th>Tanggal Tagih</th>
+                    <th>Paket</th>
                     <th>Jumlah Pembayaran</th>
+                    <th>Tanggal Pembayaran</th>
                     <th>Keterangan Pembayaran</th>
                     <th>Print</th>
                 </tr>
@@ -26,9 +27,12 @@
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
                         <td>{{ $bayar ->metode_transaksi}}</td>
-                        <td>{{ $bayar->created_at}}</td>
                         <td>{{ $bayar->tgl_tagih_plg}}</td>
+                        <td>{{$bayar->paket_plg}}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
+
+                        <td>{{ \Carbon\Carbon::parse($bayar->created_at)->locale('id')->translatedFormat('l, d F Y H:i:s') }}</td>
+
                         <td>{{ $bayar->keterangan_plg}}</td>
                         <td>
                             <button class="btn btn-info btn-sm"
@@ -38,6 +42,8 @@
                 @endforeach
             </tbody>
         </table>
+
+        <a href="/pelanggan"class="btn btn-primary">  << Kembali</a>
     </div>
 
     <!-- QRCode.js -->
@@ -56,7 +62,7 @@
 
             // Format teks untuk dicetak menyerupai struk pembayaran dengan border dan tata letak di tengah
             var printContent = `
-                <div style="border: 1px solid #000; padding: 20px; width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
+                <div style="border: 1px solid #000; padding: 20px; width: 350px; margin: 0 auto; font-family: Arial, sans-serif;">
                     <!-- Bagian Header -->
                     <div style="border-bottom: 2px solid #000; text-align: center; padding-bottom: 10px; margin-bottom: 10px;">
                         <h2 style="font-size: 16px; margin: 0;">KWITANSI PEMBAYARAN INTERNET BULANAN</h2>

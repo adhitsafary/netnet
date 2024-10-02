@@ -134,6 +134,7 @@ class PelangganController extends Controller
         // Mengambil total pemasukan dan pengeluaran untuk hari ini
         $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
+        $total_user_bayar = BayarPelanggan::whereDate('created_at', $tanggalHariIni)->sum('jumlah_pembayaran');
         $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
 
         $pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', Carbon::today())
@@ -170,6 +171,8 @@ class PelangganController extends Controller
 
         // Hitung jumlah pelanggan yang membayar hari ini
         $jumlahPelangganMembayarHariIni = $pembayaranHariiniPelanggan->count();
+        $total_jml_user = BayarPelanggan::whereDate('created_at', $tanggalHariIni)->count();
+
 
         //total jumlah yang tertagih harian
         $totalTagihanTertagih = $totalTagihanHariIni - $totalPendapatanharian_semua;
@@ -242,6 +245,11 @@ class PelangganController extends Controller
             'labels',
             'totalUsers',
             'totalPembayaran',
+            //pembayaran hari ini total
+            'total_user_bayar',
+            'total_jml_user',
+
+
 
 
         ));
@@ -282,57 +290,35 @@ class PelangganController extends Controller
         // Pengecekan dan update status pembayaran otomatis berdasarkan tanggal tagihan
         $pelanggan_all = Pelanggan::all();
 
-        foreach ($pelanggan_all as $pelanggan) {
-            // Ambil tanggal tagih (hari saja)
-            $hari_tagih = intval($pelanggan->aktivasi_plg); // Misal: "25"
+        // Ambil nilai filter dari request
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
 
-            // Ambil bulan dan tahun saat ini
+        // Proses pengecekan status pembayaran berdasarkan tanggal tagihan pelanggan
+        foreach ($pelanggan_all as $pelanggan) {
+            $hari_tagih = intval($pelanggan->aktivasi_plg);
+
+            // Dapatkan bulan dan tahun saat ini
             $currentMonth = now()->month;
             $currentYear = now()->year;
 
-            // Validasi hari tagih agar nilainya valid (antara 1 dan 31)
+            // Validasi hari tagih (harus antara 1 sampai 31)
             if ($hari_tagih >= 1 && $hari_tagih <= 31) {
-                // Buat tanggal tagih lengkap (menggabungkan hari, bulan, dan tahun)
                 $tgl_tagih = Carbon::createFromDate($currentYear, $currentMonth, $hari_tagih);
 
-                // Jika tanggal tagih sudah lewat di bulan ini, pindahkan ke bulan berikutnya
+                // Jika tanggal tagih sudah lewat bulan ini, pindahkan ke bulan depan
                 if (now()->gt($tgl_tagih)) {
                     $tgl_tagih = $tgl_tagih->addMonth();
                 }
 
-                // Bandingkan tgl_tagih dengan waktu sekarang
+                // Cek apakah sudah melewati tanggal tagih dan pelanggan belum membayar
                 if (now()->gt($tgl_tagih) && $pelanggan->status_pembayaran === 'sudah bayar') {
                     $pelanggan->status_pembayaran = 'Belum Bayar';
                     $pelanggan->save();
                 }
             } else {
                 Log::error("Hari tagih tidak valid untuk pelanggan ID: " . $pelanggan->id_plg);
-            }
-        }
-
-        // Update status pembayaran berdasarkan tanggal tagihan
-        $pelanggans = Pelanggan::where('status_pembayaran', 'sudah bayar')->get();
-
-        foreach ($pelanggans as $pelanggan) {
-            // Pisahkan tanggal tagihan menjadi array dan ambil tanggal terakhir
-            $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
-            $tglTagihTerakhir = end($tglTagihArray); // Ambil tanggal terakhir dari array
-
-            // Cek apakah $tglTagihTerakhir adalah angka dan ubah ke dalam format tanggal dengan tahun saat ini
-            if (is_numeric($tglTagihTerakhir)) {
-                // Buat tanggal lengkap dengan format 'Y-m-d'
-                $tglTagihPlg = Carbon::createFromFormat('Y-m-d', "$currentYear-" . Carbon::now()->month . "-$tglTagihTerakhir");
-
-                // Hitung H-15 dari tgl_tagih_plg
-                $tanggalH15 = $tglTagihPlg->subDays(15);
-
-                // Jika sudah H-15 dan status sebelumnya belum bayar
-                if (Carbon::now()->greaterThanOrEqualTo($tanggalH15)) {
-                    if ($pelanggan->status_pembayaran === 'Belum Bayar') {
-                        $pelanggan->status_pembayaran = 'Belum Bayar';
-                        $pelanggan->save();
-                    }
-                }
             }
         }
 
@@ -346,22 +332,56 @@ class PelangganController extends Controller
             }
         }
 
+        // Filter berdasarkan tanggal tagih jika ada
+        if ($tgl_tagih_plg) {
+            $query->where('tgl_tagih_plg', $tgl_tagih_plg);
+        }
+
+        // Filter berdasarkan paket pelanggan jika ada
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+
+        // Filter berdasarkan harga paket jika ada
+        if ($harga_paket) {
+            $query->where('jumlah_pembayaran', $harga_paket);
+        }
+
         // Cek pencarian
         $search = $request->input('search');
         if ($search) {
             $query->where(function ($query) use ($search) {
-                $query->where('id', $search)
-                    ->orWhere('nama_plg', 'like', "%{$search}%");
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('aktivasi_plg', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('tgl_tagih_plg', 'like', "%{$search}%");
             });
         }
 
-        // Logika pagination dan mengembalikan view
-        $pelanggan = $query->paginate(100);
+        // Hitung total jumlah pembayaran dan total pelanggan berdasarkan query yang difilter
+        $totalJumlahPembayaran = $query->sum('harga_paket');
+        $totalPelanggan = $query->count();
+
+        // Mengambil data pelanggan beserta pembayaran terakhirnya
+        $pelanggan = $query->with('pembayaranTerakhir')->paginate(100);
+
+        // Status pembayaran untuk ditampilkan
         $status_pembayaran_display = $request->input('status_pembayaran', '');
 
-        return view('pelanggan.index', compact('search', 'pelanggan', 'status_pembayaran_display'))
-            ->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
+        // Return ke view
+        return view('pelanggan.index', compact(
+            'totalJumlahPembayaran',
+            'totalPelanggan',
+            'search',
+            'pelanggan',
+            'status_pembayaran_display'
+        ))->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
     }
+
+
+
 
 
     private function checkAndMoveToIsolirr($pelanggan)
@@ -429,7 +449,7 @@ class PelangganController extends Controller
 
         $pelanggan->save();
 
-        return redirect()->route('pelanggan.index');
+        return redirect()->route('pelanggan.index')->with('success', 'Pembayaran berhasil dilakukan.');
     }
 
     public function show(string $id) {}
@@ -566,11 +586,25 @@ class PelangganController extends Controller
 
     public function historypembayaran($id_plg)
     {
-        $pelanggan = Pelanggan::findOrFail($id_plg);
-        $pembayaran = BayarPelanggan::where('pelanggan_id', $id_plg)->get();
+        // Mencari pelanggan di tabel Pelanggan
+        $pelanggan = Pelanggan::find($id_plg);
+
+        // Jika tidak ditemukan, cari di tabel IsolirModel
+        if (!$pelanggan) {
+            $pelanggan = IsolirModel::where('id_plg', $id_plg)->first();
+        }
+
+        // Jika pelanggan tidak ditemukan di kedua tabel
+        if (!$pelanggan) {
+            return redirect()->route('pelanggan.index')->with('error', 'Pelanggan tidak ditemukan.');
+        }
+
+        // Ambil riwayat pembayaran berdasarkan id_plg yang konsisten
+        $pembayaran = BayarPelanggan::where('id_plg', $pelanggan->id_plg)->get();
 
         return view('pelanggan.historypembayaran', compact('pelanggan', 'pembayaran'));
     }
+
 
 
     public function exportExcel(Request $request)
@@ -775,21 +809,23 @@ class PelangganController extends Controller
     {
         // Ambil nilai filter dari request
         $status_pembayaran_display = $request->input('status_pembayaran', '');
-        $tanggal = $request->input('tgl_tagih_plg');
+        $tanggal_tagih = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
+        $filter = $request->input('filter');
+        $tanggal_pembayaran = $request->input('tanggal');
 
-        // Mulai query
+        // Mulai query dasar pada model Pelanggan
         $query = Pelanggan::query();
 
-        // Filter berdasarkan status pembayaran (menggunakan strcasecmp)
+        // Filter berdasarkan status pembayaran (menggunakan strcasecmp untuk case-insensitive comparison)
         if ($status_pembayaran_display) {
             $query->whereRaw('strcasecmp(status_pembayaran, ?) = 0', [$status_pembayaran_display]);
         }
 
         // Filter berdasarkan tanggal tagih jika ada
-        if ($tanggal) {
-            $query->where('tgl_tagih_plg', $tanggal);
+        if ($tanggal_tagih) {
+            $query->where('tgl_tagih_plg', $tanggal_tagih);
         }
 
         // Filter berdasarkan paket pelanggan jika ada
@@ -802,33 +838,87 @@ class PelangganController extends Controller
             $query->where('harga_paket', $harga_paket);
         }
 
-        // Lakukan pagination pada query dengan query string dari filter
+        // Filter status pembayaran: Sudah Bayar atau Belum Bayar
+        if ($filter == 'sudah_bayar') {
+            $query->whereNotNull('pembayaranTerakhir');
+        } elseif ($filter == 'belum_bayar') {
+            $query->whereNull('pembayaranTerakhir');
+        }
+
+        // Urutkan berdasarkan pembayaran terbaru atau terlama
+        if ($filter == 'terbaru') {
+            $query->orderBy('pembayaranTerakhir', 'desc');
+        } elseif ($filter == 'terlama') {
+            $query->orderBy('pembayaranTerakhir', 'asc');
+        }
+
+        // Filter berdasarkan tanggal pembayaran tertentu jika ada
+        if ($tanggal_pembayaran) {
+            $query->whereDate('pembayaranTerakhir', '=', $tanggal_pembayaran);
+        }
+
+        // Ambil data yang sudah difilter
+        $items = $query->get();
+
+        // Hitung jumlah item pada tanggal tertentu jika filter tanggal digunakan
+        $jumlahPadaTanggal = null;
+        if ($tanggal_pembayaran) {
+            $jumlahPadaTanggal = $query->count();
+        }
+
+        // Lakukan pagination pada query dan tambahkan query string dari filter
         $pelanggan = $query->paginate(100)->appends($request->all());
 
         // Kembalikan data pelanggan ke view dengan filter
-        return view('pelanggan.index', compact('pelanggan', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
+        return view('pelanggan.index', compact('items', 'jumlahPadaTanggal', 'pelanggan', 'harga_paket', 'paket_plg', 'tanggal_tagih', 'status_pembayaran_display', 'tanggal_pembayaran'));
     }
 
 
     public function checkAndMoveToIsolir()
     {
-        // Ambil semua pelanggan yang status pembayarannya belum 'Sudah Bayar'
+        // Ambil semua pelanggan
         $pelangganList = Pelanggan::all();
 
         // Tanggal hari ini
-        $today = Carbon::now()->day;
+        $today = Carbon::now();
 
         foreach ($pelangganList as $pelanggan) {
-            // Cek apakah status pembayaran bukan "Sudah Bayar" (case-insensitive)
-            if (strcasecmp($pelanggan->status_pembayaran, 'Sudah Bayar') !== 0) {
-                // Pecah 'tgl_tagih_plg' menjadi array, contoh '1,2,3,4,5' -> [1, 2, 3, 4, 5]
-                $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
+            // Ambil tanggal pembayaran terakhir dari tabel BayarPelanggan
+            $pembayaranTerakhir = BayarPelanggan::where('id_plg', $pelanggan->id_plg)
+                ->orderBy('created_at', 'desc')
+                ->first();
 
-                // Cek apakah tanggal hari ini sudah lewat batas tagih
-                $maxTglTagih = max($tglTagihArray); // Ambil batas maksimum tanggal tagih
+            // Cek apakah ada pembayaran terakhir
+            if ($pembayaranTerakhir) {
+                $createdAt = \Carbon\Carbon::parse($pembayaranTerakhir->created_at);
+            } else {
+                // Jika belum ada pembayaran sama sekali, anggap pembayaran terlambat lebih dari 1 bulan
+                $createdAt = null;
+            }
 
-                if ($today > $maxTglTagih) {
-                    // Jika sudah melewati batas dan pelanggan belum bayar, pindahkan ke tabel isolir
+            // Pecah 'tgl_tagih_plg' menjadi array (misal: '20' atau '1,15,25')
+            $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
+            $maxTglTagih = max($tglTagihArray); // Tanggal maksimum tagihan dalam bulan tersebut
+
+            // Validasi $maxTglTagih agar berada di rentang 1 sampai 31
+            if ($maxTglTagih < 1 || $maxTglTagih > 31) {
+                // Jika tidak valid, lewati iterasi ini
+                continue;
+            }
+
+            // Buat tanggal tagih bulan ini dengan validasi
+            try {
+                $tglTagihBulanIni = Carbon::createFromDate($today->year, $today->month, $maxTglTagih);
+            } catch (\Exception $e) {
+                // Jika terjadi error saat membuat tanggal, skip pelanggan ini
+                continue;
+            }
+
+            // Cek apakah tanggal pembayaran terakhir sudah lebih dari 1 bulan
+            if (!$createdAt || $createdAt->lt($today->copy()->subMonth())) {
+                // Cek apakah sudah melewati tanggal tagih bulan ini
+                if ($today->greaterThan($tglTagihBulanIni)) {
+                    // Pelanggan belum bayar dan sudah melewati batas tagih
                     IsolirModel::create([
                         'id_plg' => $pelanggan->id_plg,
                         'nama_plg' => $pelanggan->nama_plg,
@@ -845,7 +935,7 @@ class PelangganController extends Controller
                         'status_pembayaran' => $pelanggan->status_pembayaran,
                     ]);
 
-                    // Hapus pelanggan dari tabel pelanggan setelah dipindahkan
+                    // Hapus pelanggan dari tabel pelanggan setelah dipindahkan ke isolir
                     $pelanggan->delete();
                 }
             }
@@ -854,41 +944,57 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.index')->with('success', 'Pelanggan yang melewati batas sudah dipindahkan ke isolir.');
     }
 
+    //dengan checkAndMoveToIsolir ketika sudah 1
     public function updatePaymentStatus()
     {
-        // UPDATE PAYMENT STATUS
+        // Ambil semua pelanggan
         $pelanggans = Pelanggan::all();
 
         foreach ($pelanggans as $pelanggan) {
+            // Ambil pembayaran terakhir dari tabel BayarPelanggan berdasarkan id_plg
+            $pembayaranTerakhir = BayarPelanggan::where('id_plg', $pelanggan->id_plg)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            // Jika ada pembayaran terakhir, ambil tanggalnya
+            if ($pembayaranTerakhir) {
+                $createdAt = \Carbon\Carbon::parse($pembayaranTerakhir->created_at);
+            } else {
+                // Jika belum ada pembayaran, anggap belum ada pembayaran (default ke null)
+                $createdAt = null;
+            }
+
             // Pisahkan tanggal tagihan menjadi array dan ambil tanggal terakhir
             $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
             $tglTagihTerakhir = end($tglTagihArray); // Ambil tanggal terakhir dari array
 
-            // Cek apakah $tglTagihTerakhir adalah angka dan ubah ke dalam format tanggal dengan tahun saat ini
+            // Cek apakah $tglTagihTerakhir adalah angka dan valid
             if (is_numeric($tglTagihTerakhir)) {
                 $currentYear = Carbon::now()->year; // Ambil tahun saat ini
-                // Buat tanggal lengkap dengan format 'Y-m-d', misalnya, kita gunakan bulan saat ini
-                $tglTagihPlg = Carbon::createFromFormat('Y-m-d', "$currentYear-" . Carbon::now()->month . "-$tglTagihTerakhir");
+                $currentMonth = Carbon::now()->month; // Ambil bulan saat ini
 
-                // Cek apakah tanggal berhasil diparse
-                if ($tglTagihPlg) {
-                    // Hitung H-15 dari tgl_tagih_plg
-                    $tanggalH15 = $tglTagihPlg->subDays(15);
+                // Buat tanggal lengkap dengan format 'Y-m-d' (contohnya: '2024-09-25')
+                $tglTagihPlg = Carbon::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tglTagihTerakhir");
 
-                    // Jika sudah H-15 dan status saat ini adalah "Sudah Bayar"
-                    if (Carbon::now()->greaterThanOrEqualTo($tanggalH15) && strcasecmp($pelanggan->status_pembayaran, 'Sudah Bayar') === 0) {
+                // Hitung H-5 dari tgl_tagih_plg
+                $tanggalH5 = $tglTagihPlg->subDays(1);
+
+                // Cek apakah pelanggan sudah membayar pada bulan ini atau bulan depan
+                if ($createdAt && ($createdAt->month == Carbon::now()->month || $createdAt->month == Carbon::now()->addMonth()->month) && $createdAt->year == Carbon::now()->year) {
+                    // Jika sudah bayar pada bulan ini atau bulan depan, tetap set status menjadi "Sudah Bayar"
+                    $pelanggan->status_pembayaran = 'Sudah Bayar';
+                    $pelanggan->save();
+                } else {
+                    // Jika belum bayar bulan ini dan sudah H-5 dari tanggal tagih
+                    if (Carbon::now()->greaterThanOrEqualTo($tanggalH5)) {
                         // Ubah status menjadi "Belum Bayar"
                         $pelanggan->status_pembayaran = 'Belum Bayar';
                         $pelanggan->save();
                     }
-                } else {
-                    // Tangani kasus di mana tanggal tidak valid (opsional)
                 }
-            } else {
-                // Tangani kasus di mana tglTagihTerakhir bukan angka (opsional)
             }
         }
 
-        return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan di-refresh ke 15 hari sebelum Jatuh Tempo.');
+        return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan telah diperbarui.');
     }
 }

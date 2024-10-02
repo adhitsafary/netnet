@@ -5,15 +5,15 @@
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('pemasukan.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
-                <input style="color: black;" type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
-                    placeholder="Pencarian">
+                <input style="color: black;" type="text" name="search" id="search" class="form-control"
+                    value="{{ request('search') }}" placeholder="Pencarian">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
             </div>
         </form>
-        <h5 style="color: black;">Data Pemasukan</h5>
-        <table class="table table-bordered " style="color: black;">
+        <h5 style="color: black;" class="font font-weight-bold">Data Pemasukan</h5>
+        <table class="table table-bordered  style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>
@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @forelse ($pemasukan as $no => $item)
-                    <tr>
+                    <tr class="font font-weight-bold" style="color: black">
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->jumlah }}</td>
                         <td>{{ $item->keterangan }}</td>
@@ -52,3 +52,4 @@
         </table>
     </div>
 @endsection
+
