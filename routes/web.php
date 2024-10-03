@@ -45,8 +45,10 @@ Route::post('/perbaikan/hapus/{id}', [PerbaikanController::class, 'destroy'])->n
 Route::get('/perbaikan/export-pdf', [PerbaikanController::class, 'exportPdf'])->name('perbaikan.exportPdf');
 Route::get('/perbaikan/export-excel', [PerbaikanController::class, 'exportExcel'])->name('perbaikan.exportExcel');
 
+//coba
+Route::get('/pelanggancoba', [PelangganController::class, 'indexcoba'])->name('pelanggan.index');
 //PELANGGAN
-Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.indexcoba');
 Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
 Route::post('/pelanggan/store', [PelangganController::class, 'store'])->name('pelanggan.store');
 Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
@@ -107,17 +109,23 @@ Route::get('/teknisi/baru', [TeknisiController::class, 'index'])->name('teknisi'
 Route::get('/homebaru', [PelangganController::class, 'home'])->name('index');
 
 Route::middleware(['auth'])->group(function () {
-    //alamat login akhirp
-    //Route::get('/masuk', [PelangganController::class, 'teknisi']);
-    //alamat login akhir
-    Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->middleware('userAkses:teknisi')->name('teknisi.index');
-    //alamat login akhir
-    Route::get('/masuk/admin', [PelangganController::class, 'home'])->middleware('userAkses:admin');
-    //alamat login akhir
-    Route::get('/masuk/superadmin', [SuperAdminController::class, 'home'])->middleware('userAkses:superadmin');
-    //Logout
-    Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
+  // Rute teknisi
+  Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])
+      ->middleware('userAkses:teknisi,superadmin') // Superadmin bisa akses teknisi
+      ->name('teknisi.index');
+  
+  // Rute admin
+  Route::get('/masuk/admin', [PelangganController::class, 'home'])
+      ->middleware('userAkses:admin,superadmin'); // Superadmin bisa akses admin
+  
+  // Rute superadmin
+  Route::get('/masuk/superadmin', [SuperAdminController::class, 'home'])
+      ->middleware('userAkses:superadmin');
+  
+  // Logout
+  Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
+
 
 Route::get('coba', [TeknisiController::class, 'coba']);
 
@@ -208,7 +216,7 @@ Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index']
 
 Route::post('pelanggan/{id}/update-status', [PelangganController::class, 'updateStatus'])->name('pelanggan.updateStatus');
 
-Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'])->name('keuangan.rekapHarian');
+Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'])->name('rekap-harian');
 
 //filter pelanggan harian tgl_tagih_plg
 Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTagih'])->name('pelanggan.filterTagih');

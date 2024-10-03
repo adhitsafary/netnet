@@ -10,7 +10,7 @@
         <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-biru h-100">
+                <div class="card-biru_tua h-100">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
@@ -45,13 +45,13 @@
                                     hari ini
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text text-white">Rp
-                                    {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }}</div>
+                                    {{ number_format($total_user_bayar, 0, ',', '.') }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
                                 <div class="mt-2 mb-0 text-muted">
                                     <span class="text text-white font-weight-bold text-uppercase">Semua :</span>
                                     <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
                                             class="text text-white"></i>
-                                        {{ $totalUserHarian_semua }}</span>
+                                        {{ $total_jml_user }}</span>
                                     <span class="text text-white  font-weight-bold text-uppercase">User
                                     </span>
                                 </div>
@@ -69,22 +69,28 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-white font-weight-bold text-uppercase mb-1">
-                                    Total Tagihan Hari ini
+                                <div class="bg-danger p-2">
+                                    <div class="text-white font-weight-bold text-uppercase">
+                                        Tagihan Hari ini
+                                    </div>
+                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                    <div class="text-white h5 mb-0 font-weight-bold">
+                                        Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} || User :
+                                        {{ $jumlahPelangganMembayarHariIni }}
+                                    </div>
                                 </div>
-                                <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                <div class="text-white h5 mb-0 font-weight-bold">
-                                    Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }}
+                                <div class="bg-success p-2">
+                                    <div class="text-white font-weight-bold text-uppercase ">
+                                        Tertagih
+                                    </div>
+                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                    <div class="text-white h5 mb-0 font-weight-bold">
+                                        Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User :
+                                        {{ $totalUserHarian_semua }}
+                                    </div>
                                 </div>
 
-                                <div class="mt-2 mb-0 text-muted text-white">
-                                    <span class="mr-2 text-white font-weight-bold text-uppercase">
-                                        <span class="text text-white font-weight-bold text-uppercase">Total :</span>
-                                        {{ $jumlahPelangganMembayarHariIni }}
-                                    </span>
-                                    <span class="text-white font-weight-bold text-uppercase">User
-                                    </span>
-                                </div>
+
                             </div>
 
                         </div>
@@ -97,8 +103,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-white font-weight-bold text-uppercase mb-1">Total
-                                    Jumlah yang belum tertagih</div>
+                                <div class="text-white font-weight-bold text-uppercase mb-1">Belum tertagih Hari ini</div>
                                 <div class="h5 mb-0 font-weight-bold text-white">Rp
                                     {{ number_format($totalTagihanTertagih, 0, ',', '.') }}
                                 </div>
@@ -120,32 +125,23 @@
                 </div>
             </div>
 
-
             <!-- Area Chart -->
             <!-- Chart Bar dan Line -->
-            <div class="col-xl-8 col-lg-8">
-                <div class="pt-5  pb-5 card mb-20">
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Pendapatan Harian</h6>
-                        <div class="dropdown no-arrow">
-                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                            </a>
-                        </div>
-                    </div>
+            <div class="col-xl-70 col-lg-8">
+                <div class="card-magenta">
                     <div class="card-body">
+                        <h6 class="text text-white font-weight-bold">Tabel Pembayaran Per Hari</h6>
                         <div class="chart-area">
-                            <canvas id="pendapatanChart" width="1000" height="500"></canvas>
+                            <canvas id="pendapatanChart" width="1500" height="600"></canvas>
                             <!-- Untuk Bar/Line Chart -->
                         </div>
                     </div>
                 </div>
                 <br>
             </div>
-            <br> <br> <br>
+
             <!-- Pie Chart -->
-            <div class="card-biru col-xl-4 col-lg-8 ">
+            <div class="card-biru_tua col-xl-4 col-lg-8">
                 <div class="p-3 mb-2">
                     <div class="card-kuning py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 pl-3 font-weight-bold text-white">Persentase Pembayaran</h6>
@@ -153,25 +149,32 @@
                     <div class="chart-area">
                         <canvas id="myPieChart"></canvas> <!-- Untuk Pie Chart -->
                     </div>
-                    <div class="mt-3 ml-2 card-kuning py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan <div
-                                class="text-white h5 mb-0 font-weight-bold">
-                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }}
-                            </div>
-                        </h6>
-                        <h6 class="mr-4 pl-3 font-weight-bold text-white">Baru Terbayar <div
-                                class="text-white h5 mb-0 font-weight-bold">
+                    <!-- Row untuk Baru Terbayar dan Total Tagihan -->
+                    <div class="mt-3 ml-2 d-flex justify-content-between">
+                        <!-- Baru Terbayar -->
+                        <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
+                            style="width: 48%; margin-right: 10px;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Baru Terbayar</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
                                 Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }}
                             </div>
-
-
+                        </div>
+                        <!-- Total Tagihan -->
+                        <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center"
+                            style="width: 48%;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }}
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
 
 
-            <!-- Script untuk Chart.js -->
+
+
+
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
             <script>
@@ -189,28 +192,73 @@
                         datasets: [{
                                 label: 'Jumlah Pengguna Bayar',
                                 data: totalUsers, // Data jumlah pengguna per hari
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Warna batang
-                                borderColor: 'rgba(75, 192, 192, 1)', // Warna border batang
-                                borderWidth: 1
+                                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna batang putih semi transparan
+                                borderColor: 'rgb(255, 157, 0)', // Warna border batang putih
+                                borderWidth: 1,
+                                pointRadius: 8, // Mengatur ukuran titik (besar)
+                                pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
                             },
                             {
                                 label: 'Total Pembayaran (Rp)',
                                 data: totalPembayaran, // Data total pembayaran per hari
-                                backgroundColor: 'rgba(153, 102, 255, 0.2)', // Warna grafik garis
-                                borderColor: 'rgba(153, 102, 255, 1)', // Warna border garis
+                                backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna grafik garis putih semi transparan
+                                borderColor: 'rgb(255, 157, 0)', // Warna border garis putih
                                 borderWidth: 1,
-                                type: 'line' // Grafik tipe garis (line)
+                                type: 'line', // Grafik tipe garis (line)
+                                pointRadius: 8, // Mengatur ukuran titik untuk garis (besar)
+                                pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
                             }
                         ]
                     },
                     options: {
+                        layout: {
+                            padding: 0 // Menghilangkan padding pada layout
+                        },
                         scales: {
                             y: {
-                                beginAtZero: true // Memulai grafik dari 0 pada sumbu Y
+                                beginAtZero: true, // Memulai grafik dari 0 pada sumbu Y
+                                ticks: {
+                                    color: 'white' // Warna label sumbu Y menjadi putih
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Warna grid sumbu Y putih semi transparan
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: 'white' // Warna label sumbu X menjadi putih
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)' // Warna grid sumbu X putih semi transparan
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'white', // Warna label legenda menjadi putih
+                                    font: {
+                                        style: 'bold' // Membuat label legenda bold
+                                    }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(255, 255, 255, 0.8)', // Background tooltip putih semi transparan
+                                titleColor: 'black', // Warna judul tooltip hitam
+                                bodyColor: 'black', // Warna isi tooltip hitam
+                                borderColor: 'rgba(255, 255, 255, 1)', // Warna border tooltip putih
+                                borderWidth: 1,
+                                titleFont: {
+                                    weight: 'bold' // Membuat teks judul tooltip bold
+                                }
                             }
                         }
                     }
                 });
+
+
+
+
 
                 // Data untuk Pie Chart
                 var totalTagihanHariIni = @json($totalTagihanHariIni); // Total tagihan hari ini
@@ -221,13 +269,13 @@
                 var myPieChart = new Chart(ctx2, {
                     type: 'doughnut', // Menggunakan tipe doughnut untuk lingkaran persentase
                     data: {
-                        labels: ["Belum Tertagih", "Sudah Tertagih"], // Label untuk chart
+
                         datasets: [{
                             data: [totalTagihanHariIni - totalPendapatanharian_semua,
                                 totalPendapatanharian_semua
                             ], // Data dari controller
-                            backgroundColor: ['#e74c3c', '#4e73df'], // Warna untuk bagian chart
-                            hoverBackgroundColor: ['#c0392b', '#2e59d9'], // Warna saat di-hover
+                            backgroundColor: ['#e74c3c', '#FFBB00'], // Warna untuk bagian chart
+                            hoverBackgroundColor: ['#c0392b', '#FFBB00'], // Warna saat di-hover
                             hoverBorderColor: "rgba(234, 236, 244, 1)", // Border saat di-hover
                         }],
                     },
@@ -235,7 +283,10 @@
                         maintainAspectRatio: false,
                         tooltips: {
                             backgroundColor: "rgb(255,255,255)",
-                            bodyFontColor: "#858796",
+                            titleFontColor: "white", // Judul tooltip putih
+                            bodyFontColor: "white", // Isi tooltip putih
+                            titleFontStyle: "bold", // Judul tooltip bold
+                            bodyFontStyle: "bold", // Isi tooltip bold
                             borderColor: '#dddfeb',
                             borderWidth: 1,
                             xPadding: 15,
@@ -256,9 +307,21 @@
                         },
                         legend: {
                             display: true, // Tampilkan legenda untuk menjelaskan chart
-                            position: 'bottom' // Posisi legenda di bawah chart
+                            position: 'bottom', // Posisi legenda di bawah chart
+                            labels: {
+                                fontColor: "white", // Warna teks legenda menjadi putih
+                                fontStyle: "bold", // Teks legenda menjadi bold
+                                usePointStyle: true // Menjaga ikon lingkaran di legend
+                            }
                         },
                         cutoutPercentage: 70, // Persentase ruang di tengah lingkaran (untuk tipe doughnut)
+                        plugins: {
+                            labels: {
+                                render: 'label',
+                                fontColor: 'white', // Membuat label chart menjadi putih
+                                fontStyle: 'bold' // Membuat teks label chart menjadi bold
+                            }
+                        }
                     }
                 });
             </script>
@@ -267,14 +330,13 @@
 
             <!-- Teknisi Perbaikan -->
             <div class="col-xl-8 col-lg-3 ">
-                <div class="mt-3 p-4 card-kuning">
-                    <div class="card-kuning py-3 d-flex flex-row align-items-center justify-content-between">
+                <div class=" p-4 card-hijau_tua">
+                    <div class="card-hijau_tua py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 font-weight-bold text-white"> Filter Pendapatan
                         </h6>
-                        <a class="m-0 float-right btn btn-danger btn-sm" href="/bayar-pelanggan">Lihat Semua <i
+                        <a class="m-0 float-right btn btn-success btn-sm" href="/bayar-pelanggan">Lihat Semua <i
                                 class="fas fa-chevron-right"></i></a>
                     </div>
-
                     <div class="">
                         <form action="{{ route('index') }}" method="GET">
                             <div class="row">
@@ -289,21 +351,15 @@
                                         value="{{ request('tanggal_akhir') }}">
                                 </div>
                             </div>
-
-
-                            <div class="row mt-3">
+                            <br>
+                            <div class="row ">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-primary">Filter</button>
                                 </div>
                             </div>
                         </form> <br>
-
                         <!-- Informasi pendapatan harian -->
                         <div class="">
-
-
-
-
                             <div class="text font-weight-bold text-white">Total Pendapatan :
                                 <div class="h6 float-right"><b>Rp
                                         {{ number_format($totalPendapatanharian, 0, ',', '.') }}</b></div>
@@ -312,40 +368,72 @@
                                 <div class="h6 float-right text-white"><b>{{ $totaluserhasilfilter }} User</b></div>
                             </div>
                         </div>
-
-                    </div>
-
-
-
-                </div>
-            </div>
-            <!--Row-->
-
-
-            <!-- Modal Logout -->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Are you sure you want to logout?</p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-                            <a href="/logout" class="btn btn-primary">Logout</a>
-                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Message From Customer-->
+            <div class="mt-3 col-xl-4 col-lg-5 card-magenta h-10">
+                <div class="mt-3 ">
+                    <div class="card-violet py-4 d-flex flex-row align-items-center justify-content-between">
+
+                    </div>
+                    <div class="card-violet h-20 mb-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2 mb-5">
+                                    <div class="mb-3 text-white font-weight-bold text-uppercase mb-1">Total Pembayaran
+                                        Semua
+                                        Tanggal Tagih di Hari ini</div>
+                                    <div class="h5 mb-0 font-weight-bold text-white">Rp
+                                        {{ number_format($total_user_bayar, 0, ',', '.') }}
+                                    </div>
+
+                                    <div class=" text-muted text-white">
+                                        <span class="text text-white font-weight-bold text-uppercase">Total user
+                                            :</span>
+                                        <span class="text-white font-weight-bold text-uppercase">
+
+                                            {{ $total_jml_user }}
+                                        </span>
+                                        <span class="text-white font-weight-bold text-uppercase">User
+                                        </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        <!---Container Fluid-->
+
+        <!-- Modal Logout -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <a href="/logout" class="btn btn-primary">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!---Container Fluid-->
     </div>
     <!-- Footer -->
     <br><br>

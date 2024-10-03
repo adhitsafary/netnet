@@ -14,12 +14,14 @@
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-danger">Cari</button>
                             </div>
+                           
                         </div>
                     </form>
                 </div>
 
                 <div class="col-md-3 text-right">
-                    <a href="/rekap-teknisi" class="btn btn-danger btn-sm">Rekap Bulanan Teknisi</a>
+                    <a href="/perbaikan/create"  class="btn btn-danger">Buat Perbaikan</a>
+                    <a href="/rekap-teknisi" class="btn btn-danger ">Rekap Bulanan Teknisi</a>
                 </div>
             </div>
         </div>

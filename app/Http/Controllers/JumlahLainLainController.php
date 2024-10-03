@@ -62,38 +62,30 @@ class JumlahLainLainController extends Controller
 
 
     // Fungsi untuk mendapatkan total pemasukan, pengeluaran, dan pembayaran harian
-    public function lihatRekapHarian()
+    public function lihatRekapHarian(Request $request)
     {
-        // Mendapatkan tanggal hari ini
-        $tanggalHariIni = Carbon::now()->format('Y-m-d');
-
-        // Mengambil total pemasukan dan pengeluaran untuk hari ini
+        // Cek apakah ada input tanggal, jika tidak gunakan tanggal hari ini
+        $tanggalHariIni = $request->input('tanggal') ?? Carbon::now()->format('Y-m-d');
+    
+        // Mengambil total pemasukan dan pengeluaran berdasarkan tanggal yang dipilih
         $totalPemasukan = PemasukanModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalPengeluaran = PengeluaranModel::whereDate('created_at', $tanggalHariIni)->sum('jumlah');
         $totalRegistrasi = RekapPemasanganModel::whereDate('created_at', $tanggalHariIni)->sum('registrasi');
-
-        //$pembayaranHarian = BayarPelanggan::whereDate('tanggal_pembayaran', $tanggalHariIni)->get();
-
-        // Ambil data pembayaran harian kecuali yang metode transaksinya adalah 'TF'
-        // Ambil data pembayaran yang dilakukan hari ini, kecuali metode 'TF'
-        // Ambil data paket pelanggan yang membayar hari ini ada berapa orang dan paketnya yang berapa aja
-        $pembayaranHarian = BayarPelanggan::whereDate('created_at', Carbon::today())
+    
+        $pembayaranHarian = BayarPelanggan::whereDate('created_at', $tanggalHariIni)
             ->where('metode_transaksi', '!=', 'TF') // Kecualikan metode transaksi 'TF'
             ->get();
-
-        // Hitung total pendapatan harian dari pembayaran
+    
         $totalPendapatanHarian = $pembayaranHarian->sum('jumlah_pembayaran');
         $paket_plg = $pembayaranHarian->sum('peket_plg');
-
+    
         $pemasukantotal = $totalPemasukan - $totalPengeluaran;
-
         $totalsaldo = $totalPendapatanHarian + $pemasukantotal;
-
         $totaljumlahsaldo = $totalRegistrasi + $totalsaldo;
-
-        // Hitung total user yang membayar hari ini
+    
         $totalUserHarian = $pembayaranHarian->count();
-
+    
         return view('rekap_harian.index', compact('paket_plg', 'totalRegistrasi', 'totalsaldo', 'totaljumlahsaldo', 'totalPemasukan', 'totalPengeluaran', 'totalPendapatanHarian', 'totalUserHarian', 'tanggalHariIni'));
     }
+    
 }

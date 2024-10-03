@@ -12,7 +12,14 @@
                 </div>
             </div>
         </form>
-        <h5 class="font font-weight-bold" style="color: black">Data Pengeluaran</h5>
+
+        <a href="/pengeluaran/create" class="btn btn-success">Buat Pengeluaran</a>
+        <a href="/pemasukan" class="btn btn-success">Data pemasukan</a>
+        <div style="display: flex; justify-content: center;" class="mb-3">
+
+            <h5 style="color: black;" class="font font-weight-bold">Data Pengeluaran</h5>
+        </div>
+
         <table class="table table-bordered" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>

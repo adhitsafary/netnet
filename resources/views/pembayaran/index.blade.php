@@ -42,6 +42,12 @@
             <strong class="mr-5"></strong>
             <strong>Total Jumlah Pelanggan Bayar : </strong> {{ $totalPelanggan }}
         </div>
+
+        <div style="display: flex; justify-content: center;" class="mb-2" >
+
+            <h5 style="color: black;" class="font font-weight-bold">Data Pembayaran</h5>
+        </div>
+        
         <!-- Tabel Pembayaran -->
         <table class="table table-bordered table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">

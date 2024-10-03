@@ -15,10 +15,17 @@ class UserAkses
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
-        if(auth()->user()->role == $role){
+        // Jika pengguna adalah superadmin, izinkan akses tanpa batasan
+        if (auth()->user()->role == 'superadmin') {
             return $next($request);
         }
-        return response()->json(['Anda tidak di perbolehkan Akses Halaman ini']);
-        return redirect('teknisi');
+
+        // Jika pengguna memiliki peran yang diizinkan, lanjutkan
+        if (auth()->user()->role == $role) {
+            return $next($request);
+        }
+
+        // Jika pengguna tidak memiliki akses, tampilkan pesan error
+        return response()->json(['Anda tidak di perbolehkan Akses Halaman ini'], 403);
     }
 }

@@ -71,7 +71,7 @@
                             <div class="col mr-2">
                                 <div class="bg-danger p-2">
                                     <div class="text-white font-weight-bold text-uppercase">
-                                        Total Tagihan Hari ini
+                                        Tagihan Hari ini
                                     </div>
                                     <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
                                     <div class="text-white h5 mb-0 font-weight-bold">
@@ -81,7 +81,7 @@
                                 </div>
                                 <div class="bg-success p-2">
                                     <div class="text-white font-weight-bold text-uppercase ">
-                                        Tagihan Tertagih
+                                        Tertagih
                                     </div>
                                     <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
                                     <div class="text-white h5 mb-0 font-weight-bold">
@@ -103,8 +103,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-white font-weight-bold text-uppercase mb-1">Total
-                                    Jumlah yang belum tertagih</div>
+                                <div class="text-white font-weight-bold text-uppercase mb-1">Belum tertagih Hari ini</div>
                                 <div class="h5 mb-0 font-weight-bold text-white">Rp
                                     {{ number_format($totalTagihanTertagih, 0, ',', '.') }}
                                 </div>

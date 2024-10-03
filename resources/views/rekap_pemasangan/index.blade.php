@@ -12,7 +12,14 @@
                 </div>
             </div>
         </form>
-        <h5>Data rekap pemasangan</h5>
+
+        <a href="/rekap_pemasangan/create" class="btn btn-success">Buat Rekap pemasangan</a>
+
+        <div style="display: flex; justify-content: center;" class="mb-3">
+
+            <h5 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h5>
+        </div>
+        
         <table class="table table-bordered  table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>

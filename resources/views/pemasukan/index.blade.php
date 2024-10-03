@@ -12,16 +12,24 @@
                 </div>
             </div>
         </form>
-        <h5 style="color: black;" class="font font-weight-bold">Data Pemasukan</h5>
-        <table class="table table-bordered  style="color: black;">
-            <thead class="table table-primary " style="color: black;">
+
+        <a href="/pemasukan/create" class="btn btn-success">Buat Pemasukan</a>
+        
+        <a href="/pengeluaran" class="btn btn-success">Data Pengeluaran</a>
+
+        <div style="display: flex; justify-content: center;" class="mb-3">
+
+            <h5 style="color: black;" class="font font-weight-bold">Data Pemasukan</h5>
+        </div>
+        
+        <table class="table table-bordered" style="color: black;">
+            <thead class="table table-primary" style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Jumlah</th>
                     <th>Keterangan</th>
                     <th>Tanggal</th>
                     <th>Aksi</th>
-
                 </tr>
             </thead>
             <tbody>
@@ -41,7 +49,6 @@
                                     onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
-
                     </tr>
                 @empty
                     <tr>
@@ -52,4 +59,3 @@
         </table>
     </div>
 @endsection
-
