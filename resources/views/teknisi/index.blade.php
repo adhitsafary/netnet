@@ -38,7 +38,7 @@
             <div class="col-md-3 text-right">
                 <div class="d-flex justify-content-end gap-2">
 
-                    <a class="btn btn-primary btn-sm" href="/teknisi/rekap-teknisi">Rekap Pemasangan dan Perbaikan</a>
+                    <a class="btn btn-primary btn-sm" href="">Rekap Pemasangan dan Perbaikan</a>
                     <a class="btn btn-danger btn-sm mb-2" href="/logout">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout

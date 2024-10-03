@@ -56,16 +56,26 @@ class IsolirController extends Controller
             $query->where('paket_plg', $request->input('paket_plg'));
         }
 
-        // Eksekusi query dan ambil data
-        $isolir = $query->paginate(200); // Ubah pagination jika perlu
+        // Filter berdasarkan harga paket
+        if ($request->filled('harga_paket')) {
+            $query->where('harga_paket', $request->input('harga_paket'));
+        }
+
+        // Hitung total harga_paket dan total pelanggan sebelum pagination
+        $totalJumlahPembayaran = $query->sum('harga_paket');
+        $totalPelanggan = $query->count();
+
+        // Eksekusi query dengan pagination
+        $isolir = $query->paginate(200); // Ubah pagination jika diperlukan
 
         // Status pembayaran untuk keperluan view
         $status_pembayaran_display = $request->input('status_pembayaran', '');
 
         // Kembalikan view dengan data yang sudah difilter
-        return view('isolir.index', compact('isolir', 'search', 'status_pembayaran_display'))
+        return view('isolir.index', compact('isolir', 'search', 'status_pembayaran_display', 'totalJumlahPembayaran', 'totalPelanggan'))
             ->with('success', 'Data isolir berhasil difilter.');
     }
+
 
 
 
@@ -226,40 +236,61 @@ class IsolirController extends Controller
 
     public function filterByTanggalTagihindex(Request $request)
     {
-        // Ambil nilai filter status pembayaran dari request
+        // Get filter inputs from the request
         $status_pembayaran_display = $request->input('status_pembayaran', '');
-
-        // Ambil tanggal tagih dan paket dari request
         $tanggal = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
 
-        // Mulai query
+        // Start the query
         $query = IsolirModel::query();
 
-        // Filter berdasarkan status pembayaran jika ada
+        // Apply filters
         if ($status_pembayaran_display) {
             $query->where('status_pembayaran', $status_pembayaran_display);
         }
 
-        // Filter berdasarkan tanggal tagih jika ada
         if ($tanggal) {
             $query->where('tgl_tagih_plg', $tanggal);
         }
 
-        // Filter berdasarkan paket pelanggan jika ada
         if ($paket_plg) {
             $query->where('paket_plg', $paket_plg);
         }
+
         if ($harga_paket) {
             $query->where('harga_paket', $harga_paket);
         }
 
-
-        // Lakukan pagination pada query
+        // Get paginated results
         $isolir = $query->paginate(100);
 
-        // Kembalikan data pelanggan ke view
-        return view('isolir.index', compact('isolir', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
+        // Calculate total payments and total users
+        $totalJumlahPembayaran = $query->sum('harga_paket');
+        $totalPelanggan = $query->count();
+
+        // Return the data to the view
+        return view('isolir.index', compact('isolir', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display', 'totalJumlahPembayaran', 'totalPelanggan'));
+    }
+
+    public function historypembayaran($id_plg)
+    {
+        // Mencari pelanggan di tabel Pelanggan
+        $isolir = IsolirModel::find($id_plg);
+
+        // Jika tidak ditemukan, cari di tabel IsolirModel
+        if (!$isolir) {
+            $isolir = IsolirModel::where('id_plg', $id_plg)->first();
+        }
+
+        // Jika pelanggan tidak ditemukan di kedua tabel
+        if (!$isolir) {
+            return redirect()->route('isolir.index')->with('error', 'Pelanggan tidak ditemukan.');
+        }
+
+        // Ambil riwayat pembayaran berdasarkan id_plg yang konsisten
+        $pembayaran = BayarPelanggan::where('id_plg', $isolir->id_plg)->get();
+
+        return view('isolir.historypembayaran', compact('isolir', 'pembayaran'));
     }
 }

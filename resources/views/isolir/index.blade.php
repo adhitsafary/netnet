@@ -14,6 +14,16 @@
                     </div>
                     <!-- Tombol Cari -->
                     <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
+                    <div class="">
+                        <button  class="btn btn-primary btn-lg mt-2"
+                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
+                        Pembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }}
+                        </button>
+                        <button  class="btn btn-primary btn-lg mt-2"
+                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
+                        User : {{ number_format($totalPelanggan, 0, ',', '.') }}
+                        </button>
+                    </div>
                 </form>
             </div>
 
@@ -240,7 +250,9 @@
                                 </div>
                             </div>
                         </th>
-                        <th>Aktivkan Kembali</th>
+                        <th>Riwayat Pembayaran</th>
+
+                        <th>Aktifkan Kembali</th>
 
                         <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
@@ -272,6 +284,8 @@
                                     <span class="badge badge-danger p-3">Belum Bayar</span>
                                 @endif
                             </td>
+                            <td> <a href="{{ route('isolir.historypembayaran', $item->id) }}"
+                                class="btn btn-info btn-sm">Riwayat Pembayaran</a></td>
 
                             <td>
                                 <form action="{{ route('pelanggan.reactivate', $item->id) }}" method="POST">

@@ -87,7 +87,7 @@
                     data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
                     <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Pgeluarn Pmsukan</span>
+                    <span class=" font-weight-bold">Pmsukan Pgeluarn</span>
                 </a>
                 <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
                     data-parent="#accordionSidebar">

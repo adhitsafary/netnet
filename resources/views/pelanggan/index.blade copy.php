@@ -3,8 +3,8 @@
 @section('konten')
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
-        <div class="row align-items-center">
-            <div class="col-md-6" style="color: black">
+        <div class="row mb-2 align-items-center">
+            <div class="col-md-4" style="color: black">
                 <!-- Form Pencarian -->
                 <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline" style="color: black">
                     <!-- Input Pencarian -->
@@ -17,13 +17,12 @@
                     <div class="">
                         <button  class="btn btn-primary btn-lg mt-2"
                         style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                        TotalPembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User : {{ number_format($totalPelanggan, 0, ',', '.') }}
+                        Pembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }}
                         </button>
                         <button  class="btn btn-primary btn-lg mt-2"
                         style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                        Total masuk : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User : {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                        User : {{ number_format($totalPelanggan, 0, ',', '.') }}
                         </button>
-               
                     </div>
                 </form>
                 
@@ -43,8 +42,58 @@
                     style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
                     Data Pelanggan Off</a>
 
+                <!-- Modal -->
+                <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="filterModalLabel">Filter Pelanggan</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                    <div class="form-group">
+                                        <label for="paket_plg">Paket</label>
+                                        <select name="paket_plg" id="paket_plg">
+                                            <option value="">Pilih Paket</option>
+                                            @for ($i = 1; $i <= 7; $i++)
+                                                <option value="{{ $i }}"
+                                                    {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                            <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                                                vcr
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tgl_tagih_plg">Tanggal Tagih</label>
+                                        <select name="tgl_tagih_plg" id="tgl_tagih_plg">
+                                            <option value="">Pilih Tanggal Tagih</option>
+                                            @for ($i = 1; $i <= 32; $i++)
+                                                <option value="{{ $i }}"
+                                                    {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
 
-                
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="document.querySelector('.filterForm').submit();">Terapkan Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 

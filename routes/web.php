@@ -75,6 +75,7 @@ Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->
 Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
 Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
+Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historypembayaran'])->name('isolir.historypembayaran');
 
 //index pembayaran semua user  atau global
 Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pembayaran.export');
@@ -134,7 +135,7 @@ Route::get('/get-pelanggan/{id}', [PerbaikanController::class, 'getPelanggan'])-
 
 Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name('perbaikan.rekapTeknisi');
 
-Route::get('/teknisi/rekap-teknisi', [TeknisiController::class, 'rekapTeknisi'])->name('teknisi.rekapteknisi');
+Route::get('/teknisi/rekap-teknisi', [TeknisiController::class, 'rekapTeknisi'])->name('teknisi.rekap_teknisi');
 Route::post('/rekap-teknisi/print', [PerbaikanController::class, 'printRekapTeknisi'])->name('perbaikan.printRekapTeknisi');
 
 Route::post('/perbaikan/{id}/selesai', [PerbaikanController::class, 'selesai'])->name('perbaikan.selesai');

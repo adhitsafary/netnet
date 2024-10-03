@@ -28,7 +28,7 @@
                 @forelse ($pengeluaran as $no => $item)
                     <tr>
                         <td>{{ $no + 1 }}</td>
-                        <td>{{ $item->jumlah }}</td>
+                        <td>{{ number_format($item->jumlah) }}</td>
                         <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td> <a href="{{ route('pengeluaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
@@ -36,7 +36,7 @@
                             <form action="{{ route('pengeluaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
-                                @method('DELETE')
+                         
                                 <button class="btn btn-danger btn-sm"
                                     onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
