@@ -55,8 +55,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
+                    aria-expanded="true" aria-controls="collapseBootstrap17">
                     <img src="{{ asset('asset/img/man.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Karyawan</span>
@@ -71,11 +71,27 @@
 
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap100"
+                    aria-expanded="true" aria-controls="collapseBootstrap100">
+                    <img src="{{ asset('asset/img/users.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Admin Login</span>
+                </a>
+                <div id="collapseBootstrap100" class="collapse" aria-labelledby="headingBootstrap100"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="{{ route('users.index') }}">Data Admin Login</a>
+                        <a class="collapse-item" href="{{ route('users.create') }}">Tambah Admin Login</a>
+                    </div>
+
+                </div>
+            </li>
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap1" aria-expanded="true" aria-controls="collapseBootstrap1">
                     <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">PSB dan Perbaikan</span>
@@ -330,117 +346,117 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <img class="img-profile rounded-circle" src="{{ asset('/template2/img/boy.png') }}"
                                     style="max-width: 60px">
-                                <div class="ml-2 d-none d-lg-inline text-white small">
-                                    <ul class="list-group list-group-flush" style="background-color: transparent;">
-                                        @if (Auth::check())
-                                            {{-- Mengecek apakah pengguna sudah login --}}
+                                <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
+                                    @if (Auth::check())
+                                        {{-- Mengecek apakah pengguna sudah login --}}
+                                        <span style="font-weight: bold; color: white;">{{ Auth::user()->name }}</span>
+                                        {{-- Tampilkan nama pengguna --}}
+                                        <ul class="list-group list-group-flush"
+                                            style="background-color: transparent;">
                                             @if (Auth::user()->role == 'teknisi')
                                                 <li class="list-group-item"
                                                     style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                    Menu Teknisi
+
                                                 </li>
                                             @endif
 
                                             @if (Auth::user()->role == 'admin')
                                                 <li class="list-group-item"
                                                     style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                    Menu Admin
+
                                                 </li>
                                             @endif
 
                                             @if (Auth::user()->role == 'superadmin')
                                                 <li class="list-group-item"
                                                     style="background-color: transparent; border: none; color: white; font-weight: bold;">
-                                                    Menu SuperAdmin
+
                                                 </li>
                                             @endif
-                                        @else
-                                            {{-- Pengalihan atau pesan error jika pengguna belum login --}}
-                                            <li class="list-group-item"
-                                                style="background-color: transparent; border: none; color: red;">
-                                                Silakan login untuk melihat menu.
-                                            </li>
-                                            {{-- Bisa juga dialihkan ke halaman login --}}
-                                            <script>
-                                                window.location.href = "{{ route('login') }}";
-                                                {{-- Mengalihkan ke halaman login --}}
-                                            </script>
-                                        @endif
-                                    </ul>
-
-                                </div>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/logout">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
+                                        </ul>
+                                    @else
+                                        {{-- Pengalihan atau pesan error jika pengguna belum login --}}
+                        <li class="list-group-item" style="background-color: transparent; border: none; color: red;">
+                            Silakan login untuk melihat menu.
                         </li>
-                    </ul>
-                </nav>
-                <!-- Topbar -->
-                <div class="mr-4 d-sm-flex align-items-center justify-content-between">
-                    <h4 class="h2" style="color: black;"></h4>
-                    <ol class="breadcrumb">
-                        <!-- Jam Berjalan -->
-                        <div class="h6 font-weight-bold mr-3" style="color: black;">
-                           <span id="liveClock"></span>
-                        </div>
-                        <div class="h6 font-weight-bold" style="color: black;">
-                            {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
-                        </div>
-
-
+                        {{-- Bisa juga dialihkan ke halaman login --}}
                         <script>
-                            function updateClock() {
-                                const now = new Date();
-                                const hours = String(now.getHours()).padStart(2, '0');
-                                const minutes = String(now.getMinutes()).padStart(2, '0');
-                                const seconds = String(now.getSeconds()).padStart(2, '0');
-                                const formattedTime = `${hours}:${minutes}:${seconds}`;
-                                document.getElementById('liveClock').textContent = formattedTime;
-                            }
-
-                            // Update jam setiap detik
-                            setInterval(updateClock, 1000);
-                            updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+                            window.location.href = "{{ route('login') }}";
+                            {{-- Mengalihkan ke halaman login --}}
                         </script>
-                    </ol>
-                </div>
-
-                <!-- Container Fluid-->
-                @yield('konten')
-                <!-- Footer -->
+                        @endif
             </div>
+            </a>
+
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+            </li>
+            </ul>
+            </nav>
+            <!-- Topbar -->
+            <div class="mr-4 d-sm-flex align-items-center justify-content-between">
+                <h4 class="h2" style="color: black;"></h4>
+                <ol class="breadcrumb">
+                    <!-- Jam Berjalan -->
+                    <div class="h6 font-weight-bold mr-3" style="color: black;">
+                        <span id="liveClock"></span>
+                    </div>
+                    <div class="h6 font-weight-bold" style="color: black;">
+                        {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
+                    </div>
+
+
+                    <script>
+                        function updateClock() {
+                            const now = new Date();
+                            const hours = String(now.getHours()).padStart(2, '0');
+                            const minutes = String(now.getMinutes()).padStart(2, '0');
+                            const seconds = String(now.getSeconds()).padStart(2, '0');
+                            const formattedTime = `${hours}:${minutes}:${seconds}`;
+                            document.getElementById('liveClock').textContent = formattedTime;
+                        }
+
+                        // Update jam setiap detik
+                        setInterval(updateClock, 1000);
+                        updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+                    </script>
+                </ol>
+            </div>
+
+            <!-- Container Fluid-->
+            @yield('konten')
+            <!-- Footer -->
         </div>
+    </div>
 
-        <!-- Scroll to top -->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-        <script src="{{ asset('template2/vendor/jquery/jquery.min.js') }}"></script>
-        <script src="{{ asset('template2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('template2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-        <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
-        <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
-        <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
+    <script src="{{ asset('template2/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('template2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('template2/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
+    <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
 </body>
 
 </html>

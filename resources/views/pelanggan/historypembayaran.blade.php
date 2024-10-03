@@ -16,6 +16,7 @@
                     <th>Jumlah Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Keterangan Pembayaran</th>
+                    <th>Nama Admin</th>
                     <th>Print</th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                         <td>{{ \Carbon\Carbon::parse($bayar->created_at)->locale('id')->translatedFormat('l, d F Y H:i:s') }}</td>
 
                         <td>{{ $bayar->keterangan_plg}}</td>
+                        <td>{{ $bayar->admin_name}}</td>
                         <td>
                             <button class="btn btn-info btn-sm"
                                 onclick="printPayment({{ $no + 1 }}, '{{ $bayar->nama_plg }}')">Print</button>

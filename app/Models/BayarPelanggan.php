@@ -26,6 +26,7 @@ class BayarPelanggan extends Model
         'keterangan_plg',
         'tgl_tagih_plg',
         'aktivasi_plg',
+        'admin_name',
 
     ];
 

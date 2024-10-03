@@ -16,7 +16,6 @@ use App\Models\Perbaikan;
 use App\Models\RekapPemasanganModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -350,6 +349,9 @@ class PelangganController extends Controller
             });
         }
 
+        // Hitung total pelanggan keseluruhan (tidak terpengaruh filter)
+        //$totalPelangganKeseluruhan = Pelanggan::count();
+
         $totalJumlahPembayaranKeseluruhan = Pelanggan::sum('harga_paket'); // Mengambil total keseluruhan dari tabel Pelanggan
         // Hitung total harga_paket dan total pelanggan berdasarkan filter
         $totalPelangganKeseluruhan = $query->count();
@@ -372,7 +374,6 @@ class PelangganController extends Controller
         $totalJumlahPembayaranfilter = $query->sum('pelanggan.harga_paket'); // Total pendapatan dari pelanggan
         $totalPelangganfilter = $query->count();
 
-
         // Return ke view dengan total pembayaran dan total pelanggan
         return view('pelanggan.index', compact(
             'totalPelangganfilter',
@@ -387,6 +388,7 @@ class PelangganController extends Controller
             'pelanggan'
         ))->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
     }
+
 
 
 
@@ -417,6 +419,7 @@ class PelangganController extends Controller
             $pelanggan->delete();
         }
     }
+
 
 
     public function create()
@@ -458,10 +461,14 @@ class PelangganController extends Controller
 
         $pelanggan->save();
 
-        return redirect()->route('pelanggan.index')->with('success', 'Pelanggan Baru berhasil Ditambahkan .');
+        return redirect()->route('pelanggan.index')->with('success', 'Pembayaran berhasil dilakukan.');
     }
 
+
+
+
     public function show(string $id) {}
+
 
 
     public function edit(string $id_plg)
@@ -556,14 +563,13 @@ class PelangganController extends Controller
         // Validasi input
         $request->validate([
             'id' => 'required|exists:pelanggan,id',
+            // 'tanggal_pembayaran' => 'required|date',
             'metode_transaksi' => 'required|string',
         ]);
 
         // Ambil data pelanggan berdasarkan id
         $pelanggan = Pelanggan::findOrFail($request->id);
-
-        // Ambil data admin yang login atau default ke 'Unknown Admin' jika tidak ada
-        $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
+        //dd($pelanggan);
 
         // Simpan data ke tabel bayar_pelanggan
         BayarPelanggan::create([
@@ -579,10 +585,10 @@ class PelangganController extends Controller
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
             'metode_transaksi' => $request->metode_transaksi,
             'keterangan_plg' => $request->keterangan_plg,
+
             'tanggal_pembayaran' => Carbon::now()->format('Y-m') . '-' . $pelanggan->tgl_tagih_plg,
 
-            // Tambahkan nama admin yang melakukan pembayaran
-            'admin_name' => $adminName,
+
         ]);
 
         // Update status pembayaran pelanggan menjadi 'sudah bayar'
@@ -593,7 +599,6 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan.');
     }
-
 
     public function historypembayaran($id_plg)
     {
@@ -815,7 +820,6 @@ class PelangganController extends Controller
         return view('pelanggan.index_tagih', compact('pelanggan', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
     }
 
-
     public function filterByTanggalTagihindex(Request $request)
     {
         // Ambil nilai filter dari request
@@ -824,54 +828,49 @@ class PelangganController extends Controller
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
         $filter = $request->input('filter');
-        $tanggal_pembayaran = $request->input('tanggal');
+        $tanggal_pembayaran = $request->input('created_at');
 
-        // Mulai query dasar pada model Pelanggan
-        $query = Pelanggan::query();
+        // Query dasar pelanggan dengan pembayaran terakhir
+        $query = Pelanggan::with('pembayaranTerakhir')
+            ->leftJoin('bayar_pelanggan', 'pelanggan.id_plg', '=', 'bayar_pelanggan.id_plg')
+            ->select('pelanggan.*', 'bayar_pelanggan.created_at as pembayaranTerakhir');
 
-        // Filter berdasarkan status pembayaran
+        // Filter berdasarkan status pembayaran jika ada
         if ($status_pembayaran_display) {
-            $query->whereRaw('strcasecmp(status_pembayaran, ?) = 0', [$status_pembayaran_display]);
+            $query->where('pelanggan.status_pembayaran', $status_pembayaran_display === 'belum_bayar' ? 'Belum Bayar' : 'Sudah Bayar');
         }
 
         // Filter berdasarkan tanggal tagih
         if ($tanggal_tagih) {
-            $query->where('tgl_tagih_plg', $tanggal_tagih);
+            $query->where('pelanggan.tgl_tagih_plg', $tanggal_tagih);
         }
 
         // Filter berdasarkan paket pelanggan
         if ($paket_plg) {
-            $query->where('paket_plg', $paket_plg);
+            $query->where('pelanggan.paket_plg', $paket_plg);
         }
 
         // Filter berdasarkan harga paket
         if ($harga_paket) {
-            $query->where('harga_paket', $harga_paket);
-        }
-
-        // Filter status pembayaran
-        if ($filter == 'sudah_bayar') {
-            $query->whereNotNull('pembayaranTerakhir');
-        } elseif ($filter == 'belum_bayar') {
-            $query->whereNull('pembayaranTerakhir');
-        }
-
-        // Urutkan berdasarkan pembayaran terbaru atau terlama
-        if ($filter == 'terbaru') {
-            $query->orderBy('pembayaranTerakhir', 'desc');
-        } elseif ($filter == 'terlama') {
-            $query->orderBy('pembayaranTerakhir', 'asc');
+            $query->where('pelanggan.harga_paket', $harga_paket);
         }
 
         // Filter berdasarkan tanggal pembayaran
         if ($tanggal_pembayaran) {
-            $query->whereDate('pembayaranTerakhir', '=', $tanggal_pembayaran);
+            $query->whereDate('bayar_pelanggan.created_at', '=', $tanggal_pembayaran);
+        }
+
+        // Urutkan berdasarkan pembayaran terbaru atau terlama
+        if ($filter == 'terbaru') {
+            $query->orderBy('bayar_pelanggan.created_at', 'desc');
+        } elseif ($filter == 'terlama') {
+            $query->orderBy('bayar_pelanggan.created_at', 'asc');
         }
 
         // Ambil data yang difilter
-        $items = $query->get();
+        $pelanggan = $query->paginate(100);
 
-        // Hitung total harga_paket dan jumlah pelanggan berdasarkan filter
+        // Hitung total harga paket berdasarkan filter
         $totalJumlahPembayaranfilter = $query->sum('pelanggan.harga_paket'); // Total pendapatan dari pelanggan yang difilter
 
         // Hitung total pelanggan berdasarkan filter
@@ -895,12 +894,11 @@ class PelangganController extends Controller
         // Hitung sisa pembayaran dan sisa pelanggan yang belum membayar
         $sisaPembayaran = $totalJumlahPembayaranKeseluruhan - $totalJumlahPembayaran;
         $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
-        // Pagination
-        $pelanggan = $query->paginate(100)->appends($request->all());
 
         // Kembalikan data ke view dengan total jumlah pembayaran dan pelanggan
         return view('pelanggan.index', compact(
             'totalJumlahPembayaran',
+
             'totalJumlahPembayaranfilter',
             'sisaPembayaran',
             'sisaUser',
@@ -913,8 +911,7 @@ class PelangganController extends Controller
             'paket_plg',
             'tanggal_tagih',
             'status_pembayaran_display',
-            'tanggal_pembayaran',
-            'items',
+            'tanggal_pembayaran'
         ));
     }
 
@@ -1041,5 +1038,118 @@ class PelangganController extends Controller
         }
 
         return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan telah diperbarui.');
+    }
+
+
+    public function indexcoba(Request $request)
+    {
+        // Ambil semua pelanggan
+        $query = Pelanggan::query();
+
+        // Pengecekan dan update status pembayaran otomatis berdasarkan tanggal tagihan
+        $pelanggan_all = Pelanggan::all();
+
+        // Ambil nilai filter dari request
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+
+        // Proses pengecekan status pembayaran
+        foreach ($pelanggan_all as $pelanggan) {
+            $hari_tagih = intval($pelanggan->aktivasi_plg);
+            $currentMonth = now()->month;
+            $currentYear = now()->year;
+
+            if ($hari_tagih >= 1 && $hari_tagih <= 31) {
+                $tgl_tagih = Carbon::createFromDate($currentYear, $currentMonth, $hari_tagih);
+
+                if (now()->gt($tgl_tagih)) {
+                    $tgl_tagih = $tgl_tagih->addMonth();
+                }
+
+                if (now()->gt($tgl_tagih) && $pelanggan->status_pembayaran === 'sudah bayar') {
+                    $pelanggan->status_pembayaran = 'Belum Bayar';
+                    $pelanggan->save();
+                }
+            }
+        }
+
+        // Filter berdasarkan status pembayaran
+        if ($request->filled('status_pembayaran')) {
+            $status = $request->input('status_pembayaran');
+            $query->where('status_pembayaran', $status === 'belum_bayar' ? 'Belum Bayar' : 'Sudah Bayar');
+        }
+
+        // Filter berdasarkan tanggal tagih
+        if ($tgl_tagih_plg) {
+            $query->where('tgl_tagih_plg', $tgl_tagih_plg);
+        }
+
+        // Filter berdasarkan paket pelanggan
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+
+        // Filter berdasarkan harga paket
+        if ($harga_paket) {
+            $query->where('harga_paket', $harga_paket);
+        }
+
+        // Cek pencarian
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('aktivasi_plg', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('tgl_tagih_plg', 'like', "%{$search}%");
+            });
+        }
+
+        // Hitung total pelanggan keseluruhan (tidak terpengaruh filter)
+        //$totalPelangganKeseluruhan = Pelanggan::count();
+
+        $totalJumlahPembayaranKeseluruhan = Pelanggan::sum('harga_paket'); // Mengambil total keseluruhan dari tabel Pelanggan
+        // Hitung total harga_paket dan total pelanggan berdasarkan filter
+        $totalPelangganKeseluruhan = $query->count();
+        // Hitung total pembayaran dari BayarPelanggan dalam bulan yang sama
+        $totalJumlahPembayaran = BayarPelanggan::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
+            ->sum('jumlah_pembayaran');
+
+        $userIdsWithPayments = BayarPelanggan::whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->distinct('id_plg') // Pastikan hanya menghitung ID pelanggan yang unik
+            ->pluck('id_plg'); // Ambil ID pelanggan dari pembayaran
+        $totalPelangganBayar = count($userIdsWithPayments); // Hitung jumlah user
+
+        $sisaPembayaran = $totalJumlahPembayaranKeseluruhan -  $totalJumlahPembayaran;
+        $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
+        // Ambil data pelanggan
+        $pelanggan = $query->with('pembayaranTerakhir')->paginate(100);
+        $totalJumlahPembayaranfilter = $query->sum('pelanggan.harga_paket'); // Total pendapatan dari pelanggan
+        $totalPelangganfilter = $query->count();
+
+        // Return ke view dengan total pembayaran dan total pelanggan
+        return view('pelanggan.indexcoba', compact(
+            'totalPelangganfilter',
+            'totalJumlahPembayaranfilter',
+            'sisaPembayaran',
+            'sisaUser',
+            'totalJumlahPembayaranKeseluruhan',
+            'totalPelangganKeseluruhan',
+            'totalPelangganBayar',
+            'totalJumlahPembayaran',
+            'search',
+            'pelanggan'
+        ))->with('success', 'Status Pembayaran Pelanggan di-refresh ke tanggal 15 sebelum jatuh tempo.');
+    }
+
+    public function pembayaranTerakhir()
+    {
+        return $this->hasOne(BayarPelanggan::class, 'id_plg')->latest('created_at');
     }
 }

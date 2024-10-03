@@ -4,75 +4,80 @@
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row align-items-center">
-            <div class="col-md-6" style="color: black">
+            <div class="">
                 <!-- Form Pencarian -->
 
-                <div class="mb-2">
-                    
-                    <button  class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                    style="cursor: default; background: linear-gradient(45deg, #ecc100, #ff0000b9); color: #ffffff;">
-                    Total keseluruhan : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User : {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
+                <div class="mb-2 ml-3">
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00ff6a); color: #ffffff;">
+                        Pembayaran(Filter) : Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganfilter, 0, ',', '.') }}
                     </button>
-                    <button  class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                    style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), #ffbb00); color: #ffffff;">
-                    Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User : {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #ecc100, #ff0000b9); color: #ffffff;">
+                        Total keseluruhan : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
                     </button>
-                    <button  class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                    style="cursor: default; background: linear-gradient(45deg, #007bff, #00ff6a); color: #ffffff;">
-                    Pembayaran(Filter) : Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User : {{ number_format($totalPelangganfilter, 0, ',', '.') }}
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), #ffbb00); color: #ffffff;">
+                        Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganBayar, 0, ',', '.') }}
                     </button>
-                    <button  class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                    style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff;">
-                    Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User : {{ number_format($sisaUser, 0, ',', '.') }}
+
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff;">
+                        Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
+                        {{ number_format($sisaUser, 0, ',', '.') }}
                     </button>
                 </div>
-
-                <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline" style="color: black">
-                    <!-- Input Pencarian -->
-                    <div class="input-group" style="color: black">
-                        <input type="text" name="search" id="search" class="form-control font-weight-bold"
-                            style="color: black" value="{{ request('search') }}" placeholder="Pencarian">
-                    </div>
-                    <!-- Tombol Cari -->
-                    <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
-                    
-                    
-                </form>
             </div>
         </div>
         <div class="text-right mb-2">
 
+            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline" style="color: black;">
+                <div class="input-group" style="color: black;">
+                    <input type="text" name="search" id="search" class="form-control font-weight-bold"
+                        style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
+                </div>
+                <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
+            </form>
+
             <!-- Teks Data isolir -->
-            <a href="/isolir" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Data Isolir</a>
-            <div class="btn btn-danger btn-lg mt-2" data-toggle="modal" data-target="#filterModal"
-                style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff;">
+            <a href="/isolir" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Data Isolir
+            </a>
+            <div class="btn btn-danger btn-lg mt-2 font-weight-bold" data-toggle="modal" data-target="#filterModal"
+                style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff; height: 50px;">
                 Data Pelanggan
             </div>
-            <a href="/pelangganof" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Data Pelanggan Off</a>
-            <a href="/pembayaran" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Pembayaran</a>
-            <a href="/perbaikan" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Perbaikan/PSB</a>
-            <a href="/pemasukan" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Pemasukan/Pengeluaran</a>
-            <a href="/rekap-harian/" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                Rekap Harian</a>
-            <a href="/rekap_pemasangan/" class="btn btn-primary btn-lg mt-2"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                PSB</a>
-
-
-
-            
+            <a href="/pelangganof" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Data Pelanggan Off
+            </a>
+            <a href="/pembayaran" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Pembayaran
+            </a>
+            <a href="/perbaikan" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Perbaikan/PSB
+            </a>
+            <a href="/pemasukan" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Pemasukan/Pengeluaran
+            </a>
+            <a href="/rekap-harian/" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                Rekap Harian
+            </a>
+            <a href="/rekap_pemasangan/" class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                PSB
+            </a>
         </div>
+
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -82,8 +87,8 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
 
-            <!-- Tampilkan jumlah total pembayaran dan jumlah pelanggan -->
-       
+        <!-- Tampilkan jumlah total pembayaran dan jumlah pelanggan -->
+
 
         <div class="">
             <table class="table table-bordered table-responsive " style="color: black;">

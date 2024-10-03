@@ -21,6 +21,7 @@ use App\Http\Controllers\RekapPemasanganControlller;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\TeknisiController;
+use App\Http\Controllers\UserController;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
 use Illuminate\Support\Facades\Route;
@@ -46,9 +47,9 @@ Route::get('/perbaikan/export-pdf', [PerbaikanController::class, 'exportPdf'])->
 Route::get('/perbaikan/export-excel', [PerbaikanController::class, 'exportExcel'])->name('perbaikan.exportExcel');
 
 //coba
-Route::get('/pelanggancoba', [PelangganController::class, 'indexcoba'])->name('pelanggan.index');
+//Route::get('/pelanggancoba', [PelangganController::class, 'indexcoba'])->name('pelanggan.index');
 //PELANGGAN
-Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.indexcoba');
+Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
 Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
 Route::post('/pelanggan/store', [PelangganController::class, 'store'])->name('pelanggan.store');
 Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
@@ -113,15 +114,15 @@ Route::middleware(['auth'])->group(function () {
   Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])
       ->middleware('userAkses:teknisi,superadmin') // Superadmin bisa akses teknisi
       ->name('teknisi.index');
-  
+
   // Rute admin
   Route::get('/masuk/admin', [PelangganController::class, 'home'])
       ->middleware('userAkses:admin,superadmin'); // Superadmin bisa akses admin
-  
+
   // Rute superadmin
   Route::get('/masuk/superadmin', [SuperAdminController::class, 'home'])
       ->middleware('userAkses:superadmin');
-  
+
   // Logout
   Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
@@ -262,3 +263,9 @@ Route::get('/pindahroute', function() {
     return view('pindahroute');
 });
 
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
