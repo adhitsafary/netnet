@@ -9,26 +9,27 @@
 
                 <div class="mb-2 ml-3">
                     <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00ff6a); color: #ffffff;">
+                        style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;">
                         Pembayaran(Filter) : Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User :
                         {{ number_format($totalPelangganfilter, 0, ',', '.') }}
                     </button>
 
                     <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #ecc100, #ff0000b9); color: #ffffff;">
+                        style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;">
                         Total keseluruhan : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User :
                         {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
                     </button>
-                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), #ffbb00); color: #ffffff;">
-                        Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
-                        {{ number_format($totalPelangganBayar, 0, ',', '.') }}
-                    </button>
+
 
                     <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff;">
+                        style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;">
                         Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
                         {{ number_format($sisaUser, 0, ',', '.') }}
+                    </button>
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;">
+                        Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganBayar, 0, ',', '.') }}
                     </button>
                 </div>
             </div>
@@ -45,7 +46,7 @@
 
             <!-- Teks Data isolir -->
             <a href="/isolir" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
+                style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff; height: 50px;">
                 Data Isolir
             </a>
             <div class="btn btn-danger btn-lg mt-2 font-weight-bold" data-toggle="modal" data-target="#filterModal"

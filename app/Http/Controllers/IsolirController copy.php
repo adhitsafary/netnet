@@ -13,7 +13,6 @@ use App\Models\PembayaranPelanggan;
 use App\Models\Perbaikan;
 use Maatwebsite\Excel\Facades\Excel;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -151,18 +150,12 @@ class IsolirController extends Controller
         return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil dipindahkan ke Isolir.');
     }
 
-    
-    public function reactivatePelanggan(Request $request, $id)
+    public function reactivatePelanggan($id)
     {
-        $request->validate([
-            'metode_transaksi' => 'required|string',
-            'keterangan_plg' => 'nullable|string', // Keterangan bersifat opsional
-        ]);
-
         $isolir = IsolirModel::findOrFail($id);
 
         // Pindahkan data ke tabel pelanggan
-        $pelanggan = Pelanggan::create([
+        Pelanggan::create([
             'id_plg' => $isolir->id_plg,
             'nama_plg' => $isolir->nama_plg,
             'alamat_plg' => $isolir->alamat_plg,
@@ -181,16 +174,8 @@ class IsolirController extends Controller
         // Hapus dari tabel isolir
         $isolir->delete();
 
-        // Lakukan pembayaran otomatis
-        $this->bayar(new Request([
-            'id' => $pelanggan->id,
-            'metode_transaksi' => $request->metode_transaksi, // Ambil metode transaksi dari request
-            'keterangan_plg' => $request->keterangan_plg, // Ambil keterangan dari request
-        ]));
-
-        return redirect()->route('isolir.index')->with('success', 'Pelanggan Isolir berhasil diaktifkan kembali dan pembayaran telah dilakukan.');
+        return redirect()->route('isolir.index')->with('success', 'Pelanggan Isolir berhasil diaktifkan kembali.');
     }
-
 
 
     public function checkPlgOffStatus()
@@ -217,14 +202,13 @@ class IsolirController extends Controller
         // Validasi input
         $request->validate([
             'id' => 'required|exists:pelanggan,id',
+            'tanggal_pembayaran' => 'required|date',
             'metode_transaksi' => 'required|string',
         ]);
 
         // Ambil data pelanggan berdasarkan id
         $pelanggan = Pelanggan::findOrFail($request->id);
-
-        // Ambil data admin yang login atau default ke 'Unknown Admin' jika tidak ada
-        $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
+        //dd($pelanggan);
 
         // Simpan data ke tabel bayar_pelanggan
         BayarPelanggan::create([
@@ -233,21 +217,16 @@ class IsolirController extends Controller
             'nama_plg' => $pelanggan->nama_plg,
             'alamat_plg' => $pelanggan->alamat_plg,
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
+            'tanggal_pembayaran' => $request->tanggal_pembayaran,
             'jumlah_pembayaran' => $pelanggan->harga_paket,
-            'no_telepon_plg' => $pelanggan->no_telepon_plg,
-            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-            'paket_plg' => $pelanggan->paket_plg,
-            'aktivasi_plg' => $pelanggan->aktivasi_plg,
             'metode_transaksi' => $request->metode_transaksi,
+            'no_telepon_plg' => $pelanggan->no_telepon_plg,
             'keterangan_plg' => $request->keterangan_plg,
-            'tanggal_pembayaran' => Carbon::now()->format('Y-m') . '-' . $pelanggan->tgl_tagih_plg,
-
-            // Tambahkan nama admin yang melakukan pembayaran
-            'admin_name' => $adminName,
+            'paket_plg' => $pelanggan->paket_plg,
         ]);
 
         // Update status pembayaran pelanggan menjadi 'sudah bayar'
-        $pelanggan->status_pembayaran = 'sudah bayar';
+        $pelanggan->status_pembayaran = 'Sudah Bayar';
         $pelanggan->save();
 
         // Redirect ke halaman history pembayaran dengan pesan sukses

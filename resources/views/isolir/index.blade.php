@@ -4,7 +4,7 @@
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-2 align-items-center">
-            <div class="col-md-3">
+            <div class="col-md-5">
                 <!-- Form Pencarian -->
                 <form action="{{ route('isolir.index') }}" method="GET" class="form-inline">
                     <!-- Input Pencarian -->
@@ -15,13 +15,9 @@
                     <!-- Tombol Cari -->
                     <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
                     <div class="">
-                        <button  class="btn btn-primary btn-lg mt-2"
-                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                        Pembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }}
-                        </button>
-                        <button  class="btn btn-primary btn-lg mt-2"
-                        style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
-                        User : {{ number_format($totalPelanggan, 0, ',', '.') }}
+                        <button class="btn btn-primary btn-lg mt-2"
+                            style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
+                            Pembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} ||  User : {{ number_format($totalPelanggan, 0, ',', '.') }}
                         </button>
                     </div>
                 </form>
@@ -254,12 +250,13 @@
 
                         <th>Aktifkan Kembali</th>
 
+
                         <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($isolir as $no => $item)
-                    <tr class="font-weight-bold">
+                        <tr class="font-weight-bold">
                             <td>{{ ($isolir->currentPage() - 1) * $isolir->perPage() + $loop->iteration }}</td>
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
@@ -276,7 +273,7 @@
                             <td>{{ $item->latitude }}</td>
 
                             <td>{{ $item->keterangan_plg }}</td>
-                            <td>{{$item ->created_at}}</td>
+                            <td>{{ $item->created_at }}</td>
                             <td>
                                 @if ($item->status_pembayaran === 'Sudah Bayar')
                                     <span class="badge badge-success p-3">Sudah Bayar</span>
@@ -285,16 +282,58 @@
                                 @endif
                             </td>
                             <td> <a href="{{ route('isolir.historypembayaran', $item->id) }}"
-                                class="btn btn-info btn-sm">Riwayat Pembayaran</a></td>
+                                    class="btn btn-info btn-sm">Riwayat Pembayaran</a></td>
 
-                            <td>
-                                <form action="{{ route('pelanggan.reactivate', $item->id) }}" method="POST">
-                                    @csrf
-                                    <button type="submit" class="btn btn-primary"
-                                        onclick="return confirm('Pelanggan Atas Nama : {{ $item->nama_plg }} Akan di  Aktifkan Kembali?')">Aktifkan
-                                        Kembali</button>
-                                </form>
-                            </td>
+
+                                    <td>
+                                        <a href="#" class="btn btn-success btn-sm"
+                                           onclick="showReaktivasiModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Reaktif</a>
+                                    </td>
+
+                                    <!-- Modal Reaktivasi -->
+                                    <div class="modal fade" id="reaktivasiModal" tabindex="-1" aria-labelledby="reaktivasiModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="reaktivasiModalLabel">Reaktivasi Pelanggan</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                </div>
+                                                <!-- Modal Form -->
+                                                <form id="reaktivasiForm" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="id" id="pelangganId">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="metodeTransaksi" class="form-label">Metode Transaksi</label>
+                                                            <select class="form-select" id="metodeTransaksi" name="metode_transaksi" required>
+                                                                <option value="">Pilih metode</option>
+                                                                <option value="CASH">Cash</option>
+                                                                <option value="TF">Transfer</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="keterangan_plg" class="form-label">Keterangan Reaktivasi</label>
+                                                            <input type="text" class="form-control" id="keterangan_plg" name="keterangan_plg">
+                                                        </div>
+
+                                                        <!-- Detail Pelanggan -->
+                                                        <div class="mb-3">
+                                                            <p id="reaktivasiDetails"></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Modal Footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Reaktif</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                         </tr>
 
@@ -313,15 +352,15 @@
         </div>
     @endsection
     <script>
-        function showBayarModal(id, namaPlg, hargaPaket) {
+        function showReaktivasiModal(id, namaPlg, hargaPaket) {
             document.getElementById('pelangganId').value = id;
-            document.getElementById('pembayaranDetails').innerText =
+            document.getElementById('reaktivasiDetails').innerText =
                 `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
 
-            var form = document.getElementById('bayarForm');
-            form.action = `/isolir/${id}/bayar`; // Set action URL with the ID
+            var form = document.getElementById('reaktivasiForm');
+            form.action = `/isolir/${id}/reactivate`; // Set action URL untuk reaktivasi
 
-            var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
-            bayarModal.show();
+            var reaktivasiModal = new bootstrap.Modal(document.getElementById('reaktivasiModal'));
+            reaktivasiModal.show();
         }
     </script>
