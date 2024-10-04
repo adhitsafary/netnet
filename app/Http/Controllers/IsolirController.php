@@ -151,7 +151,7 @@ class IsolirController extends Controller
         return redirect()->route('pelanggan.index')->with('success', 'Pelanggan berhasil dipindahkan ke Isolir.');
     }
 
-    
+
     public function reactivatePelanggan(Request $request, $id)
     {
         $request->validate([
@@ -313,5 +313,32 @@ class IsolirController extends Controller
         $pembayaran = BayarPelanggan::where('id_plg', $isolir->id_plg)->get();
 
         return view('isolir.historypembayaran', compact('isolir', 'pembayaran'));
+    }
+
+    public function toOff($id)
+    {
+        $isolir = IsolirModel::findOrFail($id);
+
+        // Pindahkan data ke tabel isolir dengan pengecekan untuk kolom nullable
+        Pelangganof::create([
+            'id_plg' => $isolir->id_plg,
+            'nama_plg' => $isolir->nama_plg,
+            'alamat_plg' => $isolir->alamat_plg,
+            'no_telepon_plg' => $isolir->no_telepon_plg ?? null,
+            'aktivasi_plg' => $isolir->aktivasi_plg ?? null,
+            'paket_plg' => $isolir->paket_plg ?? null,
+            'harga_paket' => $isolir->harga_paket ?? null,
+            'tgl_tagih_plg' => $isolir->tgl_tagih_plg ?? null, // Beri nilai null jika tidak diisi
+            'keterangan_plg' => $isolir->keterangan_plg ?? '-', // Contoh nilai default jika kosong
+            'odp' => $isolir->odp ?? null, // Beri nilai null jika tidak diisi
+            'longitude' => $isolir->longitude ?? null, // Beri nilai null jika tidak diisi
+            'latitude' => $isolir->latitude ?? null, // Beri nilai null jika tidak diisi
+            'status_pembayaran' => $isolir->status_pembayaran ?? 'Belum Bayar', // Contoh nilai default
+        ]);
+
+        // Hapus dari tabel isolir
+        $isolir->delete();
+
+        return redirect()->route('pelangganof.index')->with('success', 'Pelanggan Isolir berhasil dimasukan ke data Pelangggan Off.');
     }
 }

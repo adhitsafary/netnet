@@ -758,27 +758,27 @@ class PelangganController extends Controller
     {
         $pelanggan = Pelanggan::findOrFail($id);
 
-        // Pindahkan data ke tabel pelanggan
+        // Pindahkan data ke tabel isolir dengan pengecekan untuk kolom nullable
         IsolirModel::create([
             'id_plg' => $pelanggan->id_plg,
             'nama_plg' => $pelanggan->nama_plg,
             'alamat_plg' => $pelanggan->alamat_plg,
-            'no_telepon_plg' => $pelanggan->no_telepon_plg,
-            'aktivasi_plg' => $pelanggan->aktivasi_plg,
-            'paket_plg' => $pelanggan->paket_plg,
-            'harga_paket' => $pelanggan->harga_paket,
-            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
-            'keterangan_plg' => $pelanggan->keterangan_plg,
-            'odp' => $pelanggan->odp,
-            'longitude' => $pelanggan->longitude,
-            'latitude' => $pelanggan->latitude,
-            'status_pembayaran' => $pelanggan->status_pembayaran,
+            'no_telepon_plg' => $pelanggan->no_telepon_plg ?? null,
+            'aktivasi_plg' => $pelanggan->aktivasi_plg ?? null,
+            'paket_plg' => $pelanggan->paket_plg ?? null,
+            'harga_paket' => $pelanggan->harga_paket ?? null,
+            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg ?? null, // Beri nilai null jika tidak diisi
+            'keterangan_plg' => $pelanggan->keterangan_plg ?? '-', // Contoh nilai default jika kosong
+            'odp' => $pelanggan->odp ?? null, // Beri nilai null jika tidak diisi
+            'longitude' => $pelanggan->longitude ?? null, // Beri nilai null jika tidak diisi
+            'latitude' => $pelanggan->latitude ?? null, // Beri nilai null jika tidak diisi
+            'status_pembayaran' => $pelanggan->status_pembayaran ?? 'Belum Bayar', // Contoh nilai default
         ]);
 
-        // Hapus dari tabel isolir
+        // Hapus dari tabel pelanggan
         $pelanggan->delete();
 
-        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil di masukan ke Isolir.');
+        return redirect()->route('isolir.index')->with('success', 'Pelanggan berhasil dimasukan ke Isolir.');
     }
 
     public function filterByTanggalTagih(Request $request)

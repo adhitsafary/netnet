@@ -204,7 +204,7 @@ Route::get('/isolir/{id}/detail', [IsolirController::class, 'detail'])->name('is
 Route::get('/isolir/aktifkan/{id}', [IsolirController::class, 'showOff'])->name('isolir.aktifkan_pelanggan');
 
 // web.php
-Route::post('/isolir/reactivate/{id}', [IsolirController::class, 'reactivatePelanggan'])->name('pelanggan.reactivate');
+//Route::post('/isolir/reactivate/{id}', [IsolirController::class, 'reactivatePelanggan'])->name('pelanggan.reactivate');
 
 
 
@@ -214,6 +214,11 @@ Route::get('/isolir/cleanup', [IsolirController::class, 'cleanUp'])->name('isoli
 
 // web.php
 Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir');
+// web.php
+Route::post('pelanggan/to-off/{id}', [IsolirController::class, 'toOff'])->name('pelanggan.toOff');
+
+
+
 
 //rekap mutasi harian
 Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index'])->name('rekap.mutasi.harian');

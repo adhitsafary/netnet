@@ -199,7 +199,7 @@ class PelangganOfController extends Controller
                 $pelangganof->delete();
 
                 // Redirect ke halaman pelanggan dengan pesan sukses
-                return redirect()->route('pelangganof.index')->with('success', 'Pelanggan berhasil dipindahkan ke tabel pelanggan.');
+                return redirect()->route('pelangganof.index')->with('success', 'Pelanggan OFF berhasil di Aktifkan Kembali.');
             } catch (\Exception $e) {
                 // Log error dan kembalikan pesan error jika terjadi masalah
                 Log::error('Error aktifkan_pelanggan: ' . $e->getMessage());
