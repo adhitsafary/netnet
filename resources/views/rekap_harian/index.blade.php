@@ -4,10 +4,10 @@
     <div class="mb-3 p-5 mt-4">
         <div class="card">
             <div class="card-header">
-                <h4 class="text mb-3 font-weight-bold">Rekap Pendapatan Harian ({{ $tanggalHariIni }})</h4>
+                <h4 class="text mb-3 font-weight-bold" style="color: black;">Rekap Pendapatan Harian ({{ $tanggalHariIni }})</h4>
             </div>
-            <div class="card-body">
-                <table class="table table-bordered">
+            <div class="card-body" style="color: black;">
+                <table class="table table-bordered" style="color: black;">
                     <thead class="thead-light">
                         <tr>
                             <th>Keterangan</th>
@@ -26,7 +26,8 @@
 
                         <tr>
                             <td>Total Pendapatan dari Pembayaran Hari Ini</td>
-                            <td>Rp. {{ number_format($totalPendapatanHarian) }} || User Membayar Cash : {{ $totalUserHarian}} Orang</td>
+                            <td>Rp. {{ number_format($totalPendapatanHarian) }} || User Membayar Cash :
+                                {{ $totalUserHarian }} Orang</td>
                         </tr>
                         <tr>
                             <td>Registrasi Pelanggan Baru</td>

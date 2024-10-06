@@ -13,8 +13,8 @@
             </div>
         </form>
         <h5>Data Pengeluaran</h5>
-        <table class="table table-bordered">
-            <thead class="table table-primary">
+        <table class="table table-bordered " style="color: black;">
+            <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Jumlah</th>

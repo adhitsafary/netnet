@@ -696,14 +696,7 @@ class PelangganController extends Controller
         ]);
 
         $pelanggan = Pelanggan::findOrFail($id);
-
-        // Gunakan strcasecmp untuk membandingkan tanpa memperhatikan huruf kapital
-        if (strcasecmp($request->status_pembayaran, 'Belum Bayar') === 0) {
-            $pelanggan->status_pembayaran = 'Belum Bayar';
-        } elseif (strcasecmp($request->status_pembayaran, 'Sudah Bayar') === 0) {
-            $pelanggan->status_pembayaran = 'Sudah Bayar';
-        }
-
+        $pelanggan->status_pembayaran = $request->status_pembayaran;
         $pelanggan->save();
 
         return redirect()->route('pelanggan.index')->with('success', 'Status pembayaran berhasil diperbarui.');
@@ -773,8 +766,10 @@ class PelangganController extends Controller
 
     public function filterByTanggalTagihindex(Request $request)
     {
-        // Ambil nilai filter dari request
+        // Ambil nilai filter status pembayaran dari request
         $status_pembayaran_display = $request->input('status_pembayaran', '');
+
+        // Ambil tanggal tagih dan paket dari request
         $tanggal = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
@@ -782,9 +777,12 @@ class PelangganController extends Controller
         // Mulai query
         $query = Pelanggan::query();
 
-        // Filter berdasarkan status pembayaran (menggunakan strcasecmp)
+        // Filter berdasarkan status pembayaran jika ada
         if ($status_pembayaran_display) {
-            $query->whereRaw('strcasecmp(status_pembayaran, ?) = 0', [$status_pembayaran_display]);
+            $query->where(function ($query) use ($status_pembayaran_display) {
+                // Menggunakan strcasecmp untuk perbandingan case-insensitive
+                $query->whereRaw('strcasecmp(status_pembayaran, ?) = 0', [$status_pembayaran_display]);
+            });
         }
 
         // Filter berdasarkan tanggal tagih jika ada
@@ -796,16 +794,15 @@ class PelangganController extends Controller
         if ($paket_plg) {
             $query->where('paket_plg', $paket_plg);
         }
-
-        // Filter berdasarkan harga paket jika ada
         if ($harga_paket) {
             $query->where('harga_paket', $harga_paket);
         }
 
-        // Lakukan pagination pada query dengan query string dari filter
-        $pelanggan = $query->paginate(100)->appends($request->all());
 
-        // Kembalikan data pelanggan ke view dengan filter
+        // Lakukan pagination pada query
+        $pelanggan = $query->paginate(100);
+
+        // Kembalikan data pelanggan ke view
         return view('pelanggan.index', compact('pelanggan', 'harga_paket', 'paket_plg', 'tanggal', 'status_pembayaran_display'));
     }
 

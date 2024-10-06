@@ -1,20 +1,20 @@
 @extends('layout')
 
 @section('konten')
-    <div class="container mb-4">
+    <div class="container mb-4" style="color: black;">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('pemasukan.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
-                <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
+                <input style="color: black;" type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
                     placeholder="Pencarian">
                 <div class="input-group-append">
                     <button type="submit" class="btn btn-primary">Cari</button>
                 </div>
             </div>
         </form>
-        <h5>Data Pemasukan</h5>
-        <table class="table table-bordered">
-            <thead class="table table-primary">
+        <h5 style="color: black;">Data Pemasukan</h5>
+        <table class="table table-bordered " style="color: black;">
+            <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th>No</th>
                     <th>Jumlah</th>

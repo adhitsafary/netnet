@@ -434,7 +434,7 @@
         <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-
+    </div>
 </body>
 
 </html>

@@ -78,7 +78,7 @@
 
             </div>
 
-           
+
         </div>
 
         @if (session('success'))
@@ -159,10 +159,6 @@
                                 </div>
                             </form>
                         </th>
-
-                        <th>ODP</th>
-                        <th>Longitude</th>
-                        <th>Latitude</th>
                         <th>Keterangan</th>
                         <th>
                             <div class="d-flex justify-content-between align-items-center">
@@ -170,8 +166,8 @@
                                 <span>Status</span>
 
                                 <!-- Form Filter -->
-                                <div class="col-md-3 text-right" style="margin-left: 10px;">
-                                    <form action="{{ route('isolir.index') }}" method="GET" class="form-inline"
+                                <div class="col-md-3 text-right">
+                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -179,18 +175,19 @@
                                                 <option value="">Semua</option>
                                                 <option value="belum_bayar"
                                                     {{ request('status_pembayaran') == 'belum_bayar' ? 'selected' : '' }}>
-                                                    Belum
-                                                    Bayar</option>
+                                                    Belum Bayar
+                                                </option>
                                                 <option value="sudah_bayar"
                                                     {{ request('status_pembayaran') == 'sudah_bayar' ? 'selected' : '' }}>
-                                                    Sudah
-                                                    Bayar</option>
+                                                    Sudah Bayar
+                                                </option>
                                             </select>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </th>
+
                         <th>Detail</th>
                         <th>Bayar</th>
                         <th>Isolir</th>
@@ -210,11 +207,6 @@
                             <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
                             <td>{{ $item->tgl_tagih_plg }}</td>
 
-                            <td>{{ $item->odp }}</td>
-
-                            <td>{{ $item->longitude }}</td>
-                            <td>{{ $item->latitude }}</td>
-
                             <td>{{ $item->keterangan_plg }}</td>
                             <td>
                                 <form action="{{ route('pelanggan.updateStatus', $item->id) }}" method="POST"
@@ -222,21 +214,23 @@
                                     @csrf
                                     <select name="status_pembayaran" class="form-control" onchange="this.form.submit()">
                                         <option value="Belum Bayar"
-                                            {{ $item->status_pembayaran === 'belum bayar' ? 'selected' : '' }}>
+                                            {{ strcasecmp($item->status_pembayaran, 'belum bayar') === 0 ? 'selected' : '' }}>
                                             Belum Bayar
                                         </option>
                                         <option value="Sudah Bayar"
-                                            {{ $item->status_pembayaran === 'sudah bayar' ? 'selected' : '' }}>
+                                            {{ strcasecmp($item->status_pembayaran, 'sudah bayar') === 0 ? 'selected' : '' }}>
                                             Sudah Bayar
                                         </option>
                                     </select>
                                 </form>
+
                                 <span
-                                    class="badge {{ $item->status_pembayaran === 'Sudah Bayar' ? 'bg-success' : 'bg-danger' }} text-white ml-2"
+                                    class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2"
                                     style="padding: 0.5em 1em; font-size: 1.1em;">
                                     {{ $item->status_pembayaran }}
                                 </span>
                             </td>
+
 
                             <td>
                                 <a href="{{ route('pelanggan.detail', $item->id) }}"

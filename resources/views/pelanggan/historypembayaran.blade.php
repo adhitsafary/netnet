@@ -12,6 +12,7 @@
                     <th>Alamat</th>
                     <th>Metode Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
+                    <th>Tanggal Tagih</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Keterangan Pembayaran</th>
                     <th>Print</th>
@@ -25,7 +26,8 @@
                         <td>{{ $bayar->nama_plg }}</td>
                         <td>{{ $bayar->alamat_plg }}</td>
                         <td>{{ $bayar ->metode_transaksi}}</td>
-                        <td>{{ $bayar->tanggal_pembayaran}}</td>
+                        <td>{{ $bayar->created_at}}</td>
+                        <td>{{ $bayar->tgl_tagih_plg}}</td>
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $bayar->keterangan_plg}}</td>
                         <td>

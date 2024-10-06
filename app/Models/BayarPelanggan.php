@@ -24,6 +24,9 @@ class BayarPelanggan extends Model
         'created_at',
         'paket_plg',
         'keterangan_plg',
+        'tgl_tagih_plg',
+        'aktivasi_plg',
+
     ];
 
     public function pelanggan()

@@ -22,7 +22,7 @@
         </div>
 
         <!-- Tabel Perbaikan -->
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="color: black;">
             <thead>
                 <tr>
                     <th>No</th>

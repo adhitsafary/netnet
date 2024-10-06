@@ -141,7 +141,7 @@
                         <td>{{ $item->nama_plg }}</td>
                         <td>{{ $item->alamat_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
-                        <td>{{ $item->tanggal_pembayaran }}</td>
+                        <td>{{ $item->created_at }}</td>
                         <td>{{ $item->tgl_tagih_plg }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $item->metode_transaksi }}</td>
