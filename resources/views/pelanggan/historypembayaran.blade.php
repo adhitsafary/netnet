@@ -16,7 +16,8 @@
                     <th>Jumlah Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
                     <th>Keterangan Pembayaran</th>
-                    <th>Nama Admin</th>
+                    <th>Admin</th>
+                    <th>Edit</th>
                     <th>Hapus</th>
                     <th>Print</th>
                 </tr>
@@ -36,6 +37,9 @@
                         </td>
                         <td>{{ $bayar->keterangan_plg }}</td>
                         <td>{{ $bayar->admin_name }}</td>
+                        <td>
+                            <a href="{{ route('pembayaran.edit', $bayar->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        </td>
                         <td>
                             <form action="{{ route('pembayaran.destroy', $bayar->id) }}" method="POST" class="d-inline-block">
                                 @csrf

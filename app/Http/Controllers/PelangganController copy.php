@@ -747,7 +747,9 @@ class PelangganController extends Controller
             'odp' => $pelanggan->odp,
             'longitude' => $pelanggan->longitude,
             'latitude' => $pelanggan->latitude,
-            'status_pembayaran' => $pelanggan->status_pembayaran,
+            //'status_pembayaran' => $pelanggan->status_pembayaran,
+            'status_pembayaran' => 'isolir',
+
         ]);
 
         // Hapus dari tabel isolir

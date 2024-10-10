@@ -13,8 +13,8 @@
                             value="{{ request('search') }}" placeholder="Pencarian">
                     </div>
                     <!-- Tombol Cari -->
-                    <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
-                    <div class="">
+                    <button type="submit" name="action" value="search" class="btn btn-danger ml-2 ">Cari</button>
+                    <div class="ml-5">
                         <button class="btn btn-primary btn-lg mt-2"
                             style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff;">
                             Pembayaran : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
@@ -256,7 +256,7 @@
                         <th>Riwayat Pembayaran</th>
 
                         <th>Aktifkan Kembali</th>
-                        <th>Pindah Off</th>
+
 
 
                         <!-- <th>Riwayat pembayaran</th> -->
@@ -292,14 +292,7 @@
                             <td> <a href="{{ route('isolir.historypembayaran', $item->id) }}"
                                     class="btn btn-info btn-sm">Riwayat Pembayaran</a>
                             </td>
-                            <td>
-                                <form action="{{ route('pelanggan.toOff', $item->id) }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger btn-sm">Pindah Off</button>
-                                </form>
 
-                            </td>
 
                             <td>
                                 <a href="#" class="btn btn-success btn-sm"

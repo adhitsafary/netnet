@@ -44,25 +44,6 @@ class PembayaranController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         // Temukan data berdasarkan ID otomatis
@@ -191,5 +172,40 @@ class PembayaranController extends Controller
             'search',
             'created_at'
         ));
+    }
+
+    public function edit(string $id_plg)
+    {
+        $pembayaran = BayarPelanggan::findOrFail($id_plg);
+        return view('pembayaran.edit', compact('pembayaran'));
+    }
+
+    public function update(Request $request, string $id_plg)
+    {
+        // Validasi input
+        $validatedData = $request->validate([
+            'paket_plg' => 'required|string|max:255',
+            'jumlah_pembayaran' => 'required|numeric',
+            'metode_transaksi' => 'required|string',
+            'keterangan_plg' => 'nullable|string',
+            'created_at' => 'required|date_format:Y-m-d\TH:i',
+        ]);
+
+        // Ambil data pelanggan yang sudah ada
+        $pembayaran = BayarPelanggan::findOrFail($id_plg);
+
+        // Update data
+        $pembayaran->paket_plg = $validatedData['paket_plg'];
+        $pembayaran->jumlah_pembayaran = $validatedData['jumlah_pembayaran'];
+        $pembayaran->metode_transaksi = $validatedData['metode_transaksi'];
+        $pembayaran->keterangan_plg = $validatedData['keterangan_plg'];
+
+        // Pastikan waktu dalam format Y-m-d H:i:s
+        $pembayaran->created_at = Carbon::parse($validatedData['created_at'])->format('Y-m-d H:i:s');
+
+        // Simpan data yang sudah diperbarui
+        $pembayaran->save();
+
+        return redirect()->route('pembayaran.index')->with('success', 'Data pembayaran berhasil diperbarui');
     }
 }

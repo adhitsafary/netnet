@@ -43,11 +43,11 @@
             <strong>Total Jumlah Pelanggan Bayar : </strong> {{ $totalPelanggan }}
         </div>
 
-        <div style="display: flex; justify-content: center;" class="mb-2" >
+        <div style="display: flex; justify-content: center;" class="mb-2">
 
             <h5 style="color: black;" class="font font-weight-bold">Data Pembayaran</h5>
         </div>
-        
+
         <!-- Tabel Pembayaran -->
         <table class="table table-bordered table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
@@ -196,6 +196,8 @@
                     </th>
                     <th>Metode Pembayaran</th>
                     <th>Keterangan</th>
+                    <th>Admin</th>
+                    <th>Edit</th>
                     <th>Hapus</th>
                     <th>Print</th>
                 </tr>
@@ -215,6 +217,10 @@
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $item->metode_transaksi }}</td>
                         <td>{{ $item->keterangan_plg }}</td>
+                        <td>{{ $item->admin_name }}</td>
+                        <td>
+                            <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        </td>
                         <td>
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">

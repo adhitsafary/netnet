@@ -282,7 +282,6 @@ class PelangganController extends Controller
     }
 
 
-
     public function index(Request $request)
     {
         // Ambil semua pelanggan
@@ -295,6 +294,12 @@ class PelangganController extends Controller
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
         $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+
+        // Filter urutan alamat (A-Z atau Z-A)
+        $order_alamat = $request->input('order_alamat');
+        if ($order_alamat) {
+            $query->orderBy('alamat_plg', $order_alamat === 'desc' ? 'desc' : 'asc');
+        }
 
         // Proses pengecekan status pembayaran
         foreach ($pelanggan_all as $pelanggan) {
@@ -353,12 +358,12 @@ class PelangganController extends Controller
         $totalJumlahPembayaranKeseluruhan = Pelanggan::sum('harga_paket'); // Mengambil total keseluruhan dari tabel Pelanggan
         // Hitung total harga_paket dan total pelanggan berdasarkan filter
         $totalPelangganKeseluruhan = $query->count();
-        // Hitung total pembayaran dari BayarPelanggan dalam bulan yang sama
+        // Hitung total pembayaran dari table BayarPelanggan dalam bulan yang sama
         $totalJumlahPembayaran = BayarPelanggan::whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->whereBetween('created_at', [now()->startOfMonth(), now()->endOfMonth()])
             ->sum('jumlah_pembayaran');
-
+        // Hitung total user dari table BayarPelanggan dalam bulan yang sama
         $userIdsWithPayments = BayarPelanggan::whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->distinct('id_plg') // Pastikan hanya menghitung ID pelanggan yang unik
@@ -590,7 +595,10 @@ class PelangganController extends Controller
         $pelanggan->save();
 
         // Redirect ke halaman history pembayaran dengan pesan sukses
-        return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
+        //return redirect()->route('pelanggan.historypembayaran', $pelanggan->id)
+       //     ->with('success', 'Pembayaran berhasil dilakukan.');
+
+       return redirect()->route('pelanggan.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan.');
     }
 
@@ -1041,5 +1049,64 @@ class PelangganController extends Controller
         }
 
         return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan telah diperbarui.');
+    }
+
+    public function updatePaymentStatusIsolir()
+    {
+        // Ambil semua pelanggan
+        $pelanggans = Pelanggan::all();
+
+        foreach ($pelanggans as $pelanggan) {
+            // Ambil pembayaran terakhir dari tabel BayarPelanggan berdasarkan id_plg
+            $pembayaranTerakhir = BayarPelanggan::where('id_plg', $pelanggan->id_plg)
+                ->orderBy('created_at', 'desc')
+                ->first();
+
+            // Jika ada pembayaran terakhir, ambil tanggalnya
+            if ($pembayaranTerakhir) {
+                $createdAt = \Carbon\Carbon::parse($pembayaranTerakhir->created_at);
+            } else {
+                // Jika belum ada pembayaran, anggap belum ada pembayaran (default ke null)
+                $createdAt = null;
+            }
+
+            // Pisahkan tanggal tagihan menjadi array dan ambil tanggal terakhir
+            $tglTagihArray = explode(',', $pelanggan->tgl_tagih_plg);
+            $tglTagihTerakhir = end($tglTagihArray); // Ambil tanggal terakhir dari array
+
+            // Cek apakah $tglTagihTerakhir adalah angka dan valid
+            if (is_numeric($tglTagihTerakhir)) {
+                $currentYear = Carbon::now()->year; // Ambil tahun saat ini
+                $currentMonth = Carbon::now()->month; // Ambil bulan saat ini
+
+                // Buat tanggal lengkap dengan format 'Y-m-d' (contohnya: '2024-09-25')
+                $tglTagihPlg = Carbon::createFromFormat('Y-m-d', "$currentYear-$currentMonth-$tglTagihTerakhir");
+
+                // Hitung H-5 dari tgl_tagih_plg
+                $tanggalH5 = $tglTagihPlg->subDays(0);
+
+                // Cek apakah pelanggan sudah membayar pada bulan ini atau bulan depan
+                if ($createdAt && ($createdAt->month == Carbon::now()->month || $createdAt->month == Carbon::now()->addMonth()->month) && $createdAt->year == Carbon::now()->year) {
+                    // Jika sudah bayar pada bulan ini atau bulan depan, tetap set status menjadi "Sudah Bayar"
+                    $pelanggan->status_pembayaran = 'Sudah Bayar';
+                    $pelanggan->save();
+                } else {
+                    // Jika belum bayar bulan ini dan sudah H-5 dari tanggal tagih
+                    if (Carbon::now()->greaterThanOrEqualTo($tanggalH5)) {
+                        // Ubah status menjadi "Belum Bayar"
+                        $pelanggan->status_pembayaran = 'Belum Bayar';
+                        $pelanggan->save();
+                    }
+                }
+
+                // Cek jika tgl_tagih sudah lewat dan status pembayaran "Belum Bayar", ubah status jadi "Isolir"
+                if (Carbon::now()->gt($tglTagihPlg) && $pelanggan->status_pembayaran === 'Belum Bayar') {
+                    $pelanggan->status_pembayaran = 'Isolir';
+                    $pelanggan->save();
+                }
+            }
+        }
+
+        return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan telah diperbarui ke Isolir');
     }
 }

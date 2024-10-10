@@ -150,8 +150,10 @@
                 <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/check-isolir/">UPDATE ISOLIR</a>
+                     <!--   <a class="collapse-item" href="">UPDATE ISOLIR</a> -->
                         <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
+                        <a class="collapse-item" href="/update-payment-isolir">UPDATE STATUS Isolir</a>
+
                     </div>
 
                 </div>

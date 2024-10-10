@@ -1,4 +1,3 @@
-z
 <?php
 
 use App\Http\Controllers\AdminController;
@@ -71,6 +70,10 @@ Route::get('/pelanggan/aktifkan/{id}', [PelangganOfController::class, 'showOff']
 
 
 Route::post('/pelanggan/{id}/pembayaran', [PelangganController::class, 'pembayaran'])->name('pelanggan.pembayaran');
+Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
+Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+
+
 
 Route::patch('/pelanggan/{id}/toggle-visibility', [PelangganController::class, 'toggleVisibility'])->name('pelanggan.toggleVisibility');
 Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->name('pelanggan.history');
@@ -82,6 +85,7 @@ Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name
 //Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historypembayaran'])->name('isolir.historypembayaran');
+
 
 //index pembayaran semua user  atau global
 Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pembayaran.export');
@@ -113,6 +117,20 @@ Route::get('/teknisi/baru', [TeknisiController::class, 'index'])->name('teknisi'
 Route::get('/homebaru', [PelangganController::class, 'home'])->name('index');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        // Cek role user
+        if (auth()->user()->role == 'teknisi') {
+            return redirect()->route('teknisi.index'); // Redirect ke halaman teknisi
+        } elseif (auth()->user()->role == 'admin') {
+            return redirect('/masuk/admin'); // Redirect ke halaman admin
+        } elseif (auth()->user()->role == 'superadmin') {
+            return redirect('/masuk/superadmin'); // Redirect ke halaman superadmin
+        }
+
+        // Default return jika tidak ada role yang cocok
+        return abort(403, 'Unauthorized access.');
+    });
+
     // Rute teknisi
     Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])
         ->middleware('userAkses:teknisi,superadmin') // Superadmin bisa akses teknisi
@@ -129,6 +147,7 @@ Route::middleware(['auth'])->group(function () {
     // Logout
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
+
 
 
 Route::get('coba', [TeknisiController::class, 'coba']);
@@ -245,6 +264,7 @@ Route::get('/pelanggan/tagihan/index', [PelangganOfController::class, 'filterByT
 Route::get('/check-isolir', [PelangganController::class, 'checkAndMoveToIsolir'])->name('check.isolir');
 //cek payment asli
 Route::get('/update-payment-status', [PelangganController::class, 'updatePaymentStatus'])->name('update.payment.status');
+Route::get('/update-payment-isolir', [PelangganController::class, 'updatePaymentStatusIsolir'])->name('update.payment.isolir');
 //reactive bayar
 Route::post('/reactivate-bayar', [IsolirController::class, 'reactivateAndBayar'])->name('pelanggan.reactivateAndBayar');
 
@@ -279,6 +299,3 @@ Route::post('/users/store', [UserController::class, 'store'])->name('users.store
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
-
-Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
-Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');

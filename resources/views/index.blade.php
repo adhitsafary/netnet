@@ -98,30 +98,42 @@
                 </div>
             </div>
             <!-- Pending Requests Card Example -->
+            <!-- Belum Tertagih Hari Ini -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card-merah h-100">
+
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-white font-weight-bold text-uppercase mb-1">Belum tertagih Hari ini</div>
-                                <div class="h5 mb-0 font-weight-bold text-white">Rp
-                                    {{ number_format($totalTagihanTertagih, 0, ',', '.') }}
-                                </div>
-
-                                <div class="mt-2 mb-0 text-muted text-white">
-                                    <span class="text text-white font-weight-bold text-uppercase">Belum Tertagih :</span>
-                                    <span class="mr-2 text-white font-weight-bold text-uppercase">
-
+                                <div class="bg-warning p-2">
+                                    <div class="text-white font-weight-bold text-uppercase">
+                                        Sisa Tagihan Hari ini Hari ini
+                                    </div>
+                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                    <div class="text-white h5 mb-0 font-weight-bold">
+                                        Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} || User :
                                         {{ $totalUserTertagih }}
-                                    </span>
-                                    <span class="text-white font-weight-bold text-uppercase">User
-                                    </span>
+                                    </div>
                                 </div>
+
+                                <a href="{{ route('pelanggan.index', ['status_pembayaran' => 'belum_bayar']) }}"
+                                    class="text-decoration-none">
+                                    <div class="bg-success p-2">
+                                        <div class="text-white font-weight-bold text-uppercase ">
+                                            Sisa Semua Tagihan
+                                        </div>
+                                        <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                        <div class="text-white h5 mb-0 font-weight-bold">
+                                            Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User :
+                                            {{ $totalUserHarian_semua }}
+                                        </div>
+                                    </div>
+                                </a>
 
                             </div>
-
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -328,86 +340,7 @@
 
 
 
-            <!-- Teknisi Perbaikan -->
-            <div class="col-xl-8 col-lg-3 ">
-                <div class=" p-4 card-hijau_tua">
-                    <div class="card-hijau_tua py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-white"> Filter Pendapatan
-                        </h6>
-                        <a class="m-0 float-right btn btn-success btn-sm" href="/bayar-pelanggan">Lihat Semua <i
-                                class="fas fa-chevron-right"></i></a>
-                    </div>
-                    <div class="">
-                        <form action="{{ route('index') }}" method="GET">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="tanggal_mulai" class="text-white">Tanggal Mulai:</label>
-                                    <input type="date" id="tanggal_mulai" name="tanggal_mulai" class="form-control"
-                                        value="{{ request('tanggal_mulai') }}">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="tanggal_akhir" class="text-white">Tanggal Akhir:</label>
-                                    <input type="date" id="tanggal_akhir" name="tanggal_akhir" class="form-control"
-                                        value="{{ request('tanggal_akhir') }}">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row ">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Filter</button>
-                                </div>
-                            </div>
-                        </form> <br>
-                        <!-- Informasi pendapatan harian -->
-                        <div class="">
-                            <div class="text font-weight-bold text-white">Total Pendapatan :
-                                <div class="h6 float-right"><b>Rp
-                                        {{ number_format($totalPendapatanharian, 0, ',', '.') }}</b></div>
-                            </div>
-                            <div class="text font-weight-bold mt-2 text-white">Jumlah User Yang Membayar :
-                                <div class="h6 float-right text-white"><b>{{ $totaluserhasilfilter }} User</b></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Message From Customer-->
-            <div class="mt-3 col-xl-4 col-lg-5 card-magenta h-10">
-                <div class="mt-3 ">
-                    <div class="card-violet py-4 d-flex flex-row align-items-center justify-content-between">
-
-                    </div>
-                    <div class="card-violet h-20 mb-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2 mb-5">
-                                    <div class="mb-3 text-white font-weight-bold text-uppercase mb-1">Total Pembayaran
-                                        Semua
-                                        Tanggal Tagih di Hari ini</div>
-                                    <div class="h5 mb-0 font-weight-bold text-white">Rp
-                                        {{ number_format($total_user_bayar, 0, ',', '.') }}
-                                    </div>
-
-                                    <div class=" text-muted text-white">
-                                        <span class="text text-white font-weight-bold text-uppercase">Total user
-                                            :</span>
-                                        <span class="text-white font-weight-bold text-uppercase">
-
-                                            {{ $total_jml_user }}
-                                        </span>
-                                        <span class="text-white font-weight-bold text-uppercase">User
-                                        </span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
         </div>
 
         <!-- Modal Logout -->

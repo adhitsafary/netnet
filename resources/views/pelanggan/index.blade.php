@@ -34,9 +34,8 @@
                 </div>
             </div>
         </div>
-        <div class="text-right mb-2">
-
-            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline" style="color: black;">
+        <div class="d-flex align-items-center justify-content-between mt-2">
+            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
                 <div class="input-group" style="color: black;">
                     <input type="text" name="search" id="search" class="form-control font-weight-bold"
                         style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
@@ -44,40 +43,12 @@
                 <button type="submit" name="action" value="search" class="btn btn-danger ml-2">Cari</button>
             </form>
 
-            <!-- Teks Data isolir -->
-            <a href="/isolir" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff; height: 50px;">
-                Data Isolir
-            </a>
-            <div class="btn btn-danger btn-lg mt-2 font-weight-bold" data-toggle="modal" data-target="#filterModal"
-                style="cursor: default; background: linear-gradient(45deg, #ff0000, #ffc02d); color: #ffffff; height: 50px;">
-                Data Pelanggan
+            <div class="mx-auto text-center mr-3">
+                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan</h3>
             </div>
-            <a href="/pelangganof" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                Data Pelanggan Off
-            </a>
-            <a href="/pembayaran" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                Pembayaran
-            </a>
-            <a href="/perbaikan" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                Perbaikan/PSB
-            </a>
-            <a href="/pemasukan" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                Pemasukan/Pengeluaran
-            </a>
-            <a href="/rekap-harian/" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                Rekap Harian
-            </a>
-            <a href="/rekap_pemasangan/" class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                style="cursor: default; background: linear-gradient(45deg, #007bff, #00b4db); color: #ffffff; height: 50px;">
-                PSB
-            </a>
         </div>
+
+
 
 
         @if (session('success'))
@@ -98,7 +69,21 @@
                         <th class="">No</th>
                         <th>ID</th>
                         <th>Nama</th>
-                        <th>Alamat</th>
+                        <th>
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.filterTagihindex') }}">
+                                <div class="form-group">
+                                    <select name="order_alamat" id="order_alamat" onchange="this.form.submit();">
+                                        <option value="">Urutkan Alamat</option>
+                                        <option value="asc" {{ request('order_alamat') == 'asc' ? 'selected' : '' }}>A-Z</option>
+                                        <option value="desc" {{ request('order_alamat') == 'desc' ? 'selected' : '' }}>Z-A</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </th>
+
+
+
+                        <th>Bayar</th>
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
@@ -244,7 +229,7 @@
                         </th>
 
                         <th>Detail</th>
-                        <th>Bayar</th>
+
                         <th>Isolir</th>
                         <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
@@ -258,6 +243,10 @@
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
                             <td>{{ $item->alamat_plg }}</td>
+                            <td>
+                                <a href="#" class="btn btn-success btn-sm"
+                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+                            </td>
                             <td>{{ $item->no_telepon_plg }}</td>
                             <td>{{ $item->aktivasi_plg }}</td>
                             <td>{{ $item->paket_plg }}</td>
@@ -300,10 +289,7 @@
                                     class="btn btn-warning btn-sm">Detail</a>
                             </td>
                             <!-- Tombol Bayar -->
-                            <td>
-                                <a href="#" class="btn btn-success btn-sm"
-                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-                            </td>
+
                             <!-- Modal Bayar -->
                             <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
                                 aria-hidden="true">
@@ -328,8 +314,9 @@
                                                     <select class="form-select" id="metodeTransaksi"
                                                         name="metode_transaksi" required>
                                                         <option value="">Pilih metode</option>
-                                                        <option value="CASH">Cash</option>
-                                                        <option value="TF">Transfer</option>
+                                                        <option value="TF">TF</option>
+                                                        <option value="CASH">KANTOR</option>
+
                                                     </select>
                                                 </div>
 
