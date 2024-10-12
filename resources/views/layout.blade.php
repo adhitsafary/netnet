@@ -164,6 +164,22 @@
                     </div>
                 </div>
             </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span class=" font-weight-bold">Update ISOLIR DAN PEMBAYARAN</span>
+                </a>
+                <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/check-isolir/">UPDATE ISOLIR</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
+                    </div>
+                </div>
+            </li>
 
 
         </ul>

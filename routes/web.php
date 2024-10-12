@@ -212,3 +212,10 @@ Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTa
 Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
 //filter di pembayaran
 Route::get('/pembayaran/filter/', [PembayaranController::class, 'pembayaran_filter'])->name('pembayaran.filter');
+
+
+//isolir asli
+Route::get('/check-isolir', [PelangganController::class, 'checkAndMoveToIsolir'])->name('check.isolir');
+//cek payment asli
+Route::get('/update-payment-status', [PelangganController::class, 'updatePaymentStatus'])->name('update.payment.status');
+

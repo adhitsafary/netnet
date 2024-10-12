@@ -86,17 +86,29 @@
                             <option value="">Semua</option>
                             <option value="belum_bayar"
                                 {{ $status_pembayaran_display == 'belum_bayar' ? 'selected' : '' }}>
-                                Belum Bayar</option>
+                                Belum Bayar
+                            </option>
                             <option value="sudah_bayar"
                                 {{ $status_pembayaran_display == 'sudah_bayar' ? 'selected' : '' }}>
-                                Sudah Bayar</option>
+                                Sudah Bayar
+                            </option>
                         </select>
                     </div>
                     <!-- Tombol Filter -->
                     <button type="submit" name="action" value="filter" class="btn btn-primary ml-2">Filter</button>
                 </form>
             </div>
+
         </div>
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
 
         <div class="">
             <table class="table table-bordered " style="color: black;">

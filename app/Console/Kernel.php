@@ -11,7 +11,7 @@ class Kernel extends ConsoleKernel
 {
     protected function schedule(Schedule $schedule): void
     {
-        // Jadwal yang sudah ada
+        // Jadwal untuk pengecekan status pembayaran setiap hari
         $schedule->command('pembayaran:cek')->daily();
 
         // Penjadwalan untuk pengecekan status isolir setiap hari
@@ -21,7 +21,18 @@ class Kernel extends ConsoleKernel
 
         // Penjadwalan untuk membersihkan pelanggan isolir lebih dari 60 hari
         $schedule->command('isolir:cleanup')->daily();
+
+        // Jalankan fungsi checkAndMoveToIsolir setiap hari
+        $schedule->call(function () {
+            (new PelangganController)->checkAndMoveToIsolir();
+        })->daily();
+
+        // Jalankan fungsi updatePaymentStatus setiap hari
+        $schedule->call(function () {
+            (new PelangganController)->updatePaymentStatus();
+        })->daily();
     }
+
 
     protected $commands = [
         Commands\CleanUpIsolir::class,

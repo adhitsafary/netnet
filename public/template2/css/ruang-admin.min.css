@@ -37,7 +37,6 @@ a:focus {
     overflow-x: hidden;
 }
 
-
 #wrapper #content-wrapper #content {
     -webkit-box-flex: 1;
     -ms-flex: 1 0 auto;
@@ -1657,8 +1656,16 @@ body.sidebar-toggled footer.sticky-footer {
     color: white !important; /* Pastikan warna teks putih */
 }
 
-
 .text-black {
     color: black !important;
 }
 
+#pendapatanChart {
+    width: 100%; /* Lebar penuh dari kontainer */
+    height: 400px; /* Tinggi diatur menjadi 400px untuk memperbesar */
+}
+
+/* Mengatur card agar lebih lebar dan tinggi */
+.card {
+    padding: 20px; /* Menambahkan padding untuk memperluas ruang dalam */
+}
