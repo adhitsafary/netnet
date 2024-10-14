@@ -10,100 +10,38 @@
                 <div class="mb-2 ml-3">
 
 
-                    <!-- Tampilkan Hasil Filter -->
-
-                    <div>
 
 
 
-                        <!-- Tombol Total Sudah Bayar -->
-                        <button class="btn btn-info mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
-                            Total Sudah Bayar: {{ $totalSudahBayar }} (Rp
-                            {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})
-                        </button>
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;">
+                        Pelanggan Unblock : Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganfilter, 0, ',', '.') }}
+                    </button>
 
-                        <!-- Tombol Total Belum Bayar -->
-                        <button class="btn btn-warning mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Belum Bayar: {{ $totalBelumBayar }} (Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})')">
-                            Total Belum Bayar: {{ $totalBelumBayar }} (Rp
-                            {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})
-                        </button>
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;">
+                        Total keseluruhan : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
+                    </button>
 
-                        <!-- Tombol Total Isolir -->
 
-                        <a href="{{ route('pelanggan.isolir') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold"> Total
-                            Isolir: {{ $totalIsolir }} (Rp
-                            {{ number_format($totalPembayaranIsolir, 0, ',', '.') }})</a>
-
-                        <!-- Tombol Total Block -->
-                        <button class="btn btn-dark mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})')">
-                            Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})
-                        </button>
-
-                        <!-- Tombol Total Unblock -->
-                        <button class="btn btn-success mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Unblock: {{ $totalUnblock }} (Rp {{ number_format($totalPembayaranUnblock, 0, ',', '.') }})')">
-                            Total Unblock: {{ $totalUnblock }} (Rp
-                            {{ number_format($totalPembayaranUnblock, 0, ',', '.') }})
-                        </button>
-
-                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;"
-                            onclick="copyToClipboard('Pelanggan (Filter): Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User: {{ number_format($totalPelangganfilter, 0, ',', '.') }}')">
-                            Total Filter: Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User
-                            :
-                            {{ number_format($totalPelangganfilter, 0, ',', '.') }}
-                        </button>
-
-                        <!-- Tombol Total Keseluruhan -->
-                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;"
-                            onclick="copyToClipboard('Total Keseluruhan: Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User: {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}')">
-                            Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
-                            User :
-                            {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
-                        </button>
-
-                        <!-- Tombol Sisa Pembayaran -->
-                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;"
-                            onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
-                            Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
-                            {{ number_format($sisaUser, 0, ',', '.') }}
-                        </button>
-
-                        <!-- Tombol Total Masuk -->
-                        <button class="btn btn-primary mt-2 btn-lg  font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;"
-                            onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
-                            Total Masuk : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
-                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
-                        </button>
-                    </div>
-
-                    <!-- Tambahkan script JavaScript untuk menyalin data ke clipboard -->
-                    <script>
-                        function copyToClipboard(text) {
-                            // Membuat elemen input sementara untuk menyalin teks
-                            var tempInput = document.createElement('input');
-                            tempInput.value = text;
-                            document.body.appendChild(tempInput);
-                            tempInput.select();
-                            document.execCommand('copy');
-                            document.body.removeChild(tempInput);
-
-                            // Tampilkan alert sebagai notifikasi
-                            alert('Teks disalin: ' + text);
-                        }
-                    </script>
-
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;">
+                        Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
+                        {{ number_format($sisaUser, 0, ',', '.') }}
+                    </button>
+                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                        style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;">
+                        Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
+                        {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                    </button>
                 </div>
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-between mt-2">
-            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
+            <form action="{{ route('pelanggan.unblock') }}" method="GET" class="form-inline d-flex"
+                style="color: black;">
                 <div class="input-group" style="color: black;">
                     <input type="text" name="search" id="search" class="form-control font-weight-bold"
                         style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
@@ -112,25 +50,9 @@
             </form>
 
             <div class="mx-auto text-center mr-3">
-                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan</h3>
+                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan Unblock</h3>
             </div>
-            <div class="col-md-3 text-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Ekspor
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('pelanggan.export', ['format' => 'pdf', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                           class="dropdown-item">PDF</a>
-                        <a href="{{ route('pelanggan.export', ['format' => 'excel', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                           class="dropdown-item">Excel</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
 
 
 
@@ -160,7 +82,7 @@
 
         <div class="">
             <th>
-                <form action="{{ route('pelanggan.index') }}" method="GET">
+                <form action="{{ route('pelanggan.unblock') }}" method="GET">
                     <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
                     <input type="text" name="paket_plg" placeholder="Paket">
                     <input type="number" name="harga_paket" placeholder="Harga Paket">
@@ -171,6 +93,8 @@
                     </select>
                     <button type="submit">Filter</button>
                 </form>
+
+
             </th>
 
             <table class="table table-bordered table-responsive " style="color: black;">
@@ -179,7 +103,7 @@
                         <th class="">No</th>
                         <th>ID</th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.unblock') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_nama">Nama</label><br>
@@ -193,7 +117,7 @@
 
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.unblock') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_alamat">Alamat</label><br>
@@ -213,7 +137,7 @@
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.unblock') }}">
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -232,7 +156,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.unblock') }}">
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -307,7 +231,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.unblock') }}">
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>
@@ -322,7 +246,7 @@
                             </form>
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.unblock') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_keterangan">Keterangan</label><br>
@@ -343,7 +267,7 @@
                                 <span>Status Pembayaran</span>
                                 <!-- Form Filter -->
                                 <div class="col-md-3 text-right">
-                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
+                                    <form action="{{ route('pelanggan.unblock') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -394,10 +318,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                                : 'Belum Ada pembayaran' }}
-                                                                                                                        </td> -->
+                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                : 'Belum Ada pembayaran' }}
+                                                                                        </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
@@ -528,7 +452,4 @@
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();
         }
-
-
-
     </script>

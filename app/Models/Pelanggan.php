@@ -30,6 +30,12 @@ class Pelanggan extends Model
     ];
 
     // Relasi ke tabel bayar_pelanggan
+    public function pembayaran()
+    {
+        return $this->hasMany(BayarPelanggan::class, 'pelanggan_id', 'id'); // Menghubungkan ke foreign key 'pelanggan_id'
+    }
+
+    // Relasi ke tabel bayar_pelanggan untuk mengambil pembayaran terakhir
     public function pembayaranTerakhir()
     {
         return $this->hasOne(BayarPelanggan::class, 'pelanggan_id', 'id') // Menghubungkan ke foreign key 'pelanggan_id'

@@ -14,7 +14,7 @@
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-danger">Cari</button>
                             </div>
-                           
+
                         </div>
                     </form>
                 </div>
@@ -35,7 +35,7 @@
         @endif
 
         <!-- Tabel Perbaikan -->
-        <table class="table table-bordered " style="color: black;">
+        <table class="table table-bordered table-responsive " style="color: black;">
             <thead class="table table-danger" style="color: black;">
                 <tr>
                     <th>No</th>

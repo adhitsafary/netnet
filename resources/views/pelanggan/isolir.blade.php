@@ -103,7 +103,7 @@
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-between mt-2">
-            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
+            <form action="{{ route('pelanggan.isolir') }}" method="GET" class="form-inline d-flex" style="color: black;">
                 <div class="input-group" style="color: black;">
                     <input type="text" name="search" id="search" class="form-control font-weight-bold"
                         style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
@@ -112,26 +112,9 @@
             </form>
 
             <div class="mx-auto text-center mr-3">
-                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan</h3>
+                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan Isolir</h3>
             </div>
-            <div class="col-md-3 text-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        Ekspor
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('pelanggan.export', ['format' => 'pdf', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                           class="dropdown-item">PDF</a>
-                        <a href="{{ route('pelanggan.export', ['format' => 'excel', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                           class="dropdown-item">Excel</a>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-
 
 
 
@@ -160,7 +143,7 @@
 
         <div class="">
             <th>
-                <form action="{{ route('pelanggan.index') }}" method="GET">
+                <form action="{{ route('pelanggan.isolir') }}" method="GET">
                     <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
                     <input type="text" name="paket_plg" placeholder="Paket">
                     <input type="number" name="harga_paket" placeholder="Harga Paket">
@@ -171,6 +154,8 @@
                     </select>
                     <button type="submit">Filter</button>
                 </form>
+
+
             </th>
 
             <table class="table table-bordered table-responsive " style="color: black;">
@@ -179,7 +164,7 @@
                         <th class="">No</th>
                         <th>ID</th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_nama">Nama</label><br>
@@ -193,7 +178,7 @@
 
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_alamat">Alamat</label><br>
@@ -209,11 +194,11 @@
 
 
 
-                        <th>Bayar</th>
+
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -232,7 +217,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -307,7 +292,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>
@@ -322,7 +307,7 @@
                             </form>
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_keterangan">Keterangan</label><br>
@@ -336,14 +321,13 @@
 
                         </th>
                         <th>Bayar Terakhir</th>
-
                         <th>
                             <div class="d-flex justify-content-between align-items-center">
                                 <!-- Label Status -->
                                 <span>Status Pembayaran</span>
                                 <!-- Form Filter -->
                                 <div class="col-md-3 text-right">
-                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
+                                    <form action="{{ route('pelanggan.isolir') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -353,13 +337,9 @@
                                                     {{ request('status_pembayaran') == 'belum_bayar' ? 'selected' : '' }}>
                                                     Belum Bayar
                                                 </option>
-                                                <option value="sudah_bayar"
-                                                    {{ request('status_pembayaran') == 'sudah_bayar' ? 'selected' : '' }}>
-                                                    Sudah Bayar
-                                                </option>
-                                                <option value="UnBlock"
-                                                    {{ request('status_pembayaran') == 'UnBlock' ? 'selected' : '' }}>
-                                                    UnBlock
+                                                <option value="isolir"
+                                                    {{ request('status_pembayaran') == 'isolir' ? 'selected' : '' }}>
+                                                    Isolir
                                                 </option>
                                             </select>
                                         </div>
@@ -368,9 +348,11 @@
                             </div>
                         </th>
 
+
                         <th>Detail</th>
+                        <th>Status</th>
 
-
+                        <!-- <th>Riwayat pembayaran</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -382,10 +364,7 @@
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
                             <td>{{ $item->alamat_plg }}</td>
-                            <td>
-                                <a href="#" class="btn btn-success btn-sm"
-                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-                            </td>
+
                             <td>{{ $item->no_telepon_plg }}</td>
                             <td>{{ $item->aktivasi_plg }}</td>
                             <td>{{ $item->paket_plg }}</td>
@@ -394,10 +373,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                                : 'Belum Ada pembayaran' }}
-                                                                                                                        </td> -->
+                                                                                                        {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                            ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                            : 'Belum Ada pembayaran' }}
+                                                                                                    </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
@@ -424,7 +403,7 @@
                                 </select>
 
                                 <span
-                                    class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2"
+                                    class="badge {{ strcasecmp($item->status_pembayaran, 'Block') === 0 ? 'bg-dark' : 'bg-danger' }} text-white ml-2"
                                     style="padding: 0.5em 1em; font-size: 1.1em;">
                                     {{ $item->status_pembayaran }}
                                 </span>
@@ -499,6 +478,22 @@
                                     </div>
                                 </div>
                             </div>
+                            <td>
+                                <form action="{{ route('pelanggan.toggleStatus', $item->id) }}" method="POST"
+                                    style="display: inline;">
+                                    @csrf
+                                    <input type="hidden" name="status"
+                                        value="{{ $item->status_pembayaran === 'Block' ? 'nonblock' : 'block' }}">
+                                    <button type="submit" style="border: none; background: none;">
+                                        <img src="{{ asset('asset/img/' . ($item->status_pembayaran === 'Block' ? 'off.png' : 'on.png')) }}"
+                                            alt="{{ $item->status_pembayaran === 'Block' ? 'Nonblock' : 'Block' }}"
+                                            style="width: 60px; height: auto; cursor: pointer;">
+                                    </button>
+                                </form>
+                            </td>
+
+
+
 
                         </tr>
 
@@ -528,7 +523,4 @@
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();
         }
-
-
-
     </script>

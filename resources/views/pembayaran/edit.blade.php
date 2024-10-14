@@ -27,6 +27,11 @@
             <input type="datetime-local" name="created_at"
                 value="{{ old('created_at', $pembayaran->created_at->format('Y-m-d\TH:i')) }}" class="form-control mt-2">
 
+                <label for="tanggal_pembayaran">Bayar Untuk Bulan</label>
+                <input type="month" name="tanggal_pembayaran"
+                    value="{{ old('tanggal_pembayaran', $pembayaran->created_at->format('Y-m')) }}" class="form-control mt-2">
+
+
 
             <button class="btn btn-primary btn-sm mt-4">Simpan</button>
         </form>

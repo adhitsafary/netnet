@@ -63,64 +63,47 @@
             </div>
 
 
-            <!-- Earnings (Annual) Card Example -->
+            <!-- New User Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-kuning h-100">
+                <div class="card-kuning  h-100">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="bg-danger p-2">
-                                    <div class="text-white font-weight-bold text-uppercase">
-                                        Tagihan Hari ini
+                            <a href="{{ route('pelanggan.redirect') }}">
+                                <div class="col mr-2">
+                                    <div class=" text text-white font-weight-bold text-uppercase mb-1">Total Semua User yang
+                                        Membayar
+                                        hari ini
                                     </div>
-                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                    <div class="text-white h5 mb-0 font-weight-bold">
-                                        Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} || User :
-                                        {{ $jumlahPelangganMembayarHariIni }}
-                                    </div>
-                                </div>
-                                <div class="bg-success p-2">
-                                    <div class="text-white font-weight-bold text-uppercase ">
-                                        Tertagih
-                                    </div>
-                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                    <div class="text-white h5 mb-0 font-weight-bold">
-                                        Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User :
-                                        {{ $totalUserHarian_semua }}
+                                    <div class="h5 mb-0 font-weight-bold text text-white">Rp
+                                        {{ number_format($totalTagihanHariIni, 0, ',', '.') }}</div>
+                                    <!-- Menampilkan pendapatan dengan format rupiah -->
+                                    <div class="mt-2 mb-0 text-muted">
+                                        <span class="text text-white font-weight-bold text-uppercase">Semua :</span>
+                                        <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
+                                                class="text text-white"></i>
+                                            {{ $jumlahPelangganMembayarHariIni }}</span>
+                                        <span class="text text-white  font-weight-bold text-uppercase">User
+                                        </span>
                                     </div>
                                 </div>
-
-
-                            </div>
-
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Pending Requests Card Example -->
             <!-- Belum Tertagih Hari Ini -->
             <div class="col-xl-3 col-md-6 mb-4">
                 <div class="card-merah h-100">
-
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="bg-warning p-2">
-                                    <div class="text-white font-weight-bold text-uppercase">
-                                        Sisa Tagihan Hari ini Hari ini
-                                    </div>
-                                    <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                    <div class="text-white h5 mb-0 font-weight-bold">
-                                        Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} || User :
-                                        {{ $totalUserTertagih }}
-                                    </div>
-                                </div>
+                                <a href="{{ route('pelanggan.sudahbayar') }}">
 
-                                <a href="{{ route('pelanggan.index', ['status_pembayaran' => 'belum_bayar']) }}"
-                                    class="text-decoration-none">
-                                    <div class="bg-success p-2">
-                                        <div class="text-white font-weight-bold text-uppercase ">
-                                            Sisa Semua Tagihan
+                                    <div>
+                                        <div class="text-white font-weight-bold text-uppercase">
+                                            Tertagih
                                         </div>
                                         <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
                                         <div class="text-white h5 mb-0 font-weight-bold">
@@ -129,10 +112,27 @@
                                         </div>
                                     </div>
                                 </a>
+                                <a href="{{ route('pelanggan.belumbayar') }}">
+
+                                    <div>
+                                        <div class="text-white font-weight-bold text-uppercase">
+                                            Sisa Tagihan Hari ini Hari ini
+                                        </div>
+                                        <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
+                                        <div class="text-white h5 mb-0 font-weight-bold">
+                                            Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} || User :
+                                            {{ $totalUserTertagih }}
+                                        </div>
+                                    </div>
+                                </a>
+
+
+
 
                             </div>
                         </div>
                     </div>
+
 
                 </div>
             </div>
@@ -140,23 +140,40 @@
             <!-- Area Chart -->
             <!-- Chart Bar dan Line -->
             <div class="col-xl-70 col-lg-8">
-                <div class="card-magenta">
+                <!-- Memperbesar tampilan card-body -->
+                <div class="card-magenta" style="font-size: 1.5rem;"> <!-- Menambah ukuran font untuk keseluruhan card -->
                     <div class="card-body">
                         <h6 class="text text-white font-weight-bold">Tabel Pembayaran Per Hari</h6>
+                        <!-- Membesarkan judul -->
                         <div class="chart-area">
                             <canvas id="pendapatanChart" width="1500" height="600"></canvas>
                             <!-- Untuk Bar/Line Chart -->
                         </div>
                     </div>
                 </div>
+
+                <!-- Memisahkan dan memperbesar running text -->
+                <div class="running-text-container" style="margin-top: 20px; height: 80px;"> <!-- Height diperbesar -->
+                    <div class="running-text" style="font-size: 2rem;"> <!-- Ukuran font diperbesar -->
+                        <span>
+                            Sisa Tagihan Hari Ini: Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} || User:
+                            {{ $totalUserTertagih }} ||
+                            Tagihan Hari Ini: Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} || User:
+                            {{ $jumlahPelangganMembayarHariIni }} ||
+                            Tertagih: Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User:
+                            {{ $totalUserHarian_semua }}
+                        </span>
+                    </div>
+                </div>
                 <br>
             </div>
+
 
             <!-- Pie Chart -->
             <div class="card-biru_tua col-xl-4 col-lg-8">
                 <div class="p-3 mb-2">
-                    <div class="card-kuning py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 pl-3 font-weight-bold text-white">Persentase Pembayaran</h6>
+                    <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 pl-3 font-weight-bold text-white">PERSANTE PEMBAYARAN</h6>
                     </div>
                     <div class="chart-area">
                         <canvas id="myPieChart"></canvas> <!-- Untuk Pie Chart -->
@@ -166,21 +183,34 @@
                         <!-- Baru Terbayar -->
                         <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
                             style="width: 48%; margin-right: 10px;">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">Baru Terbayar</h6>
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Tertagih</h6>
                             <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }}
+                                Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} <br> User :
+                                {{ $totalUserHarian_semua }}
+                            </div>
+                        </div>
+                        <!--sisa tagihan-->
+                        <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center mr-2"
+                            style="width: 48%;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa Tagihan</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} <br> User :
+                                {{ $totalUserHarian_semua }}
                             </div>
                         </div>
                         <!-- Total Tagihan -->
-                        <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center"
+                        <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
                             style="width: 48%;">
                             <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan</h6>
                             <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }}
+                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} <br> User :
+                                {{ $totalUserTertagih }}
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
 
 
@@ -279,9 +309,8 @@
                 // Inisialisasi Pie Chart
                 var ctx2 = document.getElementById("myPieChart").getContext('2d');
                 var myPieChart = new Chart(ctx2, {
-                    type: 'doughnut', // Menggunakan tipe doughnut untuk lingkaran persentase
+                    type: 'pie', // Menggunakan tipe pie untuk lingkaran penuh
                     data: {
-
                         datasets: [{
                             data: [totalTagihanHariIni - totalPendapatanharian_semua,
                                 totalPendapatanharian_semua
@@ -326,7 +355,7 @@
                                 usePointStyle: true // Menjaga ikon lingkaran di legend
                             }
                         },
-                        cutoutPercentage: 70, // Persentase ruang di tengah lingkaran (untuk tipe doughnut)
+                        cutoutPercentage: 0, // Tidak ada ruang di tengah lingkaran (untuk pie chart penuh)
                         plugins: {
                             labels: {
                                 render: 'label',
@@ -344,8 +373,8 @@
         </div>
 
         <!-- Modal Logout -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -365,21 +394,53 @@
             </div>
         </div>
 
-    </div>
-    <!---Container Fluid-->
-    </div>
-    <!-- Footer -->
-    <br><br>
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>copyright &copy;
-                    <script>
-                        document.write(new Date().getFullYear());
-                    </script> - developed by
-                    <b><a href="" target="_blank">NetNet Digital Group</a></b>
-                </span>
+
+
+        <!-- Footer -->
+        <br><br>
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>copyright &copy;
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script> - developed by
+                        <b><a href="" target="_blank">NetNet Digital Group</a></b>
+                    </span>
+                </div>
             </div>
-        </div>
-    </footer>
-@endsection
+        </footer>
+        </footer>
+    @endsection
+
+    <!-- CSS untuk Running Text -->
+    <style>
+        .running-text-container {
+            background-color: #343a40;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .running-text span {
+            display: inline-block;
+            padding-left: 100%;
+            margin-right: 50px;
+            /* Jarak antar elemen teks */
+            animation: scroll-left 30s linear infinite;
+            /* Durasi diperlambat menjadi 30 detik */
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>

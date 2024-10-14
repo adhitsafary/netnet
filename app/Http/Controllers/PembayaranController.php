@@ -44,24 +44,27 @@ class PembayaranController extends Controller
         //
     }
 
+
+
     public function destroy(string $id)
     {
         // Temukan data berdasarkan ID otomatis
         $bayarPelanggan = BayarPelanggan::findOrFail($id);
 
         // Ambil id otomatis dan id_bawan (pelanggan_id)
-        $idOtomatis = $bayarPelanggan->id;
+        $idOtomatis = $bayarPelanggan->tanggal_pembayaran;
         $pelangganId = $bayarPelanggan->pelanggan_id; // Asumsikan kolom ini adalah id_bawan dari tabel pelanggan
+        $pelanggan = Pelanggan::findOrFail($bayarPelanggan->pelanggan_id);
+
 
         // Hapus data
         $bayarPelanggan->delete();
 
-        // (Opsional) Lakukan sesuatu dengan $idOtomatis dan $pelangganId
-        // Misalnya, menambah log atau mengalihkan halaman dengan pesan khusus
-
-        // Redirect ke halaman index pembayaran dengan pesan sukses
-        return redirect()->route('pembayaran.index')->with('success', "Data dengan ID: $idOtomatis dan Pelanggan ID: $pelangganId telah dihapus.");
+        // Redirect ke halaman detail pelanggan dengan pesan sukses
+        return redirect()->route('pelanggan.historypembayaran', $pelangganId)
+            ->with('success', "Data pembayaran  $pelanggan->nama_plg, dengan ID: $idOtomatis telah dihapus.");
     }
+
 
 
 
@@ -189,6 +192,7 @@ class PembayaranController extends Controller
             'metode_transaksi' => 'required|string',
             'keterangan_plg' => 'nullable|string',
             'created_at' => 'required|date_format:Y-m-d\TH:i',
+            'tanggal_pembayaran' => 'required|date_format:Y-m',
         ]);
 
         // Ambil data pelanggan yang sudah ada
@@ -201,6 +205,9 @@ class PembayaranController extends Controller
         $pembayaran->keterangan_plg = $validatedData['keterangan_plg'];
 
         // Pastikan waktu dalam format Y-m-d H:i:s
+        $pembayaran->tanggal_pembayaran = Carbon::createFromFormat('Y-m', $validatedData['tanggal_pembayaran'])->startOfMonth()->format('Y-m-d');
+
+
         $pembayaran->created_at = Carbon::parse($validatedData['created_at'])->format('Y-m-d H:i:s');
 
         // Simpan data yang sudah diperbarui

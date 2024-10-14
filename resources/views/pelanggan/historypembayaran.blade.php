@@ -2,6 +2,23 @@
 
 @section('konten')
     <div class="container mt-4">
+        @if (session('error'))
+            <div class="alert alert-danger">{{ session('error') }}</div>
+        @endif
+
+        @if (session('alert'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ session('alert') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <h4 style="color: black">Riwayat Pembayaran - {{ $pelanggan->nama_plg }}</h4>
         <table class="table table-bordered table-responsive mt-3" style="color: black">
             <thead class="table table-primary" style="color: black">
@@ -15,6 +32,7 @@
                     <th>Paket</th>
                     <th>Jumlah Pembayaran</th>
                     <th>Tanggal Pembayaran</th>
+                    <th>Untuk Bulan</th>
                     <th>Keterangan Pembayaran</th>
                     <th>Admin</th>
                     <th>Edit</th>
@@ -35,13 +53,15 @@
                         <td>{{ number_format($bayar->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ \Carbon\Carbon::parse($bayar->created_at)->locale('id')->translatedFormat('l, d F Y H:i:s') }}
                         </td>
+                        <td>{{ $bayar->tanggal_pembayaran }}</td>
                         <td>{{ $bayar->keterangan_plg }}</td>
                         <td>{{ $bayar->admin_name }}</td>
                         <td>
                             <a href="{{ route('pembayaran.edit', $bayar->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         </td>
                         <td>
-                            <form action="{{ route('pembayaran.destroy', $bayar->id) }}" method="POST" class="d-inline-block">
+                            <form action="{{ route('pembayaran.destroy', $bayar->id) }}" method="POST"
+                                class="d-inline-block">
                                 @csrf
 
                                 <button class="btn btn-danger btn-sm"

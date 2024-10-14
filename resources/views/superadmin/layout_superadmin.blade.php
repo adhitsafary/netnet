@@ -46,7 +46,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pelanggan">Pelanggan Aktif</a>
-                        <a class="collapse-item" href="/isolir/">Pelanggan ISOLIR</a>
+                        <a class="collapse-item" href="/pelanggan/isolir/">Pelanggan ISOLIR</a>
                         <a class="collapse-item" href="/pelangganof">Pelanggan OFF</a>
                         <a class="collapse-item" href="{{ route('pelanggan.create') }}">Tambah Pelanggan Baru</a>
                         <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
@@ -180,7 +180,6 @@
                 <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/check-isolir/">UPDATE ISOLIR</a>
                         <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
                     </div>
 

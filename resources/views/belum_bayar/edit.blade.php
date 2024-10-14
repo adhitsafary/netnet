@@ -44,13 +44,6 @@
                 id="harga_paket">
             <div class="invalid-feedback" id="harga_paketError">Field Harga Paket tidak boleh kosong.</div>
 
-
-            <label for="" class="mt mt-3">Status Pembayaran</label>
-            <input type="text" name="status_pembayaran" value="{{ $pelanggan->status_pembayaran }}" class="form-control "
-                id="status_pembayaran">
-            <div class="invalid-feedback" id="harga_paketError">Field Harga Paket tidak boleh kosong.</div>
-
-
             <label for="" class="mt mt-3">ODP</label>
             <input type="text" name="odp" value="{{ $pelanggan->odp }}" class="form-control " id="odp">
             <div class="invalid-feedback" id="odpError">Field ODP tidak boleh kosong. Jika tidak ada, tulis "0".</div>

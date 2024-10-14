@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-    <div class="container mb-4">
+<div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('rekap_pemasangan.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
@@ -19,7 +19,7 @@
 
             <h5 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h5>
         </div>
-        
+
         <table class="table table-bordered  table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>

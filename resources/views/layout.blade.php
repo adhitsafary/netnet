@@ -48,12 +48,13 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
-                        <a class="collapse-item" href="/isolir/">PELANGGAN ISOLIR</a>
-                        <a class="collapse-item" href="/pelangganof">PELANGGAN OFF</a>
-                        <a class="collapse-item" href="{{ route('pelanggan.create') }}">TAMBAH PELANGGAN BARU</a>
+                        <a class="collapse-item" href="/pelanggan/isolir/">PELANGGAN ISOLIR</a>
+                        <a class="collapse-item" href="/pelanggan/unblock/">PELANGGAN Unblock</a>
+                        <a class="collapse-item" href="/pelanggan/psb/">PELANGGAN PSB</a>
+                        <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
                         <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
                     </div>
-                </div>
+                </div>`
             </li>
 
 
@@ -152,7 +153,7 @@
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
                      <!--   <a class="collapse-item" href="">UPDATE ISOLIR</a> -->
                         <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
-                        <a class="collapse-item" href="/update-payment-isolir">UPDATE STATUS Isolir</a>
+
 
                     </div>
 
@@ -383,10 +384,10 @@
                 <h4 class="h2" style="color: black;"></h4>
                 <ol class="breadcrumb">
                     <!-- Jam Berjalan -->
-                    <div class="h6 font-weight-bold mr-3" style="color: black;">
+                    <div class="h4 font-weight-bold mr-3" style="color: black;">
                         <span id="liveClock"></span>
                     </div>
-                    <div class="h6 font-weight-bold" style="color: black;">
+                    <div class="h4 font-weight-bold" style="color: black;">
                         {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
                     </div>
 

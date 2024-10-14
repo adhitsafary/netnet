@@ -1,9 +1,10 @@
-z
+
 <?php
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IsolirController;
 use App\Http\Controllers\JumlahLainLainController;
 use App\Http\Controllers\KaryawanController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PerbaikanController;
+use App\Http\Controllers\PSBController;
 use App\Http\Controllers\RekapMutasiHarianController;
 use App\Http\Controllers\RekapPemasanganController;
 use App\Http\Controllers\RekapPemasanganControlller;
@@ -51,11 +53,27 @@ Route::get('/perbaikan/export-excel', [PerbaikanController::class, 'exportExcel'
 //Route::get('/pelanggancoba', [PelangganController::class, 'indexcoba'])->name('pelanggan.index');
 //PELANGGAN
 Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan/isolir', [PelangganController::class, 'isolir'])->name('pelanggan.isolir');
+Route::get('/pelanggan/unblock', [PelangganController::class, 'unblock'])->name('pelanggan.unblock');
+Route::get('/pelanggan/psb', [PelangganController::class, 'psb'])->name('pelanggan.psb');
 Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
 Route::post('/pelanggan/store', [PelangganController::class, 'store'])->name('pelanggan.store');
 Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'edit'])->name('pelanggan.edit');
 Route::post('/pelanggan/update/{id}', [PelangganController::class, 'update'])->name('pelanggan.update');
 Route::post('/pelanggan/hapus/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
+Route::post('/pelanggan/{id}/isolir', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir');
+Route::post('/pelanggan/{id}/unblock', [PelangganController::class, 'toUnblock'])->name('pelanggan.toUnblock');
+Route::post('/pelanggan/{id}/toggle-status', [PelangganController::class, 'toggleStatus'])->name('pelanggan.toggleStatus');
+
+
+
+//PSB
+Route::get('/pasangbaru/', [PSBController::class, 'index'])->name('pasangbaru.index');
+Route::get('/pasangbaru/create', [PSBController::class, 'create'])->name('pasangbaru.create');
+Route::post('/pasangbaru/store', [PSBController::class, 'store'])->name('pasangbaru.store');
+Route::get('/pasangbaru/edit/{id}', [PSBController::class, 'edit'])->name('pasangbaru.edit');
+Route::post('/pasangbaru/update/{id}', [PSBController::class, 'update'])->name('pasangbaru.update');
+Route::post('/pasangbaru/hapus/{id}', [PSBController::class, 'destroy'])->name('pasangbaru.destroy');
 
 //Detail
 Route::get('/pelanggan/{id}/detail', [PelangganController::class, 'detail'])->name('pelanggan.detail');
@@ -86,6 +104,8 @@ Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historyp
 //index pembayaran semua user  atau global
 Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pembayaran.export');
 Route::post('/pembayaran/hapus/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
+
+Route::get('/pelanggan/export/{format}', [PelangganController::class, 'export'])->name('pelanggan.export');
 
 Route::get('/broadcast', [BroadcastController::class, 'index'])->name('broadcast.index');
 Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broadcast.send');
@@ -214,7 +234,7 @@ Route::post('/isolir/{id}/activate', [IsolirController::class, 'activate'])->nam
 Route::get('/isolir/cleanup', [IsolirController::class, 'cleanUp'])->name('isolir.cleanup');
 
 // web.php
-Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir');
+Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir'])->name('pelanggan.toIsolir1');
 // web.php
 Route::post('pelanggan/to-off/{id}', [IsolirController::class, 'toOff'])->name('pelanggan.toOff');
 
@@ -233,6 +253,7 @@ Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'
 Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTagih'])->name('pelanggan.filterTagih');
 //filter di index  pelanggan
 Route::get('/pelanggan/filter-tagih', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
+
 
 Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
 //filter di pembayaran
@@ -282,3 +303,11 @@ Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('users.de
 
 Route::get('/pembayaran/edit/{id}', [PembayaranController::class, 'edit'])->name('pembayaran.edit');
 Route::put('/pembayaran/update/{id}', [PembayaranController::class, 'update'])->name('pembayaran.update');
+
+//redirect ketika btn / data di klik di home index
+Route::get('/pelanggan/redirect', [HomeController::class, 'redirectToPelanggan'])->name('pelanggan.redirect');
+Route::get('/pelanggan/sudahbayar', [HomeController::class, 'showPelangganBelumBayar'])->name('pelanggan.belumbayar');
+Route::get('/pelanggan/belumbayar', [HomeController::class, 'showPelangganSudahBayar'])->name('pelanggan.sudahbayar');
+Route::get('/pelanggan/historyhariini', [HomeController::class, 'historyhariini'])->name('pelanggan.historyhariini');
+
+
