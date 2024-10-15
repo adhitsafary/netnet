@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
 use App\Models\PemasukanModel;
+use App\Models\Target;
 use App\Models\PembayaranPelanggan;
 use App\Models\PengeluaranModel;
 use App\Models\Perbaikan;
@@ -162,6 +163,7 @@ class PelangganController extends Controller
             ->sum('jumlah_pembayaran'); // Pastikan 'jumlah_pembayaran' adalah kolom yang menyimpan jumlah pembayaran
 
 
+
         //AMBIL TANGGAL TAGIH * JUMLAH PEMBAYARAN USER
         $todayDay = Carbon::today()->day;
         // Ambil semua pelanggan yang memiliki tgl_tagih_plg sama dengan hari ini (angka)
@@ -192,6 +194,16 @@ class PelangganController extends Controller
         $labels = [];
         $totalUsers = [];
         $totalPembayaran = [];
+
+
+        $target = Target::where('nama_target', 'marketing')->first(['jumlah_target', 'sisa_target', 'hari_tersisa']);
+
+        $jumlah_target = $target->jumlah_target;
+        $sisa_target = $target->sisa_target;
+        $hari_tersisa = $target->hari_tersisa;
+        $hasil_target = $jumlah_target - $sisa_target ;
+
+
 
         foreach ($pembayaranData as $data) {
             $labels[] = $data->tanggal; // Menyimpan tanggal untuk label sumbu X
@@ -249,6 +261,11 @@ class PelangganController extends Controller
             //pembayaran hari ini total
             'total_user_bayar',
             'total_jml_user',
+            //filter lingkaran baru
+            'sisa_target',
+            'jumlah_target',
+            'hari_tersisa',
+            'hasil_target',
 
 
 
@@ -433,11 +450,11 @@ class PelangganController extends Controller
         //ambil query semua
         $queryfull = Pelanggan::query();
         // Ambil nilai filter dari request
-        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+        $harga_paket = $request->input('harga_paket');
 
         // Filter berdasarkan tanggal tagih
-        if ($tgl_tagih_plg) {
-            $queryfull->where('tgl_tagih_plg', $tgl_tagih_plg);
+        if ($harga_paket) {
+            $queryfull->where('harga_paket', $harga_paket);
         }
 
         // Buat clone query untuk menghindari overwrite pada query yang sama
@@ -1842,5 +1859,4 @@ class PelangganController extends Controller
 
         return redirect()->back()->with('error', 'Format tidak dikenali.');
     }
-
 }

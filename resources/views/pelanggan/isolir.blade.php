@@ -194,7 +194,7 @@
 
 
 
-
+                        <th>Bayar</th>
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
@@ -364,7 +364,10 @@
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>
                             <td>{{ $item->alamat_plg }}</td>
-
+                            <td>
+                                <a href="#" class="btn btn-success btn-sm"
+                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+                            </td>
                             <td>{{ $item->no_telepon_plg }}</td>
                             <td>{{ $item->aktivasi_plg }}</td>
                             <td>{{ $item->paket_plg }}</td>
@@ -373,10 +376,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                        {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                            ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                            : 'Belum Ada pembayaran' }}
-                                                                                                    </td> -->
+                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                                : 'Belum Ada pembayaran' }}
+                                                                                                        </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran

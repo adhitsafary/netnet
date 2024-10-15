@@ -13,7 +13,10 @@
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="{{ asset('template2/css/ruang-admin.min.css') }}">
+
 </head>
 
 <body id="page-top">
@@ -34,17 +37,14 @@
             </li>
 
 
-            <li class="nav-item" style="color: black">
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    style="color: black" aria-expanded="true" aria-controls="collapseBootstrap">
+                    aria-expanded="true" aria-controls="collapseBootstrap1">
                     <img src="{{ asset('asset/img/pelanggan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-
                     <span class="font-weight-bold " style="color: black">PELANGGAN</span>
-                    <!-- Gambar dari aset di samping teks -->
-
                 </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" style="color: black"
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap1"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
@@ -54,7 +54,7 @@
                         <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
                         <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
                     </div>
-                </div>`
+                </div>
             </li>
 
 
@@ -151,10 +151,25 @@
                 <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-                     <!--   <a class="collapse-item" href="">UPDATE ISOLIR</a> -->
+
                         <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
+                    </div>
 
+                </div>
+            </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap18" aria-expanded="true" aria-controls="collapseBootstrap18">
+                    <img src="{{ asset('asset/img/target.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Target Perusahaan</span>
+                </a>
+                <div id="collapseBootstrap18" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+
+                        <a class="collapse-item" href="/target">Target</a>
                     </div>
 
                 </div>
@@ -433,6 +448,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Bootstrap 5 CSS -->
+
+    <!-- Bootstrap 5 JS Bundle (termasuk Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
     </div>
 
 

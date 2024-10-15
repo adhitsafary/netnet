@@ -23,6 +23,7 @@ use App\Http\Controllers\RekapPemasanganController;
 use App\Http\Controllers\RekapPemasanganControlller;
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\TargetController;
 use App\Http\Controllers\TeknisiController;
 use App\Http\Controllers\UserController;
 use App\Models\Pelanggan;
@@ -309,5 +310,11 @@ Route::get('/pelanggan/redirect', [HomeController::class, 'redirectToPelanggan']
 Route::get('/pelanggan/sudahbayar', [HomeController::class, 'showPelangganBelumBayar'])->name('pelanggan.belumbayar');
 Route::get('/pelanggan/belumbayar', [HomeController::class, 'showPelangganSudahBayar'])->name('pelanggan.sudahbayar');
 Route::get('/pelanggan/historyhariini', [HomeController::class, 'historyhariini'])->name('pelanggan.historyhariini');
+
+
+Route::get('/target', [TargetController::class, 'index'])->name('target.index');
+Route::post('/simpan-target', [TargetController::class, 'store'])->name('target.store');
+Route::post('/target/update/{id}', [TargetController::class, 'update'])->name('target.update');
+Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('target.destroy');
 
 
