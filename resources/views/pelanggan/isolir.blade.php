@@ -376,10 +376,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                : 'Belum Ada pembayaran' }}
-                                                                                                        </td> -->
+                                                                                                                {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                                    ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                                    : 'Belum Ada pembayaran' }}
+                                                                                                            </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
@@ -482,18 +482,28 @@
                                 </div>
                             </div>
                             <td>
-                                <form action="{{ route('pelanggan.toggleStatus', $item->id) }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    <input type="hidden" name="status"
-                                        value="{{ $item->status_pembayaran === 'Block' ? 'nonblock' : 'block' }}">
-                                    <button type="submit" style="border: none; background: none;">
+                                @if (auth()->user()->role === 'superadmin')
+                                    <!-- Cek apakah user role adalah super_admin -->
+                                    <form action="{{ route('pelanggan.toggleStatus', $item->id) }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        <input type="hidden" name="status"
+                                            value="{{ $item->status_pembayaran === 'Block' ? 'nonblock' : 'block' }}">
+                                        <button type="submit" style="border: none; background: none;">
+                                            <img src="{{ asset('asset/img/' . ($item->status_pembayaran === 'Block' ? 'off.png' : 'on.png')) }}"
+                                                alt="{{ $item->status_pembayaran === 'Block' ? 'Nonblock' : 'Block' }}"
+                                                style="width: 60px; height: auto; cursor: pointer;">
+                                        </button>
+                                    </form>
+                                @else
+                                    <!-- Jika bukan super_admin, tampilkan pesan atau tombol tidak aktif -->
+                                    <button style="border: none; background: none;" disabled>
                                         <img src="{{ asset('asset/img/' . ($item->status_pembayaran === 'Block' ? 'off.png' : 'on.png')) }}"
-                                            alt="{{ $item->status_pembayaran === 'Block' ? 'Nonblock' : 'Block' }}"
-                                            style="width: 60px; height: auto; cursor: pointer;">
+                                            alt="Role restricted" style="width: 60px; height: auto; cursor: not-allowed;">
                                     </button>
-                                </form>
+                                @endif
                             </td>
+
 
 
 

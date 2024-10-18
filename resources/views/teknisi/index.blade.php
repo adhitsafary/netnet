@@ -18,9 +18,7 @@
                 </ul>
             </div>
         </div>
-
-
-
+        
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-4">
             <div class="col-md-9">
@@ -103,8 +101,8 @@
 
                         <td>{{ ucfirst($item->status) }}</td> <!-- Menampilkan status -->
                         <td>
-                            @if ($item->status == 'pending')
-                                <!-- Hanya tampilkan tombol jika statusnya pending -->
+                            @if ($item->status == 'Proses')
+                                <!-- Hanya tampilkan tombol jika statusnya Proses -->
                                 <form action="{{ route('perbaikan.selesai', $item->id) }}" method="POST"
                                     class="d-inline-block">
                                     @csrf

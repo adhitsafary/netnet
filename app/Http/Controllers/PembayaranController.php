@@ -131,7 +131,7 @@ class PembayaranController extends Controller
 
         // Filter berdasarkan bulan jika ada
         if ($bulan) {
-            $query->whereMonth('created_at', $bulan);
+            $query->whereMonth('tanggal_pembayaran', $bulan);
         }
 
         // Filter berdasarkan tanggal mulai dan tanggal akhir jika ada

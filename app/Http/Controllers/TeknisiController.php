@@ -30,8 +30,8 @@ class TeknisiController extends Controller
         $sort = $request->get('sort', 'asc');
         $query->orderBy('created_at', $sort);
 
-        // Ambil data perbaikan yang statusnya pending
-        $perbaikan = $query->where('status', 'pending')->get();
+        // Ambil data perbaikan yang statusnya Proses
+        $perbaikan = $query->where('status', 'Proses')->get();
 
         // Data untuk chart mingguan
         $weeklyData = Perbaikan::selectRaw('WEEK(created_at) as week, COUNT(*) as total')

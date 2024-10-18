@@ -27,7 +27,7 @@
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
-                <div class="sidebar-brand-text mx-3">NetNet Digital</div>
+                <div class="sidebar-brand-text mx-3">Net Digital Group</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
@@ -50,9 +50,26 @@
                         <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
                         <a class="collapse-item" href="/pelanggan/isolir/">PELANGGAN ISOLIR</a>
                         <a class="collapse-item" href="/pelanggan/unblock/">PELANGGAN Unblock</a>
+                        <a class="collapse-item" href="/pelanggan/block/">PELANGGAN Block</a>
                         <a class="collapse-item" href="/pelanggan/psb/">PELANGGAN PSB</a>
                         <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
                         <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
+                    aria-expanded="true" aria-controls="collapseBootstrap13">
+                    <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Rekap Pemasangan</span>
+                </a>
+                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/rekap_pemasangan/">Riwayat Pemasangan</a>
+                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Form Pemasangan</a>
                     </div>
                 </div>
             </li>
@@ -71,8 +88,8 @@
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
 
                         <a class="collapse-item" href="/perbaikan/">Pemasangan - Perbaikan</a>
-                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat PERBAIKAN</a>
-                        <a class="collapse-item" href="{{ route('psb.create') }}">Buat PSB</a>
+                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat PSB dan PERBAIKAN</a>
+                        <a class="collapse-item" href="{{ route('psb.create') }}">Buat PSB dan Perbaikan Costume</a>
 
 
                     </div>
@@ -84,8 +101,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
-                    aria-expanded="true" aria-controls="collapseBootstrap12">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
                     <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pmsukan Pgeluarn</span>
@@ -104,21 +121,7 @@
             </li>
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
-                    <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Form PSB</span>
-                </a>
-                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/rekap_pemasangan/">Riwayat PSB</a>
-                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat PSB</a>
-                    </div>
-                </div>
-            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"

@@ -13,7 +13,7 @@
                         <!-- Tombol Total Sudah Bayar -->
                         <button class="btn btn-info mt-2  btn-lg  font-weight-bold"
                             onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
-                            Total Sudah Bayar: {{ $totalSudahBayar }} (Rp
+                            Total Sudah Bayar Filter: {{ $totalSudahBayar }} (Rp
                             {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})
                         </button>
 
@@ -52,7 +52,7 @@
 
                         <!-- Tombol Total Keseluruhan -->
                         <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;"
+                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;"
                             onclick="copyToClipboard('Total Keseluruhan: Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User: {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}')">
                             Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
                             User :
@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="d-flex align-items-center justify-content-between mt-2">
-            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
+            <form action="{{ route('pelanggan.block') }}" method="GET" class="form-inline d-flex" style="color: black;">
                 <div class="input-group" style="color: black;">
                     <input type="text" name="search" id="search" class="form-control font-weight-bold"
                         style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
@@ -148,7 +148,7 @@
 
         <div class="">
             <th>
-                <form action="{{ route('pelanggan.index') }}" method="GET">
+                <form action="{{ route('pelanggan.block') }}" method="GET">
                     <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
                     <input type="text" name="paket_plg" placeholder="Paket">
                     <input type="number" name="harga_paket" placeholder="Harga Paket">
@@ -167,7 +167,7 @@
                         <th class="">No</th>
                         <th>ID</th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.block') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_nama">Nama</label><br>
@@ -181,7 +181,7 @@
 
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.block') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_alamat">Alamat</label><br>
@@ -201,7 +201,7 @@
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -220,7 +220,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -295,7 +295,7 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>
@@ -310,7 +310,7 @@
                             </form>
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.index') }}" method="GET">
+                            <form action="{{ route('pelanggan.block') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_keterangan">Keterangan</label><br>
@@ -331,7 +331,7 @@
                                 <span>Status Pembayaran</span>
                                 <!-- Form Filter -->
                                 <div class="col-md-3 text-right">
-                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
+                                    <form action="{{ route('pelanggan.block') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -427,7 +427,7 @@
                             <!-- Tombol Bayar -->
 
                             <!-- Modal Bayar -->
-                            <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
+                            <div class="modal fade" id="bayarModal" tabindex`="-1" aria-labelledby="bayarModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">

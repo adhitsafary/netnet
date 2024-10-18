@@ -7,13 +7,10 @@
     <form action="{{route('rekap_pemasangan.update', $rekap_pemasangan->id)}}" method="POST">
         @csrf
 
-
         <label for="">ID Pelanggan</label>
-        <input type="text" name="id_plg" value="{{$rekap_pemasangan -> id_plg}}" class="form-control mt-2">
-
+        <input type="text" name="nik" value="{{$rekap_pemasangan -> nik}}" class="form-control mt-2">
         <label for="">nik</label>
         <input type="text" name="nik" value="{{$rekap_pemasangan -> nik}}" class="form-control mt-2">
-
         <label for="">Nama</label>
         <input type="text" name="nama" value="{{$rekap_pemasangan -> nama}}" class="form-control mt-2">
         <label for="">Alamat</label>
@@ -26,7 +23,7 @@
 
         <label for="">Paket</label>
         <input type="text" name="paket_plg" value="{{$rekap_pemasangan -> paket_plg}}" class="form-control mt-2">
-        <label for="">Harga Paket</label>
+        <label for="">Nominal</label>
         <input type="text" name="harga_paket" value="{{$rekap_pemasangan -> harga_paket}}" class="form-control mt-2">
 
         <label for="">Jatuh Tempo</label>

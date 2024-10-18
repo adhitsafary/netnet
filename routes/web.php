@@ -56,6 +56,7 @@ Route::get('/perbaikan/export-excel', [PerbaikanController::class, 'exportExcel'
 Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
 Route::get('/pelanggan/isolir', [PelangganController::class, 'isolir'])->name('pelanggan.isolir');
 Route::get('/pelanggan/unblock', [PelangganController::class, 'unblock'])->name('pelanggan.unblock');
+Route::get('/pelanggan/block', [PelangganController::class, 'block'])->name('pelanggan.block');
 Route::get('/pelanggan/psb', [PelangganController::class, 'psb'])->name('pelanggan.psb');
 Route::get('/pelanggan/create', [PelangganController::class, 'create'])->name('pelanggan.create');
 Route::post('/pelanggan/store', [PelangganController::class, 'store'])->name('pelanggan.store');
@@ -202,6 +203,7 @@ Route::post('/pengeluaran/hapus/{id}', [PengeluaranController::class, 'destroy']
 //Rekap Pemasangan
 Route::get('/rekap_pemasangan', [RekapPemasanganController::class, 'index'])->name('rekap_pemasangan.index');
 Route::get('/rekap_pemasangan/create', [RekapPemasanganController::class, 'create'])->name('rekap_pemasangan.create');
+Route::get('/rekap_pemasangan/aktivasi/{id}', [RekapPemasanganController::class, 'aktivasi'])->name('rekap_pemasangan.aktivasi');
 Route::post('/rekap_pemasangan/store', [RekapPemasanganController::class, 'store'])->name('rekap_pemasangan.store');
 Route::get('/rekap_pemasangan/edit/{id}', [RekapPemasanganController::class, 'edit'])->name('rekap_pemasangan.edit');
 Route::post('/rekap_pemasangan/update/{id}', [RekapPemasanganController::class, 'update'])->name('rekap_pemasangan.update');

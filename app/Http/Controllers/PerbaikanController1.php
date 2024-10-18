@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pelanggan;
+use App\Models\Netnet;
 use App\Models\Perbaikan;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Export\PerbaikanExport;
+use App\Models\Pelanggan;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
 class PerbaikanController extends Controller
@@ -89,81 +92,7 @@ class PerbaikanController extends Controller
         return view('perbaikan.create');
     }
 
-
     public function store(Request $request)
-    {
-        $request->validate([
-            'id_plg' => 'required',
-            'nama_plg' => 'required',
-            'alamat_plg' => 'required',
-            'no_telepon_plg' => 'required',
-            'paket_plg' => 'required',
-            'keterangan' => 'required',
-            'teknisi' => 'nullable', // Optional field for user to select a teknisi
-        ]);
-
-        // Daftar teknisi berdasarkan tim
-        $daftarTeknisi = [
-            'Tim 1 Deden - Agis',
-            'Tim 2 Mursidi - Dindin',
-            'Tim 3 Isep - Indra'
-        ];
-
-        // Jika user memilih teknisi
-        if ($request->has('teknisi') && !empty($request->teknisi)) {
-            $teknisiDipilih = $request->teknisi;
-
-            // Cek apakah teknisi yang dipilih masih dalam status "Proses"
-            $teknisiStatusProses = Perbaikan::where('teknisi', $teknisiDipilih)
-                ->where('status', 'Proses')
-                ->exists();
-
-            if ($teknisiStatusProses) {
-                return redirect()->back()->with('error', 'Teknisi yang dipilih sedang dalam status Proses. Silakan pilih teknisi lain.');
-            }
-        } else {
-            // Jika user tidak memilih teknisi, pilih secara acak dari teknisi yang tidak "Proses"
-            $teknisiAvailable = [];
-            foreach ($daftarTeknisi as $teknisi) {
-                $teknisiStatusProses = Perbaikan::where('teknisi', $teknisi)
-                    ->where('status', 'Proses')
-                    ->doesntExist(); // Cari teknisi yang tidak punya status Proses
-                if ($teknisiStatusProses) {
-                    $teknisiAvailable[] = $teknisi;
-                }
-            }
-
-            // Jika tidak ada teknisi yang tersedia (semua sedang "Proses"), tampilkan pesan error
-            if (empty($teknisiAvailable)) {
-                return redirect()->back()->with('error', 'Semua teknisi sedang dalam status Proses. Silakan coba lagi nanti.');
-            }
-
-            // Pilih teknisi secara acak dari daftar teknisi yang tersedia
-            $teknisiDipilih = $teknisiAvailable[array_rand($teknisiAvailable)];
-        }
-
-        // Buat entri baru untuk perbaikan
-        $perbaikan = new Perbaikan();
-        $perbaikan->id_plg = $request->id_plg;
-        $perbaikan->nama_plg = $request->nama_plg;
-        $perbaikan->alamat_plg = $request->alamat_plg;
-        $perbaikan->no_telepon_plg = $request->no_telepon_plg;
-        $perbaikan->paket_plg = $request->paket_plg;
-        $perbaikan->odp = $request->odp ?? null;
-        $perbaikan->maps = $request->maps ?? null;
-        $perbaikan->keterangan = $request->keterangan;
-
-        // Simpan teknisi yang dipilih
-        $perbaikan->teknisi = $teknisiDipilih;
-        $perbaikan->status = 'Proses'; // Set status awal sebagai Proses
-        $perbaikan->save();
-
-        return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
-    }
-
-
-
-    public function store1(Request $request)
     {
         $request->validate([
             'id_plg' => 'required',
@@ -181,27 +110,10 @@ class PerbaikanController extends Controller
             3 => 'Tim 3 Isep - Indra'
         ];
 
-        // Cek teknisi yang saat ini tidak memiliki status "Proses"
-        $teknisiAvailable = [];
-        foreach ($daftarTeknisi as $key => $teknisi) {
-            $teknisiStatusProses = Perbaikan::where('teknisi', $teknisi)
-                ->where('status', 'Proses')
-                ->doesntExist(); // Cari teknisi yang tidak punya status Proses
-            if ($teknisiStatusProses) {
-                $teknisiAvailable[$key] = $teknisi;
-            }
-        }
+        // Pilih teknisi secara acak dari daftar tim
+        $teknisiAcak = array_rand($daftarTeknisi);
+        $teknisiDipilih = $daftarTeknisi[$teknisiAcak];
 
-        // Jika tidak ada teknisi yang tersedia (semua sedang "Proses"), tampilkan pesan error
-        if (empty($teknisiAvailable)) {
-            return redirect()->back()->with('error', 'Semua teknisi sedang dalam status Proses. Silakan coba lagi nanti.');
-        }
-
-        // Pilih teknisi secara acak dari daftar teknisi yang tersedia
-        $teknisiAcak = array_rand($teknisiAvailable);
-        $teknisiDipilih = $teknisiAvailable[$teknisiAcak];
-
-        // Buat entri baru untuk perbaikan
         $perbaikan = new Perbaikan();
         $perbaikan->id_plg = $request->id_plg;
         $perbaikan->nama_plg = $request->nama_plg;
@@ -212,7 +124,7 @@ class PerbaikanController extends Controller
         $perbaikan->maps = $request->maps ?? null;
         $perbaikan->keterangan = $request->keterangan;
 
-        // Simpan teknisi yang dipilih setelah pengecekan
+        // Simpan teknisi yang dipilih secara acak
         $perbaikan->teknisi = $teknisiDipilih;
         $perbaikan->status = 'Proses'; // Set status awal sebagai Proses
         $perbaikan->save();
@@ -229,9 +141,8 @@ class PerbaikanController extends Controller
         return view('perbaikan.create_psb');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
+
     public function store_psb(Request $request)
     {
         $request->validate([
@@ -241,23 +152,18 @@ class PerbaikanController extends Controller
             'no_telepon_plg' => 'required',
             'paket_plg' => 'required',
             'keterangan' => 'required',
-            'teknisi' => 'nullable', // Teknisi tidak wajib diisi (opsional)
         ]);
 
         // Daftar teknisi berdasarkan tim
         $daftarTeknisi = [
-            'Tim 1 Deden - Agis',
-            'Tim 2 Mursidi - Dindin',
-            'Tim 3 Isep - Indra'
+            1 => 'Tim 1 Deden - Agis',
+            2 => 'Tim 2 Mursidi - Dindin',
+            3 => 'Tim 3 Isep - Indra'
         ];
 
-        // Cek apakah user memilih teknisi, jika tidak pilih secara acak
-        if ($request->teknisi) {
-            $teknisiDipilih = $request->teknisi;
-        } else {
-            // Pilih teknisi secara acak dari daftar
-            $teknisiDipilih = $daftarTeknisi[array_rand($daftarTeknisi)];
-        }
+        // Pilih teknisi secara acak dari daftar tim
+        $teknisiAcak = array_rand($daftarTeknisi);
+        $teknisiDipilih = $daftarTeknisi[$teknisiAcak];
 
         $perbaikan = new Perbaikan();
         $perbaikan->id_plg = $request->id_plg;
@@ -269,13 +175,55 @@ class PerbaikanController extends Controller
         $perbaikan->maps = $request->maps ?? null;
         $perbaikan->keterangan = $request->keterangan;
 
-        // Simpan teknisi yang dipilih
+        // Simpan teknisi yang dipilih secara acak
         $perbaikan->teknisi = $teknisiDipilih;
+        $perbaikan->status = 'Proses'; // Set status awal sebagai Proses
+        $perbaikan->save();
+
+        return redirect()->route('perbaikan.index')->with('success', 'Data perbaikan berhasil ditambahkan');
+    }
+
+
+
+    public function store_psb1(Request $request)
+    {
+        $request->validate([
+            'id_plg' => 'required',
+            'nama_plg' => 'required',
+            'alamat_plg' => 'required',
+            'no_telepon_plg' => 'required',
+            'paket_plg' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        // Daftar teknisi berdasarkan tim
+        $daftarTeknisi = [
+            1 => 'Tim 1 Deden - Agis',
+            2 => 'Tim 2 Mursidi - Dindin',
+            3 => 'Tim 3 Isep - Indra'
+        ];
+
+        // Pilih tim teknisi secara acak
+        $teknisiTim = rand(1, 3); // Menghasilkan angka antara 1 hingga 3
+
+        $perbaikan = new Perbaikan();
+        $perbaikan->id_plg = $request->id_plg;
+        $perbaikan->nama_plg = $request->nama_plg; // Menggunakan nama_plg yang diinput
+        $perbaikan->alamat_plg = $request->alamat_plg;
+        $perbaikan->no_telepon_plg = $request->no_telepon_plg;
+        $perbaikan->paket_plg = $request->paket_plg;
+        $perbaikan->odp = $request->odp ?? null; // Menangani jika tidak diisi
+        $perbaikan->maps = $request->maps ?? null; // Menangani jika tidak diisi
+        $perbaikan->keterangan = $request->keterangan;
+
+        // Simpan nama teknisi yang dipilih secara acak
+        $perbaikan->teknisi = $daftarTeknisi[$teknisiTim];
 
         $perbaikan->save();
 
         return redirect()->route('perbaikan.index')->with('success', 'Data PSB berhasil ditambahkan');
     }
+
 
 
 

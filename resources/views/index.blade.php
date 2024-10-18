@@ -121,7 +121,7 @@
 
                                         <div>
                                             <div class="text-white font-weight-bold text-uppercase">
-                                                Sisa Tagihan Hari ini Hari ini
+                                                Sisa Tagihan
                                             </div>
                                             <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
                                             <div class="text-white h5 mb-0 font-weight-bold">
@@ -160,18 +160,75 @@
                 </div>
 
                 <!-- Memisahkan dan memperbesar running text -->
-                <div class="running-text-container" style="margin-top: 20px; height: 80px;"> <!-- Height diperbesar -->
-                    <div class="running-text" style="font-size: 2rem;"> <!-- Ukuran font diperbesar -->
-                        <span>
-                            Sisa Tagihan Hari Ini: Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} User:
-                            {{ $totalUserTertagih }} ||
-                            Tagihan Hari Ini: Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} User:
-                            {{ $jumlahPelangganMembayarHariIni }} ||
-                            Tertagih: Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} User:
-                            {{ $totalUserHarian_semua }}
-                        </span>
+                <div class="running-text-container" style="margin-top: 20px; height: 60px;"> <!-- Height diperbesar -->
+                    <div class="">
+                        <div class="running-text" id="running-perbaikan">
+                            <!-- Teks perbaikan akan diisi di sini -->
+                        </div>
                     </div>
+
+                    <style>
+                        .running-text-container {
+                            width: 100%; /* Menyediakan lebar penuh */
+                            overflow: hidden; /* Menyembunyikan overflow */
+                            background-color: #000000; /* Warna latar belakang */
+                            border: 1px solid #ddd; /* Border */
+                            border-radius: 5px; /* Sudut melingkar */
+                            position: relative; /* Posisi relatif untuk animasi */
+                            height: 50px; /* Tinggi tetap untuk kontainer */
+                        }
+
+                        .running-text {
+                            display: inline-block; /* Pastikan tetap dalam satu baris */
+                            white-space: nowrap; /* Pastikan teks tidak membungkus */
+                            position: absolute; /* Memungkinkan pergerakan */
+                            will-change: transform; /* Mengoptimalkan animasi */
+                            transition: transform 5s linear; /* Durasi animasi */
+                        }
+                    </style>
+
+                    <script>
+                        // Ambil semua data perbaikan dalam format JSON dari Blade
+                        const perbaikanProses = @json($perbaikanProses);
+                        const runningTextElement = document.getElementById('running-perbaikan');
+                        let currentIndex = 0;
+
+                        // Fungsi untuk menampilkan data perbaikan satu per satu
+                        function displayRunningText() {
+                            // Ambil item saat ini
+                            const currentItem = perbaikanProses[currentIndex];
+
+                            // Buat teks untuk item saat ini
+                            const text = `ID Pelanggan: ${currentItem.id_plg} Nama: ${currentItem.nama_plg} Alamat: ${currentItem.alamat_plg}     No. Telepon: ${currentItem.no_telepon_plg}  Paket: ${currentItem.paket_plg}  ODP: ${currentItem.odp}    Maps: ${currentItem.maps}  Teknisi: ${currentItem.teknisi}  Keterangan: ${currentItem.keterangan}      Tanggal: ${new Date(currentItem.created_at).toLocaleDateString('id-ID')}`;
+
+
+
+
+                            // Tampilkan teks
+                            runningTextElement.innerText = text;
+
+                            // Set posisi awal di luar kanan
+                            runningTextElement.style.transform = `translateX(${window.innerWidth}px)`;
+
+                            // Atur transformasi untuk bergerak keluar dari kiri
+                            setTimeout(() => {
+                                runningTextElement.style.transform = `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
+                            }, 100); // Tunggu sebentar untuk menerapkan transform
+
+                            // Pindah ke item berikutnya
+                            currentIndex = (currentIndex + 1) % perbaikanProses.length; // Loop kembali ke awal jika mencapai akhir
+
+                            // Reset posisi setelah animasi selesai dan panggil fungsi lagi
+                            setTimeout(displayRunningText, 6000); // Ganti item setiap 6 detik (5 detik animasi + 1 detik jeda)
+                        }
+
+                        // Jalankan saat halaman dimuat
+                        window.onload = displayRunningText; // Jalankan saat halaman dimuat
+                    </script>
+
                 </div>
+
+
                 <br>
             </div>
 
@@ -237,7 +294,7 @@
                             style="width: 48%; margin-right: 10px;">
                             <h6 class="m-0 pl-3 font-weight-bold text-white">Tercapai</h6>
                             <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                 {{ number_format($hasil_target) }}
+                                {{ number_format($hasil_target) }}
                             </div>
                         </div>
                         <!--sisa tagihan-->
@@ -245,7 +302,7 @@
                             style="width: 48%;">
                             <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa</h6>
                             <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                 {{ number_format($sisa_target) }}
+                                {{ number_format($sisa_target) }}
                             </div>
                         </div>
                         <!-- Total Tagihan -->
@@ -253,7 +310,7 @@
                             style="width: 48%;">
                             <h6 class="m-0 pl-3 font-weight-bold text-white">Jumlah Target</h6>
                             <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                 {{ number_format($jumlah_target) }}
+                                {{ number_format($jumlah_target) }}
                             </div>
                         </div>
 
@@ -492,8 +549,8 @@
         </div>
 
         <!-- Modal Logout -->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
-            aria-hidden="true">
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

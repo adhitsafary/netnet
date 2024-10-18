@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('konten')
-<div class="  pl-5 pr-5 mb-4">
+    <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <form action="{{ route('rekap_pemasangan.index') }}" method="GET" class="form-inline mb-4 ">
             <div class="input-group">
@@ -17,7 +17,7 @@
 
         <div style="display: flex; justify-content: center;" class="mb-3">
 
-            <h5 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h5>
+            <h3 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h3>
         </div>
 
         <table class="table table-bordered  table-responsive" style="color: black;">
@@ -36,6 +36,7 @@
                     <th>Tanggal Pengajuan</th>
                     <th>Registrasi</th>
                     <th>Marketing</th>
+                    <th>Aktivasi</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -51,13 +52,33 @@
                         <td>{{ $item->tgl_aktivasi }}</td>
                         <td>{{ $item->paket_plg }}</td>
 
-                        <td>{{ $item->nominal }}</td>
+                        <td>{{ $item->harga_paket }}</td>
                         <td>{{ $item->jt }}</td>
                         <td>{{ $item->status }}</td>
 
                         <td>{{ $item->tgl_pengajuan }}</td>
                         <td>{{ $item->registrasi }}</td>
                         <td>{{ $item->marketing }}</td>
+                        <td>
+                            @php
+                                // Cek apakah pelanggan sudah diaktivasi
+                                $isActivated = \App\Models\Pelanggan::where('id_plg', $item->id_plg)->exists();
+                            @endphp
+
+                            @if ($isActivated)
+                                <!-- Jika sudah diaktivasi, tampilkan ikon ceklis tidak bisa diklik -->
+                                <img src="{{ asset('asset/img/ceklis2.png') }}" alt="Sudah Aktivasi"
+                                    style="width:45px; height:45px;">
+                            @else
+                                <!-- Jika belum diaktivasi, tampilkan gambar x dan tombol ceklis untuk aktivasi -->
+                                <a href="{{ route('rekap_pemasangan.aktivasi', $item->id) }}"
+                                    onclick="return confirm('Apakah Pelanggan Sudah Selesai Pasang?')">
+                                    <img src="{{ asset('asset/img/x.png') }}" alt="Belum Aktivasi"
+                                        style="width:40px; height:40px;">
+                                </a>
+                            @endif
+                        </td>
+
                         <td>
                             <a href="{{ route('rekap_pemasangan.edit', $item->id) }}"
                                 class="btn btn-warning btn-sm">Edit</a>
@@ -66,7 +87,8 @@
                                 class="d-inline-block">
                                 @csrf
                                 <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+
+                                    onclick="return confirm('Yakin ingin menghapus data ini?')" >Hapus</button>
                             </form>
                         </td>
 

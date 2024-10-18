@@ -90,8 +90,8 @@
                         </td>
                         <td>{{ ucfirst($item->status) }}</td> <!-- Menampilkan status -->
                         <td>
-                            @if ($item->status == 'pending')
-                                <!-- Hanya tampilkan tombol jika statusnya pending -->
+                            @if ($item->status == 'Proses')
+                                <!-- Hanya tampilkan tombol jika statusnya Proses -->
                                 <form action="{{ route('perbaikan.selesai', $item->id) }}" method="POST"
                                     class="d-inline-block">
                                     @csrf
