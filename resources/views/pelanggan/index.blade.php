@@ -31,10 +31,9 @@
                             {{ number_format($totalPembayaranIsolir, 0, ',', '.') }})</a>
 
                         <!-- Tombol Total Block -->
-                        <button class="btn btn-dark mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})')">
+                        <a href="{{ route('pelanggan.block') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold">
                             Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})
-                        </button>
+                        </a>
 
                         <!-- Tombol Total Unblock -->
                         <a href="{{ route('pelanggan.unblock') }}" class="btn btn-success mt-2  btn-lg  font-weight-bold">
@@ -152,6 +151,7 @@
                     <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
                     <input type="text" name="paket_plg" placeholder="Paket">
                     <input type="number" name="harga_paket" placeholder="Harga Paket">
+                    <input type="date" name="created_at" placeholder="Tanggal">
                     <select name="status_pembayaran">
                         <option value="">Semua Status</option>
                         <option value="sudah_bayar">Sudah Bayar</option>

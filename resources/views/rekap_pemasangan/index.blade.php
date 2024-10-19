@@ -17,7 +17,7 @@
 
         <div style="display: flex; justify-content: center;" class="mb-3">
 
-            <h3 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h3>
+            <h2 style="color: black;" class="font font-weight-bold">Data Rekap pemasangan</h2>
         </div>
 
         <table class="table table-bordered  table-responsive" style="color: black;">
@@ -55,7 +55,6 @@
                         <td>{{ $item->harga_paket }}</td>
                         <td>{{ $item->jt }}</td>
                         <td>{{ $item->status }}</td>
-
                         <td>{{ $item->tgl_pengajuan }}</td>
                         <td>{{ $item->registrasi }}</td>
                         <td>{{ $item->marketing }}</td>

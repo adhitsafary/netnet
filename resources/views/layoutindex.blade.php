@@ -177,6 +177,24 @@
                 </div>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap19" aria-expanded="true" aria-controls="collapseBootstrap19">
+                    <img src="{{ asset('asset/img/wa.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Peringatan Whatsapp</span>
+                </a>
+                <div id="collapseBootstrap19" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+
+                        <a class="collapse-item" href="/send-message">Peringatan WA</a>
+                    </div>
+
+                </div>
+            </li>
+
+
 
         </ul>
         <!-- Sidebar -->

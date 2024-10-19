@@ -13,7 +13,7 @@
                         <!-- Tombol Total Sudah Bayar -->
                         <button class="btn btn-info mt-2  btn-lg  font-weight-bold"
                             onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
-                            Total Sudah Bayar Filter: {{ $totalSudahBayar }} (Rp
+                            Total Sudah Bayar: {{ $totalSudahBayar }} (Rp
                             {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})
                         </button>
 
@@ -31,10 +31,9 @@
                             {{ number_format($totalPembayaranIsolir, 0, ',', '.') }})</a>
 
                         <!-- Tombol Total Block -->
-                        <button class="btn btn-dark mt-2  btn-lg  font-weight-bold"
-                            onclick="copyToClipboard('Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})')">
+                        <a href="{{ route('pelanggan.block') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold">
                             Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})
-                        </button>
+                        </a>
 
                         <!-- Tombol Total Unblock -->
                         <a href="{{ route('pelanggan.unblock') }}" class="btn btn-success mt-2  btn-lg  font-weight-bold">
@@ -52,7 +51,7 @@
 
                         <!-- Tombol Total Keseluruhan -->
                         <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;"
+                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;"
                             onclick="copyToClipboard('Total Keseluruhan: Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User: {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}')">
                             Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
                             User :

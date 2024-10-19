@@ -47,7 +47,6 @@
             <label for="tgl_aktivasi" class=" mt-2">Tanggal Aktivasi :</label>
             <input type="date" name="tgl_aktivasi" required class="form-control">
 
-
             <!-- Input jumlah -->
             <label for="registrasi" class=" mt-2">Registrasi :</label>
             <input type="text" name="registrasi" required class="form-control">
@@ -76,7 +75,6 @@
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-sm">Simpan</button> <br><br>
         </form>
-
 
     </div>
 

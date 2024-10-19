@@ -8,34 +8,89 @@
                 <!-- Form Pencarian -->
 
                 <div class="mb-2 ml-3">
+                    <!-- Tampilkan Hasil Filter -->
+                    <div>
+                        <!-- Tombol Total Sudah Bayar -->
+                        <button class="btn btn-info mt-2  btn-lg  font-weight-bold"
+                            onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
+                            Total Sudah Bayar: {{ $totalSudahBayar }} (Rp
+                            {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})
+                        </button>
 
+                        <!-- Tombol Total Belum Bayar -->
+                        <button class="btn btn-warning mt-2  btn-lg  font-weight-bold"
+                            onclick="copyToClipboard('Total Belum Bayar: {{ $totalBelumBayar }} (Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})')">
+                            Total Belum Bayar: {{ $totalBelumBayar }} (Rp
+                            {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})
+                        </button>
 
+                        <!-- Tombol Total Isolir -->
 
+                        <a href="{{ route('pelanggan.isolir') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold"> Total
+                            Isolir: {{ $totalIsolir }} (Rp
+                            {{ number_format($totalPembayaranIsolir, 0, ',', '.') }})</a>
 
+                        <!-- Tombol Total Block -->
+                        <a href="{{ route('pelanggan.block') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold">
+                            Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})
+                        </a>
 
-                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;">
-                        Pelanggan(Filter) : Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User :
-                        {{ number_format($totalPelangganfilter, 0, ',', '.') }}
-                    </button>
+                        <!-- Tombol Total Unblock -->
+                        <a href="{{ route('pelanggan.unblock') }}" class="btn btn-success mt-2  btn-lg  font-weight-bold">
+                            Total Unblock: {{ $totalUnblock }} (Rp
+                            {{ number_format($totalPembayaranUnblock, 0, ',', '.') }})
+                        </a>
 
-                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #ffffff;">
-                        Total keseluruhan : {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User :
-                        {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
-                    </button>
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;"
+                            onclick="copyToClipboard('Pelanggan (Filter): Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User: {{ number_format($totalPelangganfilter, 0, ',', '.') }}')">
+                            Total Filter: Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User
+                            :
+                            {{ number_format($totalPelangganfilter, 0, ',', '.') }}
+                        </button>
 
+                        <!-- Tombol Total Keseluruhan -->
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;"
+                            onclick="copyToClipboard('Total Keseluruhan: Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User: {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}')">
+                            Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
+                            User :
+                            {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
+                        </button>
 
-                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;">
-                        Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
-                        {{ number_format($sisaUser, 0, ',', '.') }}
-                    </button>
-                    <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                        style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;">
-                        Total Masuk : {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
-                        {{ number_format($totalPelangganBayar, 0, ',', '.') }}
-                    </button>
+                        <!-- Tombol Sisa Pembayaran -->
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;"
+                            onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
+                            Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
+                            {{ number_format($sisaUser, 0, ',', '.') }}
+                        </button>
+
+                        <!-- Tombol Total Masuk -->
+                        <button class="btn btn-primary mt-2 btn-lg  font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;"
+                            onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
+                            Total Masuk : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
+                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                        </button>
+                    </div>
+
+                    <!-- Tambahkan script JavaScript untuk menyalin data ke clipboard -->
+                    <script>
+                        function copyToClipboard(text) {
+                            // Membuat elemen input sementara untuk menyalin teks
+                            var tempInput = document.createElement('input');
+                            tempInput.value = text;
+                            document.body.appendChild(tempInput);
+                            tempInput.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(tempInput);
+
+                            // Tampilkan alert sebagai notifikasi
+                            alert('Teks disalin: ' + text);
+                        }
+                    </script>
+
                 </div>
             </div>
         </div>

@@ -112,9 +112,11 @@ Route::get('/pelanggan/export/{format}', [PelangganController::class, 'export'])
 Route::get('/broadcast', [BroadcastController::class, 'index'])->name('broadcast.index');
 Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broadcast.send');
 
-//Whatsapp Brodcast
-Route::get('/send-message', [MessageController::class, 'create'])->name('whatsapp.send-message');
+// Rute untuk menampilkan halaman pengiriman pesan
+Route::get('/send-message', [MessageController::class, 'create'])->name('message.create');
+// Rute untuk menyimpan pesan
 Route::post('/send-message', [MessageController::class, 'store'])->name('message.store');
+
 
 //PEMBAYARAN GLOBAL
 Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');

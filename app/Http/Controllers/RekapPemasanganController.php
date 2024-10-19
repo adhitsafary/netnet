@@ -61,6 +61,42 @@ class RekapPemasanganController extends Controller
 
     public function store(Request $request)
     {
+        $rekap_pemasangan = new RekapPemasanganModel();
+
+        // Input data dari form
+        $rekap_pemasangan->nik = $request->nik;
+        $rekap_pemasangan->nama = $request->nama;
+        $rekap_pemasangan->alamat = $request->alamat;
+        $rekap_pemasangan->no_telpon = $request->no_telpon;
+        $rekap_pemasangan->paket_plg = $request->paket_plg;
+        $rekap_pemasangan->harga_paket = $request->harga_paket;
+        $rekap_pemasangan->jt = \Carbon\Carbon::parse($request->tgl_aktivasi)->format('d');
+        $rekap_pemasangan->status = 'Open';
+        $rekap_pemasangan->tgl_pengajuan = $request->tgl_pengajuan;
+        $rekap_pemasangan->registrasi = $request->registrasi;
+        $rekap_pemasangan->marketing = $request->marketing;
+        $rekap_pemasangan->keterangan_plg = $request->keterangan_plg;
+        $rekap_pemasangan->id_plg = $request->id_plg;
+        $rekap_pemasangan->odp = $request->odp;
+        $rekap_pemasangan->longitude = $request->longitude;
+        $rekap_pemasangan->latitude = $request->latitude;
+
+        // tgl_aktivasi opsional
+        if ($request->filled('tgl_aktivasi')) {
+            $rekap_pemasangan->tgl_aktivasi = $request->tgl_aktivasi;
+        }
+
+        $rekap_pemasangan->save();
+
+        return redirect()->route('rekap_pemasangan.index')->with('success', 'Data rekap_pemasangan berhasil disimpan.');
+    }
+
+
+
+
+
+    public function store1(Request $request)
+    {
 
         $rekap_pemasangan = new RekapPemasanganModel();
 
@@ -120,18 +156,18 @@ class RekapPemasanganController extends Controller
         $pelanggan->longitude = $rekapPemasangan->longitude;
         $pelanggan->aktivasi_plg = $rekapPemasangan->tgl_aktivasi;
         $pelanggan->latitude = $rekapPemasangan->latitude;
-        //$pelanggan->tgl_tagih_plg = \Carbon\Carbon::now()->format('d'); // Tagih di hari ini
-        $pelanggan->tgl_tagih_plg = \Carbon\Carbon::parse($rekapPemasangan->tgl_aktivasi)->format('d'); //ini tgl tagih pelanggan
+        $pelanggan->tgl_tagih_plg = \Carbon\Carbon::now()->format('d'); // Tagih di hari ini
+        // $pelanggan->tgl_tagih_plg = \Carbon\Carbon::parse($rekapPemasangan->tgl_aktivasi)->format('d'); //ini tgl tagih pelanggan
         $pelanggan->status_pembayaran = 'PSB'; // Status awal PSB
 
         $pelanggan->save();
 
-        return redirect()->route('pelanggan.psb')->with('success', 'Pelanggan berhasil diaktivasi.');
+        return redirect()->route('rekap_pemasangan.index')->with('success', 'Pelanggan berhasil diaktivasi.');
     }
 
 
 
-    public function store1(Request $request)
+    public function store2(Request $request)
     {
 
         $rekap_pemasangan = new RekapPemasanganModel();
