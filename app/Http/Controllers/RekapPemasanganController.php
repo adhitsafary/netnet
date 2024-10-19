@@ -92,9 +92,6 @@ class RekapPemasanganController extends Controller
     }
 
 
-
-
-
     public function store1(Request $request)
     {
 
@@ -239,4 +236,19 @@ class RekapPemasanganController extends Controller
 
         return redirect()->route('rekap_pemasangan.index');
     }
+
+    public function updateTglTagihPlg()
+    {
+        // Ambil semua pelanggan
+        $pelanggans = Pelanggan::all();
+
+        foreach ($pelanggans as $pelanggan) {
+
+            if ($pelanggan->tgl_tagih_plg == ' jadi tanggal sekarang') {
+
+
+            }
+        }
+    }
+
 }

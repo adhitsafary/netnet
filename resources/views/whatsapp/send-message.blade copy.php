@@ -93,8 +93,8 @@
                 message += `Ket : *BELUM TERBAYAR*\n`;
                 message += `INFO TAMBAHAN:\n`;
                 message += 'Dimohon untuk Melampirkan bukti pembayaran apabila sudah melakukan pembayaran.\n';
-                message += 'APABILA TELAT MELAKUKAN PEMBAYARAN IURAN WIFI AKAN DIKENAKAN PEMUTUSAN INTERNET SEMENTARA YAITU (ISOLIR)🙏🏻\n\n';
-                message += `PEMBAYARAN:\n`;
+                message += 'Dan Apabila Telat Melakukan Pembayaran Iuran Wifi Akan di Kenakan Pemutusan Sementara Internet Yaitu (Isolir)\n\n';
+                message += `PEMBAYARAN:\n\n`;
                 message += `- via transfer : rek BCA : 3770198576 atas nama *Ruslandi* \n`;
                 message += `- *Jemput Pembayaran dikenakan biaya jasa pengambilan Rp.5000*\n\n`;
                 message += `Admin     : 0857-5922-9720 (Agis)\n`;
