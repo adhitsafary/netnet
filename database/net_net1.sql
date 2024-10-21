@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Okt 2024 pada 11.31
--- Versi server: 10.4.24-MariaDB
--- Versi PHP: 8.1.6
+-- Generation Time: Oct 21, 2024 at 07:56 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.1.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,14 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `absen`
+-- Table structure for table `absen`
 --
 
 CREATE TABLE `absen` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jam_masuk` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jam_keluar` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jam_masuk` varchar(255) NOT NULL,
+  `jam_keluar` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -39,30 +39,30 @@ CREATE TABLE `absen` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bayar_pelanggan`
+-- Table structure for table `bayar_pelanggan`
 --
 
 CREATE TABLE `bayar_pelanggan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `pelanggan_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aktivasi_plg` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `paket_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pelanggan_id` varchar(255) NOT NULL,
+  `id_plg` varchar(255) NOT NULL,
+  `nama_plg` varchar(255) NOT NULL,
+  `alamat_plg` varchar(255) NOT NULL,
+  `no_telepon_plg` varchar(255) NOT NULL,
+  `aktivasi_plg` varchar(100) DEFAULT NULL,
+  `paket_plg` varchar(255) NOT NULL,
   `jumlah_pembayaran` int(11) NOT NULL,
-  `tgl_tagih_plg` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tanggal_pembayaran` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `metode_transaksi` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tgl_tagih_plg` varchar(100) DEFAULT NULL,
+  `tanggal_pembayaran` varchar(100) NOT NULL,
+  `metode_transaksi` varchar(100) NOT NULL,
+  `keterangan_plg` varchar(255) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `admin_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `admin_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `bayar_pelanggan`
+-- Dumping data for table `bayar_pelanggan`
 --
 
 INSERT INTO `bayar_pelanggan` (`id`, `pelanggan_id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `aktivasi_plg`, `paket_plg`, `jumlah_pembayaran`, `tgl_tagih_plg`, `tanggal_pembayaran`, `metode_transaksi`, `keterangan_plg`, `updated_at`, `created_at`, `admin_name`) VALUES
@@ -446,45 +446,55 @@ INSERT INTO `bayar_pelanggan` (`id`, `pelanggan_id`, `id_plg`, `nama_plg`, `alam
 (440, '216', 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-19 08:51:48', '2024-10-19 08:51:48', 'Agisna'),
 (441, '578', 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '2024-10-19', 'CASH', NULL, '2024-10-19 08:52:03', '2024-10-19 08:52:03', 'Agisna'),
 (442, '879', 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '2024-10-19', 'CASH', NULL, '2024-10-19 08:52:15', '2024-10-19 08:52:15', 'Agisna'),
-(443, '885', 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '2024-10-21', 'CASH', NULL, '2024-10-19 08:52:27', '2024-10-19 08:52:27', 'Agisna');
+(443, '885', 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '2024-10-21', 'CASH', NULL, '2024-10-19 08:52:27', '2024-10-19 08:52:27', 'Agisna'),
+(444, '481', 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '2024-10-15', 'TF', NULL, '2024-10-20 04:30:15', '2024-10-20 04:30:15', 'Agisna'),
+(445, '580', 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:30:58', '2024-10-20 04:30:58', 'Agisna'),
+(446, '801', 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:31:15', '2024-10-20 04:31:15', 'Agisna'),
+(447, '440', 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:31:35', '2024-10-20 04:31:35', 'Agisna'),
+(448, '354', 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:32:29', '2024-10-20 04:32:29', 'Agisna'),
+(449, '520', 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '2024-10-20', 'TF', NULL, '2024-10-20 04:33:11', '2024-10-20 04:33:11', 'Agisna'),
+(450, '800', 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:33:52', '2024-10-20 04:33:52', 'Agisna'),
+(451, '208', 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:34:26', '2024-10-20 04:34:26', 'Agisna'),
+(452, '35', 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:35:37', '2024-10-20 04:35:37', 'Agisna'),
+(453, '965', 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '2024-10-20', 'TF', NULL, '2024-10-20 04:36:14', '2024-10-20 04:36:14', 'Agisna');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `isolir`
+-- Table structure for table `isolir`
 --
 
 CREATE TABLE `isolir` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `aktivasi_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `paket_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `harga_paket` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tgl_tagih_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `odp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'isolir',
+  `id_plg` varchar(255) NOT NULL,
+  `nama_plg` varchar(255) NOT NULL,
+  `alamat_plg` varchar(255) NOT NULL,
+  `no_telepon_plg` varchar(255) DEFAULT NULL,
+  `aktivasi_plg` varchar(255) DEFAULT NULL,
+  `paket_plg` varchar(255) DEFAULT NULL,
+  `harga_paket` varchar(255) DEFAULT NULL,
+  `tgl_tagih_plg` varchar(255) DEFAULT NULL,
+  `keterangan_plg` varchar(255) DEFAULT NULL,
+  `odp` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `status_pembayaran` varchar(255) DEFAULT 'isolir',
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -492,25 +502,25 @@ CREATE TABLE `isolir` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `karyawan`
+-- Table structure for table `karyawan`
 --
 
 CREATE TABLE `karyawan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `posisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mulai_kerja` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `no_telepon` varchar(255) NOT NULL,
+  `posisi` varchar(255) NOT NULL,
+  `mulai_kerja` varchar(255) NOT NULL,
+  `keterangan` varchar(255) DEFAULT NULL,
   `gaji` int(100) NOT NULL,
-  `tgl_gajihan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_gajihan` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `karyawan`
+-- Dumping data for table `karyawan`
 --
 
 INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `no_telepon`, `posisi`, `mulai_kerja`, `keterangan`, `gaji`, `tgl_gajihan`, `created_at`, `updated_at`) VALUES
@@ -519,22 +529,22 @@ INSERT INTO `karyawan` (`id`, `nama`, `alamat`, `no_telepon`, `posisi`, `mulai_k
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kasbon`
+-- Table structure for table `kasbon`
 --
 
 CREATE TABLE `kasbon` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_karyawan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_karyawan` varchar(100) NOT NULL,
+  `nama` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
-  `tanggal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tanggal` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `kasbon`
+-- Dumping data for table `kasbon`
 --
 
 INSERT INTO `kasbon` (`id`, `id_karyawan`, `nama`, `jumlah`, `tanggal`, `keterangan`, `created_at`, `updated_at`) VALUES
@@ -544,17 +554,17 @@ INSERT INTO `kasbon` (`id`, `id_karyawan`, `nama`, `jumlah`, `tanggal`, `keteran
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -617,54 +627,54 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_reset_tokens`
+-- Table structure for table `password_reset_tokens`
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pelanggan`
+-- Table structure for table `pelanggan`
 --
 
 CREATE TABLE `pelanggan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aktivasi_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paket_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_plg` varchar(255) NOT NULL,
+  `nama_plg` varchar(255) NOT NULL,
+  `alamat_plg` varchar(255) NOT NULL,
+  `no_telepon_plg` varchar(255) NOT NULL,
+  `aktivasi_plg` varchar(255) NOT NULL,
+  `paket_plg` varchar(255) NOT NULL,
   `harga_paket` int(255) NOT NULL,
-  `tgl_tagih_plg` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `odp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tgl_tagih_plg` varchar(100) DEFAULT NULL,
+  `keterangan_plg` varchar(255) DEFAULT NULL,
+  `odp` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `status_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Sudah Bayar'
+  `status_pembayaran` varchar(255) DEFAULT 'Sudah Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `pelanggan`
+-- Dumping data for table `pelanggan`
 --
 
 INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `aktivasi_plg`, `paket_plg`, `harga_paket`, `tgl_tagih_plg`, `keterangan_plg`, `odp`, `longitude`, `latitude`, `updated_at`, `created_at`, `status_pembayaran`) VALUES
@@ -673,7 +683,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (4, 'NNDG4', 'Abdul', 'Perum Pesona Limbangan', '81284258119', ' ', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (5, 'NNDG5', 'Abi Mulyadi', 'Kp. Cisarua Legok', '85861655538', '2022-07-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (6, 'NNDG6', 'Abdullah', 'Kp. Cisarua', '85559728210', '2022-08-03', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(8, 'NNDG8', 'Acep Usman', 'Kp. Citoe', '82120467768', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-19 01:44:25', '2024-10-10 14:31:43', 'sudah bayar'),
+(8, 'NNDG8', 'Acep Usman', 'Kp. Citoe', '82120467768', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (9, 'NNDG9', 'adang/adam', 'Kp. Cisarua', '85723131845', '2022-05-10', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (12, 'NNDG12', 'Adi', 'Kp. Nyalidung Goalpara', ' ', '2022-06-30', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (13, 'NNDG13', 'Ade Suparman (up 5 to10 mbps)', 'Kp. Cibeurem Pasir', '81224321320', '2022-08-19', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -694,7 +704,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (30, 'NNDG30', 'Akbar', 'Kp. Kekenceng', '85879490648', '2022-09-20', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (32, 'NNDG32', 'Anan ', 'Kp. Cidadap', '85659909298', '2022-08-11', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (34, 'NNDG34', 'Andri Suherli', 'Kp. Cidadap Rt 03/02', '81572773296', '2022-08-30', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(35, 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(35, 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:24', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (36, 'NNDG36', 'Aneu Sri Indrawati', 'Kp. Biru', '85811113970', '2022-08-27', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (37, 'NNDG37', 'Angga Bustomi', 'Kp. Gentong Pasir', '85863978566', '2022-09-16', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:05', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (38, 'NNDG38', 'Anton / Ayuna ', 'Kp. Cikaret', '85798764284', '2022-05-01', '1', 115000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -822,13 +832,13 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (204, 'NNDG204', 'Maman', 'Kp. Selaater', '', '2023-12-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (206, 'NNDG206', 'Mariam', 'Kp. Pasirhalang', '85872323656', '2022-03-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (207, 'NNDG207', 'Marsonocbm', 'Kp. Cibeureum', '85880333401', '/05/2022', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(208, 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(208, 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (210, 'NNDG210', 'Masrifah / Imas down to 5 mbps', 'Kp. Sayang', '85793127135', '2022-12-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (211, 'NNDG211', 'Mida', 'Kp. Astana Genteng', '85723181787', '2022-08-09', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (212, 'NNDG212', 'Mila', 'Perum Pesona Limbangan', '85781461240', '/05/2022', '2', 165000, '2', 'mlam', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (213, 'NNDG213', 'Mimah', 'Kp. Cigadog Langensari', '87721602735', '2022-08-11', '2', 165000, '8', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (214, 'NNDG214', 'Mimi Safitri', 'Kp. Cisarua', '81282358887', '2022-08-30', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(216, 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 08:51:48', '2024-10-10 14:31:43', 'sudah bayar'),
+(216, 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (218, 'NNDG218', 'Muhamad Gunawan down to 5mbps', 'Perum Bali Residen Blok F No 16', '87800140607', '2022-12-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (220, 'NNDG220', 'Muchtar', 'Perum Pesona Limbangan', '85722223830', '2022-05-26', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (222, 'NNDG222', 'Nana', 'Kp. Citoe', '81298411285', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -928,8 +938,8 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (351, 'NNDG351', 'Yandi Sopian', 'Kp. Cisarua Legok', '81572766837', '2022-10-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (352, 'NNDG352', 'Yanti cibayawak', 'Kp. Cibayawak', '85798960996', '2022-08-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (353, 'NNDG353', 'Yanti', 'Kp. Cisarua Pasir', '85884712518', '2022-09-23', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(354, 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(356, 'NNDG356', 'Yesibali', 'Perum Bali residen', '85773883929', '2022-06-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 01:46:04', '2024-10-10 14:31:43', 'sudah bayar'),
+(354, 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(356, 'NNDG356', 'Yesibali', 'Perum Bali residen', '85773883929', '2022-06-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (360, 'NNDG360', 'Yudha Kusuma Putra', 'Perum Aluna 2 Blok H No 10 Jn Merah Delima', '81395667374', '2022-06-05', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (362, 'NNDG362', 'Yuni alinda', 'Kp. Alinda', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (363, 'NNDG363', 'Yuni Melindawati', 'Kp. Pasir Halang', '81385092285', '2022-10-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -993,7 +1003,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (436, 'NNDG436', 'harley timotius', 'Perum pesona limbangan goalpara', '8,95326E+11', '27/03/2023', '2', 165000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (438, 'NNDG438', 'rini puspita', 'cidadap pangkalan', '83806211790', '29/03/2023', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (439, 'NNDG439', 'anisa arsita / irek down to 5mbps', 'Kp. gintung 01/005 Limbangan', '81287065995', '29/03/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(440, 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(440, 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (441, 'NNDG441', 'Anggi Supriyadi', 'Kp. Astana Genteng Rt 02/16', '8562398159', '2023-01-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (442, 'NNDG442', 'Annisa Ramadhani', 'Kp. Nagrak Tower gg. Paud mangga rt 03/07', '85793801027', '2023-06-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (443, 'NNDG443', 'dandy irawan', 'Kp. Tegal Huni (belakang madrasah)', '85163008278', '2023-07-04', '2', 165000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1023,17 +1033,17 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (476, 'NNDG476', 'Iman taufik ', 'Kp. cikaret', '085793512775', '2023-12-05', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-14 09:23:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (478, 'NNDG478', 'armand mubarok', 'Kp. maduhur', '085866491713', '16/05/2023', '4', 305000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:55', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (480, 'NNDG480', 'lilis rohayati', 'Kp. baru genteng', '\'081295988346', '17/05/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(481, 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-17 01:05:49', '2024-10-10 14:31:43', 'Block'),
+(481, 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (482, 'NNDG482', 'dewi ratnasari', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (483, 'NNDG483', 'hani kurnia', 'Kp. cimahpar gg.revolusi blk polsek', '085811850469', '15/05/2023', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(484, 'NNDG484', 'Nanang', 'Kp. lemahduhur', '085697231328', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:14:37', '2024-10-10 14:31:43', 'sudah bayar'),
-(485, 'NNDG485', 'supyadin', 'Kp. lemahduhur', '085795444207', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:14:50', '2024-10-10 14:31:43', 'sudah bayar'),
+(484, 'NNDG484', 'Nanang', 'Kp. lemahduhur', '085697231328', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(485, 'NNDG485', 'supyadin', 'Kp. lemahduhur', '085795444207', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (486, 'NNDG486', 'nety aulia nuraisah', 'Kp. cidadap', '085863954146', '22/05/2023', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (488, 'NNDG488', 'nani sumarni', 'Kp. babakan limbangan blk perum bali', '081345176244', '22/05/2023', '3', 205000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (489, 'NNDG489', 'yusuf', 'Kp. cikaret (situ cijeruk)', '085794634622', '22/05/2023', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (490, 'NNDG490', 'Dede hermawan', 'Kp. Limbangan', '', '', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (491, 'NNDG491', 'Heni Handayani', 'Kp. Limbangan', '081573644223', 'unknown', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(492, 'NNDG492', 'muhamad amirudin', 'Kp. Cisero', '082316899461', '24/05/2023', '2', 165000, '24', '', NULL, NULL, NULL, '2024-10-19 05:26:12', '2024-10-10 14:31:43', 'sudah bayar'),
+(492, 'NNDG492', 'muhamad amirudin', 'Kp. Cisero', '082316899461', '24/05/2023', '2', 165000, '24', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (493, 'NNDG493', 'ade misbah', 'Kp. cisero', '081573392281', '24/05/2023', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (494, 'NNDG494', 'Heni Arlina/Cuttie', 'gg. Belbar', '081510042125', '25/05/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (495, 'NNDG495', 'Rina marlina', 'Kp. Legok Astana Genteng Rt03/16', '085711970027', '26/05/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1042,7 +1052,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (499, 'NNDG499', 'irwan purnama', 'Kp. cibereum', '081283674866', '07/05/2023', '1', 125000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (501, 'NNDG501', 'wisnu', 'Kp. pasirhalang', '085724918676', '30/05/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (502, 'NNDG502', 'putri', 'Kp. asgen 01/16', '085721206156', '30/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(503, 'NNDG503', 'nurjanah', 'Kp. maduhur', '081573434841', '31/05/2023', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-19 07:15:37', '2024-10-10 14:31:43', 'sudah bayar'),
+(503, 'NNDG503', 'nurjanah', 'Kp. maduhur', '081573434841', '31/05/2023', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (504, 'NNDG504', 'yuddi hari pantjawardi', 'Kp. cigadog margaluyu', '081280033701', '31/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (505, 'NNDG505', 'supyan supriyadi', 'Kp. cigadog margaluyu', '081563159690', '31/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (507, 'NNDG507', 'Ridwan Kurniawan', 'Kp. Gudawang kbn.pedes', '082112098373', '07/06/2023', '3+', 265000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1056,7 +1066,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (517, 'NNDG517', 'agus supriatna', 'Kp. Pasir muncang', '081462368700', '15/06/2023', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (518, 'NNDG518', 'dhika destriana', 'Kp. limbangan', '089657777074', '19/06/2023', '3', 205000, '19', '', NULL, NULL, NULL, '2024-10-15 02:43:41', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (519, 'NNDG519', 'Siti Fitriani', 'Kp. Gintung', '085720614904', '19/06/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-18 06:49:21', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(520, 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(520, 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (521, 'NNDG521', 'M Ruli Rusliyansyah / Riana rin rin', 'Kp. cidadap pangkalan', '081323428046', '23/06/2023', '3', 205000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (522, 'NNDG522', 'Warda Tillah', 'Kp. cidadap pasantren', '083143629582', '23/06/2023', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (523, 'NNDG523', 'lia marlia', 'gg. Belbar', '085724872022', '23/06/2023', '3', 205000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1078,14 +1088,14 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (544, 'NNDG544', 'rismawati', 'Kp. gintung 05/03', '081572736572', '17/07/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (545, 'NNDG545', 'ai komariah', 'Kp. gintung 05/03', '085759401088', '17/07/2023', '1', 125000, '14', '', NULL, NULL, NULL, '2024-10-15 02:11:48', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (546, 'NNDG546', 'sopiah', 'Kp. gintung 05/03', '085219873678', '17/07/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(547, 'NNDG547', 'm endang jamahir', 'Kp. cibayawak 03/06', '085864326369', '18/07/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(548, 'NNDG548', 'lia nagrak tower', 'Kp. Nagrak tower', '085724754765', '18/07/2023', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-19 01:45:06', '2024-10-10 14:31:43', 'sudah bayar'),
+(547, 'NNDG547', 'm endang jamahir', 'Kp. cibayawak 03/06', '085864326369', '18/07/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Isolir'),
+(548, 'NNDG548', 'lia nagrak tower', 'Kp. Nagrak tower', '085724754765', '18/07/2023', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (549, 'NNDG549', 'Andri Andrian/ Yudi Liandri ', 'Kp. Cibereum/Kp. Subang', '081288166697', '19/07/2023', '2', 165000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (550, 'NNDG550', 'a kosasih', 'Kp. cibereum tengah', '081802125830', '20/07/2023', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (551, 'NNDG551', 'isma fauziah', 'Kp. ciloa', '083811999054', '20/07/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (553, 'NNDG553', 'rani suryani', 'Kp. Pasirmuncang', 'voucer', 'voucer', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (554, 'NNDG554', 'rani suryani', 'Kp. Pasirmuncang', '085724905721', '25/07/203', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(556, 'NNDG556', 'rika nurmalasari', 'Kp. maduhur', '085863193667', '25/07/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 07:15:05', '2024-10-10 14:31:43', 'sudah bayar'),
+(556, 'NNDG556', 'rika nurmalasari', 'Kp. maduhur', '085863193667', '25/07/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (557, 'NNDG557', 'ayu / yayu anggraeni', 'Kp astana genteng', '085782149169', '26/07/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (559, 'NNDG559', 'nandri irawan', 'Kp. cidadap pangkalan', '085871155554', '27/07/2023', '2+', 175000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (560, 'NNDG560', 'husin', 'Kp. cigadog margaluyu', '085798405276', '28/07/2023', '1', 125000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1103,8 +1113,8 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (575, 'NNDG575', 'ai nuraeni', 'Kp nagrak mi cimonyet', '083891831475', '12/08/2023', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (576, 'NNDG576', 'henti fauziah', 'Kp nagraak legok', '085864316005', '12/08/2023', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (577, 'NNDG577', 'Muhamad Naufal Lutfi', 'Perum Pesona Limbangan blok a1 no.7', '083870735530', '15/08/2023', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(578, 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 08:52:03', '2024-10-10 14:31:43', 'sudah bayar'),
-(580, 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(578, 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(580, 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (581, 'NNDG581', 'ayi riskan', 'Kp. Selaater', '085722726722', '22/08/2023', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (584, 'NNDG584', 'Alvian', 'Perum Setiabudi blok w5 i5', '082258682775', '24/08/2023', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (585, 'NNDG585', 'ali basri', 'Kp. Sasagaran cihuis', '085859745975', '24/08/2023', '2', 165000, '6', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1155,7 +1165,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (636, 'NNDG636', 'Mutiara Wahyuni down to 5 mbps', 'Kp. Sinagarpapak psrhlg  o1/04', '081313445546', '13/10/2023', '1', 125000, '13', '', NULL, NULL, NULL, '2024-10-14 09:23:23', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (637, 'NNDG637', 'Ahmad Dian', 'Kp. Gintung (Dekat Yuli)', '085797800095', '14/10/2023', '2', 165000, '14', '', NULL, NULL, NULL, '2024-10-15 02:11:49', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (639, 'NNDG639', 'Wahyudin', 'Kp. Cisarua Legok', '081563663513', '17/10/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:48', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(640, 'NNDG640', 'Eka Kartika', 'Kp. Subang Jaya', '085860271068', '19/10/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(640, 'NNDG640', 'Eka Kartika', 'Kp. Subang Jaya', '085860271068', '19/10/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (641, 'NNDG641', 'Farida Ariani', 'Kp. Gentong Sukaraja (blambir)', '085722750908/0815-6484-3660', '19/10/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (642, 'NNDG642', 'Andri ', 'Kp. Gintung', '082193339387', '21/10/2023', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (644, 'NNDG644', 'Robi iskandar', 'jl.sukaraja Sowroom (samping gg.teropong)', '085863339781', '23/10/2023', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1207,7 +1217,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (696, 'NNDG696', 'Intan  ', 'Perum Limbangan', '0881025696409', '17/12/2023', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:48', '2024-10-10 14:31:43', 'Sudah Bayar');
 INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `aktivasi_plg`, `paket_plg`, `harga_paket`, `tgl_tagih_plg`, `keterangan_plg`, `odp`, `longitude`, `latitude`, `updated_at`, `created_at`, `status_pembayaran`) VALUES
 (697, 'NNDG697', 'Siti Mariam', 'Kp.Cibayawak', '081218941731', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(699, 'NNDG699', 'Ujang Z ', 'Perum Pesona Limbangan', '085720003789', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(699, 'NNDG699', 'Ujang Z ', 'Perum Pesona Limbangan', '085720003789', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (700, 'NNDG700', 'Kokom Komariah', 'Kp.Pasir Muncang', '085872067581', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (701, 'NNDG701', 'Rival Zulkarnaen R', 'Kp.Pasir Muncang', '085819603741', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-16 10:25:31', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (702, 'NNDG702', 'Reza mahendra/Rini', 'Kp.Nyalindung', '085864253582', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1296,8 +1306,8 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (797, 'NNDG797', 'Anisa nurul meilani', 'Kp. Nagraka Tower', '0895364377685', '16/03/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (798, 'NNDG798', 'Susi', 'Kp.Buniwangi', '081282202726', '16/03/2024', '3', 205000, '16', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (799, 'NNDG799', 'Winda Ningsih', 'Kp. Buniwangi', '081381565244', '16/03/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(800, 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(801, 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(800, 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(801, 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (802, 'NNDG802', 'Yudi,S.PD', 'Kp.Sayang', '081563508737', '25/03/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (803, 'NNDG803', 'Andri', 'Perum Tando 1', '085601603152', '26/03/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (804, 'NNDG804', 'Yuliyanti Siti Amalia', 'Kp. Sinagarpapak', '081320926688/085211340041', '27/05/2024', '1', 125000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1318,15 +1328,15 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (824, 'NNDG824', 'Neneng ', 'Kp. Genteng', '085212720918', '16/04/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (825, 'NNDG825', 'Salman Alfarisi', 'Kp. Limbangan', '083811533638', '18/04/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (826, 'NNDG826', 'Hendri Maulana Sigit', 'Kp. Cibereum', '085523933395', '18/04/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(827, 'NNDG827', 'Midi', 'Kp. Citoe', '', '18/04/2024', '1', 50000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(828, 'NNDG828', 'Fajri Siswanto', 'Kp. Cisarua Legok', '0852 8215 6691', '19/04/2024', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-19 01:44:52', '2024-10-10 14:31:43', 'sudah bayar'),
-(829, 'NNDG829', 'Ujang Kuswandi', 'Kp. Gintung', '085717134583', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(830, 'NNDG830', 'Mirawati', 'Kp. Citoe', '083125854126', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(827, 'NNDG827', 'Midi', 'Kp. Citoe', '', '18/04/2024', '1', 50000, '18', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Isolir'),
+(828, 'NNDG828', 'Fajri Siswanto', 'Kp. Cisarua Legok', '0852 8215 6691', '19/04/2024', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(829, 'NNDG829', 'Ujang Kuswandi', 'Kp. Gintung', '085717134583', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
+(830, 'NNDG830', 'Mirawati', 'Kp. Citoe', '083125854126', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (831, 'NNDG831', 'Herman Hermawan', 'Kp. Kelapa Condong', '085794251710', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(833, 'NNDG833', 'Dudun Burhanudin', 'Kp. Citoe 05/05', '085872110205', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 07:07:13', '2024-10-10 14:31:43', 'sudah bayar'),
+(833, 'NNDG833', 'Dudun Burhanudin', 'Kp. Citoe 05/05', '085872110205', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (834, 'NNDG834', 'Rahmi Latipul Hasanah', 'Perum Aluna 2 Jalan merah delima blok H no 7', '082117682655', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (835, 'NNDG835', 'Baban Sobandi', 'Kp. Cibereum Tengah', '085817928651', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(836, 'NNDG836', 'Dhany Marualudin', 'Kp.Citoe', '085863420276', '21/04/2024', '1', 100000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(836, 'NNDG836', 'Dhany Marualudin', 'Kp.Citoe', '085863420276', '21/04/2024', '1', 100000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (837, 'NNDG837', 'Cici Amalia', 'Kp. Cisarua Legok', '085748089308', '22/04/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (838, 'NNDG838', 'Harun Maulana', 'Kp. Cisarua Legok', '081574141717', '22/04/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (839, 'NNDG839', 'Maulana Yusup Hamdani', 'Kp. Cigadog margaluyu ', '085798641518', '23/04/2024', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1364,12 +1374,12 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (874, 'NNDG874', 'Siti Nurfatimah', 'Kp. Margawangi', '085624167937', '13/05/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (875, 'NNDG875', 'Iwan Herdiawan', 'Kp. Batu Karut', '085810035033', '14/05/2024', '2', 165000, '14', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (878, 'NNDG878', 'Regi Mardiansyah', 'Kp. Babakan Limbangan', '085721129149', '17/05/2024', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(879, 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 08:52:15', '2024-10-10 14:31:43', 'sudah bayar'),
+(879, 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (880, 'NNDG880', 'Rio Hadi Wijaya', 'Tiara Regency No.160', '085794578264', '17/05/2024', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Isolir'),
 (881, 'NNDG881', 'Selpa', 'Kp. Buniwangi', '0881025217001', '20/05/2024', '3', 205000, '20', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (882, 'NNDG882', 'Siti Nuraeni', 'Kp. Cihuis', '085846050924', '20/05/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (884, 'NNDG884', 'Siti Sopiah', 'Kp. Cidadap', '085860958984', '21/05/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(885, 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 08:52:27', '2024-10-10 14:31:43', 'sudah bayar'),
+(885, 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (887, 'NNDG887', 'Yayang Solihah', 'Kp. Cigadog margaluyu ', '085883677313/085624233820', '25/05/2024', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (888, 'NNDG888', 'Siti Aidah', 'Kp. Komprang Cigadog', '085727770169', '25/05/2024', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (889, 'NNDG889', 'Rahmat Sunandar', 'Kp. Lemahduhur', '085863338715', '26/05/2024', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1390,7 +1400,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (904, 'NNDG904', 'Deudeu Rosita', 'Kp. Sasagaran cihuis', '085798160328', '31/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (905, 'NNDG905', 'Emi Aminah', 'Kp. Cihuis', '085863248042', '30/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (906, 'NNDG906', 'Mia Zaqia/Sarip', 'Kp. Cihuis', '', '30/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(907, 'NNDG907', 'Tina Rustiana', 'Kp. Lemah Duhur', '087884428376', '04/06/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:15:22', '2024-10-10 14:31:43', 'sudah bayar'),
+(907, 'NNDG907', 'Tina Rustiana', 'Kp. Lemah Duhur', '087884428376', '04/06/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (908, 'NNDG908', 'Acep Rahmatulloh', 'Kp. Pasir Muncang yasni', '085795284746', '04/06/2024', '3', 205000, '4', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (909, 'NNDG909', 'Emilia Lailatussofa', 'Kp. Pasir Muncang', '085862142438', '06/06/2024', '2', 165000, '6', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (910, 'NNDG910', 'Eka ', 'Kp. Bobojong', '085180589148', '04/06/2024', '2', 165000, '4', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1401,9 +1411,9 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (915, 'NNDG915', 'Solihah Hamidah', 'Kp. Cihuis', '08562296659', '13/06/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (916, 'NNDG916', 'Neni Nuraeni', 'Kp. Cidadap Tengah', '082123431459', '14/06/2024', '1', 125000, '14', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (917, 'NNDG917', 'Rian Gunawan', 'Kp. Legok Astana Genteng', '083103674174', '15/06/2024', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-12 01:40:57', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(919, 'NNDG919', 'Edi Purnomo', 'Kp. Limbangan', '', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(919, 'NNDG919', 'Edi Purnomo', 'Kp. Limbangan', '', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (920, 'NNDG920', 'Rizal Saepul Bahri', 'Kp. Lemah Duhur', '081615368920', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(921, 'NNDG921', 'Rosi Permatasari', 'Kp. Cigadog margaluyu ', '085776497366', '2024-06-19', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(921, 'NNDG921', 'Rosi Permatasari', 'Kp. Cigadog margaluyu ', '085776497366', '2024-06-19', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (923, 'NNDG923', 'Ade Ridwan', 'Kp. Cidadap Pesantren', '081393142869', '24/06/2024', '1', 125000, '1', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (924, 'NNDG924', 'Agus(Voucher)', 'Kp. Gintung', '', '24/06/2024', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (925, 'NNDG925', 'Didin( Voucher)', 'Kp.samawa', '085863087450', '03/06/2024', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1428,7 +1438,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (945, 'NNDG945', 'Fikriansyah Darmawan', 'Kp. Cigadog margaluyu ', '', '07/07/2024', '2', 165000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (946, 'NNDG946', 'Indri Siti Habibah', 'Kp. Legok Astana Genteng', '', '09/07/2024', '1', 125000, '9', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (947, 'NNDG947', 'Ilham Mubarok', 'Kp. Gintung', '', '09/07/2024', '1', 125000, '9', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(948, 'NNDG948', 'Siti Rusmiati', 'Kp. Cikawung', '085723332421', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-19 01:45:29', '2024-10-10 14:31:43', 'sudah bayar'),
+(948, 'NNDG948', 'Siti Rusmiati', 'Kp. Cikawung', '085723332421', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (949, 'NNDG949', 'Nani', 'Kp. Cikawung', '', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (950, 'NNDG950', 'Fikri Fauji', 'Perum Pesona Aluna 2 Jln. Kalsedan Blok D Ni.10', '081316144050', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-12 11:35:52', '2024-10-10 14:31:43', 'Isolir'),
 (952, 'NNDG952', 'Silva Insaniah Maulida', 'Kp. Lokantara', '085934262124', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1439,13 +1449,13 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (957, 'NNDG957', 'Usup', 'Kp. Cigadog Margaluyu', '085723332477', '13/07/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (958, 'NNDG958', 'Miftahul Aripin', 'Kp. Gentong pasir 02/01 langensari', '085759516002', '15/07/2024', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (959, 'NNDG959', 'ST. Basmah', 'Kp. Batukarut', '085759723944', '16/07/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(960, 'NNDG960', 'Ida Farida', 'Kp. Sayang', '081563306136', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-19 01:48:33', '2024-10-10 14:31:43', 'sudah bayar'),
+(960, 'NNDG960', 'Ida Farida', 'Kp. Sayang', '081563306136', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (961, 'NNDG961', 'Novitasari', 'Kp. Pasirhalang/ Kp. Legok Nyenang', '08157135415', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-12 10:20:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (962, 'NNDG962', 'Jihan Wulandari', 'Kp. Cibereum Pasir', '081460993451', '18/07/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 05:57:04', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (963, 'NNDG963', 'Ida Farida', 'Peruma Aluna 2 Jln. Permata Blok K 10', '0881011749047', '18/07/2024', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (964, 'NNDG964', 'Yeni Nuraeni', 'Kp. Gintung', '083878680392', '18/07/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 05:57:05', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(965, 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(966, 'NNDG966', 'Divia Nirma', 'Gg. Kobra ', '085721129220', '19/07/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(965, 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(966, 'NNDG966', 'Divia Nirma', 'Gg. Kobra ', '085721129220', '19/07/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (967, 'NNDG967', 'Siti Sarah', 'Kp. Ciloa', '085659080327', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (968, 'NNDG968', 'Sri Janitri', 'Kp. Cisarua', '082315821268/085703684396', '22/07/2024', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (969, 'NNDG969', 'Dedi Junaedi', 'Perumahan Aluna 2 jl.Ruby Blok E no. 1', '083824446999', '28/07/2024', '2', 165000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1508,7 +1518,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1026, 'NNDG1026', 'Suherlan', 'Kp. Legok Astana Genteng', '085872928849', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-15 02:43:42', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1027, 'NNDG1027', 'Siti Masriah', 'Kp. Lapang Kobra', '081770890228', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 06:09:58', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1028, 'NNDG1028', 'Jumaita Harahap', 'Kp. Cigadog Langensari', '081275869056', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 06:09:58', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(1029, 'NNDG1029', 'Dasep Sugandi', 'Kp. Citoe', '085603195511', '21/09/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 01:44:40', '2024-10-10 14:31:43', 'sudah bayar'),
+(1029, 'NNDG1029', 'Dasep Sugandi', 'Kp. Citoe', '085603195511', '21/09/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1030, 'NNDG1030', 'H Weli Abdul Manan', 'Perum Pesona Limbangan Blok C No.516', '081564650580', '21/09/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1031, 'NNDG1031', 'Rinaldi Ferdian', 'Kp. Cibereum', '08164643826', '22/09/2024', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1032, 'NNDG1032', 'Yogi Kahaepi', 'Kp. Cimahpar Gg. Revolusi', '087749415493', '23/09/2024', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1519,7 +1529,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1037, 'NNDG1037', 'Alma Wihelmina Toibah', 'Kp. Limbangan', '081584465738', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1038, 'NNDG1038', 'Resta Azizah', 'Kp. Pasirmuncang', '085721898874', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1039, 'NNDG1039', 'Deni Mulyadi', 'Kp. Lokantara', '', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(1044, 'NNDG1044', 'Yanti', 'Kp. Nagrak Legok', '085798087638', '19/09/2024', '1', 120000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(1044, 'NNDG1044', 'Yanti', 'Kp. Nagrak Legok', '085798087638', '19/09/2024', '1', 120000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:26', '2024-10-10 14:31:43', 'Isolir'),
 (1045, 'NNDG305', 'Siti Maemunah', 'Kp. Limbangan', '83818743986', '2022-09-13', '1', 125000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1046, 'NNDG357', 'Yeni Ibu Rt', 'Perum Griya Goalpara Asri Blok C4', '83804229311', '2022-07-07', '1', 125000, '07', '0', '0', '0', '0', '2024-10-16 10:25:31', '2024-10-11 04:11:30', 'Sudah Bayar'),
 (1047, 'NNDG79', 'Deris motor', 'Perum rahayu Elok (depan Perum)', '0', '2022-05-01', '1', 115000, '10', '0', '0', '0', '0', '2024-10-12 01:40:57', '2024-10-10 08:43:49', 'Sudah Bayar'),
@@ -1550,24 +1560,25 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1102, 'NNDG550000', 'Adit safari', 'Cicariang', '082123852983', '2024-10-18', '1', 150000, '2', NULL, '0', '0', '0', '2024-10-19 03:47:00', '2024-10-18 07:44:01', 'PSB'),
 (1104, 'reer4', 'Agiss', 'sukabumi', '085793920206', '2024-10-18', '1', 175000, '5', NULL, '0', '0', '0', '2024-10-19 07:04:48', '2024-10-18 10:38:57', 'PSB'),
 (1105, 'NNDG1064', 'Linda Sumirat', 'Perum Tiara Regency Blok G4 No. 6', '085723352186', '2024-10-19', '2', 165000, '19', NULL, '0', '0', '0', '2024-10-19 04:24:50', '2024-10-19 04:24:50', 'PSB'),
-(1106, 'NNDG1636', 'Deuisst', 'Kp. Buniwangi', '083147264219', '2024-10-19', '3', 205000, '19', NULL, '0', '0', '0', '2024-10-19 06:56:20', '2024-10-19 06:56:20', 'PSB');
+(1106, 'NNDG1636', 'Deuisst', 'Kp. Buniwangi', '083147264219', '2024-10-19', '3', 205000, '19', NULL, '0', '0', '0', '2024-10-19 06:56:20', '2024-10-19 06:56:20', 'PSB'),
+(1107, 'NNDG1065', 'Dyarly Joelazs', 'Kp. Cimahpar', '085283003524', '2024-10-19', '2', 165000, '19', NULL, '0', '0', '0', '2024-10-19 10:29:42', '2024-10-19 10:29:42', 'PSB');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pemasukan`
+-- Table structure for table `pemasukan`
 --
 
 CREATE TABLE `pemasukan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `pemasukan`
+-- Dumping data for table `pemasukan`
 --
 
 INSERT INTO `pemasukan` (`id`, `keterangan`, `jumlah`, `created_at`, `updated_at`) VALUES
@@ -1580,19 +1591,19 @@ INSERT INTO `pemasukan` (`id`, `keterangan`, `jumlah`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengeluaran`
+-- Table structure for table `pengeluaran`
 --
 
 CREATE TABLE `pengeluaran` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `pengeluaran`
+-- Dumping data for table `pengeluaran`
 --
 
 INSERT INTO `pengeluaran` (`id`, `keterangan`, `jumlah`, `created_at`, `updated_at`) VALUES
@@ -1619,27 +1630,27 @@ INSERT INTO `pengeluaran` (`id`, `keterangan`, `jumlah`, `created_at`, `updated_
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `perbaikan`
+-- Table structure for table `perbaikan`
 --
 
 CREATE TABLE `perbaikan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paket_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `odp` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `maps` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_plg` varchar(255) NOT NULL,
+  `nama_plg` varchar(255) NOT NULL,
+  `alamat_plg` varchar(255) NOT NULL,
+  `no_telepon_plg` varchar(255) NOT NULL,
+  `paket_plg` varchar(255) DEFAULT NULL,
+  `odp` varchar(255) DEFAULT NULL,
+  `maps` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `keterangan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `teknisi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Proses'
+  `keterangan` varchar(255) NOT NULL,
+  `teknisi` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL DEFAULT 'Proses'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `perbaikan`
+-- Dumping data for table `perbaikan`
 --
 
 INSERT INTO `perbaikan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `paket_plg`, `odp`, `maps`, `created_at`, `updated_at`, `keterangan`, `teknisi`, `status`) VALUES
@@ -1672,21 +1683,21 @@ INSERT INTO `perbaikan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (59, 'NNDG4', 'Abdul', 'Perum Pesona Limbangan', '81284258119', '1', '0', '0', '2024-10-17 07:22:53', '2024-10-17 07:23:50', 'Los / modem merah', 'Tim 1 Deden - Agis', 'selesai'),
 (65, 'NNDG1047', 'gilang', 'pelanuanratu', '085700000001', '4', '0', '0', '2024-10-17 07:59:23', '2024-10-17 08:00:55', 'PSB', 'Tim 1 Deden - Agis', 'selesai'),
 (69, 'NNDG1064', 'Linda Sumirat', 'Perum Tiara Blok G4 No.6', '085723352186', '2', '0', '0', '2024-10-19 01:57:54', '2024-10-19 06:18:02', 'PSB', 'Tim 2 Mursidi - Dindin', 'selesai'),
-(70, 'NNDG1065', 'Dyarly Joelzs', 'Kp. Cimahpar', '085283003524', '2', '0', '0', '2024-10-19 06:27:28', '2024-10-19 06:27:28', 'PSB', 'Tim 1 Deden - Agis', 'Proses');
+(70, 'NNDG1065', 'Dyarly Joelzs', 'Kp. Cimahpar', '085283003524', '2', '0', '0', '2024-10-19 06:27:28', '2024-10-19 10:29:56', 'PSB', 'Tim 1 Deden - Agis', 'selesai');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -1696,31 +1707,31 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `plg_off`
+-- Table structure for table `plg_off`
 --
 
 CREATE TABLE `plg_off` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telepon_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `aktivasi_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `paket_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_plg` varchar(255) NOT NULL,
+  `nama_plg` varchar(255) NOT NULL,
+  `alamat_plg` varchar(255) NOT NULL,
+  `no_telepon_plg` varchar(255) NOT NULL,
+  `aktivasi_plg` varchar(255) NOT NULL,
+  `paket_plg` varchar(255) NOT NULL,
   `harga_paket` int(11) NOT NULL,
-  `tgl_tagih_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan_plg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `odp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tgl_plg_off` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tgl_tagih_plg` varchar(255) DEFAULT NULL,
+  `keterangan_plg` varchar(255) DEFAULT NULL,
+  `odp` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
+  `tgl_plg_off` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `status_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Belum Bayar'
+  `status_pembayaran` varchar(255) DEFAULT 'Belum Bayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `plg_off`
+-- Dumping data for table `plg_off`
 --
 
 INSERT INTO `plg_off` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `aktivasi_plg`, `paket_plg`, `harga_paket`, `tgl_tagih_plg`, `keterangan_plg`, `odp`, `longitude`, `latitude`, `tgl_plg_off`, `updated_at`, `created_at`, `status_pembayaran`) VALUES
@@ -1914,7 +1925,7 @@ INSERT INTO `plg_off` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rekap_mutasi_harian`
+-- Table structure for table `rekap_mutasi_harian`
 --
 
 CREATE TABLE `rekap_mutasi_harian` (
@@ -1931,39 +1942,39 @@ CREATE TABLE `rekap_mutasi_harian` (
   `piutang_masuk` decimal(15,2) DEFAULT NULL,
   `pendapatan_total` decimal(5,2) DEFAULT NULL,
   `keterangan` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `rekap_pemasangan`
+-- Table structure for table `rekap_pemasangan`
 --
 
 CREATE TABLE `rekap_pemasangan` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nik` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_telpon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tgl_aktivasi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nik` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `no_telpon` varchar(255) NOT NULL,
+  `tgl_aktivasi` varchar(255) NOT NULL,
   `paket_plg` int(11) NOT NULL,
   `harga_paket` int(11) NOT NULL,
-  `jt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tgl_pengajuan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jt` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `tgl_pengajuan` varchar(255) NOT NULL,
   `registrasi` int(11) NOT NULL,
-  `marketing` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan_plg` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `id_plg` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `odp` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `longitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `latitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `marketing` varchar(255) NOT NULL,
+  `keterangan_plg` varchar(255) NOT NULL,
+  `id_plg` varchar(100) DEFAULT NULL,
+  `odp` varchar(100) DEFAULT NULL,
+  `longitude` varchar(100) DEFAULT NULL,
+  `latitude` varchar(100) DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `rekap_pemasangan`
+-- Dumping data for table `rekap_pemasangan`
 --
 
 INSERT INTO `rekap_pemasangan` (`id`, `nik`, `nama`, `alamat`, `no_telpon`, `tgl_aktivasi`, `paket_plg`, `harga_paket`, `jt`, `status`, `tgl_pengajuan`, `registrasi`, `marketing`, `keterangan_plg`, `id_plg`, `odp`, `longitude`, `latitude`, `updated_at`, `created_at`) VALUES
@@ -1999,12 +2010,12 @@ INSERT INTO `rekap_pemasangan` (`id`, `nik`, `nama`, `alamat`, `no_telpon`, `tgl
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `targets`
+-- Table structure for table `targets`
 --
 
 CREATE TABLE `targets` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `nama_target` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_target` varchar(255) NOT NULL,
   `jumlah_target` int(11) NOT NULL,
   `jumlah_hari` int(11) NOT NULL,
   `sisa_target` int(11) NOT NULL,
@@ -2015,7 +2026,7 @@ CREATE TABLE `targets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `targets`
+-- Dumping data for table `targets`
 --
 
 INSERT INTO `targets` (`id`, `nama_target`, `jumlah_target`, `jumlah_hari`, `sisa_target`, `hari_tersisa`, `last_update`, `created_at`, `updated_at`) VALUES
@@ -2024,24 +2035,24 @@ INSERT INTO `targets` (`id`, `nama_target`, `jumlah_target`, `jumlah_hari`, `sis
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` enum('teknisi','admin','superadmin') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'teknisi',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` enum('teknisi','admin','superadmin') NOT NULL DEFAULT 'teknisi',
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `foto` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`, `foto`) VALUES
@@ -2061,86 +2072,86 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ro
 --
 
 --
--- Indeks untuk tabel `absen`
+-- Indexes for table `absen`
 --
 ALTER TABLE `absen`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `bayar_pelanggan`
+-- Indexes for table `bayar_pelanggan`
 --
 ALTER TABLE `bayar_pelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `isolir`
+-- Indexes for table `isolir`
 --
 ALTER TABLE `isolir`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `karyawan`
+-- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kasbon`
+-- Indexes for table `kasbon`
 --
 ALTER TABLE `kasbon`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `password_reset_tokens`
+-- Indexes for table `password_reset_tokens`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
--- Indeks untuk tabel `pelanggan`
+-- Indexes for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pemasukan`
+-- Indexes for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pengeluaran`
+-- Indexes for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `perbaikan`
+-- Indexes for table `perbaikan`
 --
 ALTER TABLE `perbaikan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -2148,138 +2159,138 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indeks untuk tabel `plg_off`
+-- Indexes for table `plg_off`
 --
 ALTER TABLE `plg_off`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `rekap_mutasi_harian`
+-- Indexes for table `rekap_mutasi_harian`
 --
 ALTER TABLE `rekap_mutasi_harian`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `rekap_pemasangan`
+-- Indexes for table `rekap_pemasangan`
 --
 ALTER TABLE `rekap_pemasangan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `targets`
+-- Indexes for table `targets`
 --
 ALTER TABLE `targets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `absen`
+-- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `bayar_pelanggan`
+-- AUTO_INCREMENT for table `bayar_pelanggan`
 --
 ALTER TABLE `bayar_pelanggan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=444;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=454;
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `isolir`
+-- AUTO_INCREMENT for table `isolir`
 --
 ALTER TABLE `isolir`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `karyawan`
+-- AUTO_INCREMENT for table `karyawan`
 --
 ALTER TABLE `karyawan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `kasbon`
+-- AUTO_INCREMENT for table `kasbon`
 --
 ALTER TABLE `kasbon`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
--- AUTO_INCREMENT untuk tabel `pelanggan`
+-- AUTO_INCREMENT for table `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1107;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1108;
 
 --
--- AUTO_INCREMENT untuk tabel `pemasukan`
+-- AUTO_INCREMENT for table `pemasukan`
 --
 ALTER TABLE `pemasukan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `pengeluaran`
+-- AUTO_INCREMENT for table `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT untuk tabel `perbaikan`
+-- AUTO_INCREMENT for table `perbaikan`
 --
 ALTER TABLE `perbaikan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
--- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `plg_off`
+-- AUTO_INCREMENT for table `plg_off`
 --
 ALTER TABLE `plg_off`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=991;
 
 --
--- AUTO_INCREMENT untuk tabel `rekap_mutasi_harian`
+-- AUTO_INCREMENT for table `rekap_mutasi_harian`
 --
 ALTER TABLE `rekap_mutasi_harian`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `rekap_pemasangan`
+-- AUTO_INCREMENT for table `rekap_pemasangan`
 --
 ALTER TABLE `rekap_pemasangan`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
--- AUTO_INCREMENT untuk tabel `targets`
+-- AUTO_INCREMENT for table `targets`
 --
 ALTER TABLE `targets`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
