@@ -59,16 +59,16 @@ class MessageController extends Controller
                     $paket = '';
                     switch ($pelanggan->paket_plg) {
                         case 1:
-                            $paket = '5 MBps';
+                            $paket = '5 Mbps';
                             break;
                         case 2:
-                            $paket = '10 MBps';
+                            $paket = '10 Mbps';
                             break;
                         case 3:
-                            $paket = '15 MBps';
+                            $paket = '15 Mbps';
                             break;
                         case 4:
-                            $paket = '25 MBps';
+                            $paket = '25 Mbps';
                             break;
 
                         default:
@@ -79,8 +79,7 @@ class MessageController extends Controller
                     // Siapkan pesan
                     $message = "*REMINDER🙏🏻*\n";
                     $message .= "*NET | NET. DIGITAL-WiFi*\n\n";
-                    $message .= "*PELANGGAN*\n";
-                    $message .= "*kepada:*\n";
+                    $message .= "*Pelanggan YTH:*\n";
                     $message .= "*{$pelanggan->nama_plg} - {$pelanggan->alamat_plg}*\n\n";
                     $message .= "*PEMBERITAHUAN*\n";
                     $message .= "Tagihan Bulan : " . now()->format('F Y') . "\n";
@@ -95,11 +94,11 @@ class MessageController extends Controller
                     $message .= "PEMBAYARAN:\n";
 
                     $message .= "- via transfer : rek BCA : 3770198576 atas nama *Ruslandi* \n";
-                    $message .= "- *Jemput Pembayaran dikenakan biaya jasa pengambilan Rp.5000*\n\n";
+                    $message .= "- *Pembayaran Via Penjemputan/Pickup dikenakan biaya jasa pengambilan Rp.5000*\n\n";
                     $message .= "Dimohon untuk Melampirkan bukti pembayaran apabila sudah melakukan pembayaran.\n\n";
 
                     $message .= "INFO TAMBAHAN:\n";
-                    $message .= "*Dan Apabila Telat Melakukan Pembayaran Iuran Wifi Akan di Kenakan Pemutusan Sementara Internet Yaitu (Isolir)🙏🏻.* \n\n";
+                    $message .= "*Apabila telat melakukan pembayaran iuran wifi akan dikenakan pemutusan sementara🔊.* \n\n";
 
                     $message .= "Admin + CS     : 0857-9392-0206 (Agisna 🧕🏻)\n";
                     $message .= "marketing      : 0857-2222-0169 (Gilang 👳🏻‍♂️)\n";

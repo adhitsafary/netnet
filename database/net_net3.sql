@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 19 Okt 2024 pada 11.31
+-- Waktu pembuatan: 22 Okt 2024 pada 13.23
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `net_net1`
+-- Database: `net_net3`
 --
 
 -- --------------------------------------------------------
@@ -446,7 +446,51 @@ INSERT INTO `bayar_pelanggan` (`id`, `pelanggan_id`, `id_plg`, `nama_plg`, `alam
 (440, '216', 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-19 08:51:48', '2024-10-19 08:51:48', 'Agisna'),
 (441, '578', 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '2024-10-19', 'CASH', NULL, '2024-10-19 08:52:03', '2024-10-19 08:52:03', 'Agisna'),
 (442, '879', 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '2024-10-19', 'CASH', NULL, '2024-10-19 08:52:15', '2024-10-19 08:52:15', 'Agisna'),
-(443, '885', 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '2024-10-21', 'CASH', NULL, '2024-10-19 08:52:27', '2024-10-19 08:52:27', 'Agisna');
+(443, '885', 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '2024-10-21', 'CASH', NULL, '2024-10-19 08:52:27', '2024-10-19 08:52:27', 'Agisna'),
+(444, '481', 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '2024-10-15', 'TF', NULL, '2024-10-20 04:30:15', '2024-10-20 04:30:15', 'Agisna'),
+(445, '580', 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:30:58', '2024-10-20 04:30:58', 'Agisna'),
+(446, '801', 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:31:15', '2024-10-20 04:31:15', 'Agisna'),
+(447, '440', 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:31:35', '2024-10-20 04:31:35', 'Agisna'),
+(448, '354', 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:32:29', '2024-10-20 04:32:29', 'Agisna'),
+(449, '520', 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '2024-10-20', 'TF', NULL, '2024-10-20 04:33:11', '2024-10-20 04:33:11', 'Agisna'),
+(450, '800', 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-20 04:33:52', '2024-10-20 04:33:52', 'Agisna'),
+(451, '208', 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:34:26', '2024-10-20 04:34:26', 'Agisna'),
+(452, '35', 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-20 04:35:37', '2024-10-20 04:35:37', 'Agisna'),
+(453, '965', 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '2024-10-20', 'TF', NULL, '2024-10-20 04:36:14', '2024-10-20 04:36:14', 'Agisna'),
+(454, '992', 'NNDG992', 'Mulyani', 'Kp. Cikawung', '085722607617', '26/08/2024', '2', 165000, '26', '2024-10-26', 'TF', NULL, '2024-10-21 03:01:05', '2024-10-21 03:01:05', 'Agisna'),
+(455, '387', 'NNDG387', 'Muhamad muayad down to 5Mbps', 'Kp. gintung rt07/03 limbangan no 28', '81023129975', '2023-03-02', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 03:01:21', '2024-10-21 03:01:21', 'Agisna'),
+(456, '882', 'NNDG882', 'Siti Nuraeni', 'Kp. Cihuis', '085846050924', '20/05/2024', '2', 165000, '20', '2024-10-20', 'TF', NULL, '2024-10-21 03:01:40', '2024-10-21 03:01:40', 'Agisna'),
+(457, '834', 'NNDG834', 'Rahmi Latipul Hasanah', 'Perum Aluna 2 Jalan merah delima blok H no 7', '082117682655', '21/04/2024', '2', 165000, '21', '2024-10-21', 'TF', NULL, '2024-10-21 03:01:56', '2024-10-21 03:01:56', 'Agisna'),
+(458, '839', 'NNDG839', 'Maulana Yusup Hamdani', 'Kp. Cigadog margaluyu ', '085798641518', '23/04/2024', '2', 165000, '23', '2024-10-23', 'TF', NULL, '2024-10-21 03:02:11', '2024-10-21 03:02:11', 'Agisna'),
+(459, '699', 'NNDG699', 'Ujang Z ', 'Perum Pesona Limbangan', '085720003789', '19/12/2023', '1', 125000, '19', '2024-10-19', 'TF', NULL, '2024-10-21 03:02:28', '2024-10-21 03:02:28', 'Agisna'),
+(460, '642', 'NNDG642', 'Andri ', 'Kp. Gintung', '082193339387', '21/10/2023', '1', 125000, '21', '2024-10-21', 'TF', NULL, '2024-10-21 03:02:43', '2024-10-21 03:02:43', 'Agisna'),
+(461, '827', 'NNDG827', 'Midi', 'Kp. Citoe', '', '18/04/2024', '1', 50000, '18', '2024-10-01', 'CASH', NULL, '2024-10-21 03:07:38', '2024-10-21 03:02:00', 'Agisna'),
+(463, '164', 'NNDG164', 'Ilis Solihat', 'Kp. Nyalindung Pentas', ' \'081384027604', '2022-07-14', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 03:03:28', '2024-10-21 03:03:28', 'Agisna'),
+(464, '584', 'NNDG584', 'Alvian', 'Perum Setiabudi blok w5 i5', '082258682775', '24/08/2023', '1', 125000, '24', '2024-10-24', 'TF', NULL, '2024-10-21 03:03:39', '2024-10-21 03:03:39', 'Agisna'),
+(465, '880', 'NNDG880', 'Rio Hadi Wijaya', 'Tiara Regency No.160', '085794578264', '17/05/2024', '2', 165000, '17', '2024-10-17', 'TF', NULL, '2024-10-21 03:03:59', '2024-10-21 03:03:59', 'Agisna'),
+(466, '831', 'NNDG831', 'Herman Hermawan', 'Kp. Kelapa Condong', '085794251710', '20/04/2024', '2', 165000, '20', '2024-10-20', 'TF', NULL, '2024-10-21 03:04:28', '2024-10-21 03:04:28', 'Agisna'),
+(467, '835', 'NNDG835', 'Baban Sobandi', 'Kp. Cibereum Tengah', '085817928651', '20/04/2024', '2', 165000, '20', '2024-10-20', 'TF', NULL, '2024-10-21 03:04:46', '2024-10-21 03:04:46', 'Agisna'),
+(468, '841', 'NNDG841', 'Dede Yuliana', 'Perum Al-Hijrah Blok A no 56', '085811124186', '24/04/2024', '1', 125000, '24', '2024-10-24', 'TF', NULL, '2024-10-21 03:05:09', '2024-10-21 03:05:09', 'Agisna'),
+(469, '130', 'NNDG130', 'Ersa', 'Jp. Nyalindung', '85721681146', '2022-07-10', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 03:05:22', '2024-10-21 03:05:22', 'Agisna'),
+(470, '207', 'NNDG207', 'Marsonocbm', 'Kp. Cibeureum', '85880333401', '/05/2022', '2', 165000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 03:05:36', '2024-10-21 03:05:36', 'Agisna'),
+(471, '640', 'NNDG640', 'Eka Kartika', 'Kp. Subang Jaya', '085860271068', '19/10/2023', '1', 125000, '19', '2024-10-19', 'TF', NULL, '2024-10-21 03:05:54', '2024-10-21 03:05:54', 'Agisna'),
+(472, '296', 'NNDG296', 'Septian / Bengkel Citoe', 'Kp. Citoe', '81316006352', '2022-11-18', '2', 165000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 03:06:20', '2024-10-21 03:06:20', 'Agisna'),
+(473, '668', 'NNDG668', 'Levi', 'Kp.gudawang ', '081313585959', '20/11/2023', '3', 205000, '20', '2024-10-20', 'TF', NULL, '2024-10-21 03:06:33', '2024-10-21 03:06:33', 'Agisna'),
+(474, '921', 'NNDG921', 'Rosi Permatasari', 'Kp. Cigadog margaluyu ', '085776497366', '2024-06-19', '2', 165000, '19', '2024-10-01', 'TF', NULL, '2024-10-21 03:15:27', '2024-10-20 03:13:00', 'Agisna'),
+(475, '739', 'NNDG739', 'Santi novianti', 'Kp. Kelapa conong cibereum tengah', '085861088468', '20/01/2024', '2', 165000, '20', '2024-10-01', 'CASH', NULL, '2024-10-21 03:15:45', '2024-10-20 03:14:00', 'Agisna'),
+(476, '105', 'NNDG105', 'Ecekarpet', 'Kp. Cikaret', '', '2022-05-01', '1', 125000, '25', '2024-10-01', 'CASH', NULL, '2024-10-21 03:15:58', '2024-10-20 03:14:00', 'Agisna'),
+(477, '174', 'NNDG174', 'Irmawati', 'Kp. Cidadap', '081573720442', '2023-01-15', '1', 125000, '25', '2024-10-01', 'CASH', NULL, '2024-10-21 03:16:11', '2024-10-20 03:14:00', 'Agisna'),
+(478, '132', 'NNDG132', 'Euis Rosyani', 'Kp. Cibeureum Pasir/ Jambata', '85721185251', '2022-09-11', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 05:30:49', '2024-10-21 05:30:49', 'Agisna'),
+(479, '669', 'NNDG669', 'yuniarti', 'Perum Elok Blok D.5 no 1', '085216157120', '21/11/2023', '1', 125000, '21', '2024-10-21', 'CASH', NULL, '2024-10-21 06:37:24', '2024-10-21 06:37:24', 'Agisna'),
+(480, '362', 'NNDG362', 'Yuni alinda', 'Kp. Alinda', '', '2022-05-01', '1', 125000, '25', '2024-10-25', 'CASH', NULL, '2024-10-21 07:10:56', '2024-10-21 07:10:56', 'Agisna'),
+(481, '292', 'NNDG292', 'Sandiyanto Saputro', 'Kp. Limbangan', '85794050609', '2022-08-15', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 07:11:16', '2024-10-21 07:11:16', 'Agisna'),
+(482, '547', 'NNDG547', 'm endang jamahir', 'Kp. cibayawak 03/06', '085864326369', '18/07/2023', '1', 125000, '18', '2024-10-18', 'TF', NULL, '2024-10-21 07:22:16', '2024-10-21 07:22:16', 'Agisna'),
+(483, '967', 'NNDG967', 'Siti Sarah', 'Kp. Ciloa', '085659080327', '20/07/2024', '1', 125000, '20', '2024-10-20', 'CASH', NULL, '2024-10-21 07:31:27', '2024-10-21 07:31:27', 'Agisna'),
+(484, '288', 'NNDG288', 'Saeful Ramdhan', 'Kp Sukaraja Gg Teropong', '85703676311', '2022-12-22', '4', 305000, '20', '2024-10-20', 'CASH', NULL, '2024-10-21 07:31:39', '2024-10-21 07:31:39', 'Agisna'),
+(485, '113', 'NNDG113', 'Eli Nurlaeli', 'Kp. Gentong Pasir (blk nungky)', '83811953037', '2022-12-13', '1', 125000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 07:53:35', '2024-10-21 07:53:35', 'Agisna'),
+(486, '773', 'NNDG773', 'Cecep Mahpudin', 'Kp. Pasirmuncang', '', '17/02/2024', '1', 125000, '17', '2024-10-17', 'TF', NULL, '2024-10-21 08:05:50', '2024-10-21 08:05:50', 'Agisna'),
+(487, '720', 'NNDG720', 'Ahmad asep suherlan', 'Kp. Pasir muncang', '081563488803', '06/01/2024', '1', 125000, '6', '2024-10-6', 'TF', NULL, '2024-10-21 08:06:14', '2024-10-21 08:06:14', 'Agisna'),
+(488, '131', 'NNDG131', 'Euis susmiati abdillah ', 'Kp. Limbangan', '85846414961', '2022-05-26', '2', 165000, '25', '2024-10-25', 'TF', NULL, '2024-10-21 08:35:33', '2024-10-21 08:35:33', 'Agisna');
 
 -- --------------------------------------------------------
 
@@ -660,7 +704,7 @@ CREATE TABLE `pelanggan` (
   `latitude` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `status_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Sudah Bayar'
+  `status_pembayaran` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -673,7 +717,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (4, 'NNDG4', 'Abdul', 'Perum Pesona Limbangan', '81284258119', ' ', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (5, 'NNDG5', 'Abi Mulyadi', 'Kp. Cisarua Legok', '85861655538', '2022-07-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (6, 'NNDG6', 'Abdullah', 'Kp. Cisarua', '85559728210', '2022-08-03', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(8, 'NNDG8', 'Acep Usman', 'Kp. Citoe', '82120467768', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-19 01:44:25', '2024-10-10 14:31:43', 'sudah bayar'),
+(8, 'NNDG8', 'Acep Usman', 'Kp. Citoe', '82120467768', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (9, 'NNDG9', 'adang/adam', 'Kp. Cisarua', '85723131845', '2022-05-10', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (12, 'NNDG12', 'Adi', 'Kp. Nyalidung Goalpara', ' ', '2022-06-30', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (13, 'NNDG13', 'Ade Suparman (up 5 to10 mbps)', 'Kp. Cibeurem Pasir', '81224321320', '2022-08-19', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -694,7 +738,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (30, 'NNDG30', 'Akbar', 'Kp. Kekenceng', '85879490648', '2022-09-20', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (32, 'NNDG32', 'Anan ', 'Kp. Cidadap', '85659909298', '2022-08-11', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (34, 'NNDG34', 'Andri Suherli', 'Kp. Cidadap Rt 03/02', '81572773296', '2022-08-30', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(35, 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(35, 'NNDG35', 'Ani Somantri', 'Kp. Cisarua', '85723172791', '2022-12-09', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:24', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (36, 'NNDG36', 'Aneu Sri Indrawati', 'Kp. Biru', '85811113970', '2022-08-27', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (37, 'NNDG37', 'Angga Bustomi', 'Kp. Gentong Pasir', '85863978566', '2022-09-16', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:05', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (38, 'NNDG38', 'Anton / Ayuna ', 'Kp. Cikaret', '85798764284', '2022-05-01', '1', 115000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -747,13 +791,13 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (102, 'NNDG102', 'Dwi Handono', 'Perum Aluna 1', '8562696343', '2022-05-31', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (103, 'NNDG103', 'Dyanet Pdg', 'Perum Tiara', '81310040378', '2022-06-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (104, 'NNDG104', 'Ece Saefullah / Warung Nasi', 'Desa Sukaraja', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(105, 'NNDG105', 'Ecekarpet', 'Kp. Cikaret', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(105, 'NNDG105', 'Ecekarpet', 'Kp. Cikaret', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 03:14:45', '2024-10-10 14:31:43', 'sudah bayar'),
 (106, 'NNDG106', 'Egi Windu', 'Kp. Alinda', '85723207778', '2022-07-01', '1', 125000, '5', '', NULL, NULL, NULL, '2024-10-11 07:47:05', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (107, 'NNDG107', 'Eka Bali', 'Perum Bali Residence', '81563382941', '2022-06-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (109, 'NNDG109', 'Elah Nurhayati down to 5mbps (bohel)', 'Kp. Kabandungan', '', '2022-07-12', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (110, 'NNDG110', 'Ela Trisnawati', 'Kp. Cisero', '85879490648', '2022-08-27', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (112, 'NNDG112', 'Elis', 'Kp. Nagrak Legok', '85798169280', '2022-10-18', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-11 10:30:31', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(113, 'NNDG113', 'Eli Nurlaeli', 'Kp. Gentong Pasir (blk nungky)', '83811953037', '2022-12-13', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(113, 'NNDG113', 'Eli Nurlaeli', 'Kp. Gentong Pasir (blk nungky)', '83811953037', '2022-12-13', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 07:53:35', '2024-10-10 14:31:43', 'sudah bayar'),
 (114, 'NNDG114', 'Emakiti', 'Kp. Pesona Limbangan', '', '2022-05-01', '1', 75000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (115, 'NNDG115', 'Emil', 'Kp. Cidadap Rt 01/02', '85772000517', '2022-06-30', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (117, 'NNDG117', 'Enday', 'Kp. Tegal Huni', '85798466204', '2022-10-24', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -767,9 +811,9 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (127, 'NNDG127', 'Endang', 'Kp. Limbangan Tohaga jaya', '81296811804', '2022-09-13', '1', 125000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (128, 'NNDG128', 'Eris', 'Perum Pesona Limbangan', '81563566659', '/05/2022', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (129, 'NNDG129', 'Ermin Setiadi', 'Kp. Pasir Halang', '85723881020', '2022-07-23', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(130, 'NNDG130', 'Ersa', 'Jp. Nyalindung', '85721681146', '2022-07-10', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(131, 'NNDG131', 'Euis susmiati abdillah ', 'Kp. Limbangan', '85846414961', '2022-05-26', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(132, 'NNDG132', 'Euis Rosyani', 'Kp. Cibeureum Pasir/ Jambata', '85721185251', '2022-09-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(130, 'NNDG130', 'Ersa', 'Jp. Nyalindung', '85721681146', '2022-07-10', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 03:05:22', '2024-10-10 14:31:43', 'sudah bayar'),
+(131, 'NNDG131', 'Euis susmiati abdillah ', 'Kp. Limbangan', '85846414961', '2022-05-26', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-21 08:35:33', '2024-10-10 14:31:43', 'sudah bayar'),
+(132, 'NNDG132', 'Euis Rosyani', 'Kp. Cibeureum Pasir/ Jambata', '85721185251', '2022-09-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 05:30:49', '2024-10-10 14:31:43', 'sudah bayar'),
 (133, 'NNDG133', 'Euis', 'Gg. Revolusi Sukaraja Blk Polsek ', '85219871793', '2023-01-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (136, 'NNDG136', 'Evas/ ervas Lmb', 'Kp. Limbangan', '83806243274', '/05/2022', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (138, 'NNDG138', 'Fatonah Kbd / Fafat', 'Kp. Kabandungan', '85793530030', '2022-06-07', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -789,7 +833,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (158, 'NNDG158', 'Heri Agustian', 'Gg. Belbar', '87822774695', '2022-06-01', '2', 165000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (160, 'NNDG160', 'Hjnenengpsh', 'Perum Pasir Halang', '8156049569', '2022-06-17', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (161, 'NNDG161', 'Hoer Ramdon', 'Perum Tiara Blok I 8 No 10', '8987581284', '2022-08-29', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(164, 'NNDG164', 'Ilis Solihat', 'Kp. Nyalindung Pentas', ' \'081384027604', '2022-07-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(164, 'NNDG164', 'Ilis Solihat', 'Kp. Nyalindung Pentas', ' \'081384027604', '2022-07-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 03:03:28', '2024-10-10 14:31:43', 'sudah bayar'),
 (165, 'NNDG165', 'Cindy/toni', 'Perum bali resident blok d no 15', '89621687575', '13/2/2023', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (166, 'NNDG166', 'Iis Susilawati down to 5 mbps', 'Kp Sayang ', '85798681855', '2022-12-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (167, 'NNDG167', 'Ikmal', 'Kp. Cibayawak', '83892724608', '2022-12-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -798,7 +842,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (171, 'NNDG171', 'Indra Lesmana', 'Kp. Bababakan Limbangan Pentas', '85759585719', '2022-09-12', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (172, 'NNDG172', 'Ince', 'Kp. Pasir Halang', '85891588448', '2022-03-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (173, 'NNDG173', 'Irawati', 'Kp. Cidadap', '85795474496', '2022-11-29', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(174, 'NNDG174', 'Irmawati', 'Kp. Cidadap', '081573720442', '2023-01-15', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(174, 'NNDG174', 'Irmawati', 'Kp. Cidadap', '081573720442', '2023-01-15', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 03:14:59', '2024-10-10 14:31:43', 'sudah bayar'),
 (175, 'NNDG175', 'Iqbal', 'Perum Bali Resident', '89516813332', '2022-07-14', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (176, 'NNDG176', 'Israj Alwan', 'Kp. Cidadap down to 5mbps agst', '85862624149', '2022-11-22', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (177, 'NNDG177', 'Iskandar', 'Kp. Cigadog Langensari', '85760023050', '2023-01-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -821,14 +865,14 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (202, 'NNDG202', 'Lusi sbn', 'Desa Sukaraja', '85863111512', '2022-06-20', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (204, 'NNDG204', 'Maman', 'Kp. Selaater', '', '2023-12-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (206, 'NNDG206', 'Mariam', 'Kp. Pasirhalang', '85872323656', '2022-03-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(207, 'NNDG207', 'Marsonocbm', 'Kp. Cibeureum', '85880333401', '/05/2022', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(208, 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
+(207, 'NNDG207', 'Marsonocbm', 'Kp. Cibeureum', '85880333401', '/05/2022', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-21 03:05:36', '2024-10-10 14:31:43', 'sudah bayar'),
+(208, 'NNDG208', 'Maryati', 'Kp. Cisarua', '85759808441', '2022-10-28', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (210, 'NNDG210', 'Masrifah / Imas down to 5 mbps', 'Kp. Sayang', '85793127135', '2022-12-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (211, 'NNDG211', 'Mida', 'Kp. Astana Genteng', '85723181787', '2022-08-09', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (212, 'NNDG212', 'Mila', 'Perum Pesona Limbangan', '85781461240', '/05/2022', '2', 165000, '2', 'mlam', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (213, 'NNDG213', 'Mimah', 'Kp. Cigadog Langensari', '87721602735', '2022-08-11', '2', 165000, '8', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (214, 'NNDG214', 'Mimi Safitri', 'Kp. Cisarua', '81282358887', '2022-08-30', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
-(216, 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 08:51:48', '2024-10-10 14:31:43', 'sudah bayar'),
+(216, 'NNDG216', 'Mohamad Risat', 'Kp. Cikaret Belakang Kantor', '811997377', '2022-12-14', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (218, 'NNDG218', 'Muhamad Gunawan down to 5mbps', 'Perum Bali Residen Blok F No 16', '87800140607', '2022-12-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (220, 'NNDG220', 'Muchtar', 'Perum Pesona Limbangan', '85722223830', '2022-05-26', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
 (222, 'NNDG222', 'Nana', 'Kp. Citoe', '81298411285', '2022-10-13', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:48', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -880,13 +924,13 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (285, 'NNDG285', 'Ruslana', 'Kp. Pasir Halang ', '815922270', '2022-07-11', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (286, 'NNDG286', 'Saeful Bahri (Baso)', 'Kp. Cibereum Warung Baso', '85280768519', '2022-08-06', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (287, 'NNDG287', 'Saeful / Gelar / Mutia', 'Kp. Alinda', '81310331073', '2022-10-24', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(288, 'NNDG288', 'Saeful Ramdhan', 'Kp Sukaraja Gg Teropong', '85703676311', '2022-12-22', '4', 305000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(288, 'NNDG288', 'Saeful Ramdhan', 'Kp Sukaraja Gg Teropong', '85703676311', '2022-12-22', '4', 305000, '20', '', NULL, NULL, NULL, '2024-10-21 07:31:39', '2024-10-10 14:31:43', 'sudah bayar'),
 (289, 'NNDG289', 'Safira', 'Kp Nagrak 002/007', '87720680896', '2022-07-07', '1', 125000, '2', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (291, 'NNDG291', 'Samsudin Lauseng up to 5 mbps', 'Kp. Salaater', '82119616677', '2022-09-23', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(292, 'NNDG292', 'Sandiyanto Saputro', 'Kp. Limbangan', '85794050609', '2022-08-15', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(292, 'NNDG292', 'Sandiyanto Saputro', 'Kp. Limbangan', '85794050609', '2022-08-15', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 07:11:16', '2024-10-10 14:31:43', 'sudah bayar'),
 (294, 'NNDG294', 'Santiciloa @Netnet', 'Kp. Ciloa', '85794966965', '2022-06-22', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (295, 'NNDG295', 'Sd Kekenceng', 'Kp. Kekenceng', '', '2022-09-17', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-14 09:06:55', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(296, 'NNDG296', 'Septian / Bengkel Citoe', 'Kp. Citoe', '81316006352', '2022-11-18', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(296, 'NNDG296', 'Septian / Bengkel Citoe', 'Kp. Citoe', '81316006352', '2022-11-18', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-21 03:06:21', '2024-10-10 14:31:43', 'sudah bayar'),
 (298, 'NNDG298', 'Silvi Lestari', 'Perum Griya Goalpara Asri Blok C1', '88296573770', '2022-07-07', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (299, 'NNDG299', 'Sinta Awaliyah', 'Kp. Cikaret', '85720431151', '2022-08-29', '1', 125000, '10', '', NULL, NULL, NULL, '2024-10-12 10:20:15', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (302, 'NNDG302', 'Siti Anisa', 'Kp. Cisarua Rt 04/002', '082258711688', '2022-12-09', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -928,10 +972,10 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (351, 'NNDG351', 'Yandi Sopian', 'Kp. Cisarua Legok', '81572766837', '2022-10-20', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (352, 'NNDG352', 'Yanti cibayawak', 'Kp. Cibayawak', '85798960996', '2022-08-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (353, 'NNDG353', 'Yanti', 'Kp. Cisarua Pasir', '85884712518', '2022-09-23', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(354, 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(356, 'NNDG356', 'Yesibali', 'Perum Bali residen', '85773883929', '2022-06-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 01:46:04', '2024-10-10 14:31:43', 'sudah bayar'),
+(354, 'NNDG354', 'Yaya Karyadi', 'Kp. Pasir Halang', '85795433305', '2022-10-19', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(356, 'NNDG356', 'Yesibali', 'Perum Bali residen', '85773883929', '2022-06-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (360, 'NNDG360', 'Yudha Kusuma Putra', 'Perum Aluna 2 Blok H No 10 Jn Merah Delima', '81395667374', '2022-06-05', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(362, 'NNDG362', 'Yuni alinda', 'Kp. Alinda', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(362, 'NNDG362', 'Yuni alinda', 'Kp. Alinda', '', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 07:10:56', '2024-10-10 14:31:43', 'sudah bayar'),
 (363, 'NNDG363', 'Yuni Melindawati', 'Kp. Pasir Halang', '81385092285', '2022-10-17', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (364, 'NNDG364', 'Yuni Yuningsih', 'Kp. Cibeurem Pasir', '8156150693', '2022-10-26', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (366, 'NNDG366', 'Yusufaluna2 / Irfan', 'Perum Aluna 2 ', '85795121308', '2022-05-03', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -950,7 +994,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (384, 'NNDG384', 'Ahmad aldi rizaldi', 'Perum Tiara blok g 5 no4', '85159707711', '2023-01-02', '1', 125000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (385, 'NNDG385', 'Nunung Juariah / exs diana rostini', 'kp cibereum/deket klinik', '85860809362', '2023-01-02', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (386, 'NNDG386', 'Dede irsan saepuzzaman', 'Kp. gintung rt07/03 limbangan', '8997556294', '2023-04-02', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(387, 'NNDG387', 'Muhamad muayad down to 5Mbps', 'Kp. gintung rt07/03 limbangan no 28', '81023129975', '2023-03-02', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(387, 'NNDG387', 'Muhamad muayad down to 5Mbps', 'Kp. gintung rt07/03 limbangan no 28', '81023129975', '2023-03-02', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-21 03:01:21', '2024-10-10 14:31:43', 'sudah bayar'),
 (388, 'NNDG388', 'Neneng nuraeni', 'Kp. kekenceng rt02/01', '85520978740', '2//2/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (389, 'NNDG389', 'Rina suryani katriana', 'Kp. legok astana genteng rt03/06', '85794618206', '2023-03-02', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (390, 'NNDG390', 'Ilham amarullah', 'Gg.  manggis 2 no 592 sukaraja', '85860959174', '2023-03-02', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -993,7 +1037,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (436, 'NNDG436', 'harley timotius', 'Perum pesona limbangan goalpara', '8,95326E+11', '27/03/2023', '2', 165000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (438, 'NNDG438', 'rini puspita', 'cidadap pangkalan', '83806211790', '29/03/2023', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (439, 'NNDG439', 'anisa arsita / irek down to 5mbps', 'Kp. gintung 01/005 Limbangan', '81287065995', '29/03/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(440, 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(440, 'NNDG440', 'usep saepul rahmat', 'Kp. babakan limbangan', '85817782603', '29/03/2023', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (441, 'NNDG441', 'Anggi Supriyadi', 'Kp. Astana Genteng Rt 02/16', '8562398159', '2023-01-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (442, 'NNDG442', 'Annisa Ramadhani', 'Kp. Nagrak Tower gg. Paud mangga rt 03/07', '85793801027', '2023-06-04', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (443, 'NNDG443', 'dandy irawan', 'Kp. Tegal Huni (belakang madrasah)', '85163008278', '2023-07-04', '2', 165000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1023,17 +1067,17 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (476, 'NNDG476', 'Iman taufik ', 'Kp. cikaret', '085793512775', '2023-12-05', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-14 09:23:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (478, 'NNDG478', 'armand mubarok', 'Kp. maduhur', '085866491713', '16/05/2023', '4', 305000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:55', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (480, 'NNDG480', 'lilis rohayati', 'Kp. baru genteng', '\'081295988346', '17/05/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(481, 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-17 01:05:49', '2024-10-10 14:31:43', 'Block'),
+(481, 'NNDG481', 'dewi ratnasari down to 5mbps', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (482, 'NNDG482', 'dewi ratnasari', 'Kp. cimahpar gg.revolusi blk polsek', '085713166317', '15/05/2023', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (483, 'NNDG483', 'hani kurnia', 'Kp. cimahpar gg.revolusi blk polsek', '085811850469', '15/05/2023', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(484, 'NNDG484', 'Nanang', 'Kp. lemahduhur', '085697231328', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:14:37', '2024-10-10 14:31:43', 'sudah bayar'),
-(485, 'NNDG485', 'supyadin', 'Kp. lemahduhur', '085795444207', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:14:50', '2024-10-10 14:31:43', 'sudah bayar'),
+(484, 'NNDG484', 'Nanang', 'Kp. lemahduhur', '085697231328', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(485, 'NNDG485', 'supyadin', 'Kp. lemahduhur', '085795444207', '20/05/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (486, 'NNDG486', 'nety aulia nuraisah', 'Kp. cidadap', '085863954146', '22/05/2023', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (488, 'NNDG488', 'nani sumarni', 'Kp. babakan limbangan blk perum bali', '081345176244', '22/05/2023', '3', 205000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (489, 'NNDG489', 'yusuf', 'Kp. cikaret (situ cijeruk)', '085794634622', '22/05/2023', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (490, 'NNDG490', 'Dede hermawan', 'Kp. Limbangan', '', '', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (491, 'NNDG491', 'Heni Handayani', 'Kp. Limbangan', '081573644223', 'unknown', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(492, 'NNDG492', 'muhamad amirudin', 'Kp. Cisero', '082316899461', '24/05/2023', '2', 165000, '24', '', NULL, NULL, NULL, '2024-10-19 05:26:12', '2024-10-10 14:31:43', 'sudah bayar'),
+(492, 'NNDG492', 'muhamad amirudin', 'Kp. Cisero', '082316899461', '24/05/2023', '2', 165000, '24', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (493, 'NNDG493', 'ade misbah', 'Kp. cisero', '081573392281', '24/05/2023', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (494, 'NNDG494', 'Heni Arlina/Cuttie', 'gg. Belbar', '081510042125', '25/05/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (495, 'NNDG495', 'Rina marlina', 'Kp. Legok Astana Genteng Rt03/16', '085711970027', '26/05/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1042,7 +1086,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (499, 'NNDG499', 'irwan purnama', 'Kp. cibereum', '081283674866', '07/05/2023', '1', 125000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (501, 'NNDG501', 'wisnu', 'Kp. pasirhalang', '085724918676', '30/05/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (502, 'NNDG502', 'putri', 'Kp. asgen 01/16', '085721206156', '30/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(503, 'NNDG503', 'nurjanah', 'Kp. maduhur', '081573434841', '31/05/2023', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-19 07:15:37', '2024-10-10 14:31:43', 'sudah bayar'),
+(503, 'NNDG503', 'nurjanah', 'Kp. maduhur', '081573434841', '31/05/2023', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (504, 'NNDG504', 'yuddi hari pantjawardi', 'Kp. cigadog margaluyu', '081280033701', '31/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (505, 'NNDG505', 'supyan supriyadi', 'Kp. cigadog margaluyu', '081563159690', '31/05/2023', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (507, 'NNDG507', 'Ridwan Kurniawan', 'Kp. Gudawang kbn.pedes', '082112098373', '07/06/2023', '3+', 265000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1056,7 +1100,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (517, 'NNDG517', 'agus supriatna', 'Kp. Pasir muncang', '081462368700', '15/06/2023', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (518, 'NNDG518', 'dhika destriana', 'Kp. limbangan', '089657777074', '19/06/2023', '3', 205000, '19', '', NULL, NULL, NULL, '2024-10-15 02:43:41', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (519, 'NNDG519', 'Siti Fitriani', 'Kp. Gintung', '085720614904', '19/06/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-18 06:49:21', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(520, 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(520, 'NNDG520', 'eni rohaeni', 'Kp.nagrak', '085863954295', '20/06/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (521, 'NNDG521', 'M Ruli Rusliyansyah / Riana rin rin', 'Kp. cidadap pangkalan', '081323428046', '23/06/2023', '3', 205000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (522, 'NNDG522', 'Warda Tillah', 'Kp. cidadap pasantren', '083143629582', '23/06/2023', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (523, 'NNDG523', 'lia marlia', 'gg. Belbar', '085724872022', '23/06/2023', '3', 205000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1078,14 +1122,14 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (544, 'NNDG544', 'rismawati', 'Kp. gintung 05/03', '081572736572', '17/07/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (545, 'NNDG545', 'ai komariah', 'Kp. gintung 05/03', '085759401088', '17/07/2023', '1', 125000, '14', '', NULL, NULL, NULL, '2024-10-15 02:11:48', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (546, 'NNDG546', 'sopiah', 'Kp. gintung 05/03', '085219873678', '17/07/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(547, 'NNDG547', 'm endang jamahir', 'Kp. cibayawak 03/06', '085864326369', '18/07/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(548, 'NNDG548', 'lia nagrak tower', 'Kp. Nagrak tower', '085724754765', '18/07/2023', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-19 01:45:06', '2024-10-10 14:31:43', 'sudah bayar'),
+(547, 'NNDG547', 'm endang jamahir', 'Kp. cibayawak 03/06', '085864326369', '18/07/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-21 07:22:16', '2024-10-10 14:31:43', 'sudah bayar'),
+(548, 'NNDG548', 'lia nagrak tower', 'Kp. Nagrak tower', '085724754765', '18/07/2023', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (549, 'NNDG549', 'Andri Andrian/ Yudi Liandri ', 'Kp. Cibereum/Kp. Subang', '081288166697', '19/07/2023', '2', 165000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (550, 'NNDG550', 'a kosasih', 'Kp. cibereum tengah', '081802125830', '20/07/2023', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (551, 'NNDG551', 'isma fauziah', 'Kp. ciloa', '083811999054', '20/07/2023', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 11:16:47', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (553, 'NNDG553', 'rani suryani', 'Kp. Pasirmuncang', 'voucer', 'voucer', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (554, 'NNDG554', 'rani suryani', 'Kp. Pasirmuncang', '085724905721', '25/07/203', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(556, 'NNDG556', 'rika nurmalasari', 'Kp. maduhur', '085863193667', '25/07/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 07:15:05', '2024-10-10 14:31:43', 'sudah bayar'),
+(556, 'NNDG556', 'rika nurmalasari', 'Kp. maduhur', '085863193667', '25/07/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (557, 'NNDG557', 'ayu / yayu anggraeni', 'Kp astana genteng', '085782149169', '26/07/2023', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (559, 'NNDG559', 'nandri irawan', 'Kp. cidadap pangkalan', '085871155554', '27/07/2023', '2+', 175000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (560, 'NNDG560', 'husin', 'Kp. cigadog margaluyu', '085798405276', '28/07/2023', '1', 125000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1103,10 +1147,10 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (575, 'NNDG575', 'ai nuraeni', 'Kp nagrak mi cimonyet', '083891831475', '12/08/2023', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (576, 'NNDG576', 'henti fauziah', 'Kp nagraak legok', '085864316005', '12/08/2023', '1', 125000, '12', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (577, 'NNDG577', 'Muhamad Naufal Lutfi', 'Perum Pesona Limbangan blok a1 no.7', '083870735530', '15/08/2023', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(578, 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 08:52:03', '2024-10-10 14:31:43', 'sudah bayar'),
-(580, 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(578, 'NNDG578', 'Mastini', 'Perum Pesona limbangan  blok a1 no.4', '085720694116', '19/08/2023', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:13', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(580, 'NNDG580', 'aman nurjaman', 'Kp. Pasir halang 04/08', '085863594929', '21/08/203', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (581, 'NNDG581', 'ayi riskan', 'Kp. Selaater', '085722726722', '22/08/2023', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(584, 'NNDG584', 'Alvian', 'Perum Setiabudi blok w5 i5', '082258682775', '24/08/2023', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(584, 'NNDG584', 'Alvian', 'Perum Setiabudi blok w5 i5', '082258682775', '24/08/2023', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-21 03:03:39', '2024-10-10 14:31:43', 'sudah bayar'),
 (585, 'NNDG585', 'ali basri', 'Kp. Sasagaran cihuis', '085859745975', '24/08/2023', '2', 165000, '6', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (586, 'NNDG586', 'Nasrudin', 'Perum Pesona Limbangan', '085759666571', '25/08/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (587, 'NNDG587', 'Ela Nurlela Ninung Sari', 'Gg. Belbar rt06/07', '085720239291', '26/08/223', '2', 165000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1155,9 +1199,9 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (636, 'NNDG636', 'Mutiara Wahyuni down to 5 mbps', 'Kp. Sinagarpapak psrhlg  o1/04', '081313445546', '13/10/2023', '1', 125000, '13', '', NULL, NULL, NULL, '2024-10-14 09:23:23', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (637, 'NNDG637', 'Ahmad Dian', 'Kp. Gintung (Dekat Yuli)', '085797800095', '14/10/2023', '2', 165000, '14', '', NULL, NULL, NULL, '2024-10-15 02:11:49', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (639, 'NNDG639', 'Wahyudin', 'Kp. Cisarua Legok', '081563663513', '17/10/2023', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:48', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(640, 'NNDG640', 'Eka Kartika', 'Kp. Subang Jaya', '085860271068', '19/10/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(640, 'NNDG640', 'Eka Kartika', 'Kp. Subang Jaya', '085860271068', '19/10/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-21 03:05:54', '2024-10-10 14:31:43', 'sudah bayar'),
 (641, 'NNDG641', 'Farida Ariani', 'Kp. Gentong Sukaraja (blambir)', '085722750908/0815-6484-3660', '19/10/2023', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(642, 'NNDG642', 'Andri ', 'Kp. Gintung', '082193339387', '21/10/2023', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
+(642, 'NNDG642', 'Andri ', 'Kp. Gintung', '082193339387', '21/10/2023', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-21 03:02:43', '2024-10-10 14:31:43', 'sudah bayar'),
 (644, 'NNDG644', 'Robi iskandar', 'jl.sukaraja Sowroom (samping gg.teropong)', '085863339781', '23/10/2023', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (646, 'NNDG646', 'Farhaz (PPK kec. Sukaraja)', 'kantor kecamatan sukaraja', '081367063232', '28/10/2023', '3+', 250000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
 (647, 'NNDG647', 'redi rediansyah', 'Kp. Cimahpar 01/02', '085659501796', '28/10/2023', '1', 125000, '1', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1178,8 +1222,8 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (665, 'NNDG665', 'Nana Sumarna', 'Kp. Sayang', '085723119605', '14/11/2023', '1', 125000, '14', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (666, 'NNDG666', 'Nursidah', 'Kp. Cibereum tengah (deris motor)', '085939717596', '15/11/2023', '1', 125000, '10', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (667, 'NNDG667', 'Abdul Rohman down to 5 mbps', 'Kp. Cidadap Pangkalan', '085759205442', '16/11/2023', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:55', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(668, 'NNDG668', 'Levi', 'Kp.gudawang ', '081313585959', '20/11/2023', '3', 205000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:49', '2024-10-10 14:31:43', 'Belum Bayar'),
-(669, 'NNDG669', 'yuniarti', 'Perum Elok Blok D.5 no 1', '085216157120', '21/11/2023', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(668, 'NNDG668', 'Levi', 'Kp.gudawang ', '081313585959', '20/11/2023', '3', 205000, '20', '', NULL, NULL, NULL, '2024-10-21 03:06:33', '2024-10-10 14:31:43', 'sudah bayar'),
+(669, 'NNDG669', 'yuniarti', 'Perum Elok Blok D.5 no 1', '085216157120', '21/11/2023', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-21 06:37:24', '2024-10-10 14:31:43', 'sudah bayar'),
 (671, 'NNDG671', 'Fajar Hilmawan', 'Perum aluna 1 blok g no.12', '081563104131', '2023-11-25', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (672, 'NNDG672', 'Ruslana ali yamin', 'Kp.Limbangan', '', '29/11/2023', '1', 125000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (673, 'NNDG673', 'Wibowo yanto saputro', 'Kp.Limbangan', '', '29/11/2023', '1', 125000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1207,7 +1251,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (696, 'NNDG696', 'Intan  ', 'Perum Limbangan', '0881025696409', '17/12/2023', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-17 11:16:48', '2024-10-10 14:31:43', 'Sudah Bayar');
 INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg`, `aktivasi_plg`, `paket_plg`, `harga_paket`, `tgl_tagih_plg`, `keterangan_plg`, `odp`, `longitude`, `latitude`, `updated_at`, `created_at`, `status_pembayaran`) VALUES
 (697, 'NNDG697', 'Siti Mariam', 'Kp.Cibayawak', '081218941731', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(699, 'NNDG699', 'Ujang Z ', 'Perum Pesona Limbangan', '085720003789', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(699, 'NNDG699', 'Ujang Z ', 'Perum Pesona Limbangan', '085720003789', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-21 03:02:28', '2024-10-10 14:31:43', 'sudah bayar'),
 (700, 'NNDG700', 'Kokom Komariah', 'Kp.Pasir Muncang', '085872067581', '19/12/2023', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (701, 'NNDG701', 'Rival Zulkarnaen R', 'Kp.Pasir Muncang', '085819603741', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-16 10:25:31', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (702, 'NNDG702', 'Reza mahendra/Rini', 'Kp.Nyalindung', '085864253582', '18/12/2023', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1225,7 +1269,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (716, 'NNDG716', 'Elly Lestary', 'Kp.Cidadap pesantren', '088299360600', '01/01/2024', '1', 125000, '1', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (717, 'NNDG717', 'Siti susanti', 'Kp. Lemah duuhur', '085218287949', '03/01/2024', '2', 165000, '3', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (719, 'NNDG719', 'Ninin ulandari', 'Kp. Legok astana gentgeng', '089692891583', '04/01/2024', '1', 125000, '4', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(720, 'NNDG720', 'Ahmad asep suherlan', 'Kp. Pasir muncang', '081563488803', '06/01/2024', '1', 125000, '6', '', NULL, NULL, NULL, '2024-10-12 11:35:51', '2024-10-10 14:31:43', 'Isolir'),
+(720, 'NNDG720', 'Ahmad asep suherlan', 'Kp. Pasir muncang', '081563488803', '06/01/2024', '1', 125000, '6', '', NULL, NULL, NULL, '2024-10-21 08:06:14', '2024-10-10 14:31:43', 'sudah bayar'),
 (721, 'NNDG721', 'Hikmatul zahra', 'Kp. Gintung', '085862823054', '05/01/2024', '1', 125000, '5', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (722, 'NNDG722', 'Mamay mariah', 'Kp.citoe', '085814021545', '06/01/2024', '2', 165000, '6', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (723, 'NNDG723', 'Rosid', 'Kp. Cimahpar Gg. Revolusi', '085713166317', '08/01/2024', '2', 165000, '8', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1242,7 +1286,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (736, 'NNDG736', 'Erni nuraeni', 'Kp. Bojong sawah', '087872015016', '2024-01-13', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-14 09:23:23', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (737, 'NNDG737', 'Ai Nurhayati', 'Kp. Cibereum belbar', '085721315744', '2024-01-15', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (738, 'NNDG738', 'Agung', 'Kp.Cijeruk', '082123945855', '16/01/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(739, 'NNDG739', 'Santi novianti', 'Kp. Kelapa conong cibereum tengah', '085861088468', '20/01/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(739, 'NNDG739', 'Santi novianti', 'Kp. Kelapa conong cibereum tengah', '085861088468', '20/01/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-21 03:14:16', '2024-10-10 14:31:43', 'sudah bayar'),
 (740, 'NNDG740', 'Andi Hermawan', 'Kp.pesantren sukaraja', '081317146047', '21/01/2024', '2', 165000, '5', '', NULL, NULL, NULL, '2024-10-11 07:47:06', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (741, 'NNDG741', 'Revano/Nasrul arifin', 'Kp.cidadap pangkalan', '087869013673', '22/01/2024', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (742, 'NNDG742', 'Kusnandar', 'Kp.Babakan khoer', '83110423703', '22/01/2024', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1272,7 +1316,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (768, 'NNDG768', 'Ai Sumiati', 'Kp Kadu gede 03/04 ', '082113748835', '15/02/2024', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-12 10:20:17', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (770, 'NNDG770', 'Mega Ermawati', 'Kp. Pasir muncang', '', '16/02/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-17 00:48:25', '2024-10-10 14:31:43', 'Isolir'),
 (772, 'NNDG772', 'Firman Abdurrohim', 'Kp. Pasirmuncang', '085723340230', '17/02/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 05:57:04', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(773, 'NNDG773', 'Cecep Mahpudin', 'Kp. Pasirmuncang', '', '17/02/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Isolir'),
+(773, 'NNDG773', 'Cecep Mahpudin', 'Kp. Pasirmuncang', '', '17/02/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-21 03:03:14', '2024-10-10 14:31:43', 'sudah bayar'),
 (774, 'NNDG774', 'Nissa Aprilia,SE', 'Kp. Cidadap Pesantren', '081210103309', '18/02/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (775, 'NNDG775', 'Rani Rahmawati', 'Kp. Nagrak Tower ', '085863153731', '20/02/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (776, 'NNDG776', 'Rini Rostiati', 'Kp. Sayang', '081563341707', '23/02/2024', '1', 125000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1296,8 +1340,8 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (797, 'NNDG797', 'Anisa nurul meilani', 'Kp. Nagraka Tower', '0895364377685', '16/03/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (798, 'NNDG798', 'Susi', 'Kp.Buniwangi', '081282202726', '16/03/2024', '3', 205000, '16', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (799, 'NNDG799', 'Winda Ningsih', 'Kp. Buniwangi', '081381565244', '16/03/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(800, 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(801, 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(800, 'NNDG800', 'Yuli Yulianingsih', 'Kp. Cibereum', '085759664125', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(801, 'NNDG801', 'Ai masriah', 'Kp. Pasir muncang', '081387338987', '21/03/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (802, 'NNDG802', 'Yudi,S.PD', 'Kp.Sayang', '081563508737', '25/03/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (803, 'NNDG803', 'Andri', 'Perum Tando 1', '085601603152', '26/03/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (804, 'NNDG804', 'Yuliyanti Siti Amalia', 'Kp. Sinagarpapak', '081320926688/085211340041', '27/05/2024', '1', 125000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1318,20 +1362,20 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (824, 'NNDG824', 'Neneng ', 'Kp. Genteng', '085212720918', '16/04/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (825, 'NNDG825', 'Salman Alfarisi', 'Kp. Limbangan', '083811533638', '18/04/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (826, 'NNDG826', 'Hendri Maulana Sigit', 'Kp. Cibereum', '085523933395', '18/04/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(827, 'NNDG827', 'Midi', 'Kp. Citoe', '', '18/04/2024', '1', 50000, '18', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(828, 'NNDG828', 'Fajri Siswanto', 'Kp. Cisarua Legok', '0852 8215 6691', '19/04/2024', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-19 01:44:52', '2024-10-10 14:31:43', 'sudah bayar'),
-(829, 'NNDG829', 'Ujang Kuswandi', 'Kp. Gintung', '085717134583', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(830, 'NNDG830', 'Mirawati', 'Kp. Citoe', '083125854126', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(831, 'NNDG831', 'Herman Hermawan', 'Kp. Kelapa Condong', '085794251710', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(833, 'NNDG833', 'Dudun Burhanudin', 'Kp. Citoe 05/05', '085872110205', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 07:07:13', '2024-10-10 14:31:43', 'sudah bayar'),
-(834, 'NNDG834', 'Rahmi Latipul Hasanah', 'Perum Aluna 2 Jalan merah delima blok H no 7', '082117682655', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(835, 'NNDG835', 'Baban Sobandi', 'Kp. Cibereum Tengah', '085817928651', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(836, 'NNDG836', 'Dhany Marualudin', 'Kp.Citoe', '085863420276', '21/04/2024', '1', 100000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(827, 'NNDG827', 'Midi', 'Kp. Citoe', '', '18/04/2024', '1', 50000, '18', '', NULL, NULL, NULL, '2024-10-21 03:02:58', '2024-10-10 14:31:43', 'sudah bayar'),
+(828, 'NNDG828', 'Fajri Siswanto', 'Kp. Cisarua Legok', '0852 8215 6691', '19/04/2024', '1', 125000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(829, 'NNDG829', 'Ujang Kuswandi', 'Kp. Gintung', '085717134583', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
+(830, 'NNDG830', 'Mirawati', 'Kp. Citoe', '083125854126', '19/04/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
+(831, 'NNDG831', 'Herman Hermawan', 'Kp. Kelapa Condong', '085794251710', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-21 03:04:28', '2024-10-10 14:31:43', 'sudah bayar'),
+(833, 'NNDG833', 'Dudun Burhanudin', 'Kp. Citoe 05/05', '085872110205', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(834, 'NNDG834', 'Rahmi Latipul Hasanah', 'Perum Aluna 2 Jalan merah delima blok H no 7', '082117682655', '21/04/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-21 03:01:56', '2024-10-10 14:31:43', 'sudah bayar'),
+(835, 'NNDG835', 'Baban Sobandi', 'Kp. Cibereum Tengah', '085817928651', '20/04/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-21 03:04:46', '2024-10-10 14:31:43', 'sudah bayar'),
+(836, 'NNDG836', 'Dhany Marualudin', 'Kp.Citoe', '085863420276', '21/04/2024', '1', 100000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (837, 'NNDG837', 'Cici Amalia', 'Kp. Cisarua Legok', '085748089308', '22/04/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (838, 'NNDG838', 'Harun Maulana', 'Kp. Cisarua Legok', '081574141717', '22/04/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(839, 'NNDG839', 'Maulana Yusup Hamdani', 'Kp. Cigadog margaluyu ', '085798641518', '23/04/2024', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(839, 'NNDG839', 'Maulana Yusup Hamdani', 'Kp. Cigadog margaluyu ', '085798641518', '23/04/2024', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-21 03:02:11', '2024-10-10 14:31:43', 'sudah bayar'),
 (840, 'NNDG840', 'Dewi Fatimah', 'Kp. Cikaret', '085864545156', '24/04/2024', '2', 165000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(841, 'NNDG841', 'Dede Yuliana', 'Perum Al-Hijrah Blok A no 56', '085811124186', '24/04/2024', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(841, 'NNDG841', 'Dede Yuliana', 'Perum Al-Hijrah Blok A no 56', '085811124186', '24/04/2024', '1', 125000, '24', '', NULL, NULL, NULL, '2024-10-21 03:05:09', '2024-10-10 14:31:43', 'sudah bayar'),
 (843, 'NNDG843', 'Rudi Hermawan', 'Kp. Lokantara', '085934262124', '25/05/2024', '3', 205000, '25', '', NULL, NULL, NULL, '2024-10-17 11:16:48', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (844, 'NNDG844', 'Ceceng M Ikbal', 'Kp. Cibayawak', '083838068514', '25/04/2024', '1', 125000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (845, 'NNDG845', 'Sri Nuraeni', 'Perum Aluna 1 Blok N5', '089699225525', '27/04/2024', '2', 165000, '27', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1364,12 +1408,12 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (874, 'NNDG874', 'Siti Nurfatimah', 'Kp. Margawangi', '085624167937', '13/05/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (875, 'NNDG875', 'Iwan Herdiawan', 'Kp. Batu Karut', '085810035033', '14/05/2024', '2', 165000, '14', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (878, 'NNDG878', 'Regi Mardiansyah', 'Kp. Babakan Limbangan', '085721129149', '17/05/2024', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(879, 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 08:52:15', '2024-10-10 14:31:43', 'sudah bayar'),
-(880, 'NNDG880', 'Rio Hadi Wijaya', 'Tiara Regency No.160', '085794578264', '17/05/2024', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Isolir'),
+(879, 'NNDG879', 'Tuti Kusniawati', 'Kp. Gintung', '085723236109', '19/05/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(880, 'NNDG880', 'Rio Hadi Wijaya', 'Tiara Regency No.160', '085794578264', '17/05/2024', '2', 165000, '17', '', NULL, NULL, NULL, '2024-10-21 03:03:59', '2024-10-10 14:31:43', 'sudah bayar'),
 (881, 'NNDG881', 'Selpa', 'Kp. Buniwangi', '0881025217001', '20/05/2024', '3', 205000, '20', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(882, 'NNDG882', 'Siti Nuraeni', 'Kp. Cihuis', '085846050924', '20/05/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(882, 'NNDG882', 'Siti Nuraeni', 'Kp. Cihuis', '085846050924', '20/05/2024', '2', 165000, '20', '', NULL, NULL, NULL, '2024-10-21 03:01:40', '2024-10-10 14:31:43', 'sudah bayar'),
 (884, 'NNDG884', 'Siti Sopiah', 'Kp. Cidadap', '085860958984', '21/05/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(885, 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 08:52:27', '2024-10-10 14:31:43', 'sudah bayar'),
+(885, 'NNDG885', 'Hendriedy Sopyan', 'Kp. Gentong Pasir Langensari', '085759741741', '21/05/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (887, 'NNDG887', 'Yayang Solihah', 'Kp. Cigadog margaluyu ', '085883677313/085624233820', '25/05/2024', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (888, 'NNDG888', 'Siti Aidah', 'Kp. Komprang Cigadog', '085727770169', '25/05/2024', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (889, 'NNDG889', 'Rahmat Sunandar', 'Kp. Lemahduhur', '085863338715', '26/05/2024', '1', 125000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1390,7 +1434,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (904, 'NNDG904', 'Deudeu Rosita', 'Kp. Sasagaran cihuis', '085798160328', '31/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (905, 'NNDG905', 'Emi Aminah', 'Kp. Cihuis', '085863248042', '30/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (906, 'NNDG906', 'Mia Zaqia/Sarip', 'Kp. Cihuis', '', '30/05/2024', '2', 165000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(907, 'NNDG907', 'Tina Rustiana', 'Kp. Lemah Duhur', '087884428376', '04/06/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 07:15:22', '2024-10-10 14:31:43', 'sudah bayar'),
+(907, 'NNDG907', 'Tina Rustiana', 'Kp. Lemah Duhur', '087884428376', '04/06/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (908, 'NNDG908', 'Acep Rahmatulloh', 'Kp. Pasir Muncang yasni', '085795284746', '04/06/2024', '3', 205000, '4', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (909, 'NNDG909', 'Emilia Lailatussofa', 'Kp. Pasir Muncang', '085862142438', '06/06/2024', '2', 165000, '6', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (910, 'NNDG910', 'Eka ', 'Kp. Bobojong', '085180589148', '04/06/2024', '2', 165000, '4', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1401,9 +1445,9 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (915, 'NNDG915', 'Solihah Hamidah', 'Kp. Cihuis', '08562296659', '13/06/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-15 09:56:39', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (916, 'NNDG916', 'Neni Nuraeni', 'Kp. Cidadap Tengah', '082123431459', '14/06/2024', '1', 125000, '14', '', NULL, NULL, NULL, '2024-10-14 04:49:22', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (917, 'NNDG917', 'Rian Gunawan', 'Kp. Legok Astana Genteng', '083103674174', '15/06/2024', '2', 165000, '15', '', NULL, NULL, NULL, '2024-10-12 01:40:57', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(919, 'NNDG919', 'Edi Purnomo', 'Kp. Limbangan', '', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(919, 'NNDG919', 'Edi Purnomo', 'Kp. Limbangan', '', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
 (920, 'NNDG920', 'Rizal Saepul Bahri', 'Kp. Lemah Duhur', '081615368920', '19/06/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(921, 'NNDG921', 'Rosi Permatasari', 'Kp. Cigadog margaluyu ', '085776497366', '2024-06-19', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(921, 'NNDG921', 'Rosi Permatasari', 'Kp. Cigadog margaluyu ', '085776497366', '2024-06-19', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-21 03:13:28', '2024-10-10 14:31:43', 'sudah bayar'),
 (923, 'NNDG923', 'Ade Ridwan', 'Kp. Cidadap Pesantren', '081393142869', '24/06/2024', '1', 125000, '1', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (924, 'NNDG924', 'Agus(Voucher)', 'Kp. Gintung', '', '24/06/2024', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
 (925, 'NNDG925', 'Didin( Voucher)', 'Kp.samawa', '085863087450', '03/06/2024', 'vcr', 0, 'vcr', '', NULL, NULL, NULL, NULL, '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1428,7 +1472,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (945, 'NNDG945', 'Fikriansyah Darmawan', 'Kp. Cigadog margaluyu ', '', '07/07/2024', '2', 165000, '7', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (946, 'NNDG946', 'Indri Siti Habibah', 'Kp. Legok Astana Genteng', '', '09/07/2024', '1', 125000, '9', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (947, 'NNDG947', 'Ilham Mubarok', 'Kp. Gintung', '', '09/07/2024', '1', 125000, '9', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(948, 'NNDG948', 'Siti Rusmiati', 'Kp. Cikawung', '085723332421', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-19 01:45:29', '2024-10-10 14:31:43', 'sudah bayar'),
+(948, 'NNDG948', 'Siti Rusmiati', 'Kp. Cikawung', '085723332421', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (949, 'NNDG949', 'Nani', 'Kp. Cikawung', '', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (950, 'NNDG950', 'Fikri Fauji', 'Perum Pesona Aluna 2 Jln. Kalsedan Blok D Ni.10', '081316144050', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-12 11:35:52', '2024-10-10 14:31:43', 'Isolir'),
 (952, 'NNDG952', 'Silva Insaniah Maulida', 'Kp. Lokantara', '085934262124', '10/07/2024', '2', 165000, '10', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
@@ -1439,14 +1483,14 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (957, 'NNDG957', 'Usup', 'Kp. Cigadog Margaluyu', '085723332477', '13/07/2024', '2', 165000, '13', '', NULL, NULL, NULL, '2024-10-11 07:47:07', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (958, 'NNDG958', 'Miftahul Aripin', 'Kp. Gentong pasir 02/01 langensari', '085759516002', '15/07/2024', '1', 125000, '15', '', NULL, NULL, NULL, '2024-10-14 09:06:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (959, 'NNDG959', 'ST. Basmah', 'Kp. Batukarut', '085759723944', '16/07/2024', '2', 165000, '16', '', NULL, NULL, NULL, '2024-10-16 07:43:56', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(960, 'NNDG960', 'Ida Farida', 'Kp. Sayang', '081563306136', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-19 01:48:33', '2024-10-10 14:31:43', 'sudah bayar'),
+(960, 'NNDG960', 'Ida Farida', 'Kp. Sayang', '081563306136', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (961, 'NNDG961', 'Novitasari', 'Kp. Pasirhalang/ Kp. Legok Nyenang', '08157135415', '16/07/2024', '1', 125000, '16', '', NULL, NULL, NULL, '2024-10-12 10:20:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (962, 'NNDG962', 'Jihan Wulandari', 'Kp. Cibereum Pasir', '081460993451', '18/07/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 05:57:04', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (963, 'NNDG963', 'Ida Farida', 'Peruma Aluna 2 Jln. Permata Blok K 10', '0881011749047', '18/07/2024', '2', 165000, '18', '', NULL, NULL, NULL, '2024-10-18 02:41:18', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (964, 'NNDG964', 'Yeni Nuraeni', 'Kp. Gintung', '083878680392', '18/07/2024', '1', 125000, '18', '', NULL, NULL, NULL, '2024-10-18 05:57:05', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(965, 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(966, 'NNDG966', 'Divia Nirma', 'Gg. Kobra ', '085721129220', '19/07/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(967, 'NNDG967', 'Siti Sarah', 'Kp. Ciloa', '085659080327', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(965, 'NNDG965', 'Dede Safitri', 'Kp. Gintung', '085723369460', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Sudah Bayar'),
+(966, 'NNDG966', 'Divia Nirma', 'Gg. Kobra ', '085721129220', '19/07/2024', '2', 165000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:25', '2024-10-10 14:31:43', 'Isolir'),
+(967, 'NNDG967', 'Siti Sarah', 'Kp. Ciloa', '085659080327', '20/07/2024', '1', 125000, '20', '', NULL, NULL, NULL, '2024-10-21 07:31:27', '2024-10-10 14:31:43', 'sudah bayar'),
 (968, 'NNDG968', 'Sri Janitri', 'Kp. Cisarua', '082315821268/085703684396', '22/07/2024', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (969, 'NNDG969', 'Dedi Junaedi', 'Perumahan Aluna 2 jl.Ruby Blok E no. 1', '083824446999', '28/07/2024', '2', 165000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (970, 'NNDG970', 'Sri Mulyati', 'Kp. Limbangan', '083818769132', '25/07/2024', '2', 165000, '25', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1470,7 +1514,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (988, 'NNDG988', 'Aam Ambari', 'Kp. Cisarua Legok', '085864537860', '21/08/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (989, 'NNDG989', 'Nuraeni Ulfa', 'Kp. Citangkurak', '087831400064', '21/08/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-16 10:25:31', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (991, 'NNDG991', 'Deri Hermansyah', 'Kp. Gintung', '085259426751', '22/08/2024', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(992, 'NNDG992', 'Mulyani', 'Kp. Cikawung', '085722607617', '26/08/2024', '2', 165000, '26', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(992, 'NNDG992', 'Mulyani', 'Kp. Cikawung', '085722607617', '26/08/2024', '2', 165000, '26', '', NULL, NULL, NULL, '2024-10-21 03:01:05', '2024-10-10 14:31:43', 'sudah bayar'),
 (993, 'NNDG993', 'Ade Nurkodir', 'Kp. Gintung', '085863228318', '22/08/2024', '1', 125000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (994, 'NNDG994', 'Lina Marlina', 'Perum Aluna 2 Blok K No.14', '08976283732', '28/08/2024', '2', 165000, '28', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (995, 'NNDG995', 'Ujang Mahmud', 'Kp. Astana genteng Rt/Rw 03/16 lapangan asgen', '081295885515', '29/08/2024', '3', 205000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar');
@@ -1508,7 +1552,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1026, 'NNDG1026', 'Suherlan', 'Kp. Legok Astana Genteng', '085872928849', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-15 02:43:42', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1027, 'NNDG1027', 'Siti Masriah', 'Kp. Lapang Kobra', '081770890228', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 06:09:58', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1028, 'NNDG1028', 'Jumaita Harahap', 'Kp. Cigadog Langensari', '081275869056', '17/09/2024', '1', 125000, '17', '', NULL, NULL, NULL, '2024-10-18 06:09:58', '2024-10-10 14:31:43', 'Sudah Bayar'),
-(1029, 'NNDG1029', 'Dasep Sugandi', 'Kp. Citoe', '085603195511', '21/09/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 01:44:40', '2024-10-10 14:31:43', 'sudah bayar'),
+(1029, 'NNDG1029', 'Dasep Sugandi', 'Kp. Citoe', '085603195511', '21/09/2024', '2', 165000, '21', '', NULL, NULL, NULL, '2024-10-19 10:04:14', '2024-10-10 14:31:43', 'Sudah Bayar'),
 (1030, 'NNDG1030', 'H Weli Abdul Manan', 'Perum Pesona Limbangan Blok C No.516', '081564650580', '21/09/2024', '1', 125000, '21', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1031, 'NNDG1031', 'Rinaldi Ferdian', 'Kp. Cibereum', '08164643826', '22/09/2024', '2', 165000, '22', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1032, 'NNDG1032', 'Yogi Kahaepi', 'Kp. Cimahpar Gg. Revolusi', '087749415493', '23/09/2024', '2', 165000, '23', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
@@ -1519,7 +1563,7 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1037, 'NNDG1037', 'Alma Wihelmina Toibah', 'Kp. Limbangan', '081584465738', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1038, 'NNDG1038', 'Resta Azizah', 'Kp. Pasirmuncang', '085721898874', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1039, 'NNDG1039', 'Deni Mulyadi', 'Kp. Lokantara', '', '30/09/2024', '1', 125000, '30', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
-(1044, 'NNDG1044', 'Yanti', 'Kp. Nagrak Legok', '085798087638', '19/09/2024', '1', 120000, '19', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
+(1044, 'NNDG1044', 'Yanti', 'Kp. Nagrak Legok', '085798087638', '19/09/2024', '1', 120000, '19', '', NULL, NULL, NULL, '2024-10-20 04:50:26', '2024-10-10 14:31:43', 'Isolir'),
 (1045, 'NNDG305', 'Siti Maemunah', 'Kp. Limbangan', '83818743986', '2022-09-13', '1', 125000, '29', '', NULL, NULL, NULL, '2024-10-17 03:06:50', '2024-10-10 14:31:43', 'Belum Bayar'),
 (1046, 'NNDG357', 'Yeni Ibu Rt', 'Perum Griya Goalpara Asri Blok C4', '83804229311', '2022-07-07', '1', 125000, '07', '0', '0', '0', '0', '2024-10-16 10:25:31', '2024-10-11 04:11:30', 'Sudah Bayar'),
 (1047, 'NNDG79', 'Deris motor', 'Perum rahayu Elok (depan Perum)', '0', '2022-05-01', '1', 115000, '10', '0', '0', '0', '0', '2024-10-12 01:40:57', '2024-10-10 08:43:49', 'Sudah Bayar'),
@@ -1547,10 +1591,14 @@ INSERT INTO `pelanggan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (1099, 'NNDG1059', 'Ilham', 'Kp. Gintung', '081383534830', '2024-10-17', '1', 125000, '18', NULL, NULL, NULL, NULL, '2024-10-18 07:35:40', '2024-10-18 07:35:40', 'PSB'),
 (1100, 'NNDG1061', 'M. Raypal Yusup', 'Kp. Nagrak', '083164741424', '2024-10-17', '2', 165000, '18', NULL, NULL, NULL, NULL, '2024-10-18 07:35:44', '2024-10-18 07:35:44', 'PSB'),
 (1101, 'NNDG1063', 'Sopian', 'Kp. Buniwangi', '085693416519', '2024-10-18', '2', 165000, '18', NULL, '0', '0', '0', '2024-10-18 07:36:04', '2024-10-18 07:36:04', 'PSB'),
-(1102, 'NNDG550000', 'Adit safari', 'Cicariang', '082123852983', '2024-10-18', '1', 150000, '2', NULL, '0', '0', '0', '2024-10-19 03:47:00', '2024-10-18 07:44:01', 'PSB'),
+(1102, 'NNDG550000', 'Gumilang', 'Bayangkara', '085722220169', '2024-10-18', '1', 170000, '2', NULL, '0', '0', '0', '2024-10-22 03:54:29', '2024-10-18 07:44:01', 'PSB'),
 (1104, 'reer4', 'Agiss', 'sukabumi', '085793920206', '2024-10-18', '1', 175000, '5', NULL, '0', '0', '0', '2024-10-19 07:04:48', '2024-10-18 10:38:57', 'PSB'),
 (1105, 'NNDG1064', 'Linda Sumirat', 'Perum Tiara Regency Blok G4 No. 6', '085723352186', '2024-10-19', '2', 165000, '19', NULL, '0', '0', '0', '2024-10-19 04:24:50', '2024-10-19 04:24:50', 'PSB'),
-(1106, 'NNDG1636', 'Deuisst', 'Kp. Buniwangi', '083147264219', '2024-10-19', '3', 205000, '19', NULL, '0', '0', '0', '2024-10-19 06:56:20', '2024-10-19 06:56:20', 'PSB');
+(1106, 'NNDG1636', 'Deuisst', 'Kp. Buniwangi', '085924516846', '2024-10-19', '3', 205000, '19', NULL, '0', '0', '0', '2024-10-22 03:52:29', '2024-10-19 06:56:20', 'PSB'),
+(1107, 'NNDG1065', 'Dyarly Joelazs', 'Kp. Cimahpar', '085283003524', '2024-10-19', '2', 165000, '19', NULL, '0', '0', '0', '2024-10-19 10:29:42', '2024-10-19 10:29:42', 'PSB'),
+(1108, 'NNDG355', 'Yayah / Sahal Ramdani', 'Kp. Cidadap', '81563634686', '2022-10-12', '1', 125000, NULL, 'reactivasi tanggal 22 oktober, Request JT tgl 6 (Reminder Penagihan tgl 6 desember Rp 188.000 )', NULL, NULL, NULL, '2024-10-22 07:23:27', '2024-10-22 07:21:41', 'PSB'),
+(1109, 'NNDG1067', 'Yuni Habsoh', 'Kp. Ciloa', '085721244329', '2024-10-22', '1', 125000, '22', NULL, '0', '0', '0', '2024-10-22 07:22:03', '2024-10-22 07:22:03', 'PSB'),
+(1110, 'NNDG1066', 'Yuni Habsoh', 'Kp. Ciloa', '085721244329', '2024-10-22', '1', 125000, '22', NULL, '0', '0', '0', '2024-10-22 07:33:23', '2024-10-22 07:33:23', 'PSB');
 
 -- --------------------------------------------------------
 
@@ -1614,7 +1662,9 @@ INSERT INTO `pengeluaran` (`id`, `keterangan`, `jumlah`, `created_at`, `updated_
 (18, 'galon', 6000, '2024-10-18 08:14:44', '2024-10-18 08:14:44'),
 (19, 'kopi', 10000, '2024-10-18 08:14:59', '2024-10-18 08:14:59'),
 (20, 'Uang mang agis kemarin', 50000, '2024-10-18 08:15:20', '2024-10-18 08:15:20'),
-(21, 'tisu', 20000, '2024-10-18 08:16:11', '2024-10-18 08:16:11');
+(21, 'tisu', 20000, '2024-10-18 08:16:11', '2024-10-18 08:16:11'),
+(22, 'makan', 76000, '2024-10-21 08:35:55', '2024-10-21 08:35:55'),
+(23, 'bensin pak gilang', 12000, '2024-10-21 08:36:08', '2024-10-21 08:36:08');
 
 -- --------------------------------------------------------
 
@@ -1672,7 +1722,9 @@ INSERT INTO `perbaikan` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_p
 (59, 'NNDG4', 'Abdul', 'Perum Pesona Limbangan', '81284258119', '1', '0', '0', '2024-10-17 07:22:53', '2024-10-17 07:23:50', 'Los / modem merah', 'Tim 1 Deden - Agis', 'selesai'),
 (65, 'NNDG1047', 'gilang', 'pelanuanratu', '085700000001', '4', '0', '0', '2024-10-17 07:59:23', '2024-10-17 08:00:55', 'PSB', 'Tim 1 Deden - Agis', 'selesai'),
 (69, 'NNDG1064', 'Linda Sumirat', 'Perum Tiara Blok G4 No.6', '085723352186', '2', '0', '0', '2024-10-19 01:57:54', '2024-10-19 06:18:02', 'PSB', 'Tim 2 Mursidi - Dindin', 'selesai'),
-(70, 'NNDG1065', 'Dyarly Joelzs', 'Kp. Cimahpar', '085283003524', '2', '0', '0', '2024-10-19 06:27:28', '2024-10-19 06:27:28', 'PSB', 'Tim 1 Deden - Agis', 'Proses');
+(70, 'NNDG1065', 'Dyarly Joelzs', 'Kp. Cimahpar', '085283003524', '2', '0', '0', '2024-10-19 06:27:28', '2024-10-19 10:29:56', 'PSB', 'Tim 1 Deden - Agis', 'selesai'),
+(71, 'NNDG1066', 'Muhamad Eka Nurpalah', 'LPK Sukaraja', '089685151300', '2', '0', '0', '2024-10-22 01:09:58', '2024-10-22 09:34:25', 'PSB', 'Tim 3 Isep - Indra', 'selesai'),
+(72, 'NNDG1067', 'Yuni Habsoh', 'Kp. Ciloa', '085721244329', '1', '0', '0', '2024-10-22 02:05:50', '2024-10-22 07:22:11', 'PSB', 'Tim 1 Deden - Agis', 'selesai');
 
 -- --------------------------------------------------------
 
@@ -1814,7 +1866,6 @@ INSERT INTO `plg_off` (`id`, `id_plg`, `nama_plg`, `alamat_plg`, `no_telepon_plg
 (347, 'NNDG347', 'Windri Aluna 2', 'Alinda', '81517259609', '2022-05-23', '1', 125000, '25', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
 (348, 'NNDG348', 'Wiwi', 'Cidadap (Kampung Baru)', '85794799537', '2022-07-16', '1', 125000, '28', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
 (350, 'NNDG350', 'Yana Rudyana', 'Griyagoalpara', '85608612872', '2022-07-15', '4', 305000, '25', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
-(355, 'NNDG355', 'Yayah / Sahal Ramdani', 'Kp. Cidadap', '81563634686', '2022-10-12', '1', 125000, '25', 'off juli 2024', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
 (358, 'NNDG358', 'Yeni Stb', 'Setia Budi Blok W1 B4', '85895036910', '2022-08-09', '1', 125000, '25', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
 (359, 'NNDG359', 'Yogi', 'Cidadap', '85864474133', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
 (361, 'NNDG361', 'Yudicbp', 'Cibeureum Pasir', '85880450663', '2022-05-01', '1', 125000, '25', '', NULL, NULL, NULL, NULL, NULL, '2024-10-10 04:29:16', 'Belum Bayar'),
@@ -1991,10 +2042,10 @@ INSERT INTO `rekap_pemasangan` (`id`, `nik`, `nama`, `alamat`, `no_telpon`, `tgl
 (22, '3202330701060004', 'M. Raypal Yusup', 'Kp. Nagrak', '083164741424', '2024-10-17', 2, 165000, '17', 'open', '2024-10-17', 165000, 'mukidi', '', 'NNDG1061', NULL, NULL, NULL, '2024-10-18 03:18:37', '2024-10-18 02:21:47'),
 (24, '3202332711030003', 'Sopian', 'Kp. Buniwangi', '085693416519', '2024-10-18', 2, 165000, '18', 'Open', '2024-10-18', 165000, 'Deden, Agis', '0', 'NNDG1063', '0', '0', '0', '2024-10-18 07:19:29', '2024-10-18 06:07:12'),
 (26, '3272015705710001', 'Linda Sumirat', 'Perum Tiara Regency Blok G4 No. 6', '085723352186', '2024-10-19', 2, 165000, '19', 'Open', '2024-10-18', 165000, 'Gilang', '0', 'NNDG1064', '0', '0', '0', '2024-10-18 07:19:43', '2024-10-18 07:15:04'),
-(27, '3202030303010008', 'ADIT SAPARI', 'Cicariang', '082123852983', '2024-10-18', 1, 125000, '18', 'Open', '2024-10-18', 300000, 'adit', '0', 'NNDG550000', '0', '0', '0', '2024-10-18 07:43:51', '2024-10-18 07:43:12'),
-(29, '3202030303010008', 'ADIT SAPARI', 'Cicariang', '085793820206', '2024-10-18', 1, 125000, '18', 'Open', '2024-10-18', 300000, 'adit', '0', 'reer4', '0', '0', '0', '2024-10-18 10:38:48', '2024-10-18 10:38:48'),
-(30, '3202331707970001', 'Dyarly Joelazs', 'Kp. Cimahpar', '085283003524', '2024-10-19', 2, 165000, '19', 'Open', '2024-10-19', 165000, 'Isep', '0', 'NNDG1065', '0', '0', '0', '2024-10-19 06:28:55', '2024-10-19 06:28:55'),
-(31, '1234567788990', 'Deuisst', 'Kp. Buniwangi', '083147264219', '2024-10-19', 3, 205000, '19', 'Open', '2024-10-19', 165000, 'Aku', '0', 'NNDG1636', '0', '0', '0', '2024-10-19 06:56:08', '2024-10-19 06:56:08');
+(32, '3272022602970902', 'Muhamad Eka Nurpalah', 'LPK Sukaraja', '089685151300', '2024-10-22', 2, 165000, '22', 'Open', '2024-10-21', 165000, 'Isep', '0', 'NNDG1067', '0', '0', '0', '2024-10-22 07:33:39', '2024-10-21 08:42:30'),
+(33, '3202334310920002', 'Yuni Habsoh', 'Kp. Ciloa', '085721244329', '2024-10-22', 1, 125000, '22', 'Open', '2024-10-22', 125000, 'Gilang', '0', 'NNDG1066', '0', '0', '0', '2024-10-22 07:32:51', '2024-10-22 02:07:58'),
+(34, '3202365006910004', 'Ina Nurliana', 'Kp. Ciloa', '081563204442', '2024-10-23', 1, 125000, '23', 'Open', '2024-10-22', 125000, 'Deuis', '0', 'NNDG1068', '0', '0', '0', '2024-10-22 09:33:20', '2024-10-22 09:33:20'),
+(35, '3202336808860004', 'Ilis Susmiati', 'Kp. Ciloa', '083870974150', '2024-10-23', 1, 125000, '23', 'Open', '2024-10-22', 125000, 'Isep', '0', 'NNDG1069', '0', '0', '0', '2024-10-22 10:12:39', '2024-10-22 10:12:39');
 
 -- --------------------------------------------------------
 
@@ -2019,7 +2070,8 @@ CREATE TABLE `targets` (
 --
 
 INSERT INTO `targets` (`id`, `nama_target`, `jumlah_target`, `jumlah_hari`, `sisa_target`, `hari_tersisa`, `last_update`, `created_at`, `updated_at`) VALUES
-(15, 'marketing', 50, 14, 27, 11, '2024-10-19', '2024-10-16 04:17:09', '2024-10-19 02:42:26');
+(15, 'marketing', 50, 14, 24, 8, '2024-10-22', '2024-10-16 04:17:09', '2024-10-22 01:30:18'),
+(16, 'Besi', 50, 7, 40, 6, '2024-10-22', '2024-10-21 10:26:29', '2024-10-22 01:30:18');
 
 -- --------------------------------------------------------
 
@@ -2192,7 +2244,7 @@ ALTER TABLE `absen`
 -- AUTO_INCREMENT untuk tabel `bayar_pelanggan`
 --
 ALTER TABLE `bayar_pelanggan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=444;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -2228,7 +2280,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1107;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1111;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemasukan`
@@ -2240,13 +2292,13 @@ ALTER TABLE `pemasukan`
 -- AUTO_INCREMENT untuk tabel `pengeluaran`
 --
 ALTER TABLE `pengeluaran`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `perbaikan`
 --
 ALTER TABLE `perbaikan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
@@ -2270,13 +2322,13 @@ ALTER TABLE `rekap_mutasi_harian`
 -- AUTO_INCREMENT untuk tabel `rekap_pemasangan`
 --
 ALTER TABLE `rekap_pemasangan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT untuk tabel `targets`
 --
 ALTER TABLE `targets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`

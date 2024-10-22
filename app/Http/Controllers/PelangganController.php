@@ -1613,8 +1613,6 @@ class PelangganController extends Controller
     }
 
 
-
-
     public function toIsolir($id)
     {
         // Cari pelanggan berdasarkan ID
@@ -1645,7 +1643,6 @@ class PelangganController extends Controller
         // Redirect kembali dengan pesan sukses
         return redirect()->route('pelanggan.isolir')->with('success', 'Status pembayaran berhasil diubah menjadi Unblock.');
     }
-
 
 
 
@@ -1869,7 +1866,6 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
-
 
 
 
@@ -2353,8 +2349,6 @@ class PelangganController extends Controller
 
         return redirect()->route('pelanggan.index')->with('success', 'Status Pembayaran Pelanggan telah diperbarui.');
     }
-
-
 
 
 
