@@ -18,7 +18,7 @@
                                 <strong>Alamat :</strong> {{ $karyawan->alamat }}
                             </li>
                             <li class="list-group-item">
-                                <strong>No Telepon :</strong> {{ $karyawan->no_telpon }}
+                                <strong>No Telepon :</strong> {{ $karyawan->no_telepon }}
                             </li>
                             <li class="list-group-item">
                                 <strong>Gaji :</strong>{{ number_format($karyawan->gaji, 0, ',', '.') }}

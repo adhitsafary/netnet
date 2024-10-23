@@ -11,8 +11,8 @@
         <input type="text" name="nama" value="{{$karyawan -> nama}}"  class="form-control mt-2">
         <label for="">Alamat</label>
         <input type="text" name="alamat" value="{{$karyawan -> alamat}}" class="form-control mt-2">
-        <label for="">No Telpon</label>
-        <input type="text" name="no_telpon" value="{{$karyawan -> no_telpon}}" class="form-control mt-2">
+        <label for="">No Telepon</label>
+        <input type="text" name="no_telepon" value="{{$karyawan -> no_telepon}}" class="form-control mt-2">
         <label for="">Posisi</label>
         <input type="text" name="posisi" value="{{$karyawan -> posisi}}" class="form-control mt-2">
         <label for="">Gaji</label>

@@ -37,7 +37,7 @@
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nama }}</td>
                         <td>{{ $item->alamat }}</td>
-                        <td>{{ $item->no_telpon }}</td>
+                        <td>{{ $item->no_telepon }}</td>
                         <td>{{ $item->posisi }}</td>
                         <td>{{ $item->mulai_kerja }}</td>
                         <td>{{ $item->gaji }}</td>

@@ -115,7 +115,7 @@ class KaryawanController extends Controller
 
         $karyawan->nama = $request->nama;
         $karyawan->alamat = $request->alamat;
-        $karyawan->no_telpon = $request->no_telpon;
+        $karyawan->no_telepon = $request->no_telepon;
         $karyawan->posisi = $request->posisi;
         $karyawan->mulai_kerja = $request->mulai_kerja;
         $karyawan->gaji = $request->gaji;
@@ -148,7 +148,7 @@ class KaryawanController extends Controller
 
                 'nama' => $karyawan->nama,
                 'alamat' => $karyawan->alamat,
-                'no_telpon' => $karyawan->no_telpon,
+                'no_telepon' => $karyawan->no_telepon,
                 'posisi' => $karyawan->posisi,
                 'mulai_kerja' => $karyawan->mulai_kerja,
                 'keterangan' => $karyawan->keterangan,

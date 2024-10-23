@@ -108,6 +108,8 @@ class PelangganOfController extends Controller
     public function update(Request $request, string $id_plg)
     {
         $pelangganof = Pelangganof::findOrFail($id_plg);
+
+
         $pelangganof->id_plg = $request->id_plg;
         $pelangganof->nama_plg = $request->nama_plg;
         $pelangganof->alamat_plg = $request->alamat_plg;
@@ -115,8 +117,12 @@ class PelangganOfController extends Controller
         $pelangganof->aktivasi_plg = $request->aktivasi_plg;
         $pelangganof->paket_plg = $request->paket_plg;
         $pelangganof->harga_paket = $request->harga_paket;
-        $pelangganof->keterangan_plg = $request->keterangan_plg;
+        $pelangganof->status_pembayaran = $request->status_pembayaran;
+        $pelangganof->keterangan_plg = $request->keterangan_plg ?? null;
         $pelangganof->odp = $request->odp;
+        $pelangganof->tgl_tagih_plg = $request->tgl_tagih_plg;
+        $pelangganof->longitude = $request->longitude;
+        $pelangganof->latitude = $request->latitude;
 
         $pelangganof->save();
 
@@ -189,11 +195,12 @@ class PelangganOfController extends Controller
                     'keterangan_plg' => $pelangganof->keterangan_plg,
                     'longitude' => $pelangganof->longitude,
                     'latitude' => $pelangganof->latitude,
-                    'last_payment_date' => $pelangganof->last_payment_date,
                     'tgl_tagih_plg' => $tglTagih,  // Menambahkan kolom yang hilang
                     'created_at' => now(),
                     'updated_at' => now(),
+
                 ]);
+                $pelangganof->status_pembayaran = 'PSB';
 
                 // Hapus data dari tabel pelangganof
                 $pelangganof->delete();
