@@ -200,7 +200,7 @@ class PelangganOfController extends Controller
                     'updated_at' => now(),
 
                 ]);
-                $pelangganof->status_pembayaran = 'PSB';
+                $pelangganof->status_pembayaran = 'reactivasi';
 
                 // Hapus data dari tabel pelangganof
                 $pelangganof->delete();

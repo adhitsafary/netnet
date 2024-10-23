@@ -54,6 +54,7 @@ Route::get('/perbaikan/export-excel', [PerbaikanController::class, 'exportExcel'
 //Route::get('/pelanggancoba', [PelangganController::class, 'indexcoba'])->name('pelanggan.index');
 //PELANGGAN
 Route::get('/pelanggan', [PelangganController::class, 'index'])->name('pelanggan.index');
+Route::get('/pelanggan/reactivasi', [PelangganController::class, 'reactivasi'])->name('pelanggan.reactivasi');
 Route::get('/pelanggan/isolir', [PelangganController::class, 'isolir'])->name('pelanggan.isolir');
 Route::get('/pelanggan/unblock', [PelangganController::class, 'unblock'])->name('pelanggan.unblock');
 Route::get('/pelanggan/block', [PelangganController::class, 'block'])->name('pelanggan.block');
@@ -67,6 +68,8 @@ Route::post('/pelanggan/{id}/isolir', [PelangganController::class, 'toIsolir'])-
 Route::post('/pelanggan/{id}/unblock', [PelangganController::class, 'toUnblock'])->name('pelanggan.toUnblock');
 Route::post('/pelanggan/{id}/toggle-status', [PelangganController::class, 'toggleStatus'])->name('pelanggan.toggleStatus');
 
+
+Route::get('/pelanggan/offkan', [PelangganController::class, 'offkan'])->name('pelanggan.offkan');
 
 
 //PSB
