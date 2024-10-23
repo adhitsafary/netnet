@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
     <div class="  pl-5 pr-5 mb-4">

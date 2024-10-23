@@ -749,7 +749,7 @@ class PelangganController extends Controller
         }
 
         // Mengambil pelanggan yang tidak dalam status Isolir atau Block
-        $query = Pelanggan::whereIn('status_pembayaran', ['reactivasi']);
+        $query = Pelanggan::whereIn('status_pembayaran', ['Reactivasi']);
         $query_tnppsb = Pelanggan::whereNot('status_pembayaran', ['PSB']);
 
         // Filter berdasarkan status pembayaran
@@ -2952,7 +2952,7 @@ class PelangganController extends Controller
         if ($pelanggan) {
             try {
                 // Pastikan tanggal tagih diubah ke format yang sesuai jika perlu
-                $tglTagih = Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('Y-m-d');
+               // $tglTagih = Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('Y-m-d');
 
                 // Masukkan data ke tabel pelanggan
                 DB::table('plg_off')->insert([
@@ -2960,28 +2960,30 @@ class PelangganController extends Controller
                     'nama_plg' => $pelanggan->nama_plg,
                     'alamat_plg' => $pelanggan->alamat_plg,
                     'no_telepon_plg' => $pelanggan->no_telepon_plg,
-                    'aktivasi_plg' => $tglTagih,  // Pastikan format tanggal sesuai
+                    'aktivasi_plg' => $pelanggan->aktivasi_plg,  // Pastikan format tanggal sesuai
                     'paket_plg' => $pelanggan->paket_plg,
                     'harga_paket' => $pelanggan->harga_paket,
                     'odp' => $pelanggan->odp,
                     'keterangan_plg' => $pelanggan->keterangan_plg,
                     'longitude' => $pelanggan->longitude,
                     'latitude' => $pelanggan->latitude,
-                    'tgl_tagih_plg' => $tglTagih,  // Menambahkan kolom yang hilang
+                    'tgl_tagih_plg' =>  $pelanggan->tglTagih,  // Menambahkan kolom yang hilang
                     'created_at' => now(),
                     'updated_at' => now(),
+
+                    
 
                 ]);
                 $pelanggan->status_pembayaran = 'OFF';
 
                 // Hapus data dari tabel pelanggan
-               // $pelanggan->delete();
+                // $pelanggan->delete();
 
                 // Redirect ke halaman pelanggan dengan pesan sukses
                 return redirect()->route('pelanggan.isolir')->with('success', 'Pelanggan OFF berhasil di Aktifkan Kembali.');
             } catch (\Exception $e) {
-                // Log error dan kembalikan pesan error jika terjadi masalah
                 Log::error('Error off: ' . $e->getMessage());
+                dd($e);  // Menampilkan detail error untuk debugging
                 return redirect()->route('pelanggan.isolir')->with('error', 'Terjadi kesalahan saat memindahkan pelanggan.');
             }
         } else {

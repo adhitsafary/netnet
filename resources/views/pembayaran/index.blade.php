@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
     <div class=" p-5 mt-4">
@@ -47,6 +47,52 @@
 
             <h5 style="color: black;" class="font font-weight-bold">Data Pembayaran</h5>
         </div>
+
+        <th class="mt-2">
+            <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center ml-1">
+                <select name="tgl_tagih_plg" id="tgl_tagih_plg" class="me-2">
+                    <option value="">Tanggal Tagih</option>
+                    @for ($i = 1; $i <= 33; $i++)
+                        <option value="{{ $i }}" {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                            {{ $i }}
+                        </option>
+                    @endfor
+                </select>
+        
+                <select name="paket_plg" id="paket_plg" class="me-2  ml-1">
+                    <option value="">Paket</option>
+                    @for ($i = 1; $i <= 7; $i++)
+                        <option value="{{ $i }}" {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                            {{ $i }}
+                        </option>
+                    @endfor
+                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                        vcr
+                    </option>
+                </select>
+        
+                <select name="harga_paket" id="harga_paket" class="me-2  ml-1">
+                    <option value="">Harga</option>
+                    @foreach ([50000, 75000, 100000, 105000, 115000, 120000, 125000, 150000, 165000, 175000, 205000, 250000, 265000, 305000, 750000] as $harga)
+                        <option value="{{ $harga }}" {{ request('jumlah_pembayaran') == $harga ? 'selected' : '' }}>
+                            {{ number_format($harga, 0, ',', '.') }}
+                        </option>
+                    @endforeach
+                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
+                        vcr
+                    </option>
+                </select>
+        
+                <div class="me-2  ml-1">
+                   
+                    <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}">
+                </div>
+        
+                <button type="submit" class="btn btn-primary  ml-3 mb-2">Filter</button>
+            </form>
+        </th>
+        
+
 
         <!-- Tabel Pembayaran -->
         <table class="table table-bordered table-responsive" style="color: black;">

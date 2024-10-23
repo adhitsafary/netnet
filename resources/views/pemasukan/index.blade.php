@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
     <div class="container mb-4" style="color: black;">

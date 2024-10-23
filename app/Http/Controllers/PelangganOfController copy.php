@@ -42,53 +42,12 @@ class PelangganOfController extends Controller
     {
         $query = Pelangganof::query();
 
-        // Ambil nilai filter dari request
-        $paket_plg = $request->input('paket_plg');
-        $harga_paket = $request->input('harga_paket');
-        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
-        $created_at = $request->input('created_at');
-        $jumlah_pembayaran = $request->input('jumlah_pembayaran'); // Filter jumlah pembayaran
-        
-
         if ($request->has('search')) {
             $query->where('nama_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('id_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('alamat_plg', 'LIKE', '%' . $request->search . '%')
                 ->orWhere('no_telepon_plg', 'LIKE', '%' . $request->search . '%');
         }
-        // Filter berdasarkan status pembayaran
-        if ($request->filled('status_pembayaran')) {
-            $status = $request->input('status_pembayaran');
-            $query->where('status_pembayaran', $status === 'belum_bayar' ? 'Belum Bayar' : 'Sudah Bayar');
-        }
-
-        // Filter berdasarkan tanggal tagih
-        if ($tgl_tagih_plg) {
-            $query->where('tgl_tagih_plg', $tgl_tagih_plg);
-        }
-
-        // Filter berdasarkan jumlah pembayaran
-        if ($jumlah_pembayaran) {
-            $query->whereHas('pembayaran', function ($q) use ($jumlah_pembayaran) {
-                $q->where('jumlah_pembayaran', '>=', $jumlah_pembayaran);
-            });
-        }
-        if ($created_at) {
-            $query->whereDate('created_at', $created_at);
-        }
-
-        // Filter berdasarkan paket pelanggan
-        if ($paket_plg) {
-            $query->where('paket_plg', $paket_plg);
-        }
-
-        // Filter berdasarkan harga paket
-        if ($harga_paket) {
-            $query->where('harga_paket', $harga_paket);
-        }
-
-        // Pencarian berdasarkan berbagai kolom
-
 
         $pelangganof = $query->get();
         $totalJumlahPembayaranKeseluruhan = $query->sum('harga_paket');

@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Auth;
 
 class SesiController extends Controller
 {
-    function index()
+    public function index()
     {
-        return view('login.login');
+        return view('login.login'); // Ganti dengan view login Anda
     }
 
-    function login(Request $request)
+    public function login(Request $request)
     {
         $request->validate(
             [
@@ -25,26 +25,36 @@ class SesiController extends Controller
             ]
         );
 
-        $infologin = [
-            'email' => $request->email,
-            'password' => $request->password,
-        ];
+        $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($infologin)) {
-            if (Auth::user()->role == 'teknisi') {
-                return redirect('masuk/teknisi');
-            } else if (Auth::user()->role == 'admin') {
-                return redirect('masuk/admin');
-            } else if (Auth::user()->role == 'superadmin') {
-                return redirect('masuk/superadmin');
-            }
-
+        if (Auth::attempt($credentials)) {
+            // Pengalihan berdasarkan role
+            return $this->redirectUser();
         } else {
-            return redirect()->back()->withErrors('Username dan Password yang dimasukkan tidak sesuai')->withInput();
+            return redirect()->back()
+                ->withErrors('Username dan Password yang dimasukkan tidak sesuai')
+                ->withInput();
         }
     }
 
-    function logout()
+    private function redirectUser()
+    {
+        $role = Auth::user()->role;
+
+        // Redirect sesuai dengan role
+        switch ($role) {
+            case 'teknisi':
+                return redirect()->route('teknisi.index');
+            case 'admin':
+                return redirect()->route('index');
+            case 'superadmin':
+                return redirect()->route('home');
+            default:
+                return redirect()->route('login'); // Redirect ke halaman login jika role tidak dikenal
+        }
+    }
+
+    public function logout()
     {
         Auth::logout();
         return redirect('/');

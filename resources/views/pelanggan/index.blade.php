@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
     <div class="  pl-5 pr-5 mb-4">
@@ -51,8 +51,7 @@
 
                         <!-- Tombol Total Keseluruhan -->
                         <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
-                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;"
-                            onclick="copyToClipboard('Total Keseluruhan: Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} || User: {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}')">
+                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;">
                             Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
                             User :
                             {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
@@ -146,20 +145,109 @@
 
 
         <div class="">
-            <th>
+            
+            <th class="mt-2">
                 <form action="{{ route('pelanggan.index') }}" method="GET">
-                    <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
-                    <input type="text" name="paket_plg" placeholder="Paket">
-                    <input type="number" name="harga_paket" placeholder="Harga Paket">
-                    <input type="date" name="created_at" placeholder="Tanggal">
+                    <select name="tgl_tagih_plg" id="tgl_tagih_plg">
+                        <option value="">Tanggal Tagih</option>
+                        @for ($i = 1; $i <= 33; $i++)
+                            <option value="{{ $i }}"
+                                {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                    </select>
+                    <select name="paket_plg" id="paket_plg">
+                        <option value="">Paket</option>
+                        @for ($i = 1; $i <= 7; $i++)
+                            <option value="{{ $i }}"
+                                {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                        <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                            vcr
+                        </option>
+                    </select>
+      
+                    <select name="harga_paket" id="harga_paket">
+                        <option value="">Harga</option>
+                        <option value="50000"
+                            {{ request('jumlah_pembayaran') == '50000' ? 'selected' : '' }}>
+                            {{ number_format(50000, 0, ',', '.') }}
+                        </option>
+                        <option value="75000"
+                            {{ request('jumlah_pembayaran') == '75000' ? 'selected' : '' }}>
+                            {{ number_format(75000, 0, ',', '.') }}
+                        </option>
+                        <option value="100000"
+                            {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
+                            {{ number_format(100000, 0, ',', '.') }}
+                        </option>
+                        <option value="105000"
+                            {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
+                            {{ number_format(105000, 0, ',', '.') }}
+                        </option>
+                        <option value="115000"
+                            {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
+                            {{ number_format(115000, 0, ',', '.') }}
+                        </option>
+    
+                        <option value="120000"
+                            {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
+                            {{ number_format(120000, 0, ',', '.') }}
+                        </option>
+                        <option value="125000"
+                            {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
+                            {{ number_format(125000, 0, ',', '.') }}
+                        </option>
+                        <option value="150000"
+                            {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
+                            {{ number_format(150000, 0, ',', '.') }}
+                        </option>
+                        <option value="165000"
+                            {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
+                            {{ number_format(165000, 0, ',', '.') }}
+                        </option>
+                        <option value="175000"
+                            {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
+                            {{ number_format(175000, 0, ',', '.') }}
+                        </option>
+                        <option value="205000"
+                            {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
+                            {{ number_format(205000, 0, ',', '.') }}
+                        </option>
+                        <option value="250000"
+                            {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
+                            {{ number_format(250000, 0, ',', '.') }}
+                        </option>
+                        <option value="265000"
+                            {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
+                            {{ number_format(265000, 0, ',', '.') }}
+                        </option>
+                        <option value="305000"
+                            {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
+                            {{ number_format(305000, 0, ',', '.') }}
+                        </option>
+                        <option value="750000"
+                            {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
+                            {{ number_format(750000, 0, ',', '.') }}
+                        </option>
+                        <option value="vcr"
+                            {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
+                            vcr
+                        </option>
+                    </select>
+                 
                     <select name="status_pembayaran">
                         <option value="">Semua Status</option>
                         <option value="sudah_bayar">Sudah Bayar</option>
                         <option value="belum_bayar">Belum Bayar</option>
                     </select>
-                    <button type="submit">Filter</button>
+                    <button type="submit" class="btn btn-primary ">Filter</button>
                 </form>
             </th>
+    
 
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">
@@ -202,6 +290,7 @@
                         <th>Aktivasi</th>
                         <th>
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Paket</label><br>
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -221,6 +310,7 @@
 
                         <th>
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Harga</label><br>
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -296,6 +386,7 @@
 
                         <th>
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Tanggal Tagih</label><br>
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>

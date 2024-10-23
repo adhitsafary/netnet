@@ -1,4 +1,4 @@
-@extends('layout2')
+@extends($layout)
 
 @section('konten')
     <div class="mb-4 mt-5 text-right">

@@ -23,7 +23,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/superadmin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/admin">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -31,7 +31,7 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/masuk/superadmin">
+                <a class="nav-link" href="/masuk/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -58,41 +58,6 @@
                     </div>
                 </div>
             </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
-                    aria-expanded="true" aria-controls="collapseBootstrap17">
-                    <img src="{{ asset('asset/img/man.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Karyawan</span>
-                </a>
-                <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="{{ route('karyawan.index') }}">Data Karyawan</a>
-                        <a class="collapse-item" href="{{ route('karyawan.create') }}">Tambah Data Karyawan</a>
-                        <a class="collapse-item" href="{{ route('kasbon.index') }}">Data kasbon</a>
-                    </div>
-
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap100"
-                    aria-expanded="true" aria-controls="collapseBootstrap100">
-                    <img src="{{ asset('asset/img/users.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Admin Login</span>
-                </a>
-                <div id="collapseBootstrap100" class="collapse" aria-labelledby="headingBootstrap100"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="{{ route('users.index') }}">Data Admin Login</a>
-                        <a class="collapse-item" href="{{ route('users.create') }}">Tambah Admin Login</a>
-                    </div>
-
-                </div>
-            </li>
-
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"

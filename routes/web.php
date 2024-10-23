@@ -69,7 +69,7 @@ Route::post('/pelanggan/{id}/unblock', [PelangganController::class, 'toUnblock']
 Route::post('/pelanggan/{id}/toggle-status', [PelangganController::class, 'toggleStatus'])->name('pelanggan.toggleStatus');
 
 
-Route::get('/pelanggan/offkan', [PelangganController::class, 'offkan'])->name('pelanggan.offkan');
+Route::get('/pelanggan/offkan/{id}', [PelangganController::class, 'offkan'])->name('pelanggan.offkan');
 
 
 //PSB
@@ -90,7 +90,7 @@ Route::get('/pelangganof/edit/{id}', [PelangganOfController::class, 'edit'])->na
 Route::post('/pelangganof/update/{id}', [PelangganOfController::class, 'update'])->name('pelangganof.update');
 Route::delete('/pelangganof/delete/{id}', [PelangganOfController::class, 'destroy'])->name('pelangganof.destroy');
 Route::get('/pelangganof/{id}/detail', [PelangganOfController::class, 'detail'])->name('pelangganof.detail');
-Route::get('/pelanggan/aktifkan/{id}', [PelangganOfController::class, 'showOff'])->name('aktifkan_pelanggan');
+Route::get('/pelanggan/aktifkan/{id}', [PelangganOfController::class, 'aktifkan_pelanggan'])->name('aktifkan_pelanggan');
 
 
 Route::post('/pelanggan/{id}/pembayaran', [PelangganController::class, 'pembayaran'])->name('pelanggan.pembayaran');
@@ -128,10 +128,19 @@ Route::get('/dashboard', [PelangganController::class, 'getMonthlyPayments']);
 
 //midleware
 Route::middleware(['guest'])->group(function () {
-    //SesiLogin
+    // Rute untuk halaman login
     Route::get('/', [SesiController::class, 'index'])->name('login');
     Route::post('/', [SesiController::class, 'login']);
 });
+
+Route::middleware(['auth'])->group(function () {
+    // Redirect berdasarkan role
+    Route::get('/redirect', [SesiController::class, 'redirectUser'])->name('redirect');
+
+    // Logout
+    Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
+});
+
 
 Route::get('/home', function () {
     return redirect('/masuk/admin');
@@ -157,6 +166,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
 
+Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->name('teknisi.index');
 
 Route::get('coba', [TeknisiController::class, 'coba']);
 
@@ -323,5 +333,3 @@ Route::get('/target', [TargetController::class, 'index'])->name('target.index');
 Route::post('/simpan-target', [TargetController::class, 'store'])->name('target.store');
 Route::post('/target/update/{id}', [TargetController::class, 'update'])->name('target.update');
 Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('target.destroy');
-
-

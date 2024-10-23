@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
     <div class="  pl-5 pr-5 mb-4">
@@ -361,7 +361,7 @@
                                     onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
                             </td>
                             <td>
-                                <a href="{{ route('aktifkan_pelanggan', $item->id) }}" class="btn btn-danger btn-sm"
+                                <a href="{{ route('pelanggan.offkan', $item->id) }}" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Apakah {{ $item->nama_plg }} Akan di Aktifkan kembali?')">Matikan</a>
                             </td>
 

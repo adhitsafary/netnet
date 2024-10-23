@@ -12,11 +12,6 @@
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ asset('template2/css/ruang-admin.min.css') }}">
-
 </head>
 
 <body id="page-top">
@@ -27,7 +22,7 @@
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
-                <div class="sidebar-brand-text mx-3">Net Digital Group</div>
+                <div class="sidebar-brand-text mx-3">NetNet Digital</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
@@ -37,14 +32,17 @@
             </li>
 
 
-            <li class="nav-item">
+            <li class="nav-item" style="color: black">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
+                    style="color: black" aria-expanded="true" aria-controls="collapseBootstrap">
                     <img src="{{ asset('asset/img/pelanggan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class="font-weight-bold " style="color: black">PELANGGAN</span>
+
+                    <span class="font-weight-bold " style="color: black">Pelanggan</span>
+                    <!-- Gambar dari aset di samping teks -->
+
                 </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap1"
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" style="color: black"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
@@ -233,6 +231,9 @@
 
 
         </ul>
+
+
+
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
             <div id="content">
@@ -248,7 +249,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right  shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                                 aria-labelledby="searchDropdown">
                                 <form class="navbar-search">
                                     <div class="input-group">
@@ -282,8 +283,9 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">NET DIGITAL GROUP </div>
-                                        <span class="font-weight-bold">NET DIGITAL GROUP</span>
+                                        <div class="small text-gray-500">November 12, 2024 </div>
+                                        <span class="font-weight-bold">A new monthly report is ready to
+                                            download!</span>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -293,8 +295,8 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
-                                        NET DIGITAL GROUP
+                                        <div class="small text-gray-500">November 12, 2024 9</div>
+                                        Spending Alert: We've noticed unusually high
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -304,12 +306,12 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
-                                        NET DIGITAL GROUP
+                                        <div class="small text-gray-500">November 12, 2024 </div>
+                                        Spending Alert: We've noticed unusually high
                                     </div>
                                 </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">NET DIGITAL
-                                    GROUP</a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All
+                                    Alerts</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -330,8 +332,10 @@
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
-                                        <div class="text-truncate">NET DIGITAL GROUP.</div>
-                                        <div class="small text-gray-500">NET DIGITAL GROUP</div>
+                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                            problem I've been
+                                            having.</div>
+                                        <div class="small text-gray-500">Udin Cilok · 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -341,12 +345,14 @@
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
-                                        <div class="text-truncate">NET DIGITAL GROUP</div>
-                                        <div class="small text-gray-500">JNET DIGITAL GROUP</div>
+                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                            told me that people
+                                            say this to all dogs, even if they aren't good...</div>
+                                        <div class="small text-gray-500">Jaenab · 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More
-                                </a>
+                                    Messages</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown no-arrow mx-1">
@@ -425,7 +431,6 @@
             </div>
             </a>
 
-
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">
                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -448,17 +453,15 @@
             </li>
             </ul>
             </nav>
-
-
-
+            <!-- Topbar -->
             <div class="mr-4 d-sm-flex align-items-center justify-content-between">
                 <h4 class="h2" style="color: black;"></h4>
                 <ol class="breadcrumb">
                     <!-- Jam Berjalan -->
-                    <div class="h4 font-weight-bold mr-3" style="color: black;">
+                    <div class="h6 font-weight-bold mr-3" style="color: black;">
                         <span id="liveClock"></span>
                     </div>
-                    <div class="h4 font-weight-bold" style="color: black;">
+                    <div class="h6 font-weight-bold" style="color: black;">
                         {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
                     </div>
 
@@ -480,8 +483,6 @@
                 </ol>
             </div>
 
-            <!-- Topbar -->
-
             <!-- Container Fluid-->
             @yield('konten')
             <!-- Footer -->
@@ -499,21 +500,6 @@
     <script src="{{ asset('template2/js/ruang-admin.min.js') }}"></script>
     <script src="{{ asset('template2/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('template2/js/demo/chart-area-demo.js') }}"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
-    <!-- Bootstrap 5 CSS -->
-
-    <!-- Bootstrap 5 JS Bundle (termasuk Popper.js) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-
-    </div>
-
-
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-@extends('layoutindex')
+@extends($layout)
 
 @section('konten')
     <div class="container-fluid" id="container-wrapper">

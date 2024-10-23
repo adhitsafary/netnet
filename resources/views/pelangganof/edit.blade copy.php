@@ -1,4 +1,4 @@
-@extends('layout')
+@extends($layout)
 
 @section('konten')
 
@@ -9,7 +9,7 @@
         <label for="">ID</label>
         <input type="text" name="id_plg" value="{{$pelangganof -> id_plg}}" class="form-control mt-2">
         <label for="">Nama Pelanggan</label>
-        <input type="text" name="nama_plg" value="{{$pelangganof -> nama_plg}}"  class="form-control mt-2">
+        <input type="text" name="nama_plg" value="{{$pelangganof -> nama_plg}}" class="form-control mt-2">
         <label for="">Alamat</label>
         <input type="text" name="alamat_plg" value="{{$pelangganof -> alamat_plg}}" class="form-control mt-2">
         <label for="">No Telpon</label>
@@ -24,7 +24,7 @@
         <input type="text" name="status_plg" value="{{$pelangganof -> status_plg}}" class="form-control mt-2">
         <label for="">Keterangan</label>
         <input type="text" name="keterangan_plg" value="{{$pelangganof -> keterangan_plg}}" class="form-control mt-2">
-    
+
         <button class="btn btn-primary btn-sm">Simpan</button>
     </form>
 </div>
@@ -32,4 +32,3 @@
 
 
 @endsection
-
