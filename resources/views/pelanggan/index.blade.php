@@ -145,7 +145,7 @@
 
 
         <div class="">
-            
+
             <th class="mt-2">
                 <form action="{{ route('pelanggan.index') }}" method="GET">
                     <select name="tgl_tagih_plg" id="tgl_tagih_plg">
@@ -169,7 +169,7 @@
                             vcr
                         </option>
                     </select>
-      
+
                     <select name="harga_paket" id="harga_paket">
                         <option value="">Harga</option>
                         <option value="50000"
@@ -192,7 +192,7 @@
                             {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
                             {{ number_format(115000, 0, ',', '.') }}
                         </option>
-    
+
                         <option value="120000"
                             {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
                             {{ number_format(120000, 0, ',', '.') }}
@@ -238,16 +238,18 @@
                             vcr
                         </option>
                     </select>
-                 
+
                     <select name="status_pembayaran">
                         <option value="">Semua Status</option>
                         <option value="sudah_bayar">Sudah Bayar</option>
                         <option value="belum_bayar">Belum Bayar</option>
                     </select>
+
+                    <input type="date" id="updated_at" name="updated_at" value="{{ request()->get('updated_at') }}">
                     <button type="submit" class="btn btn-primary ">Filter</button>
                 </form>
             </th>
-    
+
 
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">

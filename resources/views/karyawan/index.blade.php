@@ -18,6 +18,7 @@
                 <tr>
                     <th>No</th>
                     <th>Nama</th>
+                    <th>KTP</th>
                     <th>Alamat</th>
                     <th>No Telpon</th>
                     <th>Posisi</th>
@@ -36,6 +37,7 @@
                     <tr>
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nama }}</td>
+                        <td>{{ $item->ktp}}</td>
                         <td>{{ $item->alamat }}</td>
                         <td>{{ $item->no_telepon }}</td>
                         <td>{{ $item->posisi }}</td>

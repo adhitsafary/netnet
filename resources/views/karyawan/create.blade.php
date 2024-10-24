@@ -7,6 +7,8 @@
             @csrf
             <label for="">Nama Karyawan</label>
             <input type="text" name="nama" class="form-control mt-2">
+            <label for="">KTP</label>
+            <input type="text" name="ktp" class="form-control mt-2">
             <label for="">Alamat</label>
             <input type="text" name="alamat" class="form-control mt-2">
             <label for="">No Telpon</label>

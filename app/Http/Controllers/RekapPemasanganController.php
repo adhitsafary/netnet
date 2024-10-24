@@ -38,10 +38,47 @@ class RekapPemasanganController extends Controller
     {
         $query = RekapPemasanganModel::query();
 
-        if ($request->has('search')) {
-            $query->where('nama', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('alamat', 'LIKE', '%' . $request->search . '%')
-                ->orWhere('marketing', 'LIKE', '%' . $request->search . '%');
+        $paket_plg = $request->input('paket_plg');
+        $nominal = $request->input('nominal');
+        $tgl_pengajuan = $request->input('tgl_pengajuan');
+        $tgl_aktivasi = $request->input('tgl_aktivasi');
+        $registrasi = $request->input('registrasi'); // Filter jumlah pembayaran
+
+        // Filter berdasarkan tanggal tagih
+        if ($tgl_pengajuan) {
+            $query->where('tgl_pengajuan', $tgl_pengajuan);
+        }
+
+        if ($registrasi) {
+            $query->where('registrasi', $registrasi);
+        }
+
+
+        if ($tgl_aktivasi) {
+            $query->whereDate('tgl_aktivasi', $tgl_aktivasi);
+        }
+
+        // Filter berdasarkan paket pelanggan
+        if ($paket_plg) {
+            $query->where('paket_plg', $paket_plg);
+        }
+
+        // Filter berdasarkan harga paket
+        if ($nominal) {
+            $query->where('nominal', $nominal);
+        }
+
+        // Pencarian berdasarkan berbagai kolom
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('aktivasi_plg', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('marketing', 'like', "%{$search}%");
+            });
         }
 
         $rekap_pemasangan = $query->get();
@@ -245,10 +282,7 @@ class RekapPemasanganController extends Controller
         foreach ($pelanggans as $pelanggan) {
 
             if ($pelanggan->tgl_tagih_plg == ' jadi tanggal sekarang') {
-
-
             }
         }
     }
-
 }

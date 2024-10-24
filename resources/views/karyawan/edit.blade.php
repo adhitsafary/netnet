@@ -9,6 +9,8 @@
 
         <label for="">Nama Karyawan</label>
         <input type="text" name="nama" value="{{$karyawan -> nama}}"  class="form-control mt-2">
+        <label for="">KTP</label>
+        <input type="text" name="ktp" value="{{$karyawan -> ktp}}"  class="form-control mt-2">
         <label for="">Alamat</label>
         <input type="text" name="alamat" value="{{$karyawan -> alamat}}" class="form-control mt-2">
         <label for="">No Telepon</label>

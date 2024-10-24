@@ -42,7 +42,7 @@ class MessageController extends Controller
             'target' => 'required|array'
         ]);
 
-        $token = "XCHE7Uuhr1yRga9rqaSS";
+        $token = "PKJTTQJBTQbr5KR6PwL1";
         $targetNumbers = $request->input('target'); // Array of target numbers
 
         try {
@@ -126,64 +126,4 @@ class MessageController extends Controller
     }
 
 
-    public function store1(Request $request)
-    {
-        $request->validate([
-            'target' => 'required|array'
-        ]);
-
-        $token = "zfg4P9aTAxLTcNuAxAaj";
-        $targetNumbers = $request->input('target'); // Array of target numbers
-
-        try {
-            foreach ($targetNumbers as $target) {
-                // Ambil data pelanggan berdasarkan nomor telepon
-                $pelanggan = Pelanggan::where('no_telepon_plg', $target)->first();
-
-                if ($pelanggan) {
-                    // Konversi tgl_tagih_plg yang berupa angka ke dalam format tanggal yang sesuai
-                    $tglTagihPlg = now()->setDay($pelanggan->tgl_tagih_plg); // Asumsi angka tersebut adalah hari
-                    $formattedDate = $tglTagihPlg->format('d F Y'); // Format tanggal tagihan
-
-                    // Siapkan pesan
-                    $message = "*NET | NET. DIGITAL-WiFi*\n\n";
-                    $message .= "*PELANGGAN*\n";
-                    $message .= "*kepada:*\n";
-                    $message .= "*{$pelanggan->nama_plg} - {$pelanggan->alamat_plg}\n\n";
-                    $message .= "*PEMBERITAHUAN*\n";
-                    $message .= "Tagihan Bulan : " . now()->format('F Y') . "\n";
-                    $message .= "Jenis Paket : {$pelanggan->paket_plg}\n";
-                    $message .= "Biaya Paket : Rp. {$pelanggan->harga_paket}\n";
-                    $message .= "Total Besar Tagihan + PPN : Rp. {$pelanggan->harga_paket}\n";
-                    $message .= "Masa aktif s/d {$formattedDate}\n\n";
-                    $message .= "Ket : *BELUM TERBAYAR*\n";
-                    $message .= "INFO TAMBAHAN:\n";
-                    $message .= "Dimohon untuk Melampirkan bukti pembayaran apabila sudah melakukan pembayaran.\n\n";
-                    $message .= "PEMBAYARAN:\n";
-                    $message .= "- via transfer : rek BCA : 3770198576 atas nama *Ruslandi* \n";
-                    $message .= "- *Jemput Pembayaran dikenakan biaya jasa pengambilan Rp.5000*\n\n";
-                    $message .= "Admin     : 0857-5922-9720 (Agis)\n";
-                    $message .= "CS        : 0857-9392-0206\n";
-                    $message .= "marketing  : 0857-2222-0169 (Gilang)\n";
-
-                    // Kirim pesan
-                    $response = Http::withHeaders([
-                        'Authorization' => $token,
-                    ])->asForm()->post('https://api.fonnte.com/send', [
-                        'target' => $target,
-                        'message' => $message,
-                        'delay' => '5',
-                    ]);
-
-                    if (!$response->successful()) {
-                        return back()->withErrors('Gagal mengirim pesan: ' . $response->body());
-                    }
-                }
-            }
-
-            return back()->with('status', 'Pesan berhasil dikirim!');
-        } catch (\Exception $e) {
-            return back()->withErrors('Terjadi kesalahan: ' . $e->getMessage());
-        }
-    }
 }

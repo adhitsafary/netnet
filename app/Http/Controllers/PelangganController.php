@@ -320,7 +320,8 @@ class PelangganController extends Controller
         $harga_paket = $request->input('harga_paket');
         $tgl_tagih_plg = $request->input('tgl_tagih_plg');
         $created_at = $request->input('created_at');
-        $jumlah_pembayaran = $request->input('jumlah_pembayaran'); // Filter jumlah pembayaran
+        $updated_at = $request->input('updated_at');
+        $jumlah_pembayaran = $request->input('jumlah_pembayaran');
 
         // Proses pengecekan status pembayaran otomatis
         foreach ($pelanggan_all as $pelanggan) {
@@ -365,6 +366,9 @@ class PelangganController extends Controller
         }
         if ($created_at) {
             $query->whereDate('created_at', $created_at);
+        }
+        if ($updated_at) {
+            $query->whereDate('updated_at', $updated_at);
         }
 
         // Filter berdasarkan paket pelanggan
@@ -903,6 +907,7 @@ class PelangganController extends Controller
 
         ));
     }
+
 
 
     public function isolir(Request $request)
@@ -2971,7 +2976,7 @@ class PelangganController extends Controller
                     'created_at' => now(),
                     'updated_at' => now(),
 
-                    
+
 
                 ]);
                 $pelanggan->status_pembayaran = 'OFF';

@@ -4,6 +4,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IsolirController;
 use App\Http\Controllers\JumlahLainLainController;
@@ -232,6 +233,7 @@ Route::get('/pemasukan/edit/{id}', [PemasukanController::class, 'edit'])->name('
 Route::post('/pemasukan/update/{id}', [PemasukanController::class, 'update'])->name('pemasukan.update');
 Route::post('/pemasukan/hapus/{id}', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 
+
 // Routes untuk isolir
 
 //Isolir
@@ -333,3 +335,15 @@ Route::get('/target', [TargetController::class, 'index'])->name('target.index');
 Route::post('/simpan-target', [TargetController::class, 'store'])->name('target.store');
 Route::post('/target/update/{id}', [TargetController::class, 'update'])->name('target.update');
 Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('target.destroy');
+
+
+//file Storage
+
+Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
+Route::get('/file/create', [FileController::class, 'create'])->name('file.create');
+Route::post('/file/store', [FileController::class, 'store'])->name('file.store');
+Route::get('/file/edit/{id}', [FileController::class, 'edit'])->name('file.edit');
+Route::post('/file/update/{id}', [FileController::class, 'update'])->name('file.update');
+Route::post('/file/hapus/{id}', [FileController::class, 'destroy'])->name('file.destroy');
+Route::get('/file/download/{id}', [FileController::class, 'download'])->name('file.download');
+

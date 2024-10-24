@@ -83,6 +83,7 @@ class KaryawanController extends Controller
         $karyawan = new KaryawanModel();
 
         $karyawan->nama = $request->nama;
+        $karyawan->ktp = $request->ktp;
         $karyawan->alamat = $request->alamat;
         $karyawan->no_telepon = $request->no_telepon;
         $karyawan->posisi = $request->posisi;
