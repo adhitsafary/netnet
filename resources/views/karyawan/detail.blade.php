@@ -15,7 +15,7 @@
                                 <strong>Nama :</strong> {{ $karyawan->nama }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Ktp :</strong> {{ $karyawan->ktp }}
+                                <strong>KTP :</strong> {{ $karyawan->ktp }}
                             </li>
                             <li class="list-group-item">
                                 <strong>Alamat :</strong> {{ $karyawan->alamat }}
