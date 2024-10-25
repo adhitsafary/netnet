@@ -94,7 +94,7 @@
                     </option>
                 </select>
 
-               
+
                 <button type="submit" class="btn btn-primary ">Filter</button>
             </form>
         </th>
@@ -122,7 +122,7 @@
             </thead>
             <tbody>
                 @forelse ($rekap_pemasangan as $no => $item)
-                    <tr>
+                    <tr class="font-weight-bold">
                         <td>{{ $no + 1 }}</td>
                         <td>{{ $item->nik }}</td>
                         <td>{{ $item->nama }}</td>

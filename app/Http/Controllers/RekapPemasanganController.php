@@ -39,6 +39,8 @@ class RekapPemasanganController extends Controller
         $query = RekapPemasanganModel::query();
 
         $paket_plg = $request->input('paket_plg');
+        $paket_plg = $request->input('nama');
+        $paket_plg = $request->input('marketing');
         $nominal = $request->input('nominal');
         $tgl_pengajuan = $request->input('tgl_pengajuan');
         $tgl_aktivasi = $request->input('tgl_aktivasi');
@@ -73,11 +75,11 @@ class RekapPemasanganController extends Controller
         if ($search) {
             $query->where(function ($query) use ($search) {
                 $query->where('id_plg', $search)
-                    ->orWhere('nama_plg', 'like', "%{$search}%")
-                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
-                    ->orWhere('aktivasi_plg', 'like', "%{$search}%")
-                    ->orWhere('alamat_plg', 'like', "%{$search}%")
-                    ->orWhere('marketing', 'like', "%{$search}%");
+                    ->orWhere('marketing', 'like', "%{$search}%")
+                    ->orWhere('nama', 'like', "%{$search}%")
+                    ->orWhere('no_telpon', 'like', "%{$search}%")
+                    ->orWhere('registrasi', 'like', "%{$search}%")
+                    ->orWhere('alamat', 'like', "%{$search}%");
             });
         }
 

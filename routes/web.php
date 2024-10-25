@@ -16,6 +16,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PemberitahuanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PerbaikanController;
 use App\Http\Controllers\PSBController;
@@ -120,6 +121,11 @@ Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broa
 Route::get('/send-message', [MessageController::class, 'create'])->name('message.create');
 // Rute untuk menyimpan pesan
 Route::post('/send-message', [MessageController::class, 'store'])->name('message.store');
+//Peringatan whatsaap
+Route::get('/peringatan', [MessageController::class, 'create2'])->name('peringatan.create');
+// Rute untuk menyimpan pesan
+Route::post('/peringatan', [MessageController::class, 'store2'])->name('peringatan.store');
+
 
 
 //PEMBAYARAN GLOBAL
@@ -234,6 +240,9 @@ Route::post('/pemasukan/update/{id}', [PemasukanController::class, 'update'])->n
 Route::post('/pemasukan/hapus/{id}', [PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
 
 
+
+
+
 // Routes untuk isolir
 
 //Isolir
@@ -338,12 +347,19 @@ Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('targe
 
 
 //file Storage
-
-Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
+//Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
 Route::get('/file/create', [FileController::class, 'create'])->name('file.create');
 Route::post('/file/store', [FileController::class, 'store'])->name('file.store');
 Route::get('/file/edit/{id}', [FileController::class, 'edit'])->name('file.edit');
 Route::post('/file/update/{id}', [FileController::class, 'update'])->name('file.update');
 Route::post('/file/hapus/{id}', [FileController::class, 'destroy'])->name('file.destroy');
 Route::get('/file/download/{id}', [FileController::class, 'download'])->name('file.download');
+Route::get('/file/{path?}', [FileController::class, 'index'])->name('file.index')->where('path', '.*');
 
+//Pemberitahuan
+Route::get('/pemberitahuan', [PemberitahuanController::class, 'index'])->name('pemberitahuan.index');
+Route::get('/pemberitahuan/create', [PemberitahuanController::class, 'create'])->name('pemberitahuan.create');
+Route::post('/pemberitahuan/store', [PemberitahuanController::class, 'store'])->name('pemberitahuan.store');
+Route::get('/pemberitahuan/edit/{id}', [PemberitahuanController::class, 'edit'])->name('pemberitahuan.edit');
+Route::post('/pemberitahuan/update/{id}', [PemberitahuanController::class, 'update'])->name('pemberitahuan.update');
+Route::post('/pemberitahuan/hapus/{id}', [PemberitahuanController::class, 'destroy'])->name('pemberitahuan.destroy');

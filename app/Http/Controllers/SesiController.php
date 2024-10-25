@@ -48,7 +48,7 @@ class SesiController extends Controller
             case 'admin':
                 return redirect()->route('index');
             case 'superadmin':
-                return redirect()->route('home');
+                return redirect()->route('index');
             default:
                 return redirect()->route('login'); // Redirect ke halaman login jika role tidak dikenal
         }

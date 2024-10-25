@@ -77,8 +77,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap100"
-                    aria-expanded="true" aria-controls="collapseBootstrap100">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap100" aria-expanded="true" aria-controls="collapseBootstrap100">
                     <img src="{{ asset('asset/img/users.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Admin Login</span>
@@ -95,11 +95,11 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
-                    aria-expanded="true" aria-controls="collapseBootstrap13">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
                     <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Rekap Pemasangan</span>
+                    <span class=" font-weight-bold">BOT Whatsapp</span>
                 </a>
                 <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
                     data-parent="#accordionSidebar">
@@ -113,8 +113,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap1" aria-expanded="true" aria-controls="collapseBootstrap1">
                     <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">PSB dan Perbaikan</span>
@@ -224,7 +224,41 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
 
-                        <a class="collapse-item" href="/send-message">Peringatan WA</a>
+
+                        <a class="collapse-item" href="/send-message">Tagihan WA BOT</a>
+                        <a class="collapse-item" href="/peringatan">Reminder WA BOT</a>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap20" aria-expanded="true" aria-controls="collapseBootstrap20">
+                    <img src="{{ asset('asset/img/folder.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">File</span>
+                </a>
+                <div id="collapseBootstrap20" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/file/index">File</a>
+                    </div>
+
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap21" aria-expanded="true" aria-controls="collapseBootstrap21">
+                    <img src="{{ asset('asset/img/pemberitahuan.png') }}" alt="Gambar Pelanggan"
+                        style="width: 50px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Pemberitahuan</span>
+                </a>
+                <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pemberitahuan">Pemberitahuan</a>
                     </div>
 
                 </div>

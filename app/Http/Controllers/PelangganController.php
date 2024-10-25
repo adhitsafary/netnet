@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exports\PelangganExport;
+use App\Models\Pemberitahuan;
 
 class PelangganController extends Controller
 {
@@ -31,6 +32,8 @@ class PelangganController extends Controller
         $pelanggan = Pelanggan::all();
         $pelangganof = Pelangganof::all();
         $perbaikanProses = Perbaikan::where('status', 'Proses')->get();
+
+        $pemberitahuan = Pemberitahuan::all();
 
         // Hitung total pendapatan bulanan
         $totalPendapatanBulanan = $pelanggan->sum('harga_paket');
@@ -269,6 +272,7 @@ class PelangganController extends Controller
             'hasil_target',
             //runing text
             'perbaikanProses',
+            'pemberitahuan',
 
 
 

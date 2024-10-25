@@ -125,5 +125,74 @@ class MessageController extends Controller
         }
     }
 
+    public function create2(Request $request)
+    {
+        $query = Pelanggan::whereNotIn('status_pembayaran', ['Sudah Bayar', 'Block', 'Isolir']);
 
+        if ($request->filled('search')) {
+            $query->where('nama_plg', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->filled('alamat_plg')) {
+            $query->where('alamat_plg', 'like', '%' . $request->alamat_plg . '%');
+        }
+
+        if ($request->filled('tgl_tagih_plg')) {
+            $query->where('tgl_tagih_plg', $request->tgl_tagih_plg);
+        }
+
+        $pelanggan = $query->get(['id_plg', 'nama_plg', 'no_telepon_plg', 'tgl_tagih_plg', 'alamat_plg', 'paket_plg']);
+
+        return view('whatsapp.peringatan', compact('pelanggan'));
+    }
+
+    public function store2(Request $request)
+    {
+        $request->validate([
+            'target' => 'required|array'
+        ]);
+
+        $token = "PKJTTQJBTQbr5KR6PwL1";
+        $targetNumbers = $request->input('target');
+
+        try {
+            foreach ($targetNumbers as $target) {
+                $pelanggan = Pelanggan::where('no_telepon_plg', $target)->first();
+
+                if ($pelanggan) {
+                    $tglTagihPlg = now()->setDay($pelanggan->tgl_tagih_plg);
+                    $formattedDate = $tglTagihPlg->format('d F Y');
+
+                    $paket = match ($pelanggan->paket_plg) {
+                        1 => '5 Mbps',
+                        2 => '10 Mbps',
+                        3 => '15 Mbps',
+                        4 => '25 Mbps',
+                        default => 'Paket tidak diketahui',
+                    };
+
+                    $message = "Assalamualaikum selamat siang. \n";
+                    $message .= "Bapak / ibu {$pelanggan->nama_plg} kami dari net net, untuk menghindari isolir pembayaran bulanan \n";
+                    $message .= "nya bisa di bayar hari ini?\n";
+                    $message .= "Bisa lewat transfer atau dana .🙏🏻\n";
+
+                    $response = Http::withHeaders([
+                        'Authorization' => $token,
+                    ])->asForm()->post('https://api.fonnte.com/send', [
+                        'target' => $target,
+                        'message' => $message,
+                        'delay' => '5',
+                    ]);
+
+                    if (!$response->successful()) {
+                        return back()->withErrors('Gagal mengirim pesan: ' . $response->body());
+                    }
+                }
+            }
+
+            return back()->with('status', 'Pesan berhasil dikirim!');
+        } catch (\Exception $e) {
+            return back()->withErrors('Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 }

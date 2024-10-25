@@ -226,7 +226,7 @@
                             // Atur transformasi untuk bergerak keluar dari kiri
                             setTimeout(() => {
                                 runningTextElement.style.transform =
-                                    `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
+                                `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
                             }, 100); // Tunggu sebentar untuk menerapkan transform
 
                             // Pindah ke item berikutnya
@@ -248,7 +248,7 @@
 
 
             <!-- Pie Chart -->
-            <div class="card-biru_tua col-xl-4 col-lg- mt-4">
+            <div class="card-biru_tua col-xl-4 col-lg-8">
                 <div class="p-3 mb-2">
                     <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 pl-3 font-weight-bold text-white">PERSANTE PEMBAYARAN</h6>
@@ -291,87 +291,110 @@
 
             </div>
 
+            <!-- Pie Chart -->
+            <!-- Marketing -->
+            <div class="card-magenta col-xl-4 col-lg-8 ml-3">
+                <div class="p-3 mb-2">
+                    <div class="py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 pl-3 font-weight-bold text-white">TARGET MARKETING</h6>
+                    </div>
+                    <div class="chart-area">
+                        <canvas id="myPieChart1"></canvas> <!-- Untuk Pie Chart -->
+                    </div>
+                    <!-- Row untuk Baru Terbayar dan Total Tagihan -->
+                    <div class="mt-3 ml-2 d-flex justify-content-between">
+                        <!-- Baru Terbayar -->
+                        <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
+                            style="width: 48%; margin-right: 10px;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Tercapai</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                {{ number_format($hasil_target) }}
+                            </div>
+                        </div>
+                        <!--sisa tagihan-->
+                        <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center mr-2"
+                            style="width: 48%;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                {{ number_format($sisa_target) }}
+                            </div>
+                        </div>
+                        <!-- Total Tagihan -->
+                        <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
+                            style="width: 48%;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Jumlah Target</h6>
+                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                {{ number_format($jumlah_target) }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             <div class="col-xl-8 col-lg-7 mb-4">
                 <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Pemberitahuan</h6>
-                        <a class="m-0 float-right btn btn-danger btn-sm" href="/pemberitahuan">Lihat semua <i
+                        <h6 class="m-0 font-weight-bold text-primary">Invoice</h6>
+                        <a class="m-0 float-right btn btn-danger btn-sm" href="#">View More <i
                                 class="fas fa-chevron-right"></i></a>
                     </div>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Pesan</th>
-                                <th>Tanggal</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse($pemberitahuan as $item)
+                    <div class="table-responsive">
+                        <table class="table align-items-center table-flush">
+                            <thead class="thead-light">
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $item->nama }}</td>
-                                    <td>{{ $item->pesan }}</td>
-                                    <td>{{ $item->updated_at }}</td>
-
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Item</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
-                            @empty
+                            </thead>
+                            <tbody>
                                 <tr>
-                                    <td colspan="4" class="text-center">Tidak ada pemberitahuan.</td>
+                                    <td><a href="#">RA0449</a></td>
+                                    <td>Udin Wayang</td>
+                                    <td>Nasi Padang</td>
+                                    <td><span class="badge badge-success">Delivered</span></td>
+                                    <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
                                 </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-
+                                <tr>
+                                    <td><a href="#">RA5324</a></td>
+                                    <td>Jaenab Bajigur</td>
+                                    <td>Gundam 90' Edition</td>
+                                    <td><span class="badge badge-warning">Shipping</span></td>
+                                    <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">RA8568</a></td>
+                                    <td>Rivat Mahesa</td>
+                                    <td>Oblong T-Shirt</td>
+                                    <td><span class="badge badge-danger">Pending</span></td>
+                                    <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">RA1453</a></td>
+                                    <td>Indri Junanda</td>
+                                    <td>Hat Rounded</td>
+                                    <td><span class="badge badge-info">Processing</span></td>
+                                    <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">RA1998</a></td>
+                                    <td>Udin Cilok</td>
+                                    <td>Baby Powder</td>
+                                    <td><span class="badge badge-success">Delivered</span></td>
+                                    <td><a href="#" class="btn btn-sm btn-primary">Detail</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="card-footer"></div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-5 mt-4 ">
-                <div class="card">
-                    <div class="card-header bg-primary d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-light">Target Marketing</h6>
-                    </div>
-                    <div class=" ">
-                        <div class=" d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">TARGET MARKETING</h6>
-                        </div>
-                        <div class="chart-area">
-                            <canvas id="myPieChart1"></canvas> <!-- Untuk Pie Chart -->
-                        </div>
-                        <!-- Row untuk Baru Terbayar dan Total Tagihan -->
-                        <div class="mt-3 ml-2 d-flex justify-content-between">
-                            <!-- Baru Terbayar -->
-                            <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
-                                style="width: 48%; margin-right: 10px;">
-                                <h6 class="m-0 pl-3 font-weight-bold text-white">Tercapai</h6>
-                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                    {{ number_format($hasil_target) }}
-                                </div>
-                            </div>
-                            <!--sisa tagihan-->
-                            <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center mr-2"
-                                style="width: 48%;">
-                                <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa</h6>
-                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                    {{ number_format($sisa_target) }}
-                                </div>
-                            </div>
-                            <!-- Total Tagihan -->
-                            <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
-                                style="width: 48%;">
-                                <h6 class="m-0 pl-3 font-weight-bold text-white">Jumlah Target</h6>
-                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                    {{ number_format($jumlah_target) }}
-                                </div>
-                            </div>
 
-                        </div>
-
-                    </div>
-                </div>
-            </div>
 
 
 

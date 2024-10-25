@@ -4,155 +4,97 @@
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
         <div class="row align-items-center">
-            <table class="table table-bordered mt-2">
-                <thead>
-                    <tr>
-                        <th>Total Sudah Bayar</th>
-                        <th>Total Belum Bayar</th>
-                        <th>Total Isolir</th>
-                        <th>Total Block</th>
-                        <th>Total Unblock</th>
-                        <th>Total Filter</th>
-                        <th>Total Keseluruhan</th>
-                        <th>Tersisa</th>
-                        <th>Total Masuk</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="custom-cell info"
+            <div class="">
+                <!-- Form Pencarian -->
+
+                <div class="mb-2 ml-3">
+                    <!-- Tampilkan Hasil Filter -->
+                    <div>
+                        <!-- Tombol Total Sudah Bayar -->
+                        <button class="btn btn-info mt-2  btn-lg  font-weight-bold"
                             onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
-                            Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }} User: {{ $totalSudahBayar }}
-                        </td>
+                            Total Sudah Bayar: {{ $totalSudahBayar }} (Rp
+                            {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})
+                        </button>
 
-                        <td class="custom-cell warning"
+                        <!-- Tombol Total Belum Bayar -->
+                        <button class="btn btn-warning mt-2  btn-lg  font-weight-bold"
                             onclick="copyToClipboard('Total Belum Bayar: {{ $totalBelumBayar }} (Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})')">
-                            Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }} User: {{ $totalBelumBayar }}
-                        </td>
+                            Total Belum Bayar: {{ $totalBelumBayar }} (Rp
+                            {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})
+                        </button>
 
-                        <td class="custom-cell danger">
-                            <a href="{{ route('pelanggan.isolir') }}"> Rp
-                                {{ number_format($totalPembayaranIsolir, 0, ',', '.') }} User: {{ $totalIsolir }}</a>
-                        </td>
+                        <!-- Tombol Total Isolir -->
 
-                        <td class="custom-cell danger">
-                            <a href="{{ route('pelanggan.block') }}"> Rp
-                                {{ number_format($totalPembayaranBlock, 0, ',', '.') }} User: {{ $totalBlock }} </a>
-                        </td>
+                        <a href="{{ route('pelanggan.isolir') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold"> Total
+                            Isolir: {{ $totalIsolir }} (Rp
+                            {{ number_format($totalPembayaranIsolir, 0, ',', '.') }})</a>
 
-                        <td class="custom-cell success">
-                            <a href="{{ route('pelanggan.unblock') }}"> Rp
-                                {{ number_format($totalPembayaranUnblock, 0, ',', '.') }} User: {{ $totalUnblock }} </a>
-                        </td>
+                        <!-- Tombol Total Block -->
+                        <a href="{{ route('pelanggan.block') }}" class="btn btn-danger mt-2  btn-lg  font-weight-bold">
+                            Total Block: {{ $totalBlock }} (Rp {{ number_format($totalPembayaranBlock, 0, ',', '.') }})
+                        </a>
 
-                        <td class="custom-cell primary">
-                            Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} User:
+                        <!-- Tombol Total Unblock -->
+                        <a href="{{ route('pelanggan.unblock') }}" class="btn btn-success mt-2  btn-lg  font-weight-bold">
+                            Total Unblock: {{ $totalUnblock }} (Rp
+                            {{ number_format($totalPembayaranUnblock, 0, ',', '.') }})
+                        </a>
+
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #007bff, #007bff); color: #ffffff;"
+                            onclick="copyToClipboard('Pelanggan (Filter): Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User: {{ number_format($totalPelangganfilter, 0, ',', '.') }}')">
+                            Total Filter: Rp {{ number_format($totalJumlahPembayaranfilter, 0, ',', '.') }} || User
+                            :
                             {{ number_format($totalPelangganfilter, 0, ',', '.') }}
-                        </td>
+                        </button>
 
-                        <td class="custom-cell primary-yellow">
-                            Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} User:
+                        <!-- Tombol Total Keseluruhan -->
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #ecc100, #ecc100); color: #000000;">
+                            Total Keseluruhan : Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} ||
+                            User :
                             {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
-                        </td>
-                        <td class="custom-cell primary-red"
-                            onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
-                            Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
-                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
-                        </td>
+                        </button>
 
-                        <td class="custom-cell primary-green"
+                        <!-- Tombol Sisa Pembayaran -->
+                        <button class="btn btn-primary btn-lg mt-2 font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, #ff0000, #ff0000); color: #ffffff;"
                             onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
-                            Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
+                            Tersisa : Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User :
                             {{ number_format($sisaUser, 0, ',', '.') }}
-                        </td>
+                        </button>
 
+                        <!-- Tombol Total Masuk -->
+                        <button class="btn btn-primary mt-2 btn-lg  font-weight-bold"
+                            style="cursor: default; background: linear-gradient(45deg, rgb(32, 190, 0), rgb(32, 190, 0)); color: #ffffff;"
+                            onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
+                            Total Masuk : Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User :
+                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                        </button>
+                    </div>
 
-                    </tr>
-                </tbody>
-            </table>
+                    <!-- Tambahkan script JavaScript untuk menyalin data ke clipboard -->
+                    <script>
+                        function copyToClipboard(text) {
+                            // Membuat elemen input sementara untuk menyalin teks
+                            var tempInput = document.createElement('input');
+                            tempInput.value = text;
+                            document.body.appendChild(tempInput);
+                            tempInput.select();
+                            document.execCommand('copy');
+                            document.body.removeChild(tempInput);
 
-            <style>
-                .custom-cell {
-                    padding: 10px;
-                    text-align: center;
-                    font-size: 1.2em;
-                    font-weight: bold;
-                    cursor: pointer;
-                    color: white;
-                }
+                            // Tampilkan alert sebagai notifikasi
+                            alert('Teks disalin: ' + text);
+                        }
+                    </script>
 
-                .custom-cell.info {
-                    background: #17a2b8;
-                    /* Biru */
-                }
-
-                .custom-cell.warning {
-                    background: #ffc107;
-                    /* Kuning */
-                    color: black;
-                }
-
-                .custom-cell.danger {
-                    background: #dc3545;
-                    /* Merah */
-                }
-
-                .custom-cell.success {
-                    background: #28a745;
-                    /* Hijau */
-                }
-
-                .custom-cell.primary {
-                    background: #007bff;
-                    /* Biru tua */
-                }
-
-                .custom-cell.primary-yellow {
-                    background: #ecc100;
-                    /* Kuning terang */
-                    color: black;
-                }
-
-                .custom-cell.primary-red {
-                    background: #ff0000;
-                    /* Merah terang */
-                }
-
-                .custom-cell.primary-green {
-                    background: rgb(32, 190, 0);
-                    /* Hijau terang */
-                }
-
-                .table-bordered {
-                    border: 1px solid #dee2e6;
-                    width: 100%;
-                }
-
-                .table th,
-                .table td {
-                    border: 1px solid #dee2e6;
-                    vertical-align: middle;
-                }
-
-                .table {
-                    width: 100%;
-                    table-layout: fixed;
-                    /* Membuat lebar kolom rata */
-                }
-
-                a {
-                    color: white;
-                    text-decoration: none;
-                }
-
-                a:hover {
-                    text-decoration: underline;
-                }
-            </style>
-
+                </div>
+            </div>
         </div>
         <div class="d-flex align-items-center justify-content-between mt-2">
-            <form action="{{ route('pelanggan.block') }}" method="GET" class="form-inline d-flex" style="color: black;">
+            <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
                 <div class="input-group" style="color: black;">
                     <input type="text" name="search" id="search" class="form-control font-weight-bold"
                         style="color: black;" value="{{ request('search') }}" placeholder="Pencarian">
@@ -203,19 +145,111 @@
 
 
         <div class="">
-            <th>
-                <form action="{{ route('pelanggan.block') }}" method="GET">
-                    <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
-                    <input type="text" name="paket_plg" placeholder="Paket">
-                    <input type="number" name="harga_paket" placeholder="Harga Paket">
+
+            <th class="mt-2">
+                <form action="{{ route('pelanggan.index') }}" method="GET">
+                    <select name="tgl_tagih_plg" id="tgl_tagih_plg">
+                        <option value="">Tanggal Tagih</option>
+                        @for ($i = 1; $i <= 33; $i++)
+                            <option value="{{ $i }}"
+                                {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                    </select>
+                    <select name="paket_plg" id="paket_plg">
+                        <option value="">Paket</option>
+                        @for ($i = 1; $i <= 7; $i++)
+                            <option value="{{ $i }}"
+                                {{ request('paket_plg') == $i ? 'selected' : '' }}>
+                                {{ $i }}
+                            </option>
+                        @endfor
+                        <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                            vcr
+                        </option>
+                    </select>
+
+                    <select name="harga_paket" id="harga_paket">
+                        <option value="">Harga</option>
+                        <option value="50000"
+                            {{ request('jumlah_pembayaran') == '50000' ? 'selected' : '' }}>
+                            {{ number_format(50000, 0, ',', '.') }}
+                        </option>
+                        <option value="75000"
+                            {{ request('jumlah_pembayaran') == '75000' ? 'selected' : '' }}>
+                            {{ number_format(75000, 0, ',', '.') }}
+                        </option>
+                        <option value="100000"
+                            {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
+                            {{ number_format(100000, 0, ',', '.') }}
+                        </option>
+                        <option value="105000"
+                            {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
+                            {{ number_format(105000, 0, ',', '.') }}
+                        </option>
+                        <option value="115000"
+                            {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
+                            {{ number_format(115000, 0, ',', '.') }}
+                        </option>
+
+                        <option value="120000"
+                            {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
+                            {{ number_format(120000, 0, ',', '.') }}
+                        </option>
+                        <option value="125000"
+                            {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
+                            {{ number_format(125000, 0, ',', '.') }}
+                        </option>
+                        <option value="150000"
+                            {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
+                            {{ number_format(150000, 0, ',', '.') }}
+                        </option>
+                        <option value="165000"
+                            {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
+                            {{ number_format(165000, 0, ',', '.') }}
+                        </option>
+                        <option value="175000"
+                            {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
+                            {{ number_format(175000, 0, ',', '.') }}
+                        </option>
+                        <option value="205000"
+                            {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
+                            {{ number_format(205000, 0, ',', '.') }}
+                        </option>
+                        <option value="250000"
+                            {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
+                            {{ number_format(250000, 0, ',', '.') }}
+                        </option>
+                        <option value="265000"
+                            {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
+                            {{ number_format(265000, 0, ',', '.') }}
+                        </option>
+                        <option value="305000"
+                            {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
+                            {{ number_format(305000, 0, ',', '.') }}
+                        </option>
+                        <option value="750000"
+                            {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
+                            {{ number_format(750000, 0, ',', '.') }}
+                        </option>
+                        <option value="vcr"
+                            {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
+                            vcr
+                        </option>
+                    </select>
+
                     <select name="status_pembayaran">
                         <option value="">Semua Status</option>
                         <option value="sudah_bayar">Sudah Bayar</option>
                         <option value="belum_bayar">Belum Bayar</option>
                     </select>
-                    <button type="submit">Filter</button>
+
+                    <input type="date" id="updated_at" name="updated_at" value="{{ request()->get('updated_at') }}">
+                    <button type="submit" class="btn btn-primary ">Filter</button>
                 </form>
             </th>
+
 
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">
@@ -223,7 +257,7 @@
                         <th class="">No</th>
                         <th>ID</th>
                         <th>
-                            <form action="{{ route('pelanggan.block') }}" method="GET">
+                            <form action="{{ route('pelanggan.index') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_nama">Nama</label><br>
@@ -237,7 +271,7 @@
 
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.block') }}" method="GET">
+                            <form action="{{ route('pelanggan.index') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_alamat">Alamat</label><br>
@@ -257,7 +291,8 @@
                         <th>No Telpon</th>
                         <th>Aktivasi</th>
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Paket</label><br>
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
                                         <option value="">Paket</option>
@@ -276,7 +311,8 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Harga</label><br>
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
                                         <option value="">Harga</option>
@@ -351,7 +387,8 @@
                         </th>
 
                         <th>
-                            <form class="filterForm" method="GET" action="{{ route('pelanggan.block') }}">
+                            <form class="filterForm" method="GET" action="{{ route('pelanggan.index') }}">
+                                <label for="order_keterangan">Tanggal Tagih</label><br>
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
                                         <option value="">Tanggal Tagih</option>
@@ -366,7 +403,7 @@
                             </form>
                         </th>
                         <th>
-                            <form action="{{ route('pelanggan.block') }}" method="GET">
+                            <form action="{{ route('pelanggan.index') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
                                 <label for="order_keterangan">Keterangan</label><br>
@@ -387,7 +424,7 @@
                                 <span>Status Pembayaran</span>
                                 <!-- Form Filter -->
                                 <div class="col-md-3 text-right">
-                                    <form action="{{ route('pelanggan.block') }}" method="GET" class="form-inline"
+                                    <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline"
                                         id="filterForm">
                                         <div class="input-group">
                                             <select name="status_pembayaran" id="status_pembayaran" class="form-control"
@@ -438,10 +475,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                                                    {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                                        ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                                        : 'Belum Ada pembayaran' }}
-                                                                                                                                </td> -->
+                                                                                                                                {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                                                    ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                                                    : 'Belum Ada pembayaran' }}
+                                                                                                                            </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
@@ -483,7 +520,7 @@
                             <!-- Tombol Bayar -->
 
                             <!-- Modal Bayar -->
-                            <div class="modal fade" id="bayarModal" tabindex`="-1" aria-labelledby="bayarModalLabel"
+                            <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
