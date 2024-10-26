@@ -3,11 +3,29 @@
 @section('konten')
     <div class=" p-5 mt-4">
         <div class="row mb-4">
-
+            <div class="col-md-9">
+                <form method="GET" action="{{ route('pembayaran.filter') }}" class="form-inline">
+                    <div class="input-group">
+                        <input type="text" name="search" id="search" class="form-control"
+                            value="{{ request('search') }}" placeholder="Pencarian">
+                        <div class="form-group">
+                            <input type="date" name="date_start" id="date_start" class="form-control"
+                                value="{{ $date_start }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="date_end" id="date_end" class="form-control"
+                                value="{{ $date_end }}">
+                        </div>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary">Cari</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
             <div class="col-md-3 text-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         Ekspor
                     </button>
                     <div class="dropdown-menu">
@@ -24,7 +42,12 @@
             <!-- Informasi Total Pembayaran dan Total Pelanggan -->
             <div class="d-flex justify-content-between align-items-center p-3"
                 style="background-color: #f8f9fa; color: black; border: 1px solid #ddd;">
-
+                <div style="display: flex; justify-content: center;" class="mb-2">
+                    <h5 style="color: rgb(0, 0, 0); background-rgb(255, 255, 255)#343a40; padding: 10px; border-radius: 5px;"
+                        class="font font-weight-bold">
+                        Data Pembayaran
+                    </h5>
+                </div>
                 <div class="p-3 text-center" style="background-color: #007bff; color: white; flex: 1; margin-right: 10px;">
                     <strong>Total Jumlah Pembayaran:</strong>
                     <div style="font-size: 1.5em;">{{ number_format($totalJumlahPembayaran) }}</div>
@@ -39,16 +62,8 @@
 
 
         <th class="mt-2">
-            <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center">
-                <input type="text" name="search" id="search" class="form-control me-2"
-                    value="{{ request('search') }}" placeholder="Pencarian">
-
-                <input type="date" name="date_start" id="date_start" class="form-control me-2"
-                    value="{{ $date_start }}">
-
-                <input type="date" name="date_end" id="date_end" class="form-control me-2" value="{{ $date_end }}">
-
-                <select name="tgl_tagih_plg" id="tgl_tagih_plg" class="form-select me-2">
+            <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center ml-1">
+                <select name="tgl_tagih_plg" id="tgl_tagih_plg" class="me-2">
                     <option value="">Tanggal Tagih</option>
                     @for ($i = 1; $i <= 33; $i++)
                         <option value="{{ $i }}" {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
@@ -57,17 +72,19 @@
                     @endfor
                 </select>
 
-                <select name="paket_plg" id="paket_plg" class="form-select me-2">
+                <select name="paket_plg" id="paket_plg" class="me-2  ml-1">
                     <option value="">Paket</option>
                     @for ($i = 1; $i <= 7; $i++)
                         <option value="{{ $i }}" {{ request('paket_plg') == $i ? 'selected' : '' }}>
                             {{ $i }}
                         </option>
                     @endfor
-                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>vcr</option>
+                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                        vcr
+                    </option>
                 </select>
 
-                <select name="harga_paket" id="harga_paket" class="form-select me-2">
+                <select name="harga_paket" id="harga_paket" class="me-2  ml-1">
                     <option value="">Harga</option>
                     @foreach ([50000, 75000, 100000, 105000, 115000, 120000, 125000, 150000, 165000, 175000, 205000, 250000, 265000, 305000, 750000] as $harga)
                         <option value="{{ $harga }}"
@@ -75,13 +92,17 @@
                             {{ number_format($harga, 0, ',', '.') }}
                         </option>
                     @endforeach
-                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>vcr</option>
+                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
+                        vcr
+                    </option>
                 </select>
 
-                <input type="date" name="created_at" id="created_at" class="form-control me-2"
-                    value="{{ request('created_at') }}">
+                <div class="me-2  ml-1">
 
-                <button type="submit" class="btn btn-primary mb-2">Filter</button>
+                    <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}">
+                </div>
+
+                <button type="submit" class="btn btn-primary  ml-3 mb-2">Filter</button>
             </form>
         </th>
 
@@ -137,8 +158,8 @@
 
                         <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
                             <div class="form-group">
-                                <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}"
-                                    onchange="this.form.submit();">
+                                <input type="date" name="created_at" id="created_at"
+                                    value="{{ request('created_at') }}" onchange="this.form.submit();">
                             </div>
                         </form>
                         Tanggal Pembayaran

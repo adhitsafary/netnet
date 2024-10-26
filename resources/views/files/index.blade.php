@@ -10,7 +10,7 @@
             </div>
         @endif
 
-        <a href="{{ route('file.create') }}" class="btn btn-primary mb-3">Upload File baru</a>
+        <a href="{{ route('file.create') }}" class="btn btn-danger mb-3">Upload File baru</a>
 
         <div class="d-flex align-items-center justify-content-between mt-2">
             <form action="{{ route('file.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
@@ -38,9 +38,9 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>File Preview & Name</th>
-                        <th>File Size</th>
-                        <th>Actions</th>
+                        <th>File</th>
+                        <th>Ukuran</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,10 +66,10 @@
                             <!-- Dropdown Action Button -->
                             <td>
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    <button class="btn btn-danger dropdown-toggle" type="button"
                                         id="actionDropdown{{ $file->id }}" data-bs-toggle="dropdown"
                                         aria-expanded="false">
-                                        &#8230;
+
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="actionDropdown{{ $file->id }}">
                                         <!-- Menghapus tindakan "Lihat" karena sudah langsung bisa diklik pada nama file -->
