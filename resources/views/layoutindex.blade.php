@@ -379,8 +379,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="{{ asset('/template2/img/boy.png') }}"
-                                    style="max-width: 60px">
+                                {{-- Cek apakah pengguna memiliki foto di database --}}
+                                <img class="img-profile rounded-circle"
+                                    src="{{ Auth::check() && Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('/template2/img/boy.png') }}"
+                                    style="max-width: 100px">
                                 <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
                                     @if (Auth::check())
                                         {{-- Mengecek apakah pengguna sudah login --}}
@@ -420,6 +422,7 @@
                             {{-- Mengalihkan ke halaman login --}}
                         </script>
                         @endif
+
             </div>
             </a>
 
