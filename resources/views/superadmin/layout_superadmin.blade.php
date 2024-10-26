@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="{{ asset('template2/img/logo/logo.png') }}" rel="icon">
-    <title>NetNet - Digital Group</title>
+    <title>NetDigitalGroup</title>
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/css/ruang-admin.min.css') }}" rel="stylesheet">
@@ -412,11 +412,16 @@
                             </div>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
+
+
+
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="{{ asset('/template2/img/boy.png') }}"
-                                    style="max-width: 60px">
+                                {{-- Cek apakah pengguna memiliki foto di database --}}
+                                <img class="img-profile rounded-circle"
+                                    src="{{ Auth::check() && Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('/template2/img/boy.png') }}"
+                                    style="max-width: 100px">
                                 <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
                                     @if (Auth::check())
                                         {{-- Mengecek apakah pengguna sudah login --}}
@@ -456,6 +461,10 @@
                             {{-- Mengalihkan ke halaman login --}}
                         </script>
                         @endif
+
+
+
+
             </div>
             </a>
 

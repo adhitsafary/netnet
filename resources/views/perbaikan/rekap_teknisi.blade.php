@@ -4,7 +4,11 @@
     <div class="container mt-4">
         <!-- Filter Tanggal -->
         <form action="{{ route('perbaikan.rekapTeknisi') }}" method="GET" class="mb-3">
-            @csrf
+            <div class="input-group" style="color: black;">
+                <input type="text" name="search" id="search" class="form-control font-weight-bold" style="color: black;"
+                    value="{{ request('search') }}" placeholder="Pencarian">
+            </div>
+
             <div class="row">
                 <div class="col-md-5">
                     <div class="form-group" style="color: black;">
@@ -59,7 +63,7 @@
             </thead>
             <tbody>
                 @foreach ($rekap as $data)
-                    <tr>
+                    <tr class="font-weight-bold">
                         <td>{{ $data->teknisi }}</td>
                         <td>{{ $data->total }}</td>
                     </tr>
@@ -85,8 +89,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($rekap as $no => $item)
-                        <tr>
+                    @forelse ($perbaikan as $no => $item)
+                        <tr class="font-weight-bold">
                             <td>{{ $no + 1 }}</td>
                             <td>{{ $item->id_plg }}</td>
                             <td>{{ $item->nama_plg }}</td>

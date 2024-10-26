@@ -169,21 +169,33 @@
 
                     <style>
                         .running-text-container {
-                            width: 100%; /* Menyediakan lebar penuh */
-                            overflow: hidden; /* Menyembunyikan overflow */
-                            background-color: #000000; /* Warna latar belakang */
-                            border: 1px solid #ddd; /* Border */
-                            border-radius: 5px; /* Sudut melingkar */
-                            position: relative; /* Posisi relatif untuk animasi */
-                            height: 50px; /* Tinggi tetap untuk kontainer */
+                            width: 100%;
+                            /* Menyediakan lebar penuh */
+                            overflow: hidden;
+                            /* Menyembunyikan overflow */
+                            background-color: #000000;
+                            /* Warna latar belakang */
+                            border: 1px solid #ddd;
+                            /* Border */
+                            border-radius: 5px;
+                            /* Sudut melingkar */
+                            position: relative;
+                            /* Posisi relatif untuk animasi */
+                            height: 50px;
+                            /* Tinggi tetap untuk kontainer */
                         }
 
                         .running-text {
-                            display: inline-block; /* Pastikan tetap dalam satu baris */
-                            white-space: nowrap; /* Pastikan teks tidak membungkus */
-                            position: absolute; /* Memungkinkan pergerakan */
-                            will-change: transform; /* Mengoptimalkan animasi */
-                            transition: transform 5s linear; /* Durasi animasi */
+                            display: inline-block;
+                            /* Pastikan tetap dalam satu baris */
+                            white-space: nowrap;
+                            /* Pastikan teks tidak membungkus */
+                            position: absolute;
+                            /* Memungkinkan pergerakan */
+                            will-change: transform;
+                            /* Mengoptimalkan animasi */
+                            transition: transform 5s linear;
+                            /* Durasi animasi */
                         }
                     </style>
 
@@ -199,7 +211,8 @@
                             const currentItem = perbaikanProses[currentIndex];
 
                             // Buat teks untuk item saat ini
-                            const text = `ID Pelanggan: ${currentItem.id_plg} Nama: ${currentItem.nama_plg} Alamat: ${currentItem.alamat_plg}     No. Telepon: ${currentItem.no_telepon_plg}  Paket: ${currentItem.paket_plg}  ODP: ${currentItem.odp}    Maps: ${currentItem.maps}  Teknisi: ${currentItem.teknisi}  Keterangan: ${currentItem.keterangan}      Tanggal: ${new Date(currentItem.created_at).toLocaleDateString('id-ID')}`;
+                            const text =
+                                `ID Pelanggan: ${currentItem.id_plg} Nama: ${currentItem.nama_plg} Alamat: ${currentItem.alamat_plg}     No. Telepon: ${currentItem.no_telepon_plg}  Paket: ${currentItem.paket_plg}  ODP: ${currentItem.odp}    Maps: ${currentItem.maps}  Teknisi: ${currentItem.teknisi}  Keterangan: ${currentItem.keterangan}      Tanggal: ${new Date(currentItem.created_at).toLocaleDateString('id-ID')}`;
 
 
 
@@ -212,7 +225,8 @@
 
                             // Atur transformasi untuk bergerak keluar dari kiri
                             setTimeout(() => {
-                                runningTextElement.style.transform = `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
+                                runningTextElement.style.transform =
+                                    `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
                             }, 100); // Tunggu sebentar untuk menerapkan transform
 
                             // Pindah ke item berikutnya
@@ -234,7 +248,7 @@
 
 
             <!-- Pie Chart -->
-            <div class="card-biru_tua col-xl-4 col-lg-8">
+            <div class="card-biru_tua col-xl-4 col-lg- mt-4">
                 <div class="p-3 mb-2">
                     <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 pl-3 font-weight-bold text-white">PERSANTE PEMBAYARAN</h6>
@@ -277,49 +291,85 @@
 
             </div>
 
-            <!-- Pie Chart -->
-            <!-- Marketing -->
-            <div class="card-magenta col-xl-4 col-lg-8 ml-3">
-                <div class="p-3 mb-2">
-                    <div class="py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 pl-3 font-weight-bold text-white">TARGET MARKETING</h6>
+            <div class="col-xl-8 col-lg-7 mb-4">
+                <div class="card">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h5 class="m-0 font-weight-bold text-primary">Pemberitahuan</h5>
+                        <a class="m-0 float-right btn btn-danger btn-sm" href="/pemberitahuan">Lihat semua <i
+                                class="fas fa-chevron-right"></i></a>
                     </div>
-                    <div class="chart-area">
-                        <canvas id="myPieChart1"></canvas> <!-- Untuk Pie Chart -->
-                    </div>
-                    <!-- Row untuk Baru Terbayar dan Total Tagihan -->
-                    <div class="mt-3 ml-2 d-flex justify-content-between">
-                        <!-- Baru Terbayar -->
-                        <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
-                            style="width: 48%; margin-right: 10px;">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">Tercapai</h6>
-                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                {{ number_format($hasil_target) }}
-                            </div>
-                        </div>
-                        <!--sisa tagihan-->
-                        <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center mr-2"
-                            style="width: 48%;">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa</h6>
-                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                {{ number_format($sisa_target) }}
-                            </div>
-                        </div>
-                        <!-- Total Tagihan -->
-                        <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
-                            style="width: 48%;">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">Jumlah Target</h6>
-                            <div class="text-white h5 mb-0 font-weight-bold pl-3">
-                                {{ number_format($jumlah_target) }}
-                            </div>
-                        </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Pesan</th>
+                                <th>Tanggal</th>
 
-                    </div>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($pemberitahuan as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->pesan }}</td>
+                                    <td>{{ $item->updated_at }}</td>
 
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center">Tidak ada pemberitahuan.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+
+                    <div class="card-footer"></div>
                 </div>
-
             </div>
+            <div class="col-xl-4 col-lg-5 mt-4 ">
+                <div class="card">
+                    <div class="card-header bg-primary d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-light">Target Marketing</h6>
+                    </div>
+                    <div class=" ">
 
+                        <div class="chart-area">
+                            <canvas id="myPieChart1"></canvas> <!-- Untuk Pie Chart -->
+                        </div>
+                        <!-- Row untuk Baru Terbayar dan Total Tagihan -->
+                        <div class="mt-3 ml-2 d-flex justify-content-between">
+                            <!-- Baru Terbayar -->
+                            <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
+                                style="width: 48%; margin-right: 10px;">
+                                <h6 class="m-0 pl-3 font-weight-bold text-white">Tercapai</h6>
+                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                    {{ number_format($hasil_target) }}
+                                </div>
+                            </div>
+                            <!--sisa tagihan-->
+                            <div class="bg-danger py-3 d-flex flex-column align-items-start justify-content-center mr-2"
+                                style="width: 48%;">
+                                <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa</h6>
+                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                    {{ number_format($sisa_target) }}
+                                </div>
+                            </div>
+                            <!-- Total Tagihan -->
+                            <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
+                                style="width: 48%;">
+                                <h6 class="m-0 pl-3 font-weight-bold text-white">Jumlah Target</h6>
+                                <div class="text-white h5 mb-0 font-weight-bold pl-3">
+                                    {{ number_format($jumlah_target) }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
 
 
 

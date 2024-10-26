@@ -172,7 +172,7 @@ class MessageController extends Controller
                     };
 
                     $message = "Assalamualaikum selamat siang. \n";
-                    $message .= "Bapak / ibu {$pelanggan->nama_plg} kami dari net net, untuk menghindari isolir pembayaran bulanan \n";
+                    $message .= "Bapak / ibu kami dari net net, untuk menghindari isolir pembayaran bulanan \n";
                     $message .= "nya bisa di bayar hari ini?\n";
                     $message .= "Bisa lewat transfer atau dana .🙏🏻\n";
 

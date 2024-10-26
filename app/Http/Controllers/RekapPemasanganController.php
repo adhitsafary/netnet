@@ -34,7 +34,7 @@ class RekapPemasanganController extends Controller
     }
 
 
-    public function index(Request $request)
+    public function index1(Request $request)
     {
         $query = RekapPemasanganModel::query();
 

@@ -5,7 +5,7 @@
         <!-- Form Filter dan Pencarian -->
         <div class="row align-items-center">
             <table class="table table-bordered mt-2">
-                <thead>
+                <thead class="custom-cell head">
                     <tr>
                         <th>Total Sudah Bayar</th>
                         <th>Total Belum Bayar</th>
@@ -75,10 +75,15 @@
                 .custom-cell {
                     padding: 10px;
                     text-align: center;
-                    font-size: 1.2em;
+                    font-size: 1.0em;
                     font-weight: bold;
                     cursor: pointer;
                     color: white;
+                }
+
+                .custom-cell.head {
+                    background: #530096;
+                    /* Biru */
                 }
 
                 .custom-cell.info {
@@ -515,10 +520,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                                                                : 'Belum Ada pembayaran' }}
-                                                                                                                                                        </td> -->
+                                                                                                                                                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                                                                                                ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                                                                                                : 'Belum Ada pembayaran' }}
+                                                                                                                                                                        </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran

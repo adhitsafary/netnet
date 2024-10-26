@@ -443,20 +443,77 @@ class PerbaikanController extends Controller
         }
     }
 
-    public function rekapTeknisi(Request $request)
+    public function rekapTeknisi1(Request $request)
     {
+        $query = Perbaikan::query();
         $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
         $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
 
-        $rekap = Perbaikan::selectRaw('teknisi, COUNT(*) as total')
-            ->whereBetween('created_at', [$startDate, $endDate])
+        // Filter tanggal
+        $query->whereBetween('created_at', [$startDate, $endDate]);
+
+        // Pencarian berdasarkan berbagai kolom
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('teknisi', 'like', "%{$search}%");
+            });
+        }
+
+        // Ambil data rekap teknisi dan total perbaikan
+        $rekap = $query->selectRaw('teknisi, COUNT(*) as total')
             ->groupBy('teknisi')
             ->get();
 
         $totalPerbaikan = $rekap->sum('total');
 
-        return view('perbaikan.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate'));
+        // Ambil semua data hasil filter untuk ditampilkan di tabel detail
+        $perbaikan = $query->get();
+
+        return view('perbaikan.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate', 'perbaikan'));
     }
+
+    public function rekapTeknisi(Request $request)
+    {
+        $perbaikan = Perbaikan::all();
+        $query = Perbaikan::query();
+        $startDate = $request->input('start_date') ? Carbon::parse($request->input('start_date'))->startOfDay() : Carbon::now()->startOfMonth();
+        $endDate = $request->input('end_date') ? Carbon::parse($request->input('end_date'))->endOfDay() : Carbon::now()->endOfMonth();
+
+        // Filter tanggal
+        $perbaikan->whereBetween('created_at', [$startDate, $endDate]);
+
+        // Pencarian berdasarkan berbagai kolom
+        $search = $request->input('search');
+        if ($search) {
+            $perbaikan->where(function ($perbaikan) use ($search) {
+                $perbaikan->where('id_plg', $search)
+                    ->orWhere('nama_plg', 'like', "%{$search}%")
+                    ->orWhere('no_telepon_plg', 'like', "%{$search}%")
+                    ->orWhere('status', 'like', "%{$search}%")
+                    ->orWhere('alamat_plg', 'like', "%{$search}%")
+                    ->orWhere('teknisi', 'like', "%{$search}%");
+            });
+        }
+
+        // Ambil data rekap teknisi dan total perbaikan
+        $rekap = $query->selectRaw('teknisi, COUNT(*) as total')
+            ->groupBy('teknisi')
+            ->get();
+
+        $totalPerbaikan = $rekap->sum('total');
+
+        // Ambil semua data hasil filter untuk ditampilkan di tabel detail
+
+        return view('perbaikan.rekap_teknisi', compact('rekap', 'totalPerbaikan', 'startDate', 'endDate', 'perbaikan'));
+    }
+
+
 
     public function printRekapTeknisi(Request $request)
     {

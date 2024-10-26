@@ -1,10 +1,10 @@
-@extends('superadmin.layout_superadmin')
+@extends($layout)
 
 @section('konten')
 <div class="container">
     <h4 class="font font-weight-bold">Input User Baru</h4>
 
-    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data"> {{-- Tambahkan enctype --}}
+    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="name">Nama:</label>
@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="foto">Foto:</label>
-            <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" required> {{-- Input untuk foto --}}
+            <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>

@@ -24,7 +24,7 @@
                                 <strong>No Telepon :</strong> {{ $karyawan->no_telepon }}
                             </li>
                             <li class="list-group-item">
-                                <strong>Gaji :</strong>{{ number_format($karyawan->gaji, 0, ',', '.') }}
+                                <strong>Gaji : </strong>{{ number_format($karyawan->gaji, 0, ',', '.') }}
                             </li>
                         </ul>
                     </div>
@@ -82,10 +82,13 @@
                             <tr>
                                 <td>{{ number_format($karyawan->gaji, 0, ',', '.') }}</td>
                                 <td style="color: darkred" class="font font-weight-bold"> {{ number_format($totalKasbon, 0, ',', '.') }}</td>
-                                <td> {{ number_format($total, 0, ',', '.') }}</td>
+                                <td> {{ number_format($$karyawan->gaji - $totalKasbon, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>
+
+                    
+
 
             </div>
             <div class="card-footer text-right">

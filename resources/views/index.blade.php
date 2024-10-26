@@ -294,7 +294,7 @@
             <div class="col-xl-8 col-lg-7 mb-4">
                 <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">Pemberitahuan</h6>
+                        <h5 class="m-0 font-weight-bold text-primary">Pemberitahuan</h5>
                         <a class="m-0 float-right btn btn-danger btn-sm" href="/pemberitahuan">Lihat semua <i
                                 class="fas fa-chevron-right"></i></a>
                     </div>
@@ -334,9 +334,7 @@
                         <h6 class="m-0 font-weight-bold text-light">Target Marketing</h6>
                     </div>
                     <div class=" ">
-                        <div class=" d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">TARGET MARKETING</h6>
-                        </div>
+
                         <div class="chart-area">
                             <canvas id="myPieChart1"></canvas> <!-- Untuk Pie Chart -->
                         </div>

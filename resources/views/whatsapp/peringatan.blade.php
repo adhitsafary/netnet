@@ -4,7 +4,7 @@
     <div class="ml-5 mr-5 mb-5">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
-                <h4>Kirim Pesan WhatsApp</h4>
+                <h4>Kirim Pesan WhatsApp Reminder</h4>
             </div>
             <div class="card-body">
 

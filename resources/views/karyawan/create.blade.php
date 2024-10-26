@@ -23,9 +23,13 @@
             <input type="date" name="mulai_kerja" class="form-control mt-2">
             <label for="">Keterangan</label>
             <input type="text" name="keterangan" class="form-control mt-2"> <br>
+            <div class="form-group">
+                <label for="foto">Foto:</label>
+                <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*" required>
+            </div>
+
 
             <button class="btn btn-primary btn-sm">Simpan</button>
         </form>
     </div>
-
 @endsection

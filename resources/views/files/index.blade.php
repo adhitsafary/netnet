@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="container">
-        <h1 class="my-4">NDG Drive</h1>
+        <h1 class="my-4">NDG Drive Storage</h1>
 
         @if (session('success'))
             <div class="alert alert-success">

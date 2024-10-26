@@ -20,7 +20,7 @@ class UserController extends Controller
         ]);
 
         // Simpan foto
-        $path = $request->file('foto')->store('public/foto_users');
+        $path = $request->file('foto')->store('foto_users', 'public');
 
         // Simpan data pengguna baru
         User::create([
@@ -33,8 +33,6 @@ class UserController extends Controller
 
         return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan.');
     }
-
-
 
 
     // Menampilkan form input user baru
@@ -50,7 +48,6 @@ class UserController extends Controller
     {
         $users = User::whereNotIn('name', ['devine'])->get();
 
-
         return view('users.index', compact('users'));
     }
 
@@ -61,17 +58,16 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    // Memperbarui data user
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
 
-        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'role' => 'required|in:teknisi,admin,superadmin',
             'password' => 'nullable|string|min:6',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi foto baru
         ]);
 
         // Update data user
@@ -79,15 +75,22 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role = $request->role;
 
-        // Jika ada password baru, maka password diperbarui
+        // Update password jika ada
         if ($request->filled('password')) {
             $user->password = Hash::make($request->password);
+        }
+
+        // Update foto jika ada foto baru
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('foto_users', 'public');
+            $user->foto = $path;
         }
 
         $user->save();
 
         return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
+
 
     // Menghapus data user
     public function destroy($id)

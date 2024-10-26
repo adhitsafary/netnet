@@ -8,5 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class KaryawanModel extends Model
 {
     use HasFactory;
-    protected $table ="karyawan";
+
+    protected $table = "karyawan";
+
+    // Menentukan kolom-kolom yang dapat diisi
+    protected $fillable = [
+        'nama',
+        'ktp',
+        'alamat',
+        'no_telepon',
+        'posisi',
+        'mulai_kerja',
+        'keterangan',
+        'foto',
+        'gaji',
+        'tgl_gajihan',
+    ];
+
+    // Jika kamu ingin menggunakan timestamps otomatis
+    public $timestamps = true;
+
+    // Jika ingin menonaktifkan timestamps otomatis
+    // public $timestamps = false;s
 }

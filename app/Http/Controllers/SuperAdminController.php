@@ -11,6 +11,7 @@ use App\Models\Pelanggan;
 use App\Models\Pelangganof;
 use App\Models\PemasukanModel;
 use App\Models\PembayaranPelanggan;
+use App\Models\Pemberitahuan;
 use App\Models\PengeluaranModel;
 use App\Models\Perbaikan;
 use App\Models\RekapPemasanganModel;
@@ -24,11 +25,14 @@ use Illuminate\Support\Facades\Log;
 class SuperAdminController extends Controller
 {
 
-    public function home1(Request $request)
+    public function home(Request $request)
     {
         // Ambil data pelanggan dan pelanggan off
         $pelanggan = Pelanggan::all();
         $pelangganof = Pelangganof::all();
+        $perbaikanProses = Perbaikan::where('status', 'Proses')->get();
+
+        $pemberitahuan = Pemberitahuan::all();
 
         // Hitung total pendapatan bulanan
         $totalPendapatanBulanan = $pelanggan->sum('harga_paket');
@@ -162,6 +166,7 @@ class SuperAdminController extends Controller
             ->sum('jumlah_pembayaran'); // Pastikan 'jumlah_pembayaran' adalah kolom yang menyimpan jumlah pembayaran
 
 
+
         //AMBIL TANGGAL TAGIH * JUMLAH PEMBAYARAN USER
         $todayDay = Carbon::today()->day;
         // Ambil semua pelanggan yang memiliki tgl_tagih_plg sama dengan hari ini (angka)
@@ -192,6 +197,16 @@ class SuperAdminController extends Controller
         $labels = [];
         $totalUsers = [];
         $totalPembayaran = [];
+
+
+        $target = Target::where('nama_target', 'marketing')->first(['jumlah_target', 'sisa_target', 'hari_tersisa']);
+
+        $jumlah_target = $target->jumlah_target;
+        $sisa_target = $target->sisa_target;
+        $hari_tersisa = $target->hari_tersisa;
+        $hasil_target = $jumlah_target - $sisa_target;
+
+
 
         foreach ($pembayaranData as $data) {
             $labels[] = $data->tanggal; // Menyimpan tanggal untuk label sumbu X
@@ -249,6 +264,14 @@ class SuperAdminController extends Controller
             //pembayaran hari ini total
             'total_user_bayar',
             'total_jml_user',
+            //filter lingkaran baru
+            'sisa_target',
+            'jumlah_target',
+            'hari_tersisa',
+            'hasil_target',
+            //runing text
+            'perbaikanProses',
+            'pemberitahuan',
 
 
 
@@ -256,7 +279,7 @@ class SuperAdminController extends Controller
         ));
     }
 
-    public function home(Request $request)
+    public function home1(Request $request)
     {
         // Ambil data pelanggan dan pelanggan off
         $pelanggan = Pelanggan::all();

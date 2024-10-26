@@ -17,6 +17,7 @@
             <thead class="table table-primary font-weight-bold" style="color: black;">
                 <tr>
                     <th>No</th>
+                    <th>Foto</th>
                     <th>Nama</th>
                     <th>KTP</th>
                     <th>Alamat</th>
@@ -36,15 +37,19 @@
                 @forelse ($karyawan as $no => $item)
                     <tr>
                         <td>{{ $no + 1 }}</td>
+                        <td>
+                            <img src="{{ asset($item->foto) }}" alt="Foto Karyawan" style="width: 50px; height: 50px;">
+                        </td>
+
                         <td>{{ $item->nama }}</td>
-                        <td>{{ $item->ktp}}</td>
+                        <td>{{ $item->ktp }}</td>
                         <td>{{ $item->alamat }}</td>
                         <td>{{ $item->no_telepon }}</td>
                         <td>{{ $item->posisi }}</td>
                         <td>{{ $item->mulai_kerja }}</td>
                         <td>{{ $item->gaji }}</td>
                         <td>{{ $item->tgl_gajihan }}</td>
-                        <td>{{ $item->posisi}}</td>
+                        <td>{{ $item->posisi }}</td>
 
                         <td>
                             <a href="{{ route('karyawan.detail', $item->id) }}" class="btn btn-warning btn-sm">Detail
