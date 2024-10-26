@@ -2302,6 +2302,23 @@ class PelangganController extends Controller
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
+    public function aktifkanPSB(Request $request)
+    {
+
+
+        // Ambil data pelanggan berdasarkan id
+        $pelanggan = Pelanggan::findOrFail($request->id);
+
+        // Update status pembayaran pelanggan menjadi 'sudah bayar'
+        $pelanggan->status_pembayaran = 'Belum Bayar';
+        $pelanggan->save();
+
+        // Redirect ke halaman history pembayaran dengan pesan sukses
+        return redirect()->route('pelanggan.psb', $pelanggan->id)
+            ->with('success', 'Pelanggann Baru Pasang berhasil diaktifkan ' . $pelanggan->nama_plg . '.');
+    }
+
+
 
 
     public function historypembayaran($id_plg)
@@ -2961,7 +2978,7 @@ class PelangganController extends Controller
         if ($pelanggan) {
             try {
                 // Pastikan tanggal tagih diubah ke format yang sesuai jika perlu
-               // $tglTagih = Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('Y-m-d');
+                // $tglTagih = Carbon::createFromFormat('d/m/Y', $pelanggan->aktivasi_plg)->format('Y-m-d');
 
                 // Masukkan data ke tabel pelanggan
                 DB::table('plg_off')->insert([

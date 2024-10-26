@@ -103,6 +103,9 @@ Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->
 //===========ini untuk pembayaran pelanggan sendiri sendiri =====================
 Route::post('isolir/{id}/reactivate', [IsolirController::class, 'reactivatePelanggan'])->name('isolir.bayar');
 
+//Aktifkan
+Route::post('pelanggan/{id}/aktifkanPSB', [PelangganController::class, 'aktifkanPSB'])->name('pelanggan.aktifkanPSB');
+
 Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
 //Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');

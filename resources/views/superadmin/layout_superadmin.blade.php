@@ -99,7 +99,7 @@
                     data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
                     <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">BOT Whatsapp</span>
+                    <span class=" font-weight-bold">Riwayat Pemasangan</span>
                 </a>
                 <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
                     data-parent="#accordionSidebar">
@@ -218,7 +218,7 @@
                     data-target="#collapseBootstrap19" aria-expanded="true" aria-controls="collapseBootstrap19">
                     <img src="{{ asset('asset/img/wa.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Peringatan Whatsapp</span>
+                    <span class=" font-weight-bold">BOT Whatsapp</span>
                 </a>
                 <div id="collapseBootstrap19" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
