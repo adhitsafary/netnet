@@ -5,7 +5,7 @@
         <!-- Form Filter dan Pencarian -->
         <div class="row align-items-center">
             <table class="table table-bordered mt-2">
-                <thead>
+                <thead class="custom-cell head">
                     <tr>
                         <th>Total Sudah Bayar</th>
                         <th>Total Belum Bayar</th>
@@ -56,14 +56,14 @@
                         </td>
                         <td class="custom-cell primary-red"
                             onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
-                            Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
-                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                            Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
+                            {{ number_format($sisaUser, 0, ',', '.') }}
                         </td>
 
                         <td class="custom-cell primary-green"
                             onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
-                            Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
-                            {{ number_format($sisaUser, 0, ',', '.') }}
+                            Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
+                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
                         </td>
 
 
@@ -75,10 +75,15 @@
                 .custom-cell {
                     padding: 10px;
                     text-align: center;
-                    font-size: 1.2em;
+                    font-size: 1.0em;
                     font-weight: bold;
                     cursor: pointer;
                     color: white;
+                }
+
+                .custom-cell.head {
+                    background: #530096;
+                    /* Biru */
                 }
 
                 .custom-cell.info {

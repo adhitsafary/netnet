@@ -56,14 +56,14 @@
                         </td>
                         <td class="custom-cell primary-red"
                             onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
-                            Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
-                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
+                            Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
+                            {{ number_format($sisaUser, 0, ',', '.') }}
                         </td>
 
                         <td class="custom-cell primary-green"
                             onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
-                            Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
-                            {{ number_format($sisaUser, 0, ',', '.') }}
+                            Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
+                            {{ number_format($totalPelangganBayar, 0, ',', '.') }}
                         </td>
 
 
