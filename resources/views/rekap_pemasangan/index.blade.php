@@ -3,14 +3,21 @@
 @section('konten')
     <div class="  pl-5 pr-5 mb-4">
         <!-- Form Filter dan Pencarian -->
-        <form action="{{ route('rekap_pemasangan.index') }}" method="GET" class="form-inline mb-4 ">
-            <div class="input-group">
+        <form action="{{ route('rekap_pemasangan.index') }}" method="GET" class="form-inline mb-4">
+            <div class="input-group mr-2">
                 <input type="text" name="search" id="search" class="form-control" value="{{ request('search') }}"
                     placeholder="Pencarian">
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Cari</button>
-                </div>
+
             </div>
+            <div class="input-group mr-2">
+                <input type="date" name="created_at_dari" id="created_at_dari" class="form-control"
+                    value="{{ request('created_at_dari') }}" placeholder="Dari Tanggal">
+            </div>
+            <div class="input-group mr-2">
+                <input type="date" name="created_at_sampai" id="created_at_sampai" class="form-control"
+                    value="{{ request('created_at_sampai') }}" placeholder="Sampai Tanggal">
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
         <a href="/rekap_pemasangan/create" class="btn btn-success">Buat Rekap pemasangan</a>

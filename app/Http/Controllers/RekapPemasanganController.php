@@ -34,7 +34,7 @@ class RekapPemasanganController extends Controller
     }
 
 
-    public function index1(Request $request)
+    public function index(Request $request)
     {
         $query = RekapPemasanganModel::query();
 
@@ -45,6 +45,15 @@ class RekapPemasanganController extends Controller
         $tgl_pengajuan = $request->input('tgl_pengajuan');
         $tgl_aktivasi = $request->input('tgl_aktivasi');
         $registrasi = $request->input('registrasi'); // Filter jumlah pembayaran
+
+        // Filter tanggal created_at
+        if ($request->filled('created_at_dari')) {
+            $query->whereDate('created_at', '>=', $request->created_at_dari);
+        }
+
+        if ($request->filled('created_at_sampai')) {
+            $query->whereDate('created_at', '<=', $request->created_at_sampai);
+        }
 
         // Filter berdasarkan tanggal tagih
         if ($tgl_pengajuan) {

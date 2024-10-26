@@ -9,31 +9,17 @@ use Illuminate\Support\Facades\Storage;
 class FileController extends Controller
 {
 
+
     public function index(Request $request)
     {
-        // Cek apakah ada permintaan untuk membuat folder baru
-        if ($request->has('new_folder_name')) {
-            $newFolderName = $request->input('new_folder_name');
-            $folderPath = 'custom_folder/' . $newFolderName;
-
-            // Membuat folder baru jika belum ada
-            if (!Storage::exists($folderPath)) {
-                Storage::makeDirectory($folderPath);
-                return redirect()->back()->with('success', 'Folder baru berhasil dibuat: ' . $newFolderName);
-            } else {
-                return redirect()->back()->with('error', 'Folder dengan nama yang sama sudah ada.');
-            }
-        }
-
-        // Inisialisasi query untuk mendapatkan file
         $query = File::query();
 
-        // Tambahkan filter berdasarkan kolom input dari request
+        // Filter berdasarkan kolom input dari request
+        $category = $request->get('category');
         $file_name = $request->input('file_name');
         $file_size = $request->input('file_size');
         $created_at = $request->input('created_at');
         $updated_at = $request->input('updated_at');
-        $category = $request->get('category');
 
         // Filter berdasarkan file_name
         if ($file_name) {
@@ -58,24 +44,20 @@ class FileController extends Controller
             $query->where('category', $category);
         }
 
-        // Eksekusi query untuk mendapatkan daftar file
+        // Filter pencarian umum
+        $search = $request->input('search');
+        if ($search) {
+            $query->where(function ($query) use ($search) {
+                $query->where('file_name', 'like', "%{$search}%");
+            });
+        }
+
+        // Eksekusi query dengan filter
         $files = $query->get();
 
-        // Ambil daftar folder dari direktori custom_folder
-        $folders = collect(Storage::directories('custom_folder'))->map(function ($folder) {
-            return (object)[
-                'file_name' => basename($folder),
-                'file_size' => null,
-                'is_folder' => true,
-                'path' => $folder // Tambahkan ini
-            ];
-        });
-
-        // Gabungkan folder dan file ke dalam satu koleksi
-        $items = $folders->merge($files);
-
-        return view('files.index', compact('items'));
+        return view('files.index', compact('files'));
     }
+
 
 
 

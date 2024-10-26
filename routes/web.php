@@ -347,14 +347,14 @@ Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('targe
 
 
 //file Storage
-//Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
+Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
 Route::get('/file/create', [FileController::class, 'create'])->name('file.create');
 Route::post('/file/store', [FileController::class, 'store'])->name('file.store');
 Route::get('/file/edit/{id}', [FileController::class, 'edit'])->name('file.edit');
 Route::post('/file/update/{id}', [FileController::class, 'update'])->name('file.update');
 Route::post('/file/hapus/{id}', [FileController::class, 'destroy'])->name('file.destroy');
 Route::get('/file/download/{id}', [FileController::class, 'download'])->name('file.download');
-Route::get('/file/{path?}', [FileController::class, 'index'])->name('file.index')->where('path', '.*');
+//Route::get('/file/{path?}', [FileController::class, 'index'])->name('file.index')->where('path', '.*');
 
 //Pemberitahuan
 Route::get('/pemberitahuan', [PemberitahuanController::class, 'index'])->name('pemberitahuan.index');
