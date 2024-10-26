@@ -2,23 +2,7 @@
 
 @section('konten')
     <div class=" p-5 mt-4">
-        <div class="row mb-4">
 
-            <div class="col-md-3 text-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Ekspor
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="{{ route('pembayaran.export', ['format' => 'pdf', 'date_start' => request('date_start'), 'date_end' => request('date_end')]) }}"
-                            class="dropdown-item">PDF</a>
-                        <a href="{{ route('pembayaran.export', ['format' => 'excel', 'date_start' => request('date_start'), 'date_end' => request('date_end')]) }}"
-                            class="dropdown-item">Excel</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container mt-4 ">
 
             <!-- Informasi Total Pembayaran dan Total Pelanggan -->
@@ -38,7 +22,9 @@
         </div>
 
 
-        <th class="mt-2">
+
+
+        <th class="mt-4 mb-4">
             <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center">
                 <input type="text" name="search" id="search" class="form-control me-2"
                     value="{{ request('search') }}" placeholder="Pencarian">
@@ -71,19 +57,47 @@
                     <option value="">Harga</option>
                     @foreach ([50000, 75000, 100000, 105000, 115000, 120000, 125000, 150000, 165000, 175000, 205000, 250000, 265000, 305000, 750000] as $harga)
                         <option value="{{ $harga }}"
-                            {{ request('jumlah_pembayaran') == $harga ? 'selected' : '' }}>
+                            {{ request('harga_paket') == $harga ? 'selected' : '' }}>
                             {{ number_format($harga, 0, ',', '.') }}
                         </option>
                     @endforeach
-                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>vcr</option>
+                    <option value="vcr" {{ request('harga_paket') == 'vcr' ? 'selected' : '' }}>vcr</option>
                 </select>
 
-                <input type="date" name="created_at" id="created_at" class="form-control me-2"
-                    value="{{ request('created_at') }}">
-
                 <button type="submit" class="btn btn-primary mb-2">Filter</button>
+                <div class="row mb-4">
+                    <div class="col-md-3 text-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                Ekspor
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="{{ route('pembayaran.export', [
+                                    'format' => 'pdf',
+                                    'date_start' => request('date_start'),
+                                    'date_end' => request('date_end'),
+                                    'tgl_tagih_plg' => request('tgl_tagih_plg'),
+                                    'paket_plg' => request('paket_plg'),
+                                    'harga_paket' => request('harga_paket'),
+                                    'search' => request('search')
+                                ]) }}" class="dropdown-item">PDF</a>
+                                <a href="{{ route('pembayaran.export', [
+                                    'format' => 'excel',
+                                    'date_start' => request('date_start'),
+                                    'date_end' => request('date_end'),
+                                    'tgl_tagih_plg' => request('tgl_tagih_plg'),
+                                    'paket_plg' => request('paket_plg'),
+                                    'harga_paket' => request('harga_paket'),
+                                    'search' => request('search')
+                                ]) }}" class="dropdown-item">Excel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </th>
+
 
 
 

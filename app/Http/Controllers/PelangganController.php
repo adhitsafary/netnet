@@ -2410,7 +2410,7 @@ class PelangganController extends Controller
 
 
 
-    public function export(Request $request, $format)
+    public function export1(Request $request, $format)
     {
         // Ambil filter dari request
         $tgl_tagih_plg = $request->input('tgl_tagih_plg');
@@ -2491,6 +2491,43 @@ class PelangganController extends Controller
             }
         } else {
             return redirect()->route('pelanggan.isolir')->with('error', 'Pelanggan tidak ditemukan.');
+        }
+    }
+
+
+    public function export(Request $request, $format)
+    {
+        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $status_pembayaran = $request->input('status_pembayaran');
+
+        // Membuat query awal untuk pelanggan dengan status tertentu
+        $query = Pelanggan::whereIn('status_pembayaran', ['Isolir', 'Block', 'Unblockk']);
+
+        // Menambahkan filter berdasarkan input yang diterima
+        $query = $query->when($tgl_tagih_plg, function ($query) use ($tgl_tagih_plg) {
+            return $query->where('tgl_tagih_plg', $tgl_tagih_plg);
+        })
+            ->when($paket_plg, function ($query) use ($paket_plg) {
+                return $query->where('paket_plg', $paket_plg);
+            })
+            ->when($harga_paket, function ($query) use ($harga_paket) {
+                return $query->where('jumlah_pembayaran', $harga_paket);
+            })
+            ->when($status_pembayaran, function ($query) use ($status_pembayaran) {
+                return $query->where('status_pembayaran', $status_pembayaran);
+            });
+
+        // Mendapatkan hasil query
+        $pembayaran = $query->get();
+
+        // Menghasilkan file sesuai dengan format yang diminta
+        if ($format === 'pdf') {
+            $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
+            return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new PelangganController($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
         }
     }
 }

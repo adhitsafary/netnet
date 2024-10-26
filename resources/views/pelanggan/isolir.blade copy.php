@@ -193,31 +193,20 @@
 
         <div class="">
             <th>
-                <form action="{{ route('pelanggan.isolir') }}" method="GET" class="d-flex align-items-center">
-                    <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih" class="form-control me-2">
-                    <input type="text" name="paket_plg" placeholder="Paket" class="form-control me-2">
-                    <input type="number" name="harga_paket" placeholder="Harga Paket" class="form-control me-2">
-
-
-
-                    <button type="submit" class="btn btn-primary me-2 ml-3 mr-2">Filter</button>
-
-                    <!-- Tombol Ekspor -->
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Ekspor
-                        </button>
-                        <div class="dropdown-menu">
-                            <a href="{{ route('pelanggan.export', ['format' => 'pdf', 'tgl_tagih_plg' => request('tgl_tagih_plg'), 'paket_plg' => request('paket_plg'), 'harga_paket' => request('harga_paket'), 'status_pembayaran' => request('status_pembayaran')]) }}"
-                                class="dropdown-item">PDF</a>
-                            <a href="{{ route('pelanggan.export', ['format' => 'excel', 'tgl_tagih_plg' => request('tgl_tagih_plg'), 'paket_plg' => request('paket_plg'), 'harga_paket' => request('harga_paket'), 'status_pembayaran' => request('status_pembayaran')]) }}"
-                                class="dropdown-item">Excel</a>
-                        </div>
-                    </div>
+                <form action="{{ route('pelanggan.isolir') }}" method="GET">
+                    <input type="text" name="tgl_tagih_plg" placeholder="Tanggal Tagih">
+                    <input type="text" name="paket_plg" placeholder="Paket">
+                    <input type="number" name="harga_paket" placeholder="Harga Paket">
+                    <select name="status_pembayaran">
+                        <option value="">Semua Status</option>
+                        <option value="sudah_bayar">Sudah Bayar</option>
+                        <option value="belum_bayar">Belum Bayar</option>
+                    </select>
+                    <button type="submit">Filter</button>
                 </form>
-            </th>
 
+
+            </th>
 
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">
@@ -442,10 +431,10 @@
 
                             <td>{{ $item->keterangan_plg }}</td>
                             <!--  <td>
-                                                                                                                        {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                                                                                                            ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
-                                                                                                                            : 'Belum Ada pembayaran' }}
-                                                                                                                    </td> -->
+                                                                                                                    {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                                                                                                                        ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->settings(['formatFunction' => 'translatedFormat'])->translatedFormat('l, d F Y H:i:s')
+                                                                                                                        : 'Belum Ada pembayaran' }}
+                                                                                                                </td> -->
 
                             <td>
                                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
