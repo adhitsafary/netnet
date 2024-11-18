@@ -2,6 +2,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AutomatisPaymentController;
 use App\Http\Controllers\BroadcastController;
 use App\Http\Controllers\CobaController;
 use App\Http\Controllers\FileController;
@@ -113,7 +114,7 @@ Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historyp
 
 //index pembayaran semua user  atau global
 Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pembayaran.export');
-Route::get('/bayar-pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pelanggan.export');
+Route::get('/pelanggan/export/{format}', [PembayaranController::class, 'export'])->name('pelanggan.export');
 Route::post('/pembayaran/hapus/{id}', [PembayaranController::class, 'destroy'])->name('pembayaran.destroy');
 
 
@@ -366,3 +367,6 @@ Route::post('/pemberitahuan/store', [PemberitahuanController::class, 'store'])->
 Route::get('/pemberitahuan/edit/{id}', [PemberitahuanController::class, 'edit'])->name('pemberitahuan.edit');
 Route::post('/pemberitahuan/update/{id}', [PemberitahuanController::class, 'update'])->name('pemberitahuan.update');
 Route::post('/pemberitahuan/hapus/{id}', [PemberitahuanController::class, 'destroy'])->name('pemberitahuan.destroy');
+
+//Automatis Bayar
+Route::get('/pelanggan/automatispayment', [AutomatisPaymentController::class, 'index'])->name('automatispayment.index');

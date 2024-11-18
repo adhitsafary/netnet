@@ -53,7 +53,7 @@
                         <a class="collapse-item" href="/pelanggan/psb/">PELANGGAN PSB</a>
                         <a class="collapse-item" href="/pelanggan/reactivasi/">PELANGGAN Reactivasi</a>
                         <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
-                        <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
+                        <a class="collapse-item" href="/pelanggan/automatispayment">Pelanggan Bayar sendiri</a>
                     </div>
                 </div>
             </li>

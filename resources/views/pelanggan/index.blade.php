@@ -297,7 +297,7 @@
 
 
             <table class="table table-bordered table-responsive " style="color: black;">
-                <thead class="table table-danger " style="color: black;">
+                <thead class="custom-cell danger" style="color: black;">
                     <tr class="font-weight-bold">
                         <th class="">No</th>
                         <th>ID</th>

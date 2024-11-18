@@ -27,13 +27,6 @@
         <div class="container">
 
 
-            @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-
             <table class="table table-bordered mt-3">
                 <thead>
                     <tr>
