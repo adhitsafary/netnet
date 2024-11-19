@@ -370,3 +370,5 @@ Route::post('/pemberitahuan/hapus/{id}', [PemberitahuanController::class, 'destr
 
 //Automatis Bayar
 Route::get('/pelanggan/automatispayment', [AutomatisPaymentController::class, 'index'])->name('automatispayment.index');
+Route::get('/pelanggan/{id}/payment', [AutomatisPaymentController::class, 'payment'])->name('pelanggan.payment');
+Route::post('/pelanggan/{id}/process-payment', [AutomatisPaymentController::class, 'processPayment'])->name('pelanggan.processPayment');

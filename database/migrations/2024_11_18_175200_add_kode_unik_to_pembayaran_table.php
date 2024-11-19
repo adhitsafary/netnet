@@ -9,12 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::table('pembayaran', function (Blueprint $table) {
-            //
+        Schema::table('bayar_pelanggan', function (Blueprint $table) {
+            $table->integer('kode_unik')->after('tanggal_pembayaran')->nullable();
         });
     }
+
 
     /**
      * Reverse the migrations.
