@@ -35,6 +35,23 @@
                     <span>Dashboard</span></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/pembayaran/mudah" data-toggle="collapse" data-target="#collapseBootstrap1000"
+                    aria-expanded="true" aria-controls="collapseBootstrap1000">
+                    <img src="{{ asset('asset/img/bayar_baru.png') }}" alt="Gambar Pelanggan"
+                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class="font-weight-bold " style="color: black">BAYAR</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="collapseBootstrap1000"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pembayaran/mudah">Bayar</a>
+                    
+                    </div>
+                </div>
+            </li>
+
+            
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"

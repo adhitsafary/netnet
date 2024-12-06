@@ -152,7 +152,7 @@ class PembayaranController extends Controller
 
         // Ambil hasil query
         $pembayaran = $query->paginate(100); // Ambil data yang telah difilter
-
+        $query->orderBy('created_at', 'desc');
         // Hitung total jumlah pembayaran yang telah difilter
         $totalJumlahPembayaran = $query->sum('jumlah_pembayaran');
 

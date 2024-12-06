@@ -17,6 +17,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PelangganOfController;
 use App\Http\Controllers\PemasukanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\PembayaranMudahController;
 use App\Http\Controllers\PemberitahuanController;
 use App\Http\Controllers\PengeluaranController;
 use App\Http\Controllers\PerbaikanController;
@@ -372,3 +373,6 @@ Route::post('/pemberitahuan/hapus/{id}', [PemberitahuanController::class, 'destr
 Route::get('/pelanggan/automatispayment', [AutomatisPaymentController::class, 'index'])->name('automatispayment.index');
 Route::get('/pelanggan/{id}/payment', [AutomatisPaymentController::class, 'payment'])->name('pelanggan.payment');
 Route::post('/pelanggan/{id}/process-payment', [AutomatisPaymentController::class, 'processPayment'])->name('pelanggan.processPayment');
+
+//Pemabayaran Mudah
+Route::get('/pembayaran/mudah', [PembayaranMudahController::class, 'index'])->name('pembayaran_mudah.index');

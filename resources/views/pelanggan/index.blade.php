@@ -156,6 +156,9 @@
             </style>
 
         </div>
+
+        <!-- End Form Filter dan pencarian -->
+         
         <div class="d-flex align-items-center justify-content-between mt-2">
             <form action="{{ route('pelanggan.index') }}" method="GET" class="form-inline d-flex" style="color: black;">
                 <div class="input-group" style="color: black;">

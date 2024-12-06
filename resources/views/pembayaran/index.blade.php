@@ -266,7 +266,7 @@
                         <td>{{ $item->alamat_plg }}</td>
                         <td>{{ $item->paket_plg }}</td>
                         <!-- ambil bulan saja dan convert ke text misal bulan 09 jadi september -->
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('F') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('F Y') }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->tgl_tagih_plg }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>

@@ -1775,7 +1775,7 @@ class PelangganController extends Controller
         $pelanggan->save();
 
         // Redirect ke halaman history pembayaran dengan pesan sukses
-        return redirect()->route('pelanggan.index', $pelanggan->id)
+        return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
