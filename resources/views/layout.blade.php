@@ -48,7 +48,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pembayaran/mudah">Bayar</a>
-                    
+                        <a class="collapse-item" href="/pembayaran/mudah/bayar_hp">Bayar Hp</a>
                     </div>
                 </div>
             </li>

@@ -1,22 +1,17 @@
+{{-- resources/views/pembayaran_piutang/index.blade.php --}}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pembayaran Piutang Hari Ini</title>
 </head>
 <body>
-<div class="mb-3">
-                                                    <label for="metodeTransaksi" class="form-label">Metode
-                                                        Transaksi</label>`
-                                                    <select class="form-select" id="metodeTransaksi"
-                                                        name="metode_transaksi" required>
-                                                        <option value="">Pilih metode</option>
-                                                        <option value="TF">TF</option>
-                                                        <option value="CASH">KANTOR</option>
 
-                                                    </select>
-                                                </div>
+    <h1>Total Pembayaran Piutang Hari Ini</h1>
+
+    <p><strong>Total Jumlah Pembayaran Piutang: Rp {{ number_format($totalPembayaran, 0, ',', '.') }}</strong></p>
+    <p><strong>Jumlah Pelanggan yang Membayar Piutang Hari Ini: {{ $jumlahPelanggan }}</strong></p>
 
 </body>
 </html>

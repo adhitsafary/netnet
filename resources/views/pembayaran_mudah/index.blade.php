@@ -14,7 +14,10 @@
                         <th>Total Tagihan Hari Ini</th>
                         <th>Tertagih</th>
                         <th>Sisa Tagihan</th>
-                
+                        <th>Filter Pembayaran</th>
+
+                        
+ 
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +40,12 @@
                             <a href="{{ route('pelanggan.belumbayar') }}"> Rp
                                 {{ number_format($totalTagihanTertagih, 0, ',', '.') }} User: {{ $totalUserTertagih }} </a>
                         </td>
+                        <td class="custom-cell danger">
+                            <a href="#"> Rp
+                                {{ number_format($totaljumlahpembayaranUntuk_filter, 0, ',', '.') }} User: {{ $totalPelangganUntuk_filter}} </a>
+                        </td>
+                       
+                       
 
                     </tr>
                 </tbody>
@@ -130,8 +139,6 @@
         <!-- End Form Filter dan Pencarian -->
 
 
-
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -140,8 +147,15 @@
 
         <form action="{{ route('pembayaran_mudah.index') }}" method="GET">
             <div class="form-group d-flex">
-                <input type="text" name="q" class="form-control me-2 mr-3" placeholder="Cari berdasarkan ID atau Nama"
+                <input type="text" name="q" class="form-control me-2 " placeholder="Cari berdasarkan ID atau Nama"
                     value="{{ $query ?? '' }}">
+
+                <select name="untuk_pembayaran" id="untuk_pembayaran" class="form-select me-2 ml-2  mr-2">
+                    <option value="">Piutang</option>
+                    <option value="piutang" {{ request('untuk_pembayaran') == 'piutang' ? 'selected' : '' }}>Piutang</option>
+                    <option value="tagihan" {{ request('untuk_pembayaran') == 'tagihan' ? 'selected' : '' }}>Tagihan</option>
+                    <option value="psb" {{ request('untuk_pembayaran') == 'psb' ? 'selected' : '' }}>PSB</option>
+                </select>
               <button type="submit" class="btn btn-primary w-50">Cari / Refresh</button>
 
             </div>
@@ -150,7 +164,7 @@
         
 
 
-        <div class="mt-4">
+    <div class="mt-4">
             @if (!$query_cari)
                 <p class="text-muted">Silakan masukkan ID atau Nama untuk mencari data pelanggan.</p>
 
@@ -159,31 +173,33 @@
         <table class="table table-bordered table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
-                    <th>No</th>
-                    <th>Nama Pelanggan</th>
-                    <th>Alamat</th>
-                    <th>Tanggal Tagih </th>
-                    <th>Paket</th>
-                    <th>Harga</th>
-                    <th>Metode Pembayaran</th>
-                    <th>Tanggal Pembayaran</th>
-                    <th>Admin</th>
-                    <th>Hapus</th>
+                    <th style="width: 1%; padding: 1px;">No</th>
+                    <th style="width: 1%; padding: 1px;">Nama Pelanggan</th>
+                    <th style="width: 1%; padding: 1px;">Alamat</th>
+                    <th style="width: 1%; padding: 1px;">Tanggal Tagih </th>
+                    <th style="width: 1%; padding: 1px;">Paket</th>
+                    <th style="width: 1%; padding: 1px;">Harga</th>
+                    <th style="width: 1%; padding: 1px;">Metode Pembayaran</th>
+                    <th style="width: 1%; padding: 1px;">Tanggal Pembayaran</th>
+                    <th style="width: 1%; padding: 1px;">Keterangan</th>
+                    <th style="width: 1%; padding: 1px;">Admin</th>
+                    <th style="width: 1%; padding: 1px;">Hapus</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($pembayaran as $no => $item)
-                    <tr class="font-weight-bold">
-                        <td>{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
-                        <td>{{ $item->nama_plg }}</td>
-                        <td>{{ $item->alamat_plg }}</td>
-                        <td>{{ $item->tgl_tagih_plg }}</td>
-                        <td>{{ $item->paket_plg }}</td>
-                        <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
-                        <td>{{ $item->metode_transaksi }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->admin_name }}</td>
-                        <td>
+                    <tr class="">
+                        <td  style="padding: 1px;">{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
+                        <td  style="padding: 1px;">{{ $item->nama_plg }}</td>
+                        <td  style="padding: 1px;">{{ $item->alamat_plg }}</td>
+                        <td  style="padding: 1px;">{{ $item->tgl_tagih_plg }}</td>
+                        <td  style="padding: 1px;">{{ $item->paket_plg }}</td>
+                        <td  style="padding: 1px;">{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
+                        <td  style="padding: 1px;">{{ $item->metode_transaksi }}</td>
+                        <td  style="padding: 1px;">{{ $item->created_at }}</td>
+                        <td  style="padding: 1px;">{{ $item->untuk_pembayaran }}</td>
+                        <td  style="padding: 1px;">{{ $item->admin_name }}</td>
+                        <td  style="padding: 1px;">
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
@@ -206,41 +222,39 @@
             @elseif($pelanggan->isEmpty())
                 <p class="text-muted">Tidak ditemukan hasil untuk "{{ $query_cari }}"</p>
             @else
-            <table class="table table-bordered table-responsive" style="color: black;">
-                    <thead class="table table-primary " style="color: black;">
-                        <tr>
-                            <th>No</th>
-                            <th>ID Pelanggan</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                    
-                            <th>Harga</th>
-                            <th>Tanggal Tagih</th>
-            
-                            <th>Status Pembayaran</th>
-                            <th>bayar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($pelanggan as $no => $item)
-                        <tr class="font-weight-bold">
-                                <td>{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
-                                <td>{{ $item->id_plg }}</td>
-                                <td>{{ $item->nama_plg }}</td>
-                                <td>{{ $item->alamat_plg }}</td>
-                        
-                                <td>{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
-                                <td>{{ $item->tgl_tagih_plg }}</td>
-                
-                                <td>
-                                {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
-                                    ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
-                                    : '-' }}
-                            </td>
-                               <td>
-                                <a href="#" class="btn btn-success btn-sm"
-                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-                            </td>
+
+            <table class="table table-bordered table-responsive" style="color: black; width: 100%; font-size: 0.9em; table-layout: fixed;">
+    <thead class="table table-primary" style="color: black;">
+        <tr>
+            <th style="width: 1%; padding: 1px;">No</th>
+            <th style="width: 1%; padding: 1px;">ID Pelanggan</th>
+            <th style="width: 1%; padding: 1px;">Nama</th>
+            <th style="width: 1%; padding: 1px;">Alamat</th>
+            <th style="width: 1%; padding: 1px;">Harga</th>
+            <th style="width: 1%; padding: 1px;">Tanggal Tagih</th>
+            <th style="width: 1%; padding: 1px;">Status Pembayaran</th>
+            <th style="width: 1%; padding: 1px;">Bayar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($pelanggan as $no => $item)
+        <tr>
+            <td style="padding: 1px;">{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
+            <td style="padding: 1px;">{{ $item->id_plg }}</td>
+            <td style="padding: 1px;">{{ $item->nama_plg }}</td>
+            <td style="padding: 1px;">{{ $item->alamat_plg }}</td>
+            <td style="padding: 1px;">{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
+            <td style="padding: 1px;">{{ $item->tgl_tagih_plg }}</td>
+            <td style="padding: 1px;">
+                {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                    ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
+                    : '-' }}
+            </td>
+            <td style="padding: 1px;">
+                <a href="#" class="btn btn-success btn-sm"
+                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+            </td>
+
 
                               <!-- Modal Bayar -->
                             <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
@@ -261,6 +275,7 @@
 
                                                 <div class="mb-3">
                                                     <label for="tanggal_pembayaran" class="form-label">Untuk Pembayaran
+                                                    <label for="tanggal_pembayaran" class="form-label">Untuk Pembayaran
                                                         Bulan</label>
                                                     <input type="month" class="form-select" id="tanggal_pembayaran"
                                                         name="tanggal_pembayaran" placeholder="Pilih bulan">
@@ -276,6 +291,18 @@
                                                         <option value="">Pilih metode</option>
                                                         <option value="TF">TF</option>
                                                         <option value="CASH">KANTOR</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="untuk_pembayaran" class="form-label">Status
+                                                        Pembayaran</label>
+                                                    <select class="form-select" id="untuk_pembayaran"
+                                                        name="untuk_pembayaran" required>
+                                                        <option value="">Pilih Pembayaran</option>
+                                                        <option value="tagihan">Tagihan </option>
+                                                        <option value="piutang">Piutang </option>
+                                                        <option value="PSB">PSB </option>
 
                                                     </select>
                                                 </div>
@@ -309,7 +336,7 @@
                     </tbody>
                 </table>
 
-                {{ $pelanggan->links() }}
+              
             @endif
         </div>
     </div>

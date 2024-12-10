@@ -1719,6 +1719,7 @@ class PelangganController extends Controller
         $request->validate([
             'id' => 'required|exists:pelanggan,id',
             'metode_transaksi' => 'required|string',
+            'untuk_pembayaran' => 'required|string',
             'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi
         ]);
 
@@ -1763,6 +1764,7 @@ class PelangganController extends Controller
             'paket_plg' => $pelanggan->paket_plg,
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
             'metode_transaksi' => $request->metode_transaksi,
+            'untuk_pembayaran' => $request->untuk_pembayaran,
             'keterangan_plg' => $request->keterangan_plg,
             'tanggal_pembayaran' => $tanggalPembayaran, // Simpan tanggal pembayaran
 
@@ -1778,6 +1780,78 @@ class PelangganController extends Controller
         return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
+
+    public function bayar2(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'id' => 'required|exists:pelanggan,id',
+            'metode_transaksi' => 'required|string',
+            'untuk_pembayaran' => 'required|string',
+            'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi
+        ]);
+
+        // Ambil data pelanggan berdasarkan id
+        $pelanggan = Pelanggan::findOrFail($request->id);
+
+        // Cek apakah admin memilih bulan pembayaran
+        if ($request->filled('tanggal_pembayaran')) {
+            // Jika ada tanggal dipilih, gunakan yang dipilih admin
+            $tanggalPembayaran = $request->tanggal_pembayaran . '-' . $pelanggan->tgl_tagih_plg;
+            $bulanPembayaran = $request->tanggal_pembayaran; // Simpan hanya Y-m (untuk pengecekan bulan)
+        } else {
+            // Jika tidak ada tanggal dipilih, gunakan bulan sekarang
+            $tanggalPembayaran = Carbon::now()->format('Y-m') . '-' . $pelanggan->tgl_tagih_plg;
+            $bulanPembayaran = Carbon::now()->format('Y-m'); // Simpan hanya Y-m (untuk pengecekan bulan)
+        }
+
+        // Cek apakah sudah ada pembayaran di bulan yang sama
+        $existingPayment = BayarPelanggan::where('pelanggan_id', $pelanggan->id)
+            ->where('tanggal_pembayaran', 'like', $bulanPembayaran . '%')
+            ->exists();
+
+        if ($existingPayment) {
+            // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
+            return redirect()->route('pelanggan.index', $pelanggan->id)
+                ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
+        }
+
+        // Ambil data admin yang login atau default ke 'Unknown Admin' jika tidak ada
+        $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
+
+        // Simpan data ke tabel bayar_pelanggan
+        BayarPelanggan::create([
+            'pelanggan_id' => $pelanggan->id,
+            'id_plg' => $pelanggan->id_plg ?? null,
+            'nama_plg' => $pelanggan->nama_plg,
+            'alamat_plg' => $pelanggan->alamat_plg,
+            'aktivasi_plg' => $pelanggan->aktivasi_plg,
+            'jumlah_pembayaran' => $pelanggan->harga_paket,
+            'no_telepon_plg' => $pelanggan->no_telepon_plg,
+            'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
+            'paket_plg' => $pelanggan->paket_plg,
+            'aktivasi_plg' => $pelanggan->aktivasi_plg,
+            'metode_transaksi' => $request->metode_transaksi,
+            'untuk_pembayaran' => $request->untuk_pembayaran,
+            'keterangan_plg' => $request->keterangan_plg,
+            'tanggal_pembayaran' => $tanggalPembayaran, // Simpan tanggal pembayaran
+
+            // Tambahkan nama admin yang melakukan pembayaran
+            'admin_name' => $adminName,
+        ]);
+
+        // Update status pembayaran pelanggan menjadi 'sudah bayar'
+        $pelanggan->status_pembayaran = 'sudah bayar';
+        $pelanggan->save();
+
+        // Redirect ke halaman history pembayaran dengan pesan sukses
+        return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
+            ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
+    }
+
+    
+
+
 
     public function aktifkanPSB(Request $request)
     {

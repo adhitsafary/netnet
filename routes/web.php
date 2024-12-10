@@ -109,6 +109,7 @@ Route::post('isolir/{id}/reactivate', [IsolirController::class, 'reactivatePelan
 Route::post('pelanggan/{id}/aktifkanPSB', [PelangganController::class, 'aktifkanPSB'])->name('pelanggan.aktifkanPSB');
 
 Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
+Route::post('pelanggan/{id}/bayar2', [PelangganController::class, 'bayar2'])->name('pelanggan.bayar2');
 //Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historypembayaran'])->name('isolir.historypembayaran');
@@ -376,3 +377,6 @@ Route::post('/pelanggan/{id}/process-payment', [AutomatisPaymentController::clas
 
 //Pemabayaran Mudah
 Route::get('/pembayaran/mudah', [PembayaranMudahController::class, 'index'])->name('pembayaran_mudah.index');
+
+Route::get('/pembayaran/mudah/coba', [PembayaranMudahController::class, 'coba'])->name('pembayaran_mudah.coba');
+Route::get('/pembayaran/mudah/bayar_hp', [PembayaranMudahController::class, 'bayar_hp'])->name('pembayaran_mudah.bayar_hp');

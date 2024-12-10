@@ -27,6 +27,7 @@ class BayarPelanggan extends Model
         'tgl_tagih_plg',
         'aktivasi_plg',
         'admin_name',
+        'untuk_pembayaran',
 
     ];
 

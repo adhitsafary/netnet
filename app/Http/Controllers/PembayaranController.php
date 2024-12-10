@@ -69,77 +69,86 @@ class PembayaranController extends Controller
 
 
     public function export(Request $request, $format)
-    {
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
+{
+    $date_start = $request->input('date_start');
+    $date_end = $request->input('date_end');
 
-        $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
-            return $query->whereBetween('created_at', [$date_start, $date_end]);
-        })->get();
+    $pembayaran = BayarPelanggan::when($date_start && $date_end, function ($query) use ($date_start, $date_end) {
+        return $query->whereBetween('created_at', [$date_start, $date_end]);
+    })->get();
 
-        if ($format === 'pdf') {
-            $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
-            return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
-        } elseif ($format === 'excel') {
-            return Excel::download(new PelangganController($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
-        }
+    if ($format === 'pdf') {
+        $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
+        return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
+    } elseif ($format === 'excel') {
+        // Gunakan kelas PembayaranExport untuk ekspor Excel
+        return Excel::download(new PembayaranExport($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
     }
+}
 
-    public function index(Request $request)
+    public function index(Request $request) 
     {
-        // Ambil nilai filter status pembayaran dari request
+        // Ambil nilai filter dari request
         $status_pembayaran_display = $request->input('status_pembayaran', '');
-
-        // Ambil tanggal tagih, paket, harga_paket, tanggal pembayaran, bulan, tanggal mulai dan tanggal akhir dari request
         $tanggal = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $jumlah_pembayaran = $request->input('jumlah_pembayaran');
         $tanggal_pembayaran = $request->input('tanggal_pembayaran');
         $created_at = $request->input('created_at');
-        $bulan = $request->input('bulan'); // Ambil bulan dari request
-        $date_start = $request->input('date_start'); // Ambil tanggal mulai dari request
-        $date_end = $request->input('date_end'); // Ambil tanggal akhir dari request
-        $search = $request->input('search'); // Ambil input pencarian dari request
+        $bulan = $request->input('bulan'); 
+        $date_start = $request->input('date_start'); 
+        $date_end = $request->input('date_end'); 
+        $search = $request->input('search'); 
+        $untuk_pembayaran = $request->input('untuk_pembayaran'); 
 
         // Mulai query
-        $query = BayarPelanggan::query(); // Ganti Pelanggan dengan BayarPelanggan
+        $query = BayarPelanggan::query(); 
+        $query_asli = BayarPelanggan::query(); 
 
-        // Filter berdasarkan status pembayaran jika ada
+        $query->orderBy('created_at', 'desc');
+
+        // Filter berdasarkan status pembayaran
         if ($status_pembayaran_display) {
             $query->where('status_pembayaran', $status_pembayaran_display);
         }
 
-        // Filter berdasarkan tanggal tagih jika ada
+        // Filter berdasarkan tanggal tagih
         if ($tanggal) {
             $query->where('tgl_tagih_plg', $tanggal);
         }
 
-        // Filter berdasarkan paket pelanggan jika ada
+        // Filter berdasarkan paket pelanggan
         if ($paket_plg) {
             $query->where('paket_plg', $paket_plg);
         }
 
-        // Filter berdasarkan harga paket jika ada
+        // Filter berdasarkan jumlah pembayaran
         if ($jumlah_pembayaran) {
             $query->where('jumlah_pembayaran', $jumlah_pembayaran);
         }
 
-        // Filter berdasarkan tanggal pembayaran (format Y-m-d) jika ada
+        // Filter berdasarkan tanggal pembayaran (format Y-m-d)
         if ($created_at) {
             $query->whereDate('created_at', $created_at);
         }
 
-        // Filter berdasarkan bulan jika ada
+        // Filter berdasarkan bulan (hanya bulan ini jika tidak ada input)
         if ($bulan) {
-            $query->whereMonth('tanggal_pembayaran', $bulan);
+            $query->whereMonth('created_at', $bulan);
+        } else {
+            // Menampilkan data bulan ini
+            $query->whereMonth('created_at', Carbon::now()->month)
+                ->whereYear('created_at', Carbon::now()->year);
         }
 
-        // Filter berdasarkan tanggal mulai dan tanggal akhir jika ada
+        // Filter berdasarkan tanggal mulai dan tanggal akhir
         if ($date_start && $date_end) {
-            $query->whereBetween('created_at', [$date_start, $date_end]);
+            $query->orWhere(function ($q) use ($date_start, $date_end) {
+                $q->whereBetween('created_at', [$date_start, $date_end]);
+            });
         }
 
-        // Filter berdasarkan pencarian jika ada
+        // Filter berdasarkan pencarian
         if ($search) {
             $query->where(function ($query) use ($search) {
                 $query->where('id_plg', $search)
@@ -150,16 +159,22 @@ class PembayaranController extends Controller
             });
         }
 
+        // Filter berdasarkan "untuk pembayaran"
+        if ($untuk_pembayaran) {
+            $query->where('untuk_pembayaran', $untuk_pembayaran);
+        }
+
         // Ambil hasil query
-        $pembayaran = $query->paginate(100); // Ambil data yang telah difilter
+        $pembayaran = $query->paginate(100);
         $query->orderBy('created_at', 'desc');
-        // Hitung total jumlah pembayaran yang telah difilter
+
+        // Hitung total jumlah pembayaran
         $totalJumlahPembayaran = $query->sum('jumlah_pembayaran');
 
-        // Hitung total jumlah pelanggan yang telah difilter
-        $totalPelanggan = $query->count(); // Menghitung jumlah pelanggan
+        // Hitung total pelanggan
+        $totalPelanggan = $query->count();
 
-        // Kembalikan data pembayaran ke view
+        // Kembalikan data ke view
         return view('pembayaran.index', compact(
             'pembayaran',
             'totalJumlahPembayaran',
@@ -173,9 +188,11 @@ class PembayaranController extends Controller
             'date_start',
             'date_end',
             'search',
-            'created_at'
+            'created_at',
+            'untuk_pembayaran',
         ));
     }
+
 
     public function edit(string $id_plg)
     {

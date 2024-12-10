@@ -1,9 +1,9 @@
 @extends($layout)
 
 @section('konten')
-    <div class=" p-5 mt-4">
+    <div class=" p-5 ">
 
-        <div class="container mt-4 ">
+        <div class="container  ">
 
             <!-- Informasi Total Pembayaran dan Total Pelanggan -->
             <div class="d-flex justify-content-between align-items-center p-3"
@@ -13,7 +13,7 @@
                     <strong>Total Jumlah Pembayaran:</strong>
                     <div style="font-size: 1.5em;">{{ number_format($totalJumlahPembayaran) }}</div>
                 </div>
-
+ 
                 <div class="p-3 text-center" style="background-color: #28a745; color: white; flex: 1;">
                     <strong>Total Jumlah Pelanggan Bayar:</strong>
                     <div style="font-size: 1.5em;">{{ $totalPelanggan }}</div>
@@ -29,12 +29,14 @@
                 <input type="text" name="search" id="search" class="form-control me-2"
                     value="{{ request('search') }}" placeholder="Pencarian">
 
-                <input type="date" name="date_start" id="date_start" class="form-control me-2"
-                    value="{{ $date_start }}">
+                <div class="d-flex align-items-center mb-3">
+                    <label for="date_start" class="form-label mb-0 mr-2 ml-2 me-2">Tanggal Awal</label>
+                    <input type="date" name="date_start" id="date_start" class="form-control me-2" value="{{ $date_start }}">
+                    <span class="mx-2">Tanggal Akhir</span>
+                    <input type="date" name="date_end" id="date_end" class="form-control" value="{{ $date_end }}">
+                </div>
 
-                <input type="date" name="date_end" id="date_end" class="form-control me-2" value="{{ $date_end }}">
-
-                <select name="tgl_tagih_plg" id="tgl_tagih_plg" class="form-select me-2">
+                <select name="tgl_tagih_plg" id="tgl_tagih_plg" class="form-select me-2 ml-2">
                     <option value="">Tanggal Tagih</option>
                     @for ($i = 1; $i <= 33; $i++)
                         <option value="{{ $i }}" {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
@@ -43,7 +45,7 @@
                     @endfor
                 </select>
 
-                <select name="paket_plg" id="paket_plg" class="form-select me-2">
+                <select name="paket_plg" id="paket_plg" class="form-select me-2 ml-2">
                     <option value="">Paket</option>
                     @for ($i = 1; $i <= 7; $i++)
                         <option value="{{ $i }}" {{ request('paket_plg') == $i ? 'selected' : '' }}>
@@ -56,20 +58,27 @@
                 <select name="harga_paket" id="harga_paket" class="form-select me-2">
                     <option value="">Harga</option>
                     @foreach ([50000, 75000, 100000, 105000, 115000, 120000, 125000, 150000, 165000, 175000, 205000, 250000, 265000, 305000, 750000] as $harga)
-                        <option value="{{ $harga }}"
-                            {{ request('harga_paket') == $harga ? 'selected' : '' }}>
+                        <option value="{{ $harga }}" {{ request('harga_paket') == $harga ? 'selected' : '' }}>
                             {{ number_format($harga, 0, ',', '.') }}
                         </option>
                     @endforeach
                     <option value="vcr" {{ request('harga_paket') == 'vcr' ? 'selected' : '' }}>vcr</option>
                 </select>
 
-                <button type="submit" class="btn btn-primary mb-2">Filter</button>
-                <div class="row mb-4">
+                <!-- Filter untuk_pembayaran -->
+                <select name="untuk_pembayaran" id="untuk_pembayaran" class="form-select me-2 ml-2">
+                    <option value="">Jenis Pembayaran</option>
+                    <option value="piutang" {{ request('untuk_pembayaran') == 'piutang' ? 'selected' : '' }}>Piutang</option>
+                    <option value="tagihan" {{ request('untuk_pembayaran') == 'tagihan' ? 'selected' : '' }}>Tagihan</option>
+                    <option value="psb" {{ request('untuk_pembayaran') == 'psb' ? 'selected' : '' }}>PSB</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary mb-2 mr-2 ml-2">Filter</button>
+                <div class="row mb-2">
                     <div class="col-md-3 text-right">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
                                 Ekspor
                             </button>
                             <div class="dropdown-menu">
@@ -80,7 +89,8 @@
                                     'tgl_tagih_plg' => request('tgl_tagih_plg'),
                                     'paket_plg' => request('paket_plg'),
                                     'harga_paket' => request('harga_paket'),
-                                    'search' => request('search')
+                                    'search' => request('search'),
+                                    'untuk_pembayaran' => request('untuk_pembayaran'),
                                 ]) }}" class="dropdown-item">PDF</a>
                                 <a href="{{ route('pembayaran.export', [
                                     'format' => 'excel',
@@ -89,7 +99,8 @@
                                     'tgl_tagih_plg' => request('tgl_tagih_plg'),
                                     'paket_plg' => request('paket_plg'),
                                     'harga_paket' => request('harga_paket'),
-                                    'search' => request('search')
+                                    'search' => request('search'),
+                                    'untuk_pembayaran' => request('untuk_pembayaran'),
                                 ]) }}" class="dropdown-item">Excel</a>
                             </div>
                         </div>
@@ -105,178 +116,61 @@
         <table class="table table-bordered table-responsive" style="color: black;">
             <thead class="table table-primary " style="color: black;">
                 <tr>
-                    <th>No</th>
-                    <th>Nama Pelanggan</th>
-                    <th>No Telp</th>
-                    <th>Alamat</th>
-                    <th>
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
-                                    <option value="">Paket</option>
-                                    @for ($i = 1; $i <= 7; $i++)
-                                        <option value="{{ $i }}"
-                                            {{ request('paket_plg') == $i ? 'selected' : '' }}>
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
-                                        vcr
-                                    </option>
-                                </select>
-                            </div>
-                        </form>
+                    <th  style="width: 1%; padding: 2px;">No</th>
+                    <th  style="width: 1%; padding: 2px;">Nama Pelanggan</th>
+                    <th  style="width: 1%; padding: 2px;">No Telp</th>
+                    <th  style="width: 1%; padding: 2px;">Alamat</th>
+                    <th  style="width: 1%; padding: 2px;">
+                      
                         Paket
                     </th>
-                    <th>
-                        <form id="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-
-                                <select name="bulan" id="bulan"
-                                    onchange="document.getElementById('filterForm').submit();">
-                                    <option value="">Pilih Bulan</option>
-                                    @foreach (['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'] as $index => $bulan)
-                                        <option value="{{ $index + 1 }}"
-                                            {{ request('bulan') == $index + 1 ? 'selected' : '' }}>
-                                            {{ $bulan }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </form>
+                    <th  style="width: 1%; padding: 2px;">
+  
                         <label for="bulan">Bulan Bayar Terakhir</label>
                     </th>
+                    <th  style="width: 1%; padding: 2px;">
 
-                    <th>
-
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}"
-                                    onchange="this.form.submit();">
-                            </div>
-                        </form>
                         Tanggal Pembayaran
                     </th>
-                    <th>
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
-                                    <option value="">Tanggal Tagih</option>
-                                    @for ($i = 1; $i <= 33; $i++)
-                                        <option value="{{ $i }}"
-                                            {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                        </form>
+                    <th  style="width: 1%; padding: 2px;">
+                    
                         Tanggal Tagih
                     </th>
-                    <th>
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <select name="jumlah_pembayaran" id="jumlah_pembayaran" onchange="this.form.submit();">
-                                    <option value="">Harga</option>
-
-                                    <option value="50000"
-                                        {{ request('jumlah_pembayaran') == '50000' ? 'selected' : '' }}>
-                                        {{ number_format(50000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="75000"
-                                        {{ request('jumlah_pembayaran') == '75000' ? 'selected' : '' }}>
-                                        {{ number_format(75000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="100000"
-                                        {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
-                                        {{ number_format(100000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="105000"
-                                        {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
-                                        {{ number_format(105000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="115000"
-                                        {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
-                                        {{ number_format(115000, 0, ',', '.') }}
-                                    </option>
-
-                                    <option value="120000"
-                                        {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
-                                        {{ number_format(120000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="125000"
-                                        {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
-                                        {{ number_format(125000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="150000"
-                                        {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
-                                        {{ number_format(150000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="165000"
-                                        {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
-                                        {{ number_format(165000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="175000"
-                                        {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
-                                        {{ number_format(175000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="205000"
-                                        {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
-                                        {{ number_format(205000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="250000"
-                                        {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
-                                        {{ number_format(250000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="265000"
-                                        {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
-                                        {{ number_format(265000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="305000"
-                                        {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
-                                        {{ number_format(305000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="750000"
-                                        {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
-                                        {{ number_format(750000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
-                                        vcr
-                                    </option>
-
-                                </select>
-                            </div>
-                        </form>
+                    <th  style="width: 1%; padding: 2px;">
+                   
                         Jumlah Pembayaran
                     </th>
-                    <th>Metode Pembayaran</th>
-                    <th>Keterangan</th>
-                    <th>Admin</th>
-                    <th>Edit</th>
-                    <th>Hapus</th>
-                    <th>Print</th>
+                    <th  style="width: 1%; padding: 2px;">Metode Pembayaran</th>
+                    <th  style="width: 1%; padding: 2px;">Pembayaran</th>
+                    <th  style="width: 1%; padding: 2px;">Keterangan</th>
+                    
+                    <th  style="width: 1%; padding: 2px;">Admin</th>
+                    <th  style="width: 1%; padding: 2px;">Edit</th>
+                    <th  style="width: 1%; padding: 2px;">Hapus</th>
+                    <th  style="width: 1%; padding: 2px;">Print</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($pembayaran as $no => $item)
-                    <tr class="font-weight-bold">
-                        <td>{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
-                        <td>{{ $item->nama_plg }}</td>
-                        <td>{{ $item->no_telepon_plg }}</td>
-                        <td>{{ $item->alamat_plg }}</td>
-                        <td>{{ $item->paket_plg }}</td>
+                    <tr class="">
+                        <td style="padding: 2px;">{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
+                        <td style="padding: 2px;">{{ $item->nama_plg }}</td>
+                        <td style="padding: 2px;">{{ $item->no_telepon_plg }}</td>
+                        <td style="padding: 2px;">{{ $item->alamat_plg }}</td>
+                        <td style="padding: 2px;">{{ $item->paket_plg }}</td>
                         <!-- ambil bulan saja dan convert ke text misal bulan 09 jadi september -->
-                        <td>{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('F Y') }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->tgl_tagih_plg }}</td>
-                        <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
-                        <td>{{ $item->metode_transaksi }}</td>
-                        <td>{{ $item->keterangan_plg }}</td>
-                        <td>{{ $item->admin_name }}</td>
-                        <td>
+                        <td style="padding: 2px;">{{ \Carbon\Carbon::parse($item->tanggal_pembayaran)->format('F Y') }}</td>
+                        <td style="padding: 2px;">{{ $item->created_at }}</td>
+                        <td style="padding: 2px;">{{ $item->tgl_tagih_plg }}</td>
+                        <td style="padding: 2px;">{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
+                        <td style="padding: 2px;">{{ $item->metode_transaksi }}</td>
+                        <td style="padding: 2px;">{{ $item->untuk_pembayaran }}</td>
+                        <td style="padding: 2px;">{{ $item->keterangan_plg }}</td>
+                        <td style="padding: 2px;">{{ $item->admin_name }}</td>
+                        <td style="padding: 2px;">
                             <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         </td>
-                        <td>
+                        <td style="padding: 2px;">
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
@@ -285,14 +179,14 @@
                                     onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
-                        <td>
+                        <td style="padding: 2px;">
                             <button class="btn btn-info btn-sm"
                                 onclick="printPayment({{ $no + 1 }}, '{{ $item->nama_plg }}')">Print</button>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="text-center">Tidak ada data pembayaran ditemukan</td>
+                        <td style="padding: 2px;" colspan="6" class="text-center">Tidak ada data pembayaran ditemukan</td>
                     </tr>
                 @endforelse
             </tbody>

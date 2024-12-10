@@ -5,39 +5,38 @@
         <h4 class="mb-4">Bayar Tagihan Pelanggan</h4>
 
 
+        <!-- Form Filter dan Pencarian -->
         <div class="row align-items-center">
             <table class="table table-bordered mt-2">
                 <thead class="custom-cell head">
                     <tr>
-                        <th>hari Ini</th>
-                        <th>Pembayaran</th>
-                        <th>Pembayaran</th>
-                        <th>Pembayaran</th>
-                        
-                 
-
+                        <th>Total semua Pembayaran hari ini</th>
+                        <th>Total Tagihan Hari Ini</th>
+                        <th>Tertagih</th>
+                        <th>Sisa Tagihan</th>
+                
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="custom-cell info"
-                            onclick="">
-                           
-                        </td>
-                        <td class="custom-cell info"
-                            onclick="">
-                           
-                        </td>
-                        <td class="custom-cell info"
-                            onclick="">
-                           
-                        </td>
-                         <td class="custom-cell info"
-                            onclick="">
-                           
+                        <td class="custom-cell info">
+                            Rp {{ number_format($total_user_bayar, 0, ',', '.') }} User: {{ $total_jml_user }}
                         </td>
 
+                        <td class="custom-cell warning">
+                        <a style="color: black"; href="{{ route('pelanggan.redirect') }}"> Rp
+                            Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} User: {{ $jumlahPelangganMembayarHariIni }} </a>
+                        </td>
 
+                        <td class="custom-cell success">
+                            <a href="{{ route('pelanggan.sudahbayar') }}"> Rp
+                                {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} User: {{ $totalUserHarian_semua }}</a>
+                        </td>
+
+                        <td class="custom-cell danger">
+                            <a href="{{ route('pelanggan.belumbayar') }}"> Rp
+                                {{ number_format($totalTagihanTertagih, 0, ',', '.') }} User: {{ $totalUserTertagih }} </a>
+                        </td>
 
                     </tr>
                 </tbody>
@@ -128,6 +127,11 @@
             </style>
 
         </div>
+        <!-- End Form Filter dan Pencarian -->
+
+
+
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -158,120 +162,13 @@
                     <th>No</th>
                     <th>Nama Pelanggan</th>
                     <th>Alamat</th>
-                  
-                  
-
-                  
-                    <th>
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
-                                    <option value="">Tanggal Tagih</option>
-                                    @for ($i = 1; $i <= 33; $i++)
-                                        <option value="{{ $i }}"
-                                            {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
-                                            {{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
-                        </form>
-                        Tanggal Tagih
-                    </th>
-                    <th>
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <select name="jumlah_pembayaran" id="jumlah_pembayaran" onchange="this.form.submit();">
-                                    <option value="">Harga</option>
-
-                                    <option value="50000"
-                                        {{ request('jumlah_pembayaran') == '50000' ? 'selected' : '' }}>
-                                        {{ number_format(50000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="75000"
-                                        {{ request('jumlah_pembayaran') == '75000' ? 'selected' : '' }}>
-                                        {{ number_format(75000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="100000"
-                                        {{ request('jumlah_pembayaran') == '100000' ? 'selected' : '' }}>
-                                        {{ number_format(100000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="105000"
-                                        {{ request('jumlah_pembayaran') == '105000' ? 'selected' : '' }}>
-                                        {{ number_format(105000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="115000"
-                                        {{ request('jumlah_pembayaran') == '115000' ? 'selected' : '' }}>
-                                        {{ number_format(115000, 0, ',', '.') }}
-                                    </option>
-
-                                    <option value="120000"
-                                        {{ request('jumlah_pembayaran') == '120000' ? 'selected' : '' }}>
-                                        {{ number_format(120000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="125000"
-                                        {{ request('jumlah_pembayaran') == '125000' ? 'selected' : '' }}>
-                                        {{ number_format(125000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="150000"
-                                        {{ request('jumlah_pembayaran') == '150000' ? 'selected' : '' }}>
-                                        {{ number_format(150000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="165000"
-                                        {{ request('jumlah_pembayaran') == '165000' ? 'selected' : '' }}>
-                                        {{ number_format(165000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="175000"
-                                        {{ request('jumlah_pembayaran') == '175000' ? 'selected' : '' }}>
-                                        {{ number_format(175000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="205000"
-                                        {{ request('jumlah_pembayaran') == '205000' ? 'selected' : '' }}>
-                                        {{ number_format(205000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="250000"
-                                        {{ request('jumlah_pembayaran') == '250000' ? 'selected' : '' }}>
-                                        {{ number_format(250000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="265000"
-                                        {{ request('jumlah_pembayaran') == '265000' ? 'selected' : '' }}>
-                                        {{ number_format(265000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="305000"
-                                        {{ request('jumlah_pembayaran') == '305000' ? 'selected' : '' }}>
-                                        {{ number_format(305000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="750000"
-                                        {{ request('jumlah_pembayaran') == '750000' ? 'selected' : '' }}>
-                                        {{ number_format(750000, 0, ',', '.') }}
-                                    </option>
-                                    <option value="vcr" {{ request('jumlah_pembayaran') == 'vcr' ? 'selected' : '' }}>
-                                        vcr
-                                    </option>
-
-                                </select>
-                            </div>
-                        </form>
-                        Jumlah Pembayaran
-                    </th>
+                    <th>Tanggal Tagih </th>
+                    <th>Paket</th>
+                    <th>Harga</th>
                     <th>Metode Pembayaran</th>
-                    
-                    <th>
-
-                        <form class="filterForm" method="GET" action="{{ route('pembayaran.filter') }}">
-                            <div class="form-group">
-                                <input type="date" name="created_at" id="created_at" value="{{ request('created_at') }}"
-                                    onchange="this.form.submit();">
-                            </div>
-                        </form>
-                        Tanggal Pembayaran
-                    </th>
-               
-              
+                    <th>Tanggal Pembayaran</th>
                     <th>Admin</th>
-                    <th>Edit</th>
                     <th>Hapus</th>
-        
                 </tr>
             </thead>
             <tbody>
@@ -279,21 +176,13 @@
                     <tr class="font-weight-bold">
                         <td>{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
                         <td>{{ $item->nama_plg }}</td>
-                
                         <td>{{ $item->alamat_plg }}</td>
-            
-                      
-                     
                         <td>{{ $item->tgl_tagih_plg }}</td>
+                        <td>{{ $item->paket_plg }}</td>
                         <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
                         <td>{{ $item->metode_transaksi }}</td>
                         <td>{{ $item->created_at }}</td>
-                        
-                       
                         <td>{{ $item->admin_name }}</td>
-                        <td>
-                            <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        </td>
                         <td>
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
@@ -313,8 +202,7 @@
             </tbody>
         </table>
     </div>
-
-
+         <div>
             @elseif($pelanggan->isEmpty())
                 <p class="text-muted">Tidak ditemukan hasil untuk "{{ $query_cari }}"</p>
             @else
