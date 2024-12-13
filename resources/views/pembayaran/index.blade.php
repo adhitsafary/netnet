@@ -20,10 +20,7 @@
                 </div>
             </div>
         </div>
-
-
-
-
+        
         <th class="mt-4 mb-4">
             <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center">
                 <input type="text" name="search" id="search" class="form-control me-2"
@@ -117,6 +114,7 @@
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th  style="width: 1%; padding: 2px;">No</th>
+                
                     <th  style="width: 1%; padding: 2px;">Nama Pelanggan</th>
                     <th  style="width: 1%; padding: 2px;">No Telp</th>
                     <th  style="width: 1%; padding: 2px;">Alamat</th>
@@ -154,6 +152,7 @@
                 @forelse ($pembayaran as $no => $item)
                     <tr class="">
                         <td style="padding: 2px;">{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
+                        
                         <td style="padding: 2px;">{{ $item->nama_plg }}</td>
                         <td style="padding: 2px;">{{ $item->no_telepon_plg }}</td>
                         <td style="padding: 2px;">{{ $item->alamat_plg }}</td>
@@ -167,6 +166,7 @@
                         <td style="padding: 2px;">{{ $item->untuk_pembayaran }}</td>
                         <td style="padding: 2px;">{{ $item->keterangan_plg }}</td>
                         <td style="padding: 2px;">{{ $item->admin_name }}</td>
+                        <td style="display: none;">{{ $item->id_plg }}</td>
                         <td style="padding: 2px;">
                             <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                         </td>
@@ -196,32 +196,109 @@
         {{ $pembayaran->links('pagination::bootstrap-4') }}
     </div>
 
-    <script>
-        function printPayment(rowNumber, namaPelanggan) {
-            var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
-            var nama = row.cells[1].innerText;
-            var alamat = row.cells[2].innerText;
-            var tglBayar = row.cells[3].innerText;
-            var jumlahBayar = row.cells[4].innerText;
+    <script> 
+    function printPayment(rowNumber, namaPelanggan) {
+        var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
+        var nama = row.cells[1].innerText;
+        var alamat = row.cells[3].innerText;
+        var paket = row.cells[4].innerText;
+        var tglBayar = row.cells[6].innerText;
+        var jumlahBayar = row.cells[8].innerText;
+        var id_plg = row.cells[13].innerText;
 
-            var printContent = `
-        <div style="border: 1px solid #000; padding: 20px; width: 600px; margin: 0 auto; font-family: Arial, sans-serif;">
-            <div style="border-bottom: 2px solid #000; text-align: center; padding-bottom: 10px; margin-bottom: 10px;">
-                <h2 style="font-size: 16px; margin: 0;">KWITANSI PEMBAYARAN INTERNET BULANAN</h2>
+        // Konversi jumlahBayar ke angka
+        jumlahBayar = parseInt(jumlahBayar.replace(/\D/g, ''), 10); // Hilangkan simbol "Rp" dan tanda baca
+
+        // Hitung jumlah sebelum PPN (mengurangi PPN 11% terlebih dahulu)
+        var jumlahTanpaPPN = jumlahBayar / 1.11 - 2670;
+
+        // Hitung PPN (11% dari jumlahTanpaPPN)
+        var ppn = jumlahTanpaPPN * 0.11;
+
+        // Tambahkan Bea Meterai
+        var beaMeterai = 3000;
+
+        // Hitung total tagihan (jumlahTanpaPPN + PPN + Bea Meterai)
+        var totalTagihan = jumlahTanpaPPN + ppn + beaMeterai;
+
+        var printContent = `
+        <div style="border: 1px solid #000; padding: 20px; width: 800px; margin: 20px auto; font-family: 'Arial', sans-serif; background-color: #fff; position: relative;">
+            <!-- Watermark LUNAS -->
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 120px; color: rgba(0, 0, 0, 0.05); font-weight: bold; z-index: 0;">
+                LUNAS
             </div>
-            <p><strong>Nama Pelanggan:</strong> ${nama}</p>
-            <p><strong>Alamat:</strong> ${alamat}</p>
-            <p><strong>Tanggal Pembayaran:</strong> ${tglBayar}</p>
-            <p><strong>Jumlah Pembayaran:</strong> Rp ${jumlahBayar}</p>
+
+            <!-- Header -->
+            <div style="position: relative; margin-bottom: 20px; text-align: center;">
+                <h2 style="font-size: 18px; margin: 0; color: #333; letter-spacing: 2px; z-index: 1;">
+                    KWITANSI PEMBAYARAN INTERNET BULANAN
+                </h2>
+                <p style="font-size: 14px; margin: 5px 0; color: #555; letter-spacing: 1px;">Terima kasih telah menggunakan layanan kami!</p>
+            </div>
+
+            <!-- Informasi Pelanggan -->
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 20px; z-index: 1; position: relative;">
+                <tr>
+                    <td style="width: 50%; vertical-align: top; padding: 10px; border: 1px solid #000;">
+                        <strong>Kepada/To:</strong><br>
+                        ${nama}<br>
+                        ${alamat}
+                    </td>
+                    <td style="width: 50%; vertical-align: top; text-align: right; padding: 10px; border: 1px solid #000;">
+                        <strong>No. Tagihan/Invoice No:</strong> ${id_plg}/${tglBayar}<br>
+                        <strong>Nomor Pelanggan/Customer:</strong> ${id_plg}<br>
+                        <strong>Tanggal Tagihan:</strong> ${tglBayar}<br>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Tabel Rincian -->
+            <table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; margin: 20px 0;">
+            <tbody>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #000;">Paket : ${paket}</td>
+                    <td style="padding: 10px; text-align: right; border: 1px solid #000;">Rp ${jumlahTanpaPPN.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #000;">PPN 11%</td>
+                    <td style="padding: 10px; text-align: right; border: 1px solid #000;">Rp ${ppn.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #000;">Bea Meterai</td>
+                    <td style="padding: 10px; text-align: right; border: 1px solid #000;">Rp ${beaMeterai.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; font-weight: bold; border: 1px solid #000;">Tagihan Bulan Ini/Current Charges</td>
+                    <td style="padding: 10px; text-align: right; font-weight: bold; border: 1px solid #000;">Rp ${totalTagihan.toLocaleString('id-ID')}</td>
+                </tr>
+            </tbody>
+        </table>
+
+            <!-- Footer -->
+            <div style="font-size: 12px; text-align: justify; border-top: 1px solid #000; padding-top: 10px; z-index: 1; position: relative;">
+                <strong>Pengumuman Penting/Important Information:</strong><br>
+                - Jasa internet dikenakan PPN 11% sesuai peraturan.<br>
+                - Pembayaran wajib dilakukan sebelum jatuh tempo untuk menghindari denda keterlambatan.<br>
+                - Informasi ini adalah resmi dan tidak dapat diganggu gugat.
+            </div>
         </div>
         `;
 
-            var printWindow = window.open('', '', 'height=600,width=400');
-            printWindow.document.write('<html><head><title>Struk Pembayaran</title></head><body>');
-            printWindow.document.write(printContent);
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        }
-    </script>
+        var printWindow = window.open('', '', 'height=800,width=800');
+        printWindow.document.write('<html><head><title>Struk Pembayaran</title>');
+        printWindow.document.write('<style>body { margin: 0; padding: 0; }</style></head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+
+
+
+
+
+
+
 @endsection

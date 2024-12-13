@@ -250,10 +250,12 @@
                     ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
                     : '-' }}
             </td>
-            <td style="padding: 1px;">
-                <a href="#" class="btn btn-success btn-sm"
-                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-            </td>
+            <td style="padding: 0; margin: 0; text-align: center;">
+    <a href="#" class="btn btn-success btn-xs" style="padding: 2px 5px; font-size: 0.75em;"
+        onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+</td>
+
+            
 
 
                               <!-- Modal Bayar -->

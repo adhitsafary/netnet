@@ -312,7 +312,7 @@
                     <th style="width: 1%; padding: 1px;">Aktivasi</th>
                     <th style="width: 1%; padding: 1px;">Paket</th>
                     <th style="width: 1%; padding: 1px;">Harga</th>
-                    <th style="width: 1%; padding: 1px;">Tanggal Tagih</th>
+                    <th style="width: 1%; padding: 0; margin: 0; text-align: center;">Tanggal Tagih</th>
                     <th style="width: 1%; padding: 1px;">Keterangan</th>
                     <th style="width: 1%; padding: 1px;">Bayar Terakhir</th>
                     <th style="width: 1%; padding: 1px;">Status Pembayaran</th>
@@ -332,24 +332,45 @@
             <td style="padding: 1px;">{{ $item->aktivasi_plg }}</td>
             <td style="padding: 1px;">{{ $item->paket_plg }}</td>
             <td style="padding: 1px;">{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
-            <td style="padding: 1px;">{{ $item->tgl_tagih_plg }}</td>
+            <td style="width: 1%; padding: 0; margin: 0; text-align: center;">{{ $item->tgl_tagih_plg }}</td>
             <td style="padding: 1px;">{{ $item->keterangan_plg }}</td>
             <td style="padding: 1px;">
                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
                     ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
                     : '-' }}
             </td>
+
+            <!---
             <td style="padding: 1px;">
                 <span class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white">
                     {{ $item->status_pembayaran }}
                 </span>
             </td>
+                -->
+                <td class="row" style="padding: 2px; font-size: 0.8em; height: 10px;">
+    <select name="tanggal_pembayaran" class="form-control ml-4" onchange="this.form.submit()" style="width: 16%;  padding: 2px; height: 25px;">
+        <option value="">Riwayat Pembayaran</option>
+        @foreach ($item->pembayaran as $pembayaran)
+            @php
+                $tanggalPembayaran = \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran);
+                $isDanger = $tanggalPembayaran->lessThan(now()->startOfMonth());
+            @endphp
+            <option value="{{ $tanggalPembayaran->format('Y-m-d') }}">{{ $tanggalPembayaran->locale('id')->isoFormat('MMMM Y') }}</option>
+        @endforeach
+        @if (!$item->pembayaran->count())
+            <option value="">Belum Ada Pembayaran</option>
+        @endif
+    </select>
+    <span class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2" style="font-size: 0.75em; height: 20px; line-height: 20px;">{{ $item->status_pembayaran }}</span>
+</td>
+
 
 
             
-            <td style="padding: 1px;">
-                <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-sm">Detail</a>
-            </td>
+<td style="padding: 0; margin: 0; text-align: center;">
+    <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-xs" style="padding: 2px 5px; font-size: 0.75em;">Detail</a>
+</td>
+
         </tr>
         @empty
         <tr>

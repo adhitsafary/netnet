@@ -420,7 +420,8 @@ class PelangganController extends Controller
         $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
 
         // Ambil data pelanggan dengan pagination
-        $pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
+        //$pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
+        $pelanggan = $query->paginate(100)->appends($request->all());
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)
@@ -1217,6 +1218,7 @@ class PelangganController extends Controller
 
         // Ambil data pelanggan dengan pagination
         $pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
+        
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)

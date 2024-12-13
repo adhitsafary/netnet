@@ -124,7 +124,7 @@
     <div class="col-12 col-md-6 col-lg-4 mb-3">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Pelanggan #{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</h5>
+                <h5 class="card-title">Pelanggan {{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</h5>
                 <p class="card-text">
                     <strong>ID Pelanggan:</strong> {{ $item->id_plg }}<br>
                     <strong>Nama:</strong> {{ $item->nama_plg }}<br>
@@ -136,10 +136,86 @@
                         ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y') 
                         : '-' }}
                 </p>
-                <a href="#" class="btn btn-success btn-sm" 
-                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">
-                    Bayar
-                        </a>
+                <td style="padding: 1px;">
+                <a href="#" class="btn btn-success btn-sm"
+                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
+            </td>
+
+
+                              <!-- Modal Bayar -->
+                            <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="bayarModalLabel">Pembayaran</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <!-- Modal Form -->
+                                        <form id="bayarForm" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" id="pelangganId">
+                                            <div class="modal-body">
+                                                <!-- Input Tanggal Pembayaran -->
+
+                                                <div class="mb-3">
+                                                    <label for="tanggal_pembayaran" class="form-label">Untuk Pembayaran
+                                                    <label for="tanggal_pembayaran" class="form-label">Untuk Pembayaran
+                                                        Bulan</label>
+                                                    <input type="month" class="form-select" id="tanggal_pembayaran"
+                                                        name="tanggal_pembayaran" placeholder="Pilih bulan">
+                                                </div>
+
+
+
+                                                <div class="mb-3">
+                                                    <label for="metodeTransaksi" class="form-label">Metode
+                                                        Transaksi</label>
+                                                    <select class="form-select" id="metodeTransaksi"
+                                                        name="metode_transaksi" required>
+                                                        <option value="">Pilih metode</option>
+                                                        <option value="TF">TF</option>
+                                                        <option value="CASH">KANTOR</option>
+
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="untuk_pembayaran" class="form-label">Status
+                                                        Pembayaran</label>
+                                                    <select class="form-select" id="untuk_pembayaran"
+                                                        name="untuk_pembayaran" required>
+                                                        <option value="">Pilih Pembayaran</option>
+                                                        <option value="tagihan">Tagihan </option>
+                                                        <option value="piutang">Piutang </option>
+                                                        <option value="PSB">PSB </option>
+
+                                                    </select>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="keterangan_plg" class="form-label">Keterangan
+                                                        Pembayaran Pelanggan</label>
+                                                    <input type="text" class="form-control" id="keterangan_plg"
+                                                        name="keterangan_plg">
+                                                </div>
+
+                                                <!-- Detail Pembayaran -->
+                                                <div class="mb-3">
+                                                    <p id="pembayaranDetails"></p>
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal Footer -->
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Bayar</button>
+                                            </div>
+                                        </form>
+
+
+                                    </div>
+                                </div>
+                            </div>
                      </div>
               </div>
          </div>
