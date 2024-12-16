@@ -61,7 +61,7 @@ class PelangganController extends Controller
             ->get();
 
         // Menghitung total user di semua paket
-       //totalUsers = $paketData->sum('total_user');
+        $totalUsers = $paketData->sum('total_user');
 
         // Membagi data menjadi dua: 5 teratas dan sisanya
         $paketTop5 = $paketData->take(3); // Mengambil 5 teratas
@@ -195,8 +195,8 @@ class PelangganController extends Controller
             ->get();
 
         // Format data agar bisa digunakan di Chart.js
-       //labels = [];
-        //otalUsers = [];
+        $labels = [];
+        $totalUsers = [];
         $totalPembayaran = [];
 
 

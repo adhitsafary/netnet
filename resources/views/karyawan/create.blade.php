@@ -18,7 +18,7 @@
             <label for="">Gaji</label>
             <input type="text" name="gaji" class="form-control mt-2">
             <label for="">Tanggal Gajihan</label>
-            <input type="date" name="tgl_gajihan" class="form-control mt-2">
+            <input type="text" name="tgl_gajihan" class="form-control mt-2">
             <label for="">Mulai Kerja</label>
             <input type="date" name="mulai_kerja" class="form-control mt-2">
             <label for="">Keterangan</label>

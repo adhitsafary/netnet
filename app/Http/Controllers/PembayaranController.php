@@ -160,7 +160,8 @@ public function index(Request $request)
     }
 
     // Ambil hasil query
-    $pembayaran = $query->paginate(100);
+    //$pembayaran = $query->paginate(100);
+    $pembayaran = $query->paginate(1500)->appends($request->all());
 
     // Hitung total jumlah pembayaran
     $totalJumlahPembayaran = $query->sum('jumlah_pembayaran');
