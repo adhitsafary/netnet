@@ -43,6 +43,13 @@
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class="font-weight-bold " style="color: black">BAYAR</span>
                 </a>
+                <div id="collapseBootstrap1000" class="collapse" aria-labelledby="collapseBootstrap1000"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pembayaran/mudah">Bayar</a>
+                        <a class="collapse-item" href="/pembayaran/mudah/bayar_hp">Bayar Hp</a>
+                    </div>
+                </div>
             </li>
 
 

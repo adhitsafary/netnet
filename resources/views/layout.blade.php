@@ -113,6 +113,21 @@
             </li>
 
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap21" aria-expanded="true" aria-controls="collapseBootstrap21">
+                    <img src="{{ asset('asset/img/icon/absen.png') }}" alt="Gambar Pelanggan"
+                        style="width: 35px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Absen Kehadiran</span>
+                </a>
+                <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/pemberitahuan">Data Kehadiran</a>
+                    </div>
+
+                </div>
+            </li>
 
 
 
@@ -231,7 +246,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse"
                     data-target="#collapseBootstrap21" aria-expanded="true" aria-controls="collapseBootstrap21">
                     <img src="{{ asset('asset/img/pemberitahuan.png') }}" alt="Gambar Pelanggan"
-                        style="width: 50px; height: auto; margin-left: 10px;" class="mr-2">
+                        style="width: 40px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pemberitahuan</span>
                 </a>
                 <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"

@@ -30,4 +30,10 @@ class KaryawanModel extends Model
 
     // Jika ingin menonaktifkan timestamps otomatis
     // public $timestamps = false;s
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id', 'id');
+    }
+
 }

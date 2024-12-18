@@ -68,51 +68,46 @@
 
                     <div>
                 <!-- Tabel Pembayaran -->
-        <table class="table table-bordered table-responsive" style="color: black;">
-            <thead class="table table-primary " style="color: black;">
-                <tr>
-                    <th style="width: 1%; padding: 1px;">No</th>
-                    <th style="width: 1%; padding: 1px;">Nama Pelanggan</th>
-                    <th style="width: 1%; padding: 1px;">Alamat</th>
-                    <th style="width: 1%; padding: 1px;">Tanggal Tagih </th>
-                    <th style="width: 1%; padding: 1px;">Harga</th>
-                    <th style="width: 1%; padding: 1px;">Metode Pembayaran</th>
-                    <th style="width: 1%; padding: 1px;">Tanggal Pembayaran</th>
-                    <th style="width: 1%; padding: 1px;">Keterangan</th>
-                    <th style="width: 1%; padding: 1px;">Admin</th>
-                    <th style="width: 1%; padding: 1px;">Hapus</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($pembayaran as $no => $item)
-                    <tr class="">
-                        <td  style="padding: 1px;">{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
-                        <td  style="padding: 1px;">{{ $item->nama_plg }}</td>
-                        <td  style="padding: 1px;">{{ $item->alamat_plg }}</td>
-                        <td  style="padding: 1px;">{{ $item->tgl_tagih_plg }}</td>
-                        <td  style="padding: 1px;">{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
-                        <td  style="padding: 1px;">{{ $item->metode_transaksi }}</td>
-                        <td  style="padding: 1px;">{{ $item->created_at }}</td>
-                        <td  style="padding: 1px;">{{ $item->untuk_pembayaran }}</td>
-                        <td  style="padding: 1px;">{{ $item->admin_name }}</td>
-                        <td  style="padding: 1px;">
-                            <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
-                                class="d-inline-block">
-                                @csrf
+                <div class="container mt-4">
+    <div class="row">
+        @forelse ($pembayaran as $no => $item)
+            <div class="col-12 col-md-6 col-lg-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            Pelanggan {{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}
+                        </h5>
+                        <p class="card-text">
+                            <strong>Nama:</strong> {{ $item->nama_plg }}<br>
+                            <strong>Alamat:</strong> {{ $item->alamat_plg }}<br>
+                            <strong>Tanggal Tagih:</strong> {{ $item->tgl_tagih_plg }}<br>
+                            <strong>Harga:</strong> Rp {{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}<br>
+                            <strong>Metode Pembayaran:</strong> {{ $item->metode_transaksi }}<br>
+                            <strong>Tanggal Pembayaran:</strong> {{ $item->created_at }}<br>
+                            <strong>Keterangan:</strong> {{ $item->untuk_pembayaran }}<br>
+                            <strong>Admin:</strong> {{ $item->admin_name }}
+                        </p>
+                        <div class="d-flex justify-content-end">
+                           
+                        <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
+                            class="d-inline-block">
+                            @csrf
+                            <a href="#" onclick="if(confirm('Yakin ingin menghapus data ini?')) { this.closest('form').submit(); return false; }" style="display: inline-block;">
+                                <img src="{{ asset('asset/img/icon/delete.png') }}" style="height: 35px; width: 35px;" alt="Hapus" >
+                            </a>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @empty
+            <div class="col-12 text-center">
+                <p>Tidak ada data pembayaran ditemukan</p>
+            </div>
+        @endforelse
+    </div>
+</div>
 
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                            </form>
-                        </td>
-                     
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="6" class="text-center">Tidak ada data pembayaran ditemukan</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
     </div>
          <div>
             @elseif($pelanggan->isEmpty())
@@ -136,10 +131,10 @@
                         ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y') 
                         : '-' }}
                 </p>
-                <td style="padding: 1px;">
-                <a href="#" class="btn btn-success btn-sm"
-                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-            </td>
+                <td style="padding: 0; margin: 0; text-align: center;">
+    <a href="#" class="btn btn-success btn-xs" style="padding: 2px 5px; font-size: 0.75em;"
+        onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})"><img src="{{asset('asset/img/icon/bayar.png')}}" style = "height : 30px; width : 30px; " alt=""></a>
+</td>
 
 
                               <!-- Modal Bayar -->

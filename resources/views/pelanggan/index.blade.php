@@ -169,8 +169,17 @@
             </form>
 
             <div class="mx-auto text-center mr-3">
-                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan</h3>
-            </div>
+    <h3 class="font-weight-bold" style="
+        background: linear-gradient(45deg,rgb(60, 105, 0),rgb(0, 81, 148)); /* Gradasi hijau ke biru */
+        -webkit-background-clip: text; /* Clip background pada teks */
+        -webkit-text-fill-color: transparent; /* Jadikan teks transparan agar gradasi terlihat */
+        font-size: 2em; /* Ukuran font */
+        display: inline-block; /* Agar padding sesuai */
+    ">
+        Data Pelanggan
+    </h3>
+</div>
+
             <div class="col-md-3 text-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
@@ -300,7 +309,7 @@
 
 
     <table class="table table-bordered table-responsive" style="color: black; width: 100%; font-size: 0.85em; table-layout: fixed;">
-            <thead class="custom-cell danger" style="color: black;">
+            <thead class="custom-cell danger" style="color: white;">
                 <tr class="font-weight-bold">
                     <th style="width: 1%; padding: 1px;">No</th>
                     <th style="width: 1%; padding: 1px;">ID</th>
@@ -316,19 +325,43 @@
                     <th style="width: 1%; padding: 1px;">Keterangan</th>
                     <th style="width: 1%; padding: 1px;">Bayar Terakhir</th>
                     <th style="width: 1%; padding: 1px;">Status Pembayaran</th>
-                    <th style="width: 1%; padding: 1px;">Detail</th>
 
                 </tr>
             </thead>
     <tbody>
         @forelse ($pelanggan as $no => $item)
         <tr class="">
-            <td style="padding: 1px;">{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
-            <td style="padding: 1px;">{{ $item->id_plg }}</td>
-            <td style="padding: 1px;">{{ $item->nama_plg }}</td>
-            <td style="padding: 1px;">{{ $item->alamat_plg }}</td>
-           
-            <td style="padding: 1px;">{{ $item->no_telepon_plg }}</td>
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}
+            </a>
+        </td>
+
+        <!-- ID Pelanggan -->
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->id_plg }}
+            </a>
+        </td>
+
+        <!-- Nama Pelanggan -->
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->nama_plg }}
+            </a>
+        </td>
+
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->alamat_plg }}
+            </a>
+        </td>
+
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->no_telepon_plg }}
+            </a>
+        </td>
             <td style="padding: 1px;">{{ $item->aktivasi_plg }}</td>
             <td style="padding: 1px;">{{ $item->paket_plg }}</td>
             <td style="padding: 1px;">{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
@@ -367,9 +400,9 @@
 
 
             
-<td style="padding: 0; margin: 0; text-align: center;">
+<!--  <td style="padding: 0; margin: 0; text-align: center;">
     <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-xs" style="padding: 2px 5px; font-size: 0.75em;">Detail</a>
-</td>
+</td> -->
 
         </tr>
         @empty
@@ -378,11 +411,7 @@
         </tr>
         @endforelse
 
-        <div>
-        <tr>
-            <h1></h1>
-                        cek        </tr>
-        </div>
+       
 
     </tbody>
 </table>

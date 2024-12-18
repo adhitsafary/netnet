@@ -61,7 +61,8 @@ class PembayaranController extends Controller
         $bayarPelanggan->delete();
 
         // Redirect ke halaman detail pelanggan dengan pesan sukses
-        return redirect()->route('pelanggan.historypembayaran', $pelangganId)
+      //  return redirect()->route('pelanggan.historypembayaran', $pelangganId) //ini yang langsung mengarah ke id yang di hapus diawal
+      return redirect()->route('pembayaran.index')
             ->with('success', "Data pembayaran  $pelanggan->nama_plg, dengan ID: $idOtomatis telah dihapus.");
     }
 

@@ -9,7 +9,7 @@
 
         <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-6 mb-3">
                 <div class="card-biru_tua h-70">
                     <div class="card-body">
                         <div class="row align-items-center">
@@ -35,7 +35,7 @@
 
 
             <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-6 mb-3">
                 <div class="card-violet h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -64,7 +64,7 @@
 
 
             <!-- New User Card Example -->
-            <div class="col-xl-2 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-3">
                 <div class="card-hijau  h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -92,7 +92,7 @@
             </div>
 
             <!-- New User Card Example -->
-            <div class="col-xl-2 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-3">
                 <div class="card-kuning  h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -121,7 +121,7 @@
 
 
              <!-- New User Card Example -->
-             <div class="col-xl-2 col-md-6 mb-4">
+             <div class="col-xl-2 col-md-6 mb-3">
                 <div class="card-merah  h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
@@ -150,7 +150,7 @@
 
 
            <!-- Chart Bar dan Line -->
-<div class="col-xl-70 col-lg-8">
+<div class="col-xl-70 col-lg-8 mb-3">
     <!-- Memperbesar tampilan card-body -->
     <div class="card-magenta" style="font-size: 1.5rem; height: 500px;"> <!-- Menambah ukuran font dan tinggi card -->
         <div class="card-body" style="height: 100%;"> <!-- Memastikan card-body mengikuti tinggi card -->
@@ -167,7 +167,7 @@
 
 
             <!-- Pie Chart -->
-            <div class="card-biru_tua col-xl-4 col-lg- mt-0 h-100">
+            <div class="card-biru_tua col-xl-4 col-lg- mt-0 h-100 mb-3 ">
                 <div class="p-3 ">
                     <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 pl-3 font-weight-bold text-white">PERSANTE PEMBAYARAN</h6>
@@ -212,7 +212,7 @@
 
             </div>
 
-            <div class="col-xl-8 col-lg-7 mb-4 ">
+            <div class="col-xl-8 col-lg-7  ">
                 <div class="card h-100">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="m-0 font-weight-bold text-primary">Pemberitahuan</h5>

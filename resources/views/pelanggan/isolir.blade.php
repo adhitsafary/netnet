@@ -222,9 +222,9 @@
             <table class="table table-bordered table-responsive " style="color: black;">
                 <thead class="table table-danger " style="color: black;">
                     <tr class="font-weight-bold">
-                        <th class="">No</th>
-                        <th>ID</th>
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">No</th>
+                        <th  style="width: 1%; padding: 1px;">ID</th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
@@ -238,7 +238,7 @@
                             </form>
 
                         </th>
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
@@ -255,10 +255,11 @@
 
 
 
-                        <th>Bayar</th>
-                        <th>No Telpon</th>
-                        <th>Aktivasi</th>
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">Bayar</th>
+                        <th  style="width: 1%; padding: 1px;">AKSI</th>
+                        <th  style="width: 1%; padding: 1px;">No Telpon</th>
+                        <th  style="width: 1%; padding: 1px;">Aktivasi</th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="paket_plg" id="paket_plg" onchange="this.form.submit();">
@@ -277,7 +278,7 @@
                             </form>
                         </th>
 
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="harga_paket" id="harga_paket" onchange="this.form.submit();">
@@ -352,7 +353,7 @@
                             </form>
                         </th>
 
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form class="filterForm" method="GET" action="{{ route('pelanggan.isolir') }}">
                                 <div class="form-group">
                                     <select name="tgl_tagih_plg" id="tgl_tagih_plg" onchange="this.form.submit();">
@@ -367,7 +368,7 @@
                                 </div>
                             </form>
                         </th>
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">
                             <form action="{{ route('pelanggan.isolir') }}" method="GET">
                                 <!-- Filter lainnya... -->
 
@@ -381,8 +382,8 @@
                             </form>
 
                         </th>
-                        <th>Bayar Terakhir</th>
-                        <th>
+                        <th  style="width: 1%; padding: 1px;">Bayar Terakhir</th>
+                        <th  style="width: 1%; padding: 1px;">
                             <div class="d-flex justify-content-between align-items-center">
                                 <!-- Label Status -->
                                 <span>Status Pembayaran</span>
@@ -410,8 +411,8 @@
                         </th>
 
 
-                        <th>Detail</th>
-                        <th>Status</th>
+                        <th  style="width: 1%; padding: 1px;">Detail</th>
+                        <th  style="width: 1%; padding: 1px;">Status</th>
 
                         <!-- <th>Riwayat pembayaran</th> -->
                     </tr>

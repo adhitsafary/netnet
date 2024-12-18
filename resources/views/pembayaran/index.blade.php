@@ -168,20 +168,25 @@
                         <td style="padding: 2px;">{{ $item->admin_name }}</td>
                         <td style="display: none;">{{ $item->id_plg }}</td>
                         <td style="padding: 2px;">
-                            <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('pembayaran.edit', $item->id) }}" class="btn btn-primary btn-sm">
+                            <img src="{{asset('asset/img/icon/edit.png') }}" style="height : 30px; width : 30px" alt="">
+                            </a>
                         </td>
                         <td style="padding: 2px;">
                             <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                                 class="d-inline-block">
                                 @csrf
 
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                                <button 
+                                    onclick="return confirm('Yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">
+                                    <img src="{{ asset('asset/img/icon/delete.png') }}" style="height: 30px; width: 30px;" alt="Hapus" ></button>
                             </form>
                         </td>
                         <td style="padding: 2px;">
                             <button class="btn btn-info btn-sm"
-                                onclick="printPayment({{ $no + 1 }}, '{{ $item->nama_plg }}')">Print</button>
+                                onclick="printPayment({{ $no + 1 }}, '{{ $item->nama_plg }}')">
+                            <img src="{{asset('asset/img/icon/printer.png')}}" style="height : 30px; width 30px; " alt="">
+                            </button>
                         </td>
                     </tr>
                 @empty
