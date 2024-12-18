@@ -169,8 +169,17 @@
             </form>
 
             <div class="mx-auto text-center mr-3">
-                <h3 class="font-weight-bold" style="color: black;">Data Pelanggan</h3>
-            </div>
+    <h3 class="font-weight-bold" style="
+        background: linear-gradient(45deg,rgb(60, 105, 0),rgb(0, 81, 148)); /* Gradasi hijau ke biru */
+        -webkit-background-clip: text; /* Clip background pada teks */
+        -webkit-text-fill-color: transparent; /* Jadikan teks transparan agar gradasi terlihat */
+        font-size: 2em; /* Ukuran font */
+        display: inline-block; /* Agar padding sesuai */
+    ">
+        Data Pelanggan
+    </h3>
+</div>
+
             <div class="col-md-3 text-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
@@ -300,7 +309,7 @@
 
 
     <table class="table table-bordered table-responsive" style="color: black; width: 100%; font-size: 0.85em; table-layout: fixed;">
-            <thead class="custom-cell danger" style="color: black;">
+            <thead class="custom-cell danger" style="color: white;">
                 <tr class="font-weight-bold">
                     <th style="width: 1%; padding: 1px;">No</th>
                     <th style="width: 1%; padding: 1px;">ID</th>
@@ -312,44 +321,89 @@
                     <th style="width: 1%; padding: 1px;">Aktivasi</th>
                     <th style="width: 1%; padding: 1px;">Paket</th>
                     <th style="width: 1%; padding: 1px;">Harga</th>
-                    <th style="width: 1%; padding: 1px;">Tanggal Tagih</th>
+                    <th style="width: 1%; padding: 0; margin: 0; text-align: center;">Tanggal Tagih</th>
                     <th style="width: 1%; padding: 1px;">Keterangan</th>
                     <th style="width: 1%; padding: 1px;">Bayar Terakhir</th>
                     <th style="width: 1%; padding: 1px;">Status Pembayaran</th>
-                    <th style="width: 1%; padding: 1px;">Detail</th>
 
                 </tr>
             </thead>
     <tbody>
         @forelse ($pelanggan as $no => $item)
         <tr class="">
-            <td style="padding: 1px;">{{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}</td>
-            <td style="padding: 1px;">{{ $item->id_plg }}</td>
-            <td style="padding: 1px;">{{ $item->nama_plg }}</td>
-            <td style="padding: 1px;">{{ $item->alamat_plg }}</td>
-           
-            <td style="padding: 1px;">{{ $item->no_telepon_plg }}</td>
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}
+            </a>
+        </td>
+
+        <!-- ID Pelanggan -->
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->id_plg }}
+            </a>
+        </td>
+
+        <!-- Nama Pelanggan -->
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->nama_plg }}
+            </a>
+        </td>
+
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->alamat_plg }}
+            </a>
+        </td>
+
+        <td style="padding: 1px;">
+            <a href="{{ route('pelanggan.detail', $item->id) }}" style="text-decoration: none; color: inherit;">
+                {{ $item->no_telepon_plg }}
+            </a>
+        </td>
             <td style="padding: 1px;">{{ $item->aktivasi_plg }}</td>
             <td style="padding: 1px;">{{ $item->paket_plg }}</td>
             <td style="padding: 1px;">{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
-            <td style="padding: 1px;">{{ $item->tgl_tagih_plg }}</td>
+            <td style="width: 1%; padding: 0; margin: 0; text-align: center;">{{ $item->tgl_tagih_plg }}</td>
             <td style="padding: 1px;">{{ $item->keterangan_plg }}</td>
             <td style="padding: 1px;">
                 {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
                     ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
                     : '-' }}
             </td>
+
+            <!---
             <td style="padding: 1px;">
                 <span class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white">
                     {{ $item->status_pembayaran }}
                 </span>
             </td>
+                -->
+                <td class="row" style="padding: 2px; font-size: 0.8em; height: 10px;">
+    <select name="tanggal_pembayaran" class="form-control ml-4" onchange="this.form.submit()" style="width: 16%;  padding: 2px; height: 25px;">
+        <option value="">Riwayat Pembayaran</option>
+        @foreach ($item->pembayaran as $pembayaran)
+            @php
+                $tanggalPembayaran = \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran);
+                $isDanger = $tanggalPembayaran->lessThan(now()->startOfMonth());
+            @endphp
+            <option value="{{ $tanggalPembayaran->format('Y-m-d') }}">{{ $tanggalPembayaran->locale('id')->isoFormat('MMMM Y') }}</option>
+        @endforeach
+        @if (!$item->pembayaran->count())
+            <option value="">Belum Ada Pembayaran</option>
+        @endif
+    </select>
+    <span class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2" style="font-size: 0.75em; height: 20px; line-height: 20px;">{{ $item->status_pembayaran }}</span>
+</td>
+
 
 
             
-            <td style="padding: 1px;">
-                <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-sm">Detail</a>
-            </td>
+<!--  <td style="padding: 0; margin: 0; text-align: center;">
+    <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-xs" style="padding: 2px 5px; font-size: 0.75em;">Detail</a>
+</td> -->
+
         </tr>
         @empty
         <tr>
@@ -357,11 +411,7 @@
         </tr>
         @endforelse
 
-        <div>
-        <tr>
-            <h1></h1>
-                        cek        </tr>
-        </div>
+       
 
     </tbody>
 </table>

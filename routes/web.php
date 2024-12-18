@@ -33,6 +33,8 @@ use App\Http\Controllers\UserController;
 use App\Models\Pelanggan;
 use App\Models\Pelangganof;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AbsensiController;
+
 
 
 
@@ -380,3 +382,10 @@ Route::get('/pembayaran/mudah', [PembayaranMudahController::class, 'index'])->na
 
 Route::get('/pembayaran/mudah/coba', [PembayaranMudahController::class, 'coba'])->name('pembayaran_mudah.coba');
 Route::get('/pembayaran/mudah/bayar_hp', [PembayaranMudahController::class, 'bayar_hp'])->name('pembayaran_mudah.bayar_hp');
+
+
+//absensi
+Route::post('/absensi', [AbsensiController::class, 'store']);
+Route::get('/hitung-gaji/{user_id}', [AbsensiController::class, 'hitungGaji']);
+Route::get('/form-absensi', [AbsensiController::class, 'showAbsensiForm']);
+Route::get('/form-gaji', [AbsensiController::class, 'showGajiForm']);

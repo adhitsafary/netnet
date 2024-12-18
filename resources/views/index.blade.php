@@ -9,22 +9,22 @@
 
         <div class="row mb-3">
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-biru_tua h-100">
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card-biru_tua h-70">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col">
-                                <div class="text text-white font-weight-bold text-uppercase mb-1">Pemasukan CASH -
+                                <div class="text text-white font-weight-bold  mb-1">Pemasukan KANTOR -
                                     Pengeluaran
                                 </div>
-                                <div class=" h5 mb-0 mr-0 font-weight-bold text-white font-bold">Rp
-                                    {{ number_format($totaljumlahsaldo, 0, ',', '.') }}</div>
-                                <div class="mt-2 mb-0 text-muted">
-                                    <span class="text text-white font-weight-bold text-uppercase">Cash :</span>
+                                <div class=" h6 mb-0 mr-0 font-weight-bold text-white font-bold">Rp
+                                    {{ number_format($totaljumlahsaldo, 0, ',', '.') }} || {{ $totalUserHarian }}</div>
+                                <div class="mb-0 text-muted">
+                                    <span class="text text-white font-weight-bold "></span>
                                     <span
-                                        class="text text-white font-weight-bold text-uppercase">{{ $totalUserHarian }}</span>
+                                        class="text text-white font-weight-bold "></span>
 
-                                    <span class="text text-white font-weight-bold text-uppercase"> User</span>
+                                    <span class="text text-white font-weight-bold "></span>
                                 </div>
                             </div>
 
@@ -35,24 +35,24 @@
 
 
             <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-hijau h-100">
+            <div class="col-xl-3 col-md-6 mb-3">
+                <div class="card-violet h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class=" text text-white font-weight-bold text-uppercase mb-1">Total Semua User yang
+                                <div class=" text text-white font-weight-bold  mb-1">Total Semua User yang
                                     Membayar
                                     hari ini
                                 </div>
-                                <div class="h5 mb-0 font-weight-bold text text-white">Rp
-                                    {{ number_format($total_user_bayar, 0, ',', '.') }}</div>
+                                <div class=" mb-0 font-weight-bold text text-white">Rp
+                                    {{ number_format($total_user_bayar, 0, ',', '.') }} || {{ $total_jml_user }}</div>
                                 <!-- Menampilkan pendapatan dengan format rupiah -->
-                                <div class="mt-2 mb-0 text-muted">
-                                    <span class="text text-white font-weight-bold text-uppercase">Semua :</span>
-                                    <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
+                                <div class="mb-0 text-muted">
+                                    <span class="text text-white font-weight-bold "></span>
+                                    <span class="text text-white mr-2 font-weight-bold "><i
                                             class="text text-white"></i>
-                                        {{ $total_jml_user }}</span>
-                                    <span class="text text-white  font-weight-bold text-uppercase">User
+                                        </span>
+                                    <span class="text text-white  font-weight-bold ">
                                     </span>
                                 </div>
                             </div>
@@ -64,24 +64,24 @@
 
 
             <!-- New User Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-kuning  h-100">
+            <div class="col-xl-2 col-md-6 mb-3">
+                <div class="card-hijau  h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <a href="{{ route('pelanggan.redirect') }}">
                                 <div class="col mr-2">
-                                    <div class=" text text-white font-weight-bold text-uppercase mb-1">Total Tagihan hari
+                                    <div class=" text text-white font-weight-bold  mb-1">Total Tagihan hari
                                         ini
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text text-white">Rp
-                                        {{ number_format($totalTagihanHariIni, 0, ',', '.') }}</div>
+                                    <div class=" mb-0 font-weight-bold text text-white">Rp
+                                        {{ number_format($totalTagihanHariIni, 0, ',', '.') }} || {{ $jumlahPelangganMembayarHariIni }}</div>
                                     <!-- Menampilkan pendapatan dengan format rupiah -->
-                                    <div class="mt-2 mb-0 text-muted">
-                                        <span class="text text-white font-weight-bold text-uppercase">Semua :</span>
-                                        <span class="text text-white mr-2 font-weight-bold text-uppercase"><i
+                                    <div class="mb-0 text-muted">
+                                        <span class="text text-white font-weight-bold "></span>
+                                        <span class="text text-white mr-2 font-weight-bold "><i
                                                 class="text text-white"></i>
-                                            {{ $jumlahPelangganMembayarHariIni }}</span>
-                                        <span class="text text-white  font-weight-bold text-uppercase">User
+                                            </span>
+                                        <span class="text text-white  font-weight-bold ">
                                         </span>
                                     </div>
                                 </div>
@@ -91,165 +91,84 @@
                 </div>
             </div>
 
-            <!-- Pending Requests Card Example -->
-            <!-- Belum Tertagih Hari Ini -->
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-merah h-100">
+            <!-- New User Card Example -->
+            <div class="col-xl-2 col-md-6 mb-3">
+                <div class="card-kuning  h-70">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="">
-                                    <a href="{{ route('pelanggan.sudahbayar') }}">
-
-                                        <div>
-                                            <div class="text-white font-weight-bold text-uppercase">
-                                                Tertagih
-                                            </div>
-                                            <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                            <div class="text-white h5 mb-0 font-weight-bold">
-                                                Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} || User :
-                                                {{ $totalUserHarian_semua }}
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <div class=" p-1 mt-1">
-
+                        <a href="{{ route('pelanggan.sudahbayar') }}">
+                                <div class="col mr-2">
+                                    <div class=" text text-white font-weight-bold  mb-1"> Tertagih
                                     </div>
-
-                                    <a href="{{ route('pelanggan.belumbayar') }}">
-
-                                        <div>
-                                            <div class="text-white font-weight-bold text-uppercase">
-                                                Sisa Tagihan
-                                            </div>
-                                            <!-- Menampilkan total tagihan hari ini dengan format rupiah -->
-                                            <div class="text-white h5 mb-0 font-weight-bold">
-                                                Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} || User :
-                                                {{ $totalUserTertagih }}
-                                            </div>
-                                        </div>
-                                    </a>
+                                    <div class=" mb-0 font-weight-bold text text-white">Rp
+                                    Rp {{ number_format($totalPendapatanharian_semua, 0, ',', '.') }} ||
+                                        {{ $totalUserHarian_semua }}</div>
+                                    <!-- Menampilkan pendapatan dengan format rupiah -->
+                                    <div class="mb-0 text-muted">
+                                        <span class="text text-white font-weight-bold "></span>
+                                        <span class="text text-white mr-2 font-weight-bold "><i
+                                                class="text text-white"></i>
+                                            </span>
+                                        <span class="text text-white  font-weight-bold ">
+                                        </span>
+                                    </div>
                                 </div>
-
-
-
-
-
-                            </div>
+                            </a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
 
-            <!-- Chart Bar dan Line -->
-            <div class="col-xl-70 col-lg-8">
-                <!-- Memperbesar tampilan card-body -->
-                <div class="card-magenta" style="font-size: 1.5rem;"> <!-- Menambah ukuran font untuk keseluruhan card -->
+             <!-- New User Card Example -->
+             <div class="col-xl-2 col-md-6 mb-3">
+                <div class="card-merah  h-70">
                     <div class="card-body">
-                        <h6 class="text text-white font-weight-bold">Tabel Pembayaran Per Hari</h6>
-                        <!-- Membesarkan judul -->
-                        <div class="chart-area">
-                            <canvas id="pendapatanChart" width="1500" height="300"></canvas>
-                            <!-- Untuk Bar/Line Chart -->
+                        <div class="row no-gutters align-items-center">
+                            <a href="{{ route('pelanggan.belumbayar') }}">
+                                <div class="col mr-2">
+                                    <div class=" text text-white font-weight-bold  mb-1"> Sisa Tagihan
+                                    </div>
+                                    <div class=" mb-0 font-weight-bold text text-white">Rp
+                                    Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} ||
+                                        {{ $totalUserTertagih }}</div>
+                                    <!-- Menampilkan pendapatan dengan format rupiah -->
+                                    <div class="mb-0 text-muted">
+                                        <span class="text text-white font-weight-bold "></span>
+                                        <span class="text text-white mr-2 font-weight-bold "><i
+                                                class="text text-white"></i>
+                                            </span>
+                                        <span class="text text-white  font-weight-bold ">
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
-
-                <!-- Memisahkan dan memperbesar running text -->
-                <div class="running-text-container" style="margin-top: 20px; height: 60px;"> <!-- Height diperbesar -->
-                    <div class="">
-                        <div class="running-text" id="running-perbaikan">
-                            <!-- Teks perbaikan akan diisi di sini -->
-                        </div>
-                    </div>
-
-                    <style>
-                        .running-text-container {
-                            width: 100%;
-                            /* Menyediakan lebar penuh */
-                            overflow: hidden;
-                            /* Menyembunyikan overflow */
-                            background-color: #000000;
-                            /* Warna latar belakang */
-                            border: 1px solid #ddd;
-                            /* Border */
-                            border-radius: 5px;
-                            /* Sudut melingkar */
-                            position: relative;
-                            /* Posisi relatif untuk animasi */
-                            height: 50px;
-                            /* Tinggi tetap untuk kontainer */
-                        }
-
-                        .running-text {
-                            display: inline-block;
-                            /* Pastikan tetap dalam satu baris */
-                            white-space: nowrap;
-                            /* Pastikan teks tidak membungkus */
-                            position: absolute;
-                            /* Memungkinkan pergerakan */
-                            will-change: transform;
-                            /* Mengoptimalkan animasi */
-                            transition: transform 5s linear;
-                            /* Durasi animasi */
-                        }
-                    </style>
-
-                    <script>
-                        // Ambil semua data perbaikan dalam format JSON dari Blade
-                        const perbaikanProses = @json($perbaikanProses);
-                        const runningTextElement = document.getElementById('running-perbaikan');
-                        let currentIndex = 0;
-
-                        // Fungsi untuk menampilkan data perbaikan satu per satu
-                        function displayRunningText() {
-                            // Ambil item saat ini
-                            const currentItem = perbaikanProses[currentIndex];
-
-                            // Buat teks untuk item saat ini
-                            const text =
-                                `ID Pelanggan: ${currentItem.id_plg} Nama: ${currentItem.nama_plg} Alamat: ${currentItem.alamat_plg}     No. Telepon: ${currentItem.no_telepon_plg}  Paket: ${currentItem.paket_plg}  ODP: ${currentItem.odp}    Maps: ${currentItem.maps}  Teknisi: ${currentItem.teknisi}  Keterangan: ${currentItem.keterangan}      Tanggal: ${new Date(currentItem.created_at).toLocaleDateString('id-ID')}`;
-
-
-
-
-                            // Tampilkan teks
-                            runningTextElement.innerText = text;
-
-                            // Set posisi awal di luar kanan
-                            runningTextElement.style.transform = `translateX(${window.innerWidth}px)`;
-
-                            // Atur transformasi untuk bergerak keluar dari kiri
-                            setTimeout(() => {
-                                runningTextElement.style.transform =
-                                    `translateX(-${runningTextElement.offsetWidth}px)`; // Bergerak ke luar kiri
-                            }, 100); // Tunggu sebentar untuk menerapkan transform
-
-                            // Pindah ke item berikutnya
-                            currentIndex = (currentIndex + 1) % perbaikanProses.length; // Loop kembali ke awal jika mencapai akhir
-
-                            // Reset posisi setelah animasi selesai dan panggil fungsi lagi
-                            setTimeout(displayRunningText, 6000); // Ganti item setiap 6 detik (5 detik animasi + 1 detik jeda)
-                        }
-
-                        // Jalankan saat halaman dimuat
-                        window.onload = displayRunningText; // Jalankan saat halaman dimuat
-                    </script>
-
-                </div>
-
-
-                <br>
             </div>
+
+
+           <!-- Chart Bar dan Line -->
+<div class="col-xl-70 col-lg-8 mb-3">
+    <!-- Memperbesar tampilan card-body -->
+    <div class="card-magenta" style="font-size: 1.5rem; height: 500px;"> <!-- Menambah ukuran font dan tinggi card -->
+        <div class="card-body" style="height: 100%;"> <!-- Memastikan card-body mengikuti tinggi card -->
+            <h6 class="text text-white font-weight-bold">Tabel Pembayaran Per Hari</h6>
+            <!-- Membesarkan judul -->
+            <div class="chart-area" style="height: 400px;"> <!-- Menyesuaikan tinggi area chart -->
+                <canvas id="pendapatanChart" width="850" height="300"></canvas>
+                <!-- Untuk Bar/Line Chart -->
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
             <!-- Pie Chart -->
-            <div class="card-biru_tua col-xl-4 col-lg- mt-4">
-                <div class="p-3 mb-2">
+            <div class="card-biru_tua col-xl-4 col-lg- mt-0 h-100 mb-3 ">
+                <div class="p-3 ">
                     <div class="py-3 d-flex flex-row align-items-center justify-content-between">
                         <h6 class="m-0 pl-3 font-weight-bold text-white">PERSANTE PEMBAYARAN</h6>
                     </div>
@@ -258,8 +177,18 @@
                     </div>
                     <!-- Row untuk Baru Terbayar dan Total Tagihan -->
                     <div class="mt-3 ml-2 d-flex justify-content-between">
+
+                     <!-- Total Tagihan -->
+                     <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
+                            style="width: 48%;">
+                            <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan</h6>
+                            <div class="text-white h6 mb-0 font-weight-bold pl-3">
+                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} <br> User :
+                                {{ $totalUserTertagih }}
+                            </div>
+                        </div>
                         <!-- Baru Terbayar -->
-                        <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center"
+                        <div class="bg-warning py-3 d-flex flex-column align-items-start justify-content-center ml-2"
                             style="width: 48%; margin-right: 10px;">
                             <h6 class="m-0 pl-3 font-weight-bold text-white">Tertagih</h6>
                             <div class="text-white h6 mb-0 font-weight-bold pl-3">
@@ -276,23 +205,15 @@
                                 {{ $totalUserHarian_semua }}
                             </div>
                         </div>
-                        <!-- Total Tagihan -->
-                        <div class="bg-success py-3 d-flex flex-column align-items-start justify-content-center"
-                            style="width: 48%;">
-                            <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan</h6>
-                            <div class="text-white h6 mb-0 font-weight-bold pl-3">
-                                Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} <br> User :
-                                {{ $totalUserTertagih }}
-                            </div>
-                        </div>
+                       
 
                     </div>
                 </div>
 
             </div>
 
-            <div class="col-xl-8 col-lg-7 mb-4">
-                <div class="card">
+            <div class="col-xl-8 col-lg-7  ">
+                <div class="card h-100">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <h5 class="m-0 font-weight-bold text-primary">Pemberitahuan</h5>
                         <a class="m-0 float-right btn btn-danger btn-sm" href="/pemberitahuan">Lihat semua <i

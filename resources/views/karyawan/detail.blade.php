@@ -82,7 +82,7 @@
                             <tr>
                                 <td>{{ number_format($karyawan->gaji, 0, ',', '.') }}</td>
                                 <td style="color: darkred" class="font font-weight-bold"> {{ number_format($totalKasbon, 0, ',', '.') }}</td>
-                                <td> {{ number_format($$karyawan->gaji - $totalKasbon, 0, ',', '.') }}</td>
+                                <td> {{ number_format($karyawan->gaji - $totalKasbon, 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>

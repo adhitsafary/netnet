@@ -16,24 +16,6 @@ use Illuminate\Support\Facades\Log;
 class KaryawanController extends Controller
 {
 
-    public function home()
-    {
-
-        $karyawan = KaryawanModel::all();
-
-        // Hitung total pendapatan bulanan
-        $totalPendapatanBulanan = $karyawan->sum('harga_paket');
-
-        // Hitung total jumlah pengguna
-        $totalJumlahPengguna = $karyawan->count();
-
-        // Kirim data ke view
-        return view('karyawan.index', compact('karyawan', 'totalPendapatanBulanan', 'totalJumlahPengguna'));
-    }
-
-
-
-
     public function detail($id)
     {
         // Cari karyawan berdasarkan ID

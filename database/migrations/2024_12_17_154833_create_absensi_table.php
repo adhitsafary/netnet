@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('bayar_pelanggan', function (Blueprint $table) {
-            $table->integer('kode_unik')->after('tanggal_pembayaran')->nullable();
+        Schema::create('absensi', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->date('tanggal');
+            $table->enum('status_hadir', ['hadir', 'tidak hadir']);
+            $table->timestamps();
         });
     }
-
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('pembayaran', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('absensi');
     }
 };

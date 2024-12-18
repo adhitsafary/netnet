@@ -64,17 +64,21 @@
             <div class="card-footer text-right">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ route('pelanggan.edit', $pelanggan->id) }}" class="">
+                            <img src="{{asset('asset/img/icon/edit.png') }}" style="height : 40px; width : 40px" alt="">
+                        </a>
                         <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST"
                             class="d-inline-block">
                             @csrf
-
-                            <button class="btn btn-danger btn-sm"
-                                onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
+                            <a href="#" onclick="if(confirm('Yakin ingin menghapus data ini?')) { this.closest('form').submit(); return false; }" style="display: inline-block;">
+                                <img src="{{ asset('asset/img/icon/delete.png') }}" style="height: 35px; width: 35px;" alt="Hapus" >
+                            </a>
                         </form>
 
-                        <a href="#" class="btn btn-success btn-sm"
-                            onclick="showBayarModal({{ $pelanggan->id }}, '{{ $pelanggan->nama_plg }}', {{ $pelanggan->harga_paket }})">Bayar</a>
+                    <!--    <a href="#" class=""
+                            onclick="showBayarModal({{ $pelanggan->id }}, '{{ $pelanggan->nama_plg }}', {{ $pelanggan->harga_paket }})">
+                        <img src="{{asset('asset/img/icon/bayar.png')}}" style="heigth : 35px; width : 35px; " alt="">
+                        </a>
 
                         <div class="modal fade" id="bayarModal" tabindex="-1" aria-labelledby="bayarModalLabel"
                             aria-hidden="true">
@@ -85,12 +89,12 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <!-- Modal Form -->
+                                  
                                     <form id="bayarForm" method="POST">
                                         @csrf
                                         <input type="hidden" name="id" id="pelangganId">
                                         <div class="modal-body">
-                                            <!-- Input Tanggal Pembayaran -->
+                                         
                                             <div class="mb-3">
                                                 <label for="tanggalPembayaran" class="form-label">Tanggal
                                                     Pembayaran</label>
@@ -108,22 +112,24 @@
                                                 </select>
                                             </div>
 
-                                            <!-- Detail Pembayaran -->
+                          
                                             <div class="mb-3">
                                                 <p id="pembayaranDetails"></p>
                                             </div>
                                         </div>
 
-                                        <!-- Modal Footer -->
+                                    
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-primary">Bayar</button>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                        </div>
+                        </div>  -->
                         <a href="{{ route('pelanggan.historypembayaran', $pelanggan->id) }}"
-                            class="btn btn-info btn-sm">Riwayat Pembayaran</a>
+                            class="btn btn-info btn-sm">
+                        <img src="{{asset('asset/img/icon/riwayat.png')}}" style="height : 35px; width : 35px; " alt="">
+                        </a>
 
                     </div>
                     <div>

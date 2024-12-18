@@ -151,7 +151,7 @@
                     value="{{ $query ?? '' }}">
 
                 <select name="untuk_pembayaran" id="untuk_pembayaran" class="form-select me-2 ml-2  mr-2">
-                    <option value="">Piutang</option>
+                    <option value="">Pilih Pembayaran</option>
                     <option value="piutang" {{ request('untuk_pembayaran') == 'piutang' ? 'selected' : '' }}>Piutang</option>
                     <option value="tagihan" {{ request('untuk_pembayaran') == 'tagihan' ? 'selected' : '' }}>Tagihan</option>
                     <option value="psb" {{ request('untuk_pembayaran') == 'psb' ? 'selected' : '' }}>PSB</option>
@@ -200,13 +200,13 @@
                         <td  style="padding: 1px;">{{ $item->untuk_pembayaran }}</td>
                         <td  style="padding: 1px;">{{ $item->admin_name }}</td>
                         <td  style="padding: 1px;">
-                            <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
-                                class="d-inline-block">
-                                @csrf
-
-                                <button class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus</button>
-                            </form>
+                        <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
+                            class="d-inline-block">
+                            @csrf
+                            <a href="#" onclick="if(confirm('Yakin ingin menghapus data ini?')) { this.closest('form').submit(); return false; }" style="display: inline-block;" class="btn btn-danger btn-sm">
+                                <img src="{{ asset('asset/img/icon/delete.png') }}" style="height: 25px; width: 25px;" alt="Hapus" >
+                            </a>
+                        </form>
                         </td>
                      
                     </tr>
@@ -250,10 +250,12 @@
                     ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
                     : '-' }}
             </td>
-            <td style="padding: 1px;">
-                <a href="#" class="btn btn-success btn-sm"
-                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">Bayar</a>
-            </td>
+            <td style="padding: 0; margin: 0; text-align: center;">
+    <a href="#" class="btn btn-success btn-xs" style="padding: 2px 5px; font-size: 0.75em;"
+        onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})"><img src="{{asset('asset/img/icon/bayar.png')}}" style = "height : 30px; width : 30px; " alt=""></a>
+</td>
+
+            
 
 
                               <!-- Modal Bayar -->

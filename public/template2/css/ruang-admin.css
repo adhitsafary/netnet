@@ -19,6 +19,13 @@ a:focus {
     outline: 0;
 }
 
+
+
+.text-small {
+    font-size: 0.85rem !important;
+}
+
+
 #wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
