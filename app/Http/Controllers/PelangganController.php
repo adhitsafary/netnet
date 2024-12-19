@@ -61,7 +61,7 @@ class PelangganController extends Controller
             ->get();
 
         // Menghitung total user di semua paket
-       //totalUsers = $paketData->sum('total_user');
+        //totalUsers = $paketData->sum('total_user');
 
         // Membagi data menjadi dua: 5 teratas dan sisanya
         $paketTop5 = $paketData->take(3); // Mengambil 5 teratas
@@ -195,7 +195,7 @@ class PelangganController extends Controller
             ->get();
 
         // Format data agar bisa digunakan di Chart.js
-       //labels = [];
+        //labels = [];
         //otalUsers = [];
         $totalPembayaran = [];
 
@@ -1217,7 +1217,7 @@ class PelangganController extends Controller
 
         // Ambil data pelanggan dengan pagination
         $pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
-        
+
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)
@@ -1627,7 +1627,9 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.psb')->with('success', 'Pelanggan Baru berhasil Ditambahkan .');
     }
 
-    public function show(string $id) {}
+    public function show(string $id)
+    {
+    }
 
 
     public function edit(string $id_plg)
@@ -1745,7 +1747,7 @@ class PelangganController extends Controller
 
         if ($existingPayment) {
             // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
-            return redirect()->route('pelanggan.index', $pelanggan->id)
+            return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
 
@@ -1813,7 +1815,7 @@ class PelangganController extends Controller
 
         if ($existingPayment) {
             // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
-            return redirect()->route('pelanggan.index', $pelanggan->id)
+            return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
 
@@ -1850,7 +1852,7 @@ class PelangganController extends Controller
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
-    
+
 
 
 
@@ -2545,7 +2547,7 @@ class PelangganController extends Controller
                     'keterangan_plg' => $pelanggan->keterangan_plg,
                     'longitude' => $pelanggan->longitude,
                     'latitude' => $pelanggan->latitude,
-                    'tgl_tagih_plg' =>  $pelanggan->tglTagih,  // Menambahkan kolom yang hilang
+                    'tgl_tagih_plg' => $pelanggan->tglTagih,  // Menambahkan kolom yang hilang
                     'created_at' => now(),
                     'updated_at' => now(),
 

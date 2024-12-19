@@ -38,161 +38,21 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <img src="{{ asset('asset/img/pelanggan.png') }}" alt="Gambar Pelanggan"
+                <a class="nav-link collapsed" href="/pembayaran/mudah" data-toggle="collapse"
+                    data-target="#collapseBootstrap1000" aria-expanded="true" aria-controls="collapseBootstrap1000">
+                    <img src="{{ asset('asset/img/bayar_baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class="font-weight-bold " style="color: black">PELANGGAN</span>
+                    <span class="font-weight-bold " style="color: black">BAYAR</span>
                 </a>
-                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap1"
+                <div id="collapseBootstrap1000" class="collapse" aria-labelledby="collapseBootstrap1000"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/pelanggan">PELANGGAN AKTIF</a>
-                        <a class="collapse-item" href="/pelanggan/isolir/">PELANGGAN ISOLIR</a>
-                        <a class="collapse-item" href="/pelanggan/unblock/">PELANGGAN Unblock</a>
-                        <a class="collapse-item" href="/pelanggan/block/">PELANGGAN Block</a>
-                        <a class="collapse-item" href="/pelanggan/psb/">PELANGGAN PSB</a>
-                        <a class="collapse-item" href="/pelanggan/reactivasi/">PELANGGAN Reactivasi</a>
-                        <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
-                        <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
+                        <a class="collapse-item" href="/pembayaran/mudah">Bayar</a>
+                        <a class="collapse-item" href="/pembayaran/mudah/bayar_hp">Bayar Hp</a>
                     </div>
                 </div>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
-                    aria-expanded="true" aria-controls="collapseBootstrap13">
-                    <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Rekap Pemasangan</span>
-                </a>
-                <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/rekap_pemasangan/">Riwayat Pemasangan</a>
-                        <a class="collapse-item" href="/rekap_pemasangan/create">Buat Form Pemasangan</a>
-                    </div>
-                </div>
-            </li>
-
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
-                    <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">PSB dan Perbaikan</span>
-                </a>
-                <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap1"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-
-                        <a class="collapse-item" href="/perbaikan/">Pemasangan - Perbaikan</a>
-                        <a class="collapse-item" href="{{ route('perbaikan.create') }}">Buat PSB dan PERBAIKAN</a>
-                        <a class="collapse-item" href="{{ route('psb.create') }}">Buat PSB dan Perbaikan Costume</a>
-
-
-                    </div>
-                </div>
-            </li>
-
-
-
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
-                    aria-expanded="true" aria-controls="collapseBootstrap12">
-                    <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Pmsukan Pgeluarn</span>
-                </a>
-                <div id="collapseBootstrap12" class="collapse" aria-labelledby="headingBootstrap12"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-                        <a class="collapse-item" href="/pemasukan/">Riwayat Pemasukan</a>
-                        <a class="collapse-item" href="/pengeluaran/">Riwayat Pengeluaran</a>
-                        <a class="collapse-item" href="/pemasukan/create">Buat Pemasukan</a>
-                        <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
-
-
-                    </div>
-                </div>
-            </li>
-
-
-
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage"
-                    aria-expanded="true" aria-controls="collapsePage">
-                    <img src="{{ asset('asset/img/pembayaran.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">RIWAYAT</span>
-                </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
-                        <h6 class="collapse-header"></h6>
-                        <a class="collapse-item" href="/pembayaran">Riwayat Pembayaran</a>
-
-                        <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
-
-                        <!-- <a class="collapse-item" href="/pembayaran">Belum bayar</a> -->
-
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
-                    aria-expanded="true" aria-controls="collapseBootstrap17">
-                    <img src="{{ asset('asset/img/update.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Update DATA</span>
-                </a>
-                <div id="collapseBootstrap17" class="collapse" aria-labelledby="headingBootstrap17"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-
-                        <a class="collapse-item" href="/update-payment-status">UPDATE STATUS PEMBAYARAN</a>
-                    </div>
-
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap18"
-                    aria-expanded="true" aria-controls="collapseBootstrap18">
-                    <img src="{{ asset('asset/img/target.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Target Perusahaan</span>
-                </a>
-                <div id="collapseBootstrap18" class="collapse" aria-labelledby="headingBootstrap17"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-
-                        <a class="collapse-item" href="/target">Target</a>
-                    </div>
-
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap19"
-                    aria-expanded="true" aria-controls="collapseBootstrap19">
-                    <img src="{{ asset('asset/img/wa.png') }}" alt="Gambar Pelanggan"
-                        style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Peringatan Whatsapp</span>
-                </a>
-                <div id="collapseBootstrap19" class="collapse" aria-labelledby="headingBootstrap17"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-
-                        <a class="collapse-item" href="/send-message">Peringatan WA</a>
-                    </div>
-
-                </div>
-            </li>
 
 
 
@@ -343,8 +203,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="{{ asset('/template2/img/boy.png') }}"
-                                    style="max-width: 60px">
+                                {{-- Cek apakah pengguna memiliki foto di database --}}
+                                <img class="img-profile rounded-circle"
+                                    src="{{ Auth::check() && Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('/template2/img/boy.png') }}"
+                                    style="max-width: 100px">
                                 <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
                                     @if (Auth::check())
                                     {{-- Mengecek apakah pengguna sudah login --}}
@@ -380,9 +242,14 @@
                         {{-- Bisa juga dialihkan ke halaman login --}}
                         <script>
                             window.location.href = "{{ route('login') }}";
-                            { { --Mengalihkan ke halaman login-- } }
+                            {
+                                {
+                                    --Mengalihkan ke halaman login--
+                                }
+                            }
                         </script>
                         @endif
+
             </div>
             </a>
 
@@ -406,45 +273,11 @@
                     Logout
                 </a>
             </div>
-            </li>
-            </ul>
-            </nav>
 
 
 
-            <div class="mr-4 d-sm-flex align-items-center justify-content-between">
-                <h4 class="h2" style="color: black;"></h4>
-                <ol class="breadcrumb">
-                    <!-- Jam Berjalan -->
-                    <div class="h4 font-weight-bold mr-3" style="color: black;">
-                        <span id="liveClock"></span>
-                    </div>
-                    <div class="h4 font-weight-bold" style="color: black;">
-                        {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
-                    </div>
-
-
-                    <script>
-                        function updateClock() {
-                            const now = new Date();
-                            const hours = String(now.getHours()).padStart(2, '0');
-                            const minutes = String(now.getMinutes()).padStart(2, '0');
-                            const seconds = String(now.getSeconds()).padStart(2, '0');
-                            const formattedTime = `${hours}:${minutes}:${seconds}`;
-                            document.getElementById('liveClock').textContent = formattedTime;
-                        }
-
-                        // Update jam setiap detik
-                        setInterval(updateClock, 1000);
-                        updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
-                    </script>
-                </ol>
-            </div>
-
-            <!-- Topbar -->
-
-            <!-- Container Fluid-->
             @yield('konten')
+            
             <!-- Footer -->
         </div>
     </div>

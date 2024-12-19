@@ -11,7 +11,17 @@ class Absensi extends Model
     
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
+
+    protected $table = 'absensi';
+
+    protected $fillable = [
+        'user_id',
+        'foto',
+        'jam_masuk',
+        'titik_lokasi',
+    ];
+
 
 }
