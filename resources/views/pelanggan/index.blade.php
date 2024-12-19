@@ -314,10 +314,8 @@
                 <tr class="font-weight-bold">
                     <th style="width: 1%; padding: 1px;">No</th>
                     <th style="width: 1%; padding: 1px;">ID</th>
-                    <th style="width: 1%; padding: 1px;">Nama
-                    </th>
-                    <th style="width: 1%; padding: 1px;">Alamat
-                    </th>
+                    <th style="width: 1%; padding: 1px;">Nama</th>
+                    <th style="width: 1%; padding: 1px;">Alamat</th>
                     <th style="width: 1%; padding: 1px;">No Telpon</th>
                     <th style="width: 1%; padding: 1px;">Aktivasi</th>
                     <th style="width: 1%; padding: 1px;">Paket</th>

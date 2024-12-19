@@ -157,9 +157,20 @@ Route::middleware(['auth'])->group(function () {
 });
 
 
-Route::get('/home', function () {
+//ini baru 19/12/2024
+
+// Arahkan teknisi ke halaman absensi/index
+Route::middleware(['auth', 'role:teknisi'])->get('/absensi/index', function () {
+    return view('absensi.index'); // Halaman absensi untuk teknisi
+});
+
+// Route untuk mengarahkan /home ke /masuk/admin
+Route::get('/home', function () { 
     return redirect('/masuk/admin');
 });
+
+
+
 Route::get('/teknisi/baru', [TeknisiController::class, 'index'])->name('teknisi');
 Route::get('/homebaru', [PelangganController::class, 'home'])->name('index');
 
@@ -409,3 +420,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/absensi/pulang', [AbsensiController::class, 'updatePulang']);
 });
 
+Route::post('/absensi/hapus/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');

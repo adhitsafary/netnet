@@ -124,7 +124,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/absensi/dashboard">Data Kehadiran</a>
-                        <a class="collapse-item" href="/absensi/index">Coba Absen</a>
+                        <a class="collapse-item" href="/absensi/absen">Coba Absen</a>
                     </div>
 
                 </div>
@@ -267,7 +267,7 @@
                 <!-- TopBar -->
                 <!-- TopBar -->
                 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn btn-default rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
                     </button>
                     <ul class="navbar-nav ml-auto">
@@ -483,34 +483,34 @@
 
 
 
-            <div class="mr-4 d-sm-flex align-items-center justify-content-between">
-                <h4 class="h2" style="color: black;"></h4>
-                <ol class="breadcrumb">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h6 class="h6 text-center" style="color: black;"></h6>
+                <ol class="breadcrumb d-flex align-items-center">
                     <!-- Jam Berjalan -->
-                    <div class="h4 font-weight-bold mr-3" style="color: black;">
+                    <div class="h6 font-weight-bold mr-3" style="color: black;">
                         <span id="liveClock"></span>
                     </div>
-                    <div class="h4 font-weight-bold" style="color: black;">
+                    <div class="h6 font-weight-bold" style="color: black;">
                         {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
                     </div>
-
-
-                    <script>
-                        function updateClock() {
-                            const now = new Date();
-                            const hours = String(now.getHours()).padStart(2, '0');
-                            const minutes = String(now.getMinutes()).padStart(2, '0');
-                            const seconds = String(now.getSeconds()).padStart(2, '0');
-                            const formattedTime = `${hours}:${minutes}:${seconds}`;
-                            document.getElementById('liveClock').textContent = formattedTime;
-                        }
-
-                        // Update jam setiap detik
-                        setInterval(updateClock, 1000);
-                        updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
-                    </script>
                 </ol>
             </div>
+
+            <script>
+                function updateClock() {
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    const seconds = String(now.getSeconds()).padStart(2, '0');
+                    const formattedTime = `${hours}:${minutes}:${seconds}`;
+                    document.getElementById('liveClock').textContent = formattedTime;
+                }
+
+                // Update jam setiap detik
+                setInterval(updateClock, 1000);
+                updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+            </script>
+
 
             <!-- Topbar -->
 

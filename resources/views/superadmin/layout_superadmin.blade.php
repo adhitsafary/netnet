@@ -23,7 +23,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/superadmin">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/admin">
                 <div class="sidebar-brand-icon">
                     <img src="{{ asset('template2/img/logo/logo2.png') }}">
                 </div>
@@ -31,14 +31,15 @@
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="/masuk/superadmin">
+                <a class="nav-link" href="/masuk/admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link collapsed" href="/pembayaran/mudah" data-toggle="collapse" data-target="#collapseBootstrap1000"
-                    aria-expanded="true" aria-controls="collapseBootstrap1000">
+                <a class="nav-link collapsed" href="/pembayaran/mudah" data-toggle="collapse"
+                    data-target="#collapseBootstrap1000" aria-expanded="true" aria-controls="collapseBootstrap1000">
                     <img src="{{ asset('asset/img/bayar_baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class="font-weight-bold " style="color: black">BAYAR</span>
@@ -51,7 +52,6 @@
                     </div>
                 </div>
             </li>
-
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
@@ -70,10 +70,11 @@
                         <a class="collapse-item" href="/pelanggan/psb/">PELANGGAN PSB</a>
                         <a class="collapse-item" href="/pelanggan/reactivasi/">PELANGGAN Reactivasi</a>
                         <a class="collapse-item" href="/pelangganof/">PELANGGAN OFF</a>
-                        <a class="collapse-item" href="pelanggan/bayar">Pelanggan Bayar sendiri</a>
+                        <a class="collapse-item" href="/pelanggan/automatispayment/">Pelanggan Bayar sendiri</a>
                     </div>
                 </div>
             </li>
+
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
@@ -111,11 +112,11 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
+                    aria-expanded="true" aria-controls="collapseBootstrap13">
                     <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
-                    <span class=" font-weight-bold">Riwayat Pemasangan</span>
+                    <span class=" font-weight-bold">Rekap Pemasangan</span>
                 </a>
                 <div id="collapseBootstrap13" class="collapse" aria-labelledby="headingBootstrap13"
                     data-parent="#accordionSidebar">
@@ -127,10 +128,9 @@
             </li>
 
 
-
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap1" aria-expanded="true" aria-controls="collapseBootstrap1">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
+                    aria-expanded="true" aria-controls="collapseBootstrap1">
                     <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">PSB dan Perbaikan</span>
@@ -149,12 +149,28 @@
             </li>
 
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap21"
+                    aria-expanded="true" aria-controls="collapseBootstrap21">
+                    <img src="{{ asset('asset/img/icon/absen.png') }}" alt="Gambar Pelanggan"
+                        style="width: 35px; height: auto; margin-left: 10px;" class="mr-2">
+                    <span class=" font-weight-bold">Absen Kehadiran</span>
+                </a>
+                <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
+                        <a class="collapse-item" href="/absensi/dashboard">Data Kehadiran</a>
+                        <a class="collapse-item" href="/absensi/absen">Coba Absen</a>
+                    </div>
+
+                </div>
+            </li>
 
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
+                    aria-expanded="true" aria-controls="collapseBootstrap12">
                     <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pmsukan Pgeluarn</span>
@@ -182,8 +198,7 @@
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">RIWAYAT</span>
                 </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
-                    data-parent="#accordionSidebar">
+                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="/pembayaran">Riwayat Pembayaran</a>
@@ -197,8 +212,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
+                    aria-expanded="true" aria-controls="collapseBootstrap17">
                     <img src="{{ asset('asset/img/update.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Update DATA</span>
@@ -214,8 +229,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap18" aria-expanded="true" aria-controls="collapseBootstrap18">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap18"
+                    aria-expanded="true" aria-controls="collapseBootstrap18">
                     <img src="{{ asset('asset/img/target.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Target Perusahaan</span>
@@ -230,8 +245,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap19" aria-expanded="true" aria-controls="collapseBootstrap19">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap19"
+                    aria-expanded="true" aria-controls="collapseBootstrap19">
                     <img src="{{ asset('asset/img/wa.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">BOT Whatsapp</span>
@@ -239,7 +254,6 @@
                 <div id="collapseBootstrap19" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
-
 
                         <a class="collapse-item" href="/send-message">Tagihan WA BOT</a>
                         <a class="collapse-item" href="/peringatan">Reminder WA BOT</a>
@@ -249,8 +263,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap20" aria-expanded="true" aria-controls="collapseBootstrap20">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap20"
+                    aria-expanded="true" aria-controls="collapseBootstrap20">
                     <img src="{{ asset('asset/img/folder.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">File</span>
@@ -265,10 +279,10 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse"
-                    data-target="#collapseBootstrap21" aria-expanded="true" aria-controls="collapseBootstrap21">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap21"
+                    aria-expanded="true" aria-controls="collapseBootstrap21">
                     <img src="{{ asset('asset/img/pemberitahuan.png') }}" alt="Gambar Pelanggan"
-                        style="width: 50px; height: auto; margin-left: 10px;" class="mr-2">
+                        style="width: 40px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pemberitahuan</span>
                 </a>
                 <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
@@ -289,9 +303,10 @@
                 <!-- TopBar -->
                 <!-- TopBar -->
                 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
-                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                    <button id="sidebarToggleTop" class="btn text-gray-500 rounded-circle mr-3 white-button">
                         <i class="fa fa-bars"></i>
                     </button>
+
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
@@ -386,8 +401,7 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/girl.png" style="max-width: 60px"
-                                            alt="">
+                                        <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
@@ -416,9 +430,8 @@
                                             <div class="small float-right"><b>50%</b></div>
                                         </div>
                                         <div class="progress" style="height: 12px;">
-                                            <div class="progress-bar bg-success" role="progressbar"
-                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
+                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </a>
@@ -428,9 +441,6 @@
                             </div>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
-
-
-
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -440,46 +450,46 @@
                                     style="max-width: 100px">
                                 <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
                                     @if (Auth::check())
-                                        {{-- Mengecek apakah pengguna sudah login --}}
-                                        <span style="font-weight: bold; color: white;">{{ Auth::user()->name }}</span>
-                                        {{-- Tampilkan nama pengguna --}}
-                                        <ul class="list-group list-group-flush"
-                                            style="background-color: transparent;">
-                                            @if (Auth::user()->role == 'teknisi')
-                                                <li class="list-group-item"
-                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                    {{-- Mengecek apakah pengguna sudah login --}}
+                                    <span style="font-weight: bold; color: white;">{{ Auth::user()->name }}</span>
+                                    {{-- Tampilkan nama pengguna --}}
+                                    <ul class="list-group list-group-flush" style="background-color: transparent;">
+                                        @if (Auth::user()->role == 'teknisi')
+                                        <li class="list-group-item"
+                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                                </li>
-                                            @endif
+                                        </li>
+                                        @endif
 
-                                            @if (Auth::user()->role == 'admin')
-                                                <li class="list-group-item"
-                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                        @if (Auth::user()->role == 'admin')
+                                        <li class="list-group-item"
+                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                                </li>
-                                            @endif
+                                        </li>
+                                        @endif
 
-                                            @if (Auth::user()->role == 'superadmin')
-                                                <li class="list-group-item"
-                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                        @if (Auth::user()->role == 'superadmin')
+                                        <li class="list-group-item"
+                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                                </li>
-                                            @endif
-                                        </ul>
+                                        </li>
+                                        @endif
+                                    </ul>
                                     @else
-                                        {{-- Pengalihan atau pesan error jika pengguna belum login --}}
+                                    {{-- Pengalihan atau pesan error jika pengguna belum login --}}
                         <li class="list-group-item" style="background-color: transparent; border: none; color: red;">
                             Silakan login untuk melihat menu.
                         </li>
                         {{-- Bisa juga dialihkan ke halaman login --}}
                         <script>
                             window.location.href = "{{ route('login') }}";
-                            {{-- Mengalihkan ke halaman login --}}
+                            {
+                                {
+                                    --Mengalihkan ke halaman login--
+                                }
+                            }
                         </script>
                         @endif
-
-
-
 
             </div>
             </a>
@@ -510,34 +520,34 @@
 
 
 
-            <div class="mr-4 d-sm-flex align-items-center justify-content-between">
-                <h4 class="h2" style="color: black;"></h4>
-                <ol class="breadcrumb">
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h6 class="h6 text-center" style="color: black;"></h6>
+                <ol class="breadcrumb d-flex align-items-center">
                     <!-- Jam Berjalan -->
-                    <div class="h4 font-weight-bold mr-3" style="color: black;">
+                    <div class="h6 font-weight-bold mr-3" style="color: black;">
                         <span id="liveClock"></span>
                     </div>
-                    <div class="h4 font-weight-bold" style="color: black;">
+                    <div class="h6 font-weight-bold" style="color: black;">
                         {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
                     </div>
-
-
-                    <script>
-                        function updateClock() {
-                            const now = new Date();
-                            const hours = String(now.getHours()).padStart(2, '0');
-                            const minutes = String(now.getMinutes()).padStart(2, '0');
-                            const seconds = String(now.getSeconds()).padStart(2, '0');
-                            const formattedTime = `${hours}:${minutes}:${seconds}`;
-                            document.getElementById('liveClock').textContent = formattedTime;
-                        }
-
-                        // Update jam setiap detik
-                        setInterval(updateClock, 1000);
-                        updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
-                    </script>
                 </ol>
             </div>
+
+            <script>
+                function updateClock() {
+                    const now = new Date();
+                    const hours = String(now.getHours()).padStart(2, '0');
+                    const minutes = String(now.getMinutes()).padStart(2, '0');
+                    const seconds = String(now.getSeconds()).padStart(2, '0');
+                    const formattedTime = `${hours}:${minutes}:${seconds}`;
+                    document.getElementById('liveClock').textContent = formattedTime;
+                }
+
+                // Update jam setiap detik
+                setInterval(updateClock, 1000);
+                updateClock(); // Panggil fungsi segera untuk menampilkan waktu saat ini tanpa menunggu 1 detik
+            </script>
+
 
             <!-- Topbar -->
 

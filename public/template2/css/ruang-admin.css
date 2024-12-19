@@ -2003,3 +2003,8 @@ body.sidebar-toggled footer.sticky-footer {
     color: white; /* Menyesuaikan warna teks agar kontras */
     border-color: #1d3cea; /* Mengatur warna border */
 }
+
+
+.custom-padding .card-body {
+    padding: 1px;  /* Mengatur padding sesuai kebutuhan, bisa disesuaikan */
+}

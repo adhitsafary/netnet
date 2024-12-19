@@ -1,4 +1,4 @@
-@extends('layout_login')
+@extends($layout)
 
 @section('konten')
 <!DOCTYPE html>
@@ -48,7 +48,7 @@
             margin-top: 20px;
             padding: 10px;
             border-radius: 5px;
-            background-color: rgb(85, 85, 85);
+            background-color:rgb(85, 85, 85);
             color: #333;
         }
 
@@ -95,12 +95,11 @@
 
 <body>
 
-    <div class="container mt-2">
-      
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Form Absensi</h1>
 
         <!-- Card Form -->
-        <div class="card ml-4 mr-4 mb-5">
-        <h6 class="text-center" style="font-weight: 700;">Form Absensi kehadiran</h6>
+        <div class="card">
             <div class="card-body">
                 <form id="absensi-form">
                     <div class="mb-4">
@@ -113,7 +112,7 @@
                         <video id="video" autoplay></video>
                         <canvas id="canvas"></canvas>
                         <br>
-                        <button type="button" id="snap" class="btn btn-danger mt-3">Ambil Foto</button>
+                        <button type="button" id="snap" class="btn btn-primary mt-3">Ambil Foto</button>
                     </div>
 
                     <input type="hidden" id="foto" name="foto">
@@ -124,7 +123,7 @@
                         <input type="text" id="jam_pulang" name="jam_pulang" class="form-control" readonly>
                     </div>
 
-                    <button type="submit" class="btn btn-danger w-100 mt-4">Submit</button>
+                    <button type="submit" class="btn btn-success w-100 mt-4">Submit</button>
                 </form>
 
                 <!-- Loading Spinner -->
@@ -144,9 +143,7 @@
         const context = canvas.getContext("2d");
 
         // Mengaktifkan kamera
-        navigator.mediaDevices.getUserMedia({
-                video: true
-            })
+        navigator.mediaDevices.getUserMedia({ video: true })
             .then((stream) => {
                 video.srcObject = stream;
             })
@@ -166,46 +163,14 @@
         });
 
         // Mendapatkan lokasi pengguna
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
+        navigator.geolocation.getCurrentPosition((position) => {
+            document.querySelector("#titik_lokasi").value =
+                position.coords.latitude + "," + position.coords.longitude;
+        }, (error) => {
+            console.error("Error getting location: ", error);
+            alert("Gagal mendapatkan lokasi.");
+        });
 
-                    // Menampilkan koordinat sementara
-                    document.querySelector("#titik_lokasi").value = `${latitude}, ${longitude}`;
-
-                    try {
-                        const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`);
-                        const data = await response.json();
-                        const placeName = data.display_name || "Lokasi tidak diketahui";
-
-                        // Menambahkan latitude dan longitude di belakang nama lokasi
-                        document.querySelector("#titik_lokasi").value = `${placeName} ( ${latitude}, ${longitude} )`;
-                    } catch (error) {
-                        console.error("Error fetching location name:", error);
-                        alert("Gagal mendapatkan nama lokasi. Hanya menyimpan koordinat.");
-                        document.querySelector("#titik_lokasi").value = `${latitude}, ${longitude}`;
-                    }
-                },
-                (error) => {
-                    let errorMessage = "Gagal mendapatkan lokasi.";
-                    switch (error.code) {
-                        case error.PERMISSION_DENIED:
-                            errorMessage = "Akses lokasi ditolak. Mohon izinkan akses lokasi.";
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            errorMessage = "Informasi lokasi tidak tersedia.";
-                            break;
-                        case error.TIMEOUT:
-                            errorMessage = "Permintaan lokasi melebihi batas waktu.";
-                            break;
-                        default:
-                            errorMessage = "Terjadi kesalahan dalam mendapatkan lokasi.";
-                    }
-                    alert(errorMessage);
-                    console.error("Geolocation Error:", error);
-                }
-        );
         // Debugging Script
         document.querySelector("#absensi-form").addEventListener("submit", async (e) => {
             e.preventDefault();
@@ -267,6 +232,5 @@
     </script>
 
 </body>
-
 </html>
 @endsection
