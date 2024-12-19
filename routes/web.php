@@ -381,7 +381,7 @@ Route::post('/pelanggan/{id}/process-payment', [AutomatisPaymentController::clas
 Route::get('/pembayaran/mudah', [PembayaranMudahController::class, 'index'])->name('pembayaran_mudah.index');
 
 Route::get('/pembayaran/mudah/coba', [PembayaranMudahController::class, 'coba'])->name('pembayaran_mudah.coba');
-Route::get('/pembayaran/mudah/bayar_hp', [PembayaranMudahController::class, 'bayar_hp'])->name('pembayaran_mudah.bayar_hp');
+Route::get('/pembayaran/mudah/bayar_hp', [PembayaranMudahController::class, 'bayar_hp'])->name(name: 'pembayaran_mudah.bayar_hp');
 
 
 //absensi
@@ -389,3 +389,23 @@ Route::post('/absensi', [AbsensiController::class, 'store']);
 Route::get('/hitung-gaji/{user_id}', [AbsensiController::class, 'hitungGaji']);
 Route::get('/form-absensi', [AbsensiController::class, 'showAbsensiForm']);
 Route::get('/form-gaji', [AbsensiController::class, 'showGajiForm']);
+
+Route::get('/absensi/splash', [AbsensiController::class, 'splash'])->name('absensi.splash');
+//Route::get('/absensi/login', [AbsensiController::class,   'login'])->name('absensi.login');
+Route::get('/absensi/absen', [AbsensiController::class, 'absen'])->name('absensi.absen');
+
+Route::get('/absensi/dashboard', [AbsensiController::class, 'getAbsensiData'])->name('absensi.dashboard');
+
+
+//midleware
+Route::middleware(['guest'])->group(function () {
+    // Rute untuk halaman login
+    Route::get('/absensi/index', [AbsensiController::class, 'index'])->name('absensi.index');
+    Route::post('/absensi/index', [AbsensiController::class, 'login']);
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/absensi/masuk', [AbsensiController::class, 'store']);
+    Route::post('/absensi/pulang', [AbsensiController::class, 'updatePulang']);
+});
+

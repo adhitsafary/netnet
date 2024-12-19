@@ -39,7 +39,7 @@
 <body>
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="login-container">
-            <img class="d-block mx-auto login-logo mb-3" src="{{ asset('template2/img/logo/logo2.png') }}"
+            <img class="d-block mx-auto login-logo mb-3" src="{{ asset('template2/img/logo/logo.png') }}"
                 alt="Logo">
             <h3 class="text-center">Net Digital Grup</h3>
             <h4 class="mb-3 text-center">Login</h4>
