@@ -28,7 +28,7 @@ class NotificationController extends Controller
                 ],
             ]);
         } catch (\Exception $e) {
-            \Log::error("Telegram Notification Error: " . $e->getMessage());
+          //  \Log::error("Telegram Notification Error: " . $e->getMessage());
         }
     }
 
