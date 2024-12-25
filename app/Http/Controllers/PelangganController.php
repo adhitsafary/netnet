@@ -1857,7 +1857,7 @@ class PelangganController extends Controller
             'alamat_plg' => $pelanggan->alamat_plg,
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
             'jumlah_pembayaran' => $pelanggan->harga_paket,
-            'no_telepon_plg' => $pelanggan->no_telepon_plg,
+            'no_telepon_plg' => $pelanggan->no_telepon_plg ,
             'tgl_tagih_plg' => $pelanggan->tgl_tagih_plg,
             'paket_plg' => $pelanggan->paket_plg,
             'aktivasi_plg' => $pelanggan->aktivasi_plg,
