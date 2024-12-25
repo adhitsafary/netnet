@@ -147,7 +147,8 @@
                             </p>
                             <td style="padding: 0; margin: 0; text-align: center;">
                                 <a href="#" class="btn btn-success btn-xs" style="padding: 2px 5px; font-size: 0.75em;"
-                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})"><img
+                                    onclick="showBayarModal({{ $item->id }}, '{{ $item->nama_plg }}', {{ $item->harga_paket }})">
+                                    <img
                                         src="{{asset('asset/img/icon/bayar.png')}}"
                                         style="height : 30px; width : 30px; " alt=""></a>
                             </td>
@@ -247,7 +248,7 @@
                 `Nama Pelanggan: ${namaPlg}\nHarga Paket: Rp. ${hargaPaket}`;
 
             var form = document.getElementById('bayarForm');
-            form.action = `/pelanggan/${id}/bayar2`; // Set action URL with the ID
+            form.action = `/pelanggan/${id}/bayar_mudah_hp`; // Set action URL with the ID
 
             var bayarModal = new bootstrap.Modal(document.getElementById('bayarModal'));
             bayarModal.show();

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('template2/img/logo/logo.png') }}" rel="icon">
+    <link href="{{ asset('asset/img/logo.png') }}" rel="icon">
     <title>NetDigitalGroup</title>
     <link href="{{ asset('template2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template2/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
@@ -25,7 +25,7 @@
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/masuk/admin">
                 <div class="sidebar-brand-icon">
-                    <img src="{{ asset('template2/img/logo/logo2.png') }}">
+                    <img src="{{ asset('asset/img/logo.png') }}">
                 </div>
                 <div class="sidebar-brand-text mx-3">Net Digital Group</div>
             </a>

@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exports\PelangganExport;
 use App\Models\Pemberitahuan;
+use GuzzleHttp\Client;
+
 
 class PelangganController extends Controller
 {
@@ -1627,9 +1629,7 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.psb')->with('success', 'Pelanggan Baru berhasil Ditambahkan .');
     }
 
-    public function show(string $id)
-    {
-    }
+    public function show(string $id) {}
 
 
     public function edit(string $id_plg)
@@ -1731,11 +1731,9 @@ class PelangganController extends Controller
 
         // Cek apakah admin memilih bulan pembayaran
         if ($request->filled('tanggal_pembayaran')) {
-            // Jika ada tanggal dipilih, gunakan yang dipilih admin
             $tanggalPembayaran = $request->tanggal_pembayaran . '-' . $pelanggan->tgl_tagih_plg;
             $bulanPembayaran = $request->tanggal_pembayaran; // Simpan hanya Y-m (untuk pengecekan bulan)
         } else {
-            // Jika tidak ada tanggal dipilih, gunakan bulan sekarang
             $tanggalPembayaran = Carbon::now()->format('Y-m') . '-' . $pelanggan->tgl_tagih_plg;
             $bulanPembayaran = Carbon::now()->format('Y-m'); // Simpan hanya Y-m (untuk pengecekan bulan)
         }
@@ -1746,7 +1744,6 @@ class PelangganController extends Controller
             ->exists();
 
         if ($existingPayment) {
-            // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
             return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
@@ -1755,7 +1752,7 @@ class PelangganController extends Controller
         $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
 
         // Simpan data ke tabel bayar_pelanggan
-        BayarPelanggan::create([
+        $payment = BayarPelanggan::create([
             'pelanggan_id' => $pelanggan->id,
             'id_plg' => $pelanggan->id_plg ?? null,
             'nama_plg' => $pelanggan->nama_plg,
@@ -1770,8 +1767,6 @@ class PelangganController extends Controller
             'untuk_pembayaran' => $request->untuk_pembayaran,
             'keterangan_plg' => $request->keterangan_plg,
             'tanggal_pembayaran' => $tanggalPembayaran, // Simpan tanggal pembayaran
-
-            // Tambahkan nama admin yang melakukan pembayaran
             'admin_name' => $adminName,
         ]);
 
@@ -1779,12 +1774,44 @@ class PelangganController extends Controller
         $pelanggan->status_pembayaran = 'sudah bayar';
         $pelanggan->save();
 
+        // Kirim notifikasi Telegram
+        $this->sendTelegramNotification($payment);
+
         // Redirect ke halaman history pembayaran dengan pesan sukses
         return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
-    public function bayar2(Request $request)
+    // Fungsi untuk mengirim notifikasi ke Telegram
+    private function sendTelegramNotification($payment)
+    {
+        $token = '7085351448:AAErPRbIkJJOwkDTIMFUlwNU3AN_UQ1cRkY';
+        $chat_id = '5985430823';
+        $url = "https://api.telegram.org/bot{$token}/sendMessage";
+
+        $message = "💰 *Notifikasi Pembayaran Baru*\n\n" .
+            "👤 *Nama Pelanggan:* {$payment->nama_plg}\n" .
+            "💵 *Jumlah Pembayaran:* Rp " . number_format($payment->jumlah_pembayaran, 0, ',', '.') . "\n" .
+            "📅 *Tanggal Pembayaran:* {$payment->tanggal_pembayaran}\n" .
+            "💳 *Metode Transaksi:* {$payment->metode_transaksi}\n" .
+            "📝 *Untuk Pembayaran:* {$payment->untuk_pembayaran}";
+
+        $client = new Client();
+
+        try {
+            $client->post($url, [
+                'form_params' => [
+                    'chat_id' => $chat_id,
+                    'text' => $message,
+                    'parse_mode' => 'Markdown',
+                ],
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Telegram Notification Error: " . $e->getMessage());
+        }
+    }
+
+    public function bayar_mudah_hp(Request $request)
     {
         // Validasi input
         $request->validate([
@@ -1815,7 +1842,7 @@ class PelangganController extends Controller
 
         if ($existingPayment) {
             // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
-            return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
+            return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
 
@@ -1823,7 +1850,7 @@ class PelangganController extends Controller
         $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
 
         // Simpan data ke tabel bayar_pelanggan
-        BayarPelanggan::create([
+        $payment = BayarPelanggan::create([
             'pelanggan_id' => $pelanggan->id,
             'id_plg' => $pelanggan->id_plg ?? null,
             'nama_plg' => $pelanggan->nama_plg,
@@ -1847,10 +1874,14 @@ class PelangganController extends Controller
         $pelanggan->status_pembayaran = 'sudah bayar';
         $pelanggan->save();
 
+        //kirim notifikasi ke telegram
+        $this->sendTelegramNotification($payment);
+
         // Redirect ke halaman history pembayaran dengan pesan sukses
         return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
+
 
 
 

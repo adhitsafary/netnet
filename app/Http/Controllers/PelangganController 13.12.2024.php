@@ -1217,7 +1217,7 @@ class PelangganController extends Controller
 
         // Ambil data pelanggan dengan pagination
         $pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
-        
+
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)
@@ -1782,7 +1782,7 @@ class PelangganController extends Controller
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
-    public function bayar2(Request $request)
+    public function bayar_mudah_hp(Request $request)
     {
         // Validasi input
         $request->validate([
@@ -1850,7 +1850,7 @@ class PelangganController extends Controller
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
-    
+
 
 
 
