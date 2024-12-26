@@ -35,6 +35,7 @@ use App\Models\Pelangganof;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\TanggalController;
 
 //PERBAIKAN
 Route::get('/home', [PelangganController::class, 'home'])->name('index');
@@ -390,3 +391,8 @@ Route::post('/absensi/hapus/{id}', [AbsensiController::class, 'destroy'])->name(
 //Payment Notifiaksi ke telegram
 Route::post('/store-payment', [NotificationController::class, 'storePayment'])->name('store.payment');
 Route::get('/send-notification', [NotificationController::class, 'notifyLatesPayment'])->name('send.notification');
+
+
+//merubah tanggal di web
+Route::get('/ubah-tanggal', [TanggalController::class, 'index'])->name('ubah-tanggal.index');
+Route::post('/ubah-tanggal/update', [TanggalController::class, 'update'])->name('ubah-tanggal.update');

@@ -199,21 +199,21 @@
 
 
     @if (session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+    <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
 
     @if (session('alert'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            {{ session('alert') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('alert') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
     @if (session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     @endif
 
     <!-- Tampilkan jumlah total pembayaran dan jumlah pelanggan -->
@@ -227,20 +227,20 @@
                     <option value="">Tanggal Tagih</option>
                     @for ($i = 1; $i <= 33; $i++)
                         <option value="{{ $i }}" {{ request('tgl_tagih_plg') == $i ? 'selected' : '' }}>
-                            {{ $i }}
+                        {{ $i }}
                         </option>
-                    @endfor
+                        @endfor
                 </select>
                 <select name="paket_plg" id="paket_plg">
                     <option value="">Paket</option>
                     @for ($i = 1; $i <= 7; $i++)
                         <option value="{{ $i }}" {{ request('paket_plg') == $i ? 'selected' : '' }}>
-                            {{ $i }}
+                        {{ $i }}
                         </option>
-                    @endfor
-                    <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
-                        vcr
-                    </option>
+                        @endfor
+                        <option value="vcr" {{ request('paket_plg') == 'vcr' ? 'selected' : '' }}>
+                            vcr
+                        </option>
                 </select>
 
                 <select name="harga_paket" id="harga_paket">
@@ -329,94 +329,125 @@
             </thead>
             <tbody>
                 @forelse ($pelanggan as $no => $item)
-                                    <tr class="">
-                                        <td style="padding: 1px;">
-                                            <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                                style="text-decoration: none; color: inherit;">
-                                                {{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}
-                                            </a>
-                                        </td>
+                <tr class="">
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ ($pelanggan->currentPage() - 1) * $pelanggan->perPage() + $loop->iteration }}
+                        </a>
+                    </td>
 
-                                        <!-- ID Pelanggan -->
-                                        <td style="padding: 1px;">
-                                            <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                                style="text-decoration: none; color: inherit;">
-                                                {{ $item->id_plg }}
-                                            </a>
-                                        </td>
+                    <!-- ID Pelanggan -->
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->id_plg }}
+                        </a>
+                    </td>
 
-                                        <!-- Nama Pelanggan -->
-                                        <td style="padding: 1px;">
-                                            <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                                style="text-decoration: none; color: inherit;">
-                                                {{ $item->nama_plg }}
-                                            </a>
-                                        </td>
+                    <!-- Nama Pelanggan -->
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->nama_plg }}
+                        </a>
+                    </td>
 
-                                        <td style="padding: 1px;">
-                                            <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                                style="text-decoration: none; color: inherit;">
-                                                {{ $item->alamat_plg }}
-                                            </a>
-                                        </td>
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->alamat_plg }}
+                        </a>
+                    </td>
 
-                                        <td style="padding: 1px;">
-                                            <a href="{{ route('pelanggan.detail', $item->id) }}"
-                                                style="text-decoration: none; color: inherit;">
-                                                {{ $item->no_telepon_plg }}
-                                            </a>
-                                        </td>
-                                        <td style="padding: 1px;">{{ $item->aktivasi_plg }}</td>
-                                        <td style="padding: 1px;">{{ $item->paket_plg }}</td>
-                                        <td style="padding: 1px;">{{ number_format($item->harga_paket, 0, ',', '.') }}</td>
-                                        <td style="width: 1%; padding: 0; margin: 0; text-align: center;">{{ $item->tgl_tagih_plg }}</td>
-                                        <td style="padding: 1px;">{{ $item->keterangan_plg }}</td>
-                                        <td style="padding: 1px;">
-                                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->no_telepon_plg }}
+                        </a>
+                    </td>
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->aktivasi_plg }}
+                        </a>
+                    </td>
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->paket_plg }}
+                        </a>
+                    </td>
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ number_format($item->harga_paket, 0, ',', '.') }}
+                        </a>
+                    </td>
+                    <td style="width: 1%; padding: 0; margin: 0; text-align: center;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->tgl_tagih_plg }}
+                        </a>
+                    </td>
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ $item->keterangan_plg }}
+                        </a>
+                    </td>
+
+                    <td style="padding: 1px;">
+                        <a href="{{ route('pelanggan.detail', $item->id) }}"
+                            style="text-decoration: none; color: inherit;">
+                            {{ optional($item->pembayaranTerakhir)->tanggal_pembayaran
                             ? \Carbon\Carbon::parse($item->pembayaranTerakhir->tanggal_pembayaran)->locale('id')->isoFormat('MMMM Y')
                             : '-' }}
-                                        </td>
+                        </a>
+                    </td>
 
-                                        <!---
+                    <!---
                                 <td style="padding: 1px;">
                                     <span class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white">
                                         {{ $item->status_pembayaran }}
                                     </span>
                                 </td>
                                     -->
-                                        <td class="row" style="padding: 2px; font-size: 0.8em; height: 10px;">
-                                            <select name="tanggal_pembayaran" class="form-control ml-4" onchange="this.form.submit()"
-                                                style="width: 16%;  padding: 2px; height: 25px;">
-                                                <option value="">Riwayat Pembayaran</option>
-                                                @foreach ($item->pembayaran as $pembayaran)
-                                                                        @php
-                                                                            $tanggalPembayaran = \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran);
-                                                                            $isDanger = $tanggalPembayaran->lessThan(now()->startOfMonth());
-                                                                        @endphp
-                                                                        <option value="{{ $tanggalPembayaran->format('Y-m-d') }}">
-                                                                            {{ $tanggalPembayaran->locale('id')->isoFormat('MMMM Y') }}</option>
-                                                @endforeach
-                                                @if (!$item->pembayaran->count())
-                                                    <option value="">Belum Ada Pembayaran</option>
-                                                @endif
-                                            </select>
-                                            <span
-                                                class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2"
-                                                style="font-size: 0.75em; height: 20px; line-height: 20px;">{{ $item->status_pembayaran }}</span>
-                                        </td>
+                    <td class="row" style="padding: 2px; font-size: 0.8em; height: 10px;">
+
+                        <select name="tanggal_pembayaran" class="form-control ml-4" onchange="this.form.submit()"
+                            style="width: 16%;  padding: 2px; height: 25px;">
+                            <option value="">Riwayat Pembayaran</option>
+                            @foreach ($item->pembayaran as $pembayaran)
+                            @php
+                            $tanggalPembayaran = \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran);
+                            $isDanger = $tanggalPembayaran->lessThan(now()->startOfMonth());
+                            @endphp
+                            <option value="{{ $tanggalPembayaran->format('Y-m-d') }}">
+                                {{ $tanggalPembayaran->locale('id')->isoFormat('MMMM Y') }}
+                            </option>
+                            @endforeach
+                            @if (!$item->pembayaran->count())
+                            <option value="">Belum Ada Pembayaran</option>
+                            @endif
+                        </select>
+                        <span
+                            class="badge {{ strcasecmp($item->status_pembayaran, 'Sudah Bayar') === 0 ? 'bg-success' : 'bg-danger' }} text-white ml-2"
+                            style="font-size: 0.75em; height: 20px; line-height: 20px;">{{ $item->status_pembayaran }}</span>
+                    </td>
 
 
 
 
-                                        <!--  <td style="padding: 0; margin: 0; text-align: center;">
+                    <!--  <td style="padding: 0; margin: 0; text-align: center;">
                         <a href="{{ route('pelanggan.detail', $item->id) }}" class="btn btn-warning btn-xs" style="padding: 2px 5px; font-size: 0.75em;">Detail</a>
                     </td> -->
 
-                                    </tr>
+                </tr>
                 @empty
-                    <tr>
-                        <td colspan="14" class="text-center" style="padding: 10px;">Tidak ada data ditemukan</td>
-                    </tr>
+                <tr>
+                    <td colspan="14" class="text-center" style="padding: 10px;">Tidak ada data ditemukan</td>
+                </tr>
                 @endforelse
 
 
