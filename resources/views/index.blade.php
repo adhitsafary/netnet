@@ -3,9 +3,8 @@
 @section('konten')
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-2">
-
-
     </div>
+
 
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->
@@ -186,7 +185,7 @@
                         <h6 class="m-0 pl-3 font-weight-bold text-white">Total Tagihan</h6>
                         <div class="text-white h6 mb-0 font-weight-bold pl-3">
                             Rp {{ number_format($totalTagihanHariIni, 0, ',', '.') }} <br> User :
-                            {{ $totalUserTertagih }}
+                            {{ $jumlahPelangganMembayarHariIni }}
                         </div>
                     </div>
                     <!-- Baru Terbayar -->
@@ -204,7 +203,7 @@
                         <h6 class="m-0 pl-3 font-weight-bold text-white">Sisa Tagihan</h6>
                         <div class="text-white h6 mb-0 font-weight-bold pl-3">
                             Rp {{ number_format($totalTagihanTertagih, 0, ',', '.') }} <br> User :
-                            {{ $totalUserHarian_semua }}
+                            {{ $totalUserTertagih }}
                         </div>
                     </div>
 
@@ -233,17 +232,17 @@
                     </thead>
                     <tbody>
                         @forelse($pemberitahuan as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item->nama }}</td>
-                                <td>{{ $item->pesan }}</td>
-                                <td>{{ $item->updated_at }}</td>
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->nama }}</td>
+                            <td>{{ $item->pesan }}</td>
+                            <td>{{ $item->updated_at }}</td>
 
-                            </tr>
+                        </tr>
                         @empty
-                            <tr>
-                                <td colspan="4" class="text-center">Tidak ada pemberitahuan.</td>
-                            </tr>
+                        <tr>
+                            <td colspan="4" class="text-center">Tidak ada pemberitahuan.</td>
+                        </tr>
                         @endforelse
                     </tbody>
                 </table>
@@ -314,24 +313,24 @@
                 data: {
                     labels: labels, // Label (Tanggal 1-30)
                     datasets: [{
-                        label: 'Jumlah Pengguna Bayar',
-                        data: totalUsers, // Data jumlah pengguna per hari
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna batang putih semi transparan
-                        borderColor: 'rgb(255, 157, 0)', // Warna border batang putih
-                        borderWidth: 1,
-                        pointRadius: 8, // Mengatur ukuran titik (besar)
-                        pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
-                    },
-                    {
-                        label: 'Total Pembayaran (Rp)',
-                        data: totalPembayaran, // Data total pembayaran per hari
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna grafik garis putih semi transparan
-                        borderColor: 'rgb(255, 157, 0)', // Warna border garis putih
-                        borderWidth: 1,
-                        type: 'line', // Grafik tipe garis (line)
-                        pointRadius: 8, // Mengatur ukuran titik untuk garis (besar)
-                        pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
-                    }
+                            label: 'Jumlah Pengguna Bayar',
+                            data: totalUsers, // Data jumlah pengguna per hari
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna batang putih semi transparan
+                            borderColor: 'rgb(255, 157, 0)', // Warna border batang putih
+                            borderWidth: 1,
+                            pointRadius: 8, // Mengatur ukuran titik (besar)
+                            pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
+                        },
+                        {
+                            label: 'Total Pembayaran (Rp)',
+                            data: totalPembayaran, // Data total pembayaran per hari
+                            backgroundColor: 'rgba(255, 255, 255, 0.2)', // Warna grafik garis putih semi transparan
+                            borderColor: 'rgb(255, 157, 0)', // Warna border garis putih
+                            borderWidth: 1,
+                            type: 'line', // Grafik tipe garis (line)
+                            pointRadius: 8, // Mengatur ukuran titik untuk garis (besar)
+                            pointHoverRadius: 10 // Mengatur ukuran titik saat di-hover (lebih besar)
+                        }
                     ]
                 },
                 options: {
@@ -417,9 +416,9 @@
                         displayColors: false,
                         caretPadding: 10,
                         callbacks: {
-                            label: function (tooltipItem, data) {
+                            label: function(tooltipItem, data) {
                                 var dataset = data.datasets[tooltipItem.datasetIndex];
-                                var total = dataset.data.reduce(function (previousValue, currentValue) {
+                                var total = dataset.data.reduce(function(previousValue, currentValue) {
                                     return previousValue + currentValue;
                                 });
                                 var currentValue = dataset.data[tooltipItem.index];
@@ -484,9 +483,9 @@
                         displayColors: false,
                         caretPadding: 10,
                         callbacks: {
-                            label: function (tooltipItem, data) {
+                            label: function(tooltipItem, data) {
                                 var dataset = data.datasets[tooltipItem.datasetIndex];
-                                var total = dataset.data.reduce(function (previousValue, currentValue) {
+                                var total = dataset.data.reduce(function(previousValue, currentValue) {
                                     return previousValue + currentValue;
                                 });
                                 var currentValue = dataset.data[tooltipItem.index];
@@ -611,3 +610,11 @@
             </span>
         </div>
     </div>
+
+
+    <script>
+        // Auto-refresh halaman setiap 30 detik
+        setInterval(() => {
+            location.reload(); // Reload halaman
+        }, 30000); // 30.000 ms = 30 detik
+    </script>

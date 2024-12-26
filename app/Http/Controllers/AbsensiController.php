@@ -10,6 +10,7 @@ use App\Models\Karyawan;
 use App\Models\KaryawanModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -309,7 +310,7 @@ class AbsensiController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store2223(Request $request)
     {
         try {
             // Log data yang diterima
@@ -377,7 +378,7 @@ class AbsensiController extends Controller
                     'data' => $absensiMasuk
                 ], 201);
             } elseif (!$absensiMasuk && !$absensiPulang) {
-                // Jika belum ada absensi, simpan absensi pertama (jam masuk)
+
                 $absensi = Absensi::create([
                     'user_id' => $userId,
                     'foto' => 'uploads/' . $filename,
@@ -406,7 +407,190 @@ class AbsensiController extends Controller
         }
     }
 
+    public function store_dengan_emot(Request $request)
+    {
+        try {
+            Log::info('Data diterima dari frontend:', $request->all());
 
+            $validated = $request->validate([
+                'foto' => 'required|string',
+                'titik_lokasi' => 'required|string',
+            ]);
+
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->foto));
+            $filename = time() . '.png';
+            $folderPath = public_path('uploads');
+
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+
+            file_put_contents($folderPath . '/' . $filename, $imageData);
+
+            $userId = auth()->id();
+            $userName = auth()->user()->name; // Pastikan field 'name' ada di tabel pengguna
+            $today = now()->toDateString();
+
+            $absensiMasuk = Absensi::where('user_id', $userId)
+                ->whereDate('jam_masuk', $today)
+                ->first();
+
+            $absensiPulang = Absensi::where('user_id', $userId)
+                ->whereDate('jam_masuk', $today)
+                ->whereNotNull('jam_pulang')
+                ->first();
+
+            $chatId = '5985430823';
+
+            if ($absensiMasuk && !$absensiPulang) {
+                $absensiMasuk->jam_pulang = now();
+                $absensiMasuk->foto = 'uploads/' . $filename;
+                $absensiMasuk->titik_lokasi = $validated['titik_lokasi'];
+                $absensiMasuk->save();
+
+                $formattedJamPulang = $absensiMasuk->jam_pulang->format('H:i:s');
+                $message = "👤 Nama : {$userName}\n📍 Titik Lokasi : {$validated['titik_lokasi']}\n🔚 Jam Pulang : {$formattedJamPulang}";
+                self::sendMessage($chatId, $message);
+
+                Log::info('Absensi pulang berhasil disimpan:', $absensiMasuk->toArray());
+
+                return response()->json([
+                    'message' => 'Absensi pulang berhasil disimpan!',
+                    'jam_pulang' => $formattedJamPulang,
+                    'data' => $absensiMasuk
+                ], 201);
+            } elseif (!$absensiMasuk && !$absensiPulang) {
+                $absensi = Absensi::create([
+                    'user_id' => $userId,
+                    'foto' => 'uploads/' . $filename,
+                    'jam_masuk' => now(),
+                    'titik_lokasi' => $validated['titik_lokasi'],
+                    'jam_pulang' => null,
+                ]);
+
+                $formattedJamMasuk = $absensi->jam_masuk->format('H:i:s');
+                $message = "👤 Nama: {$userName}\n📍 Titik Lokasi: {$validated['titik_lokasi']}\n🔛 Jam Masuk : {$formattedJamMasuk}";
+                self::sendMessage($chatId, $message);
+
+                Log::info('Absensi masuk berhasil disimpan:', $absensi->toArray());
+
+                return response()->json([
+                    'message' => 'Absensi masuk berhasil disimpan!',
+                    'data' => $absensi
+                ], 201);
+            } else {
+                return response()->json([
+                    'message' => 'Kamu sudah absen hari ini.',
+                ], 400);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error saat menyimpan absensi:', ['error' => $e->getMessage()]);
+            return response()->json(['message' => 'Terjadi kesalahan.'], 500);
+        }
+    }
+
+
+    public function store(Request $request)
+    {
+        try {
+            // Log data yang diterima
+            Log::info('Data diterima dari frontend:', $request->all());
+
+            // Validasi data
+            $validated = $request->validate([
+                'foto' => 'required|string',
+                'titik_lokasi' => 'required|string',
+            ]);
+
+            // Proses simpan file foto
+            $imageData = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->foto));
+            $filename = time() . '.png';
+            $folderPath = public_path('uploads');
+
+            if (!file_exists($folderPath)) {
+                mkdir($folderPath, 0777, true);
+            }
+
+            if (!is_writable($folderPath)) {
+                Log::error('Folder uploads tidak dapat ditulis:', ['folder' => $folderPath]);
+                return response()->json(['message' => 'Server tidak dapat menyimpan file foto.'], 500);
+            }
+
+            file_put_contents($folderPath . '/' . $filename, $imageData);
+
+            // Cek apakah sudah ada absensi untuk hari ini
+            $userId = auth()->id();
+            $today = now()->toDateString();
+
+            $absensiMasuk = Absensi::where('user_id', $userId)
+                ->whereDate('jam_masuk', $today)
+                ->first();
+
+            $absensiPulang = Absensi::where('user_id', $userId)
+                ->whereDate('jam_masuk', $today)
+                ->whereNotNull('jam_pulang')
+                ->first();
+
+            $chatId = '5985430823';
+            $botToken = '7085351448:AAErPRbIkJJOwkDTIMFUlwNU3AN_UQ1cRkY';
+
+            if ($absensiMasuk && !$absensiPulang) {
+                // Update jam_pulang
+                $absensiMasuk->jam_pulang = now();
+                $absensiMasuk->foto = 'uploads/' . $filename;
+                $absensiMasuk->titik_lokasi = $validated['titik_lokasi'];
+                $absensiMasuk->save();
+
+                $formattedJamPulang = $absensiMasuk->jam_pulang->format('H:i:s');
+
+                // Kirim notifikasi ke Telegram
+                $message = "Absensi Pulang 🏠:\n" .
+                    "🧑 Nama: " . auth()->user()->name . "\n" .
+                    "📍 Titik Lokasi: {$validated['titik_lokasi']}\n" .
+                    "🏠 Jam Pulang: {$formattedJamPulang}";
+                self::sendMessage($chatId, $message, $botToken);
+
+                Log::info('Absensi pulang berhasil disimpan:', $absensiMasuk->toArray());
+
+                return response()->json([
+                    'message' => 'Absensi pulang berhasil disimpan!',
+                    'jam_pulang' => $formattedJamPulang,
+                    'data' => $absensiMasuk
+                ], 201);
+            } elseif (!$absensiMasuk && !$absensiPulang) {
+                // Buat absensi baru
+                $absensi = Absensi::create([
+                    'user_id' => $userId,
+                    'foto' => 'uploads/' . $filename,
+                    'jam_masuk' => now(),
+                    'titik_lokasi' => $validated['titik_lokasi'],
+                    'jam_pulang' => null,
+                ]);
+
+                // Kirim notifikasi ke Telegram
+                $message = "Absensi Masuk 🏢:\n" .
+                    "🧑 Nama: " . auth()->user()->name . "\n" .
+                    "📍 Titik Lokasi: {$validated['titik_lokasi']}\n" .
+                    "🏢 Jam Masuk: " . $absensi->jam_masuk->format('H:i:s');
+                self::sendMessage($chatId, $message, $botToken);
+
+                Log::info('Absensi masuk berhasil disimpan:', $absensi->toArray());
+
+                return response()->json([
+                    'message' => 'Absensi masuk berhasil disimpan!',
+                    'data' => $absensi
+                ], 201);
+            } else {
+                // Sudah ada absensi masuk dan pulang pada hari yang sama
+                return response()->json([
+                    'message' => 'Kamu sudah absen hari ini.',
+                ], 400);
+            }
+        } catch (\Exception $e) {
+            Log::error('Error saat menyimpan absensi:', ['error' => $e->getMessage()]);
+            return response()->json(['message' => 'Terjadi kesalahan.'], 500);
+        }
+    }
 
 
     public function updatePulang(Request $request)
@@ -439,7 +623,7 @@ class AbsensiController extends Controller
                 ->get();
 
             // Menyiapkan data untuk dikirim ke frontend
-            $data = $absensi->map(function($item) {
+            $data = $absensi->map(function ($item) {
                 return [
                     'id' => $item->id,
                     'user_name' => $item->user->name, // Mengambil nama user
@@ -465,5 +649,37 @@ class AbsensiController extends Controller
     {
         $absensi = Absensi::all();
         return view('absensi.dashboard', compact('absensi'));
+    }
+
+    public function destroy($id)
+    {
+        $absensi = Absensi::findOrFail($id);
+        $absensi->delete();
+
+        return redirect()->route('absensi.dashboard')->with('success', 'Absensi berhasil dihapus.');
+    }
+
+
+
+    public static function sendMessage($chatId, $message)
+    {
+        try {
+            $botToken = '7085351448:AAErPRbIkJJOwkDTIMFUlwNU3AN_UQ1cRkY';
+            $url = "https://api.telegram.org/bot{$botToken}/sendMessage";
+
+            $response = Http::post($url, [
+                'chat_id' => $chatId,
+                'text' => $message,
+            ]);
+
+            if ($response->failed()) {
+                Log::error('Gagal mengirim pesan Telegram:', $response->json());
+            }
+
+            return $response->json();
+        } catch (\Exception $e) {
+            Log::error('Error saat mengirim pesan Telegram:', ['error' => $e->getMessage()]);
+            return false;
+        }
     }
 }

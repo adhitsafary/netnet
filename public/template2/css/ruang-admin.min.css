@@ -1692,3 +1692,7 @@ body {
 .element-hover:hover {
     transform: scale(1.5); /* Memperbesar elemen */
 }
+
+.custom-padding .card-body {
+    padding: 1px;  /* Mengatur padding sesuai kebutuhan, bisa disesuaikan */
+}

@@ -1517,6 +1517,14 @@
   border-radius: 50% !important;
 }
 
+.rounded-circle1 {
+  border-radius: 10% !important;
+  -webkit-border-radius: 10% !important;
+  -moz-border-radius: 10% !important;
+  -ms-border-radius: 10% !important;
+  -o-border-radius: 10% !important;
+}
+
 .rounded-pill {
   border-radius: 50rem !important;
 }

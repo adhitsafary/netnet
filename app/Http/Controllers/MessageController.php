@@ -42,7 +42,7 @@ class MessageController extends Controller
             'target' => 'required|array'
         ]);
 
-        $token = "UVaBxkcCSfifCQp4Fi5v";
+        $token = "BwoxV6XB9KcUPaEhCrB4";
         $targetNumbers = $request->input('target'); // Array of target numbers
 
         try {
@@ -152,7 +152,7 @@ class MessageController extends Controller
             'target' => 'required|array'
         ]);
 
-        $token = "PKJTTQJBTQbr5KR6PwL1";
+        $token = "BwoxV6XB9KcUPaEhCrB4";
         $targetNumbers = $request->input('target');
 
         try {

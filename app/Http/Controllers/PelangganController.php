@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Exports\PelangganExport;
 use App\Models\Pemberitahuan;
+use GuzzleHttp\Client;
+
 
 class PelangganController extends Controller
 {
@@ -420,7 +422,7 @@ class PelangganController extends Controller
 
         // Ambil data pelanggan dengan pagination
         //$pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
-        $pelanggan = $query->paginate(1000)->appends($request->all());
+        $pelanggan = $query->paginate(250)->appends($request->all());
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)
@@ -444,7 +446,7 @@ class PelangganController extends Controller
         if ($harga_paket) {
             $queryfull->where('harga_paket', $harga_paket);
         }
-
+        //
         // Filter berdasarkan paket_plg
         if ($paket_plg) {
             $queryfull->where('paket_plg', $paket_plg);
@@ -822,7 +824,8 @@ class PelangganController extends Controller
         $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
 
         // Ambil data pelanggan dengan pagination
-        $pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
+        //$pelanggan = $query->with(['pembayaran', 'pembayaranTerakhir'])->paginate(100);
+        $pelanggan = $query->paginate(250)->appends($request->all());
 
         // Tambahan: Ambil data tambahan dan hitung pembayaran masuk berdasarkan filter
         $totalJumlahPembayaranMasuk = BayarPelanggan::whereDate('created_at', $tgl_tagih_plg)
@@ -1627,9 +1630,7 @@ class PelangganController extends Controller
         return redirect()->route('pelanggan.psb')->with('success', 'Pelanggan Baru berhasil Ditambahkan .');
     }
 
-    public function show(string $id)
-    {
-    }
+    public function show(string $id) {}
 
 
     public function edit(string $id_plg)
@@ -1731,11 +1732,9 @@ class PelangganController extends Controller
 
         // Cek apakah admin memilih bulan pembayaran
         if ($request->filled('tanggal_pembayaran')) {
-            // Jika ada tanggal dipilih, gunakan yang dipilih admin
             $tanggalPembayaran = $request->tanggal_pembayaran . '-' . $pelanggan->tgl_tagih_plg;
             $bulanPembayaran = $request->tanggal_pembayaran; // Simpan hanya Y-m (untuk pengecekan bulan)
         } else {
-            // Jika tidak ada tanggal dipilih, gunakan bulan sekarang
             $tanggalPembayaran = Carbon::now()->format('Y-m') . '-' . $pelanggan->tgl_tagih_plg;
             $bulanPembayaran = Carbon::now()->format('Y-m'); // Simpan hanya Y-m (untuk pengecekan bulan)
         }
@@ -1746,7 +1745,6 @@ class PelangganController extends Controller
             ->exists();
 
         if ($existingPayment) {
-            // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
             return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
@@ -1755,7 +1753,7 @@ class PelangganController extends Controller
         $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
 
         // Simpan data ke tabel bayar_pelanggan
-        BayarPelanggan::create([
+        $payment = BayarPelanggan::create([
             'pelanggan_id' => $pelanggan->id,
             'id_plg' => $pelanggan->id_plg ?? null,
             'nama_plg' => $pelanggan->nama_plg,
@@ -1770,8 +1768,6 @@ class PelangganController extends Controller
             'untuk_pembayaran' => $request->untuk_pembayaran,
             'keterangan_plg' => $request->keterangan_plg,
             'tanggal_pembayaran' => $tanggalPembayaran, // Simpan tanggal pembayaran
-
-            // Tambahkan nama admin yang melakukan pembayaran
             'admin_name' => $adminName,
         ]);
 
@@ -1779,12 +1775,99 @@ class PelangganController extends Controller
         $pelanggan->status_pembayaran = 'sudah bayar';
         $pelanggan->save();
 
+        // Kirim notifikasi Telegram
+        $this->sendTelegramNotification($payment);
+
         // Redirect ke halaman history pembayaran dengan pesan sukses
         return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
 
-    public function bayar2(Request $request)
+
+    // Fungsi untuk mengirim notifikasi ke Telegram
+    private function sendTelegramNotification2($payment)
+    {
+        $token = '7085351448:AAErPRbIkJJOwkDTIMFUlwNU3AN_UQ1cRkY';
+        $chat_id = '-1002333302498';
+        $url = "https://api.telegram.org/bot{$token}/sendMessage";
+
+        $message = "💰 *Notifikasi Pembayaran Baru*\n\n" .
+            "👤 *Nama Pelanggan:* {$payment->nama_plg}\n" .
+            "👤 *Alamat:* {$payment->alamat_plg}\n" .
+            "💵 *Jumlah Pembayaran:* Rp " . number_format($payment->jumlah_pembayaran, 0, ',', '.') . "\n" .
+            "📅 *Tanggal Pembayaran:* {$payment->created_at}\n" .
+            "💳 *Metode Transaksi:* {$payment->metode_transaksi}\n" .
+            "📝 *Untuk Pembayaran:* {$payment->untuk_pembayaran}";
+
+        $client = new Client();
+
+        try {
+            $client->post($url, [
+                'form_params' => [
+                    'chat_id' => $chat_id,
+                    'text' => $message,
+                    'parse_mode' => 'Markdown',
+                ],
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Telegram Notification Error: " . $e->getMessage());
+        }
+    }
+
+    private function sendTelegramNotification($payment)
+    {
+        $token = '7085351448:AAErPRbIkJJOwkDTIMFUlwNU3AN_UQ1cRkY';
+        $chat_id = '-1002333302498';
+        $url = "https://api.telegram.org/bot{$token}/sendMessage";
+
+        // Mendapatkan data tambahan untuk dikirim ke Telegram
+        $totalJumlahPembayaranKeseluruhan = BayarPelanggan::sum('jumlah_pembayaran');
+        $totalPelangganKeseluruhan = Pelanggan::count();
+        $totalJumlahPembayaran = BayarPelanggan::whereMonth('tanggal_pembayaran', now()->month)
+            ->whereYear('tanggal_pembayaran', now()->year)
+            ->sum('jumlah_pembayaran');
+
+        $userIdsWithPayments = BayarPelanggan::whereMonth('tanggal_pembayaran', now()->month)
+            ->whereYear('tanggal_pembayaran', now()->year)
+            ->distinct('id_plg')
+            ->pluck('id_plg');
+
+        $totalPelangganBayar = count($userIdsWithPayments);
+
+        $sisaPembayaran = $totalJumlahPembayaranKeseluruhan - $totalJumlahPembayaran;
+        $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
+
+        // Menyiapkan pesan untuk Telegram
+        $message = "💰 *Notifikasi Pembayaran Baru*\n\n" .
+            "👤 *Nama Pelanggan:* {$payment->nama_plg}\n" .
+            "👤 *Alamat:* {$payment->alamat_plg}\n" .
+            "💵 *Jumlah Pembayaran:* Rp " . number_format($payment->jumlah_pembayaran, 0, ',', '.') . "\n" .
+            "📅 *Tanggal Pembayaran:* {$payment->created_at}\n" .
+            "💳 *Metode Transaksi:* {$payment->metode_transaksi}\n" .
+            "📝 *Untuk Pembayaran:* {$payment->untuk_pembayaran}\n" .
+            "============================================\n" .
+            "📊 *Total Tagihan:* Rp " . number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') . " 👥 *User:* {$totalPelangganKeseluruhan}\n" .
+            "💸 *Pemabayaran Masuk:* Rp " . number_format($totalJumlahPembayaran, 0, ',', '.') . " 👥 *User:* {$totalPelangganBayar}\n" .
+            "💰 *Sisa Pembayaran:* Rp " . number_format($sisaPembayaran, 0, ',', '.') .  " 👥 *User:* {$sisaUser}\n" .
+            "🙎🏻‍♂️ *Admin:* {$payment->admin_name}\n";
+
+        $client = new Client();
+
+        try {
+            $client->post($url, [
+                'form_params' => [
+                    'chat_id' => $chat_id,
+                    'text' => $message,
+                    'parse_mode' => 'Markdown',
+                ],
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Telegram Notification Error: " . $e->getMessage());
+        }
+    }
+
+
+    public function bayar_mudah_hp(Request $request)
     {
         // Validasi input
         $request->validate([
@@ -1815,7 +1898,7 @@ class PelangganController extends Controller
 
         if ($existingPayment) {
             // Jika sudah ada pembayaran di bulan tersebut, kirim pesan kesalahan dengan nama pelanggan
-            return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
+            return redirect()->route('pembayaran_mudah.index', $pelanggan->id)
                 ->with('alert', 'Gagal!! Karena Pembayaran untuk bulan ini sudah dilakukan untuk Pelanggan ' . $pelanggan->nama_plg . '.');
         }
 
@@ -1823,7 +1906,7 @@ class PelangganController extends Controller
         $adminName = Auth::user() ? Auth::user()->name : 'Unknown Admin';
 
         // Simpan data ke tabel bayar_pelanggan
-        BayarPelanggan::create([
+        $payment = BayarPelanggan::create([
             'pelanggan_id' => $pelanggan->id,
             'id_plg' => $pelanggan->id_plg ?? null,
             'nama_plg' => $pelanggan->nama_plg,
@@ -1847,10 +1930,14 @@ class PelangganController extends Controller
         $pelanggan->status_pembayaran = 'sudah bayar';
         $pelanggan->save();
 
+        //kirim notifikasi ke telegram
+        $this->sendTelegramNotification($payment);
+
         // Redirect ke halaman history pembayaran dengan pesan sukses
         return redirect()->route('pembayaran_mudah.bayar_hp', $pelanggan->id)
             ->with('success', 'Pembayaran berhasil dilakukan untuk pelanggan ' . $pelanggan->nama_plg . '.');
     }
+
 
 
 
@@ -2336,16 +2423,28 @@ class PelangganController extends Controller
                     $pelanggan->save();
                 } else {
                     // Jika belum bayar dan tanggal sekarang sama dengan tgl_tagih_plg
-                    if (Carbon::now()->isSameDay($tglTagihPlg)) {
-                        // Ubah status menjadi "Belum Bayar" jika tanggal saat ini sama dengan tgl_tagih_plg
-                        $pelanggan->status_pembayaran = 'Belum Bayar';
+                    if (Carbon::now()->format('d-m') === $tglTagihPlg->format('d-m')) {
+                        // Cek apakah ada tanggal pembayaran terakhir
+                        if ($pelanggan->pembayaranTerakhir && Carbon::parse($pelanggan->pembayaranTerakhir->tanggal_pembayaran)->format('m-Y') === Carbon::now()->format('m-Y')) {
+                            // Jika bulan pembayaran terakhir adalah bulan sekarang, status tetap "Belum Bayar"
+                            $pelanggan->status_pembayaran = 'Belum Bayar';
+                        } else {
+                            // Jika bulan pembayaran terakhir bukan bulan sekarang, ubah status menjadi "Isolir"
+                            $pelanggan->status_pembayaran = 'Isolir';
+                        }
                         $pelanggan->save();
                     } elseif (Carbon::now()->greaterThan($tglTagihPlg)) {
-                        // Jika sudah lewat jatuh tempo, ubah status menjadi "Isolir"
-                        $pelanggan->status_pembayaran = 'Isolir';
+                        // Jika tanggal sekarang sudah lewat dari tgl_tagih_plg
+                        if ($pelanggan->pembayaranTerakhir && Carbon::parse($pelanggan->pembayaranTerakhir->tanggal_pembayaran)->format('m-Y') === Carbon::now()->format('m-Y')) {
+                            // Jika pembayaran terakhir di bulan ini, status tetap "Belum Bayar"
+                            $pelanggan->status_pembayaran = 'Belum Bayar';
+                        } else {
+                            // Jika pembayaran terakhir tidak di bulan ini, ubah status menjadi "Isolir"
+                            $pelanggan->status_pembayaran = 'Isolir';
+                        }
                         $pelanggan->save();
                     } elseif (Carbon::now()->lessThan($tglTagihPlg)) {
-                        // Jika tanggal saat ini kurang dari tgl_tagih_plg, status menjadi "Belum Bayar"
+                        // Jika tanggal saat ini kurang dari tgl_tagih_plg, tetap "Belum Bayar"
                         $pelanggan->status_pembayaran = 'Belum Bayar';
                         $pelanggan->save();
                     }

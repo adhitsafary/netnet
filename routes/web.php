@@ -34,9 +34,8 @@ use App\Models\Pelanggan;
 use App\Models\Pelangganof;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
-
-
-
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\TanggalController;
 
 //PERBAIKAN
 Route::get('/home', [PelangganController::class, 'home'])->name('index');
@@ -79,7 +78,7 @@ Route::get('/pelanggan/offkan/{id}', [PelangganController::class, 'offkan'])->na
 
 
 //PSB
-Route::get('/pasangbaru/', [PSBController::class, 'index'])->name('pasangbaru.index');
+Route::get('/pasangbaru', [PSBController::class, 'index'])->name('pasangbaru.index');
 Route::get('/pasangbaru/create', [PSBController::class, 'create'])->name('pasangbaru.create');
 Route::post('/pasangbaru/store', [PSBController::class, 'store'])->name('pasangbaru.store');
 Route::get('/pasangbaru/edit/{id}', [PSBController::class, 'edit'])->name('pasangbaru.edit');
@@ -100,7 +99,6 @@ Route::get('/pelanggan/aktifkan/{id}', [PelangganOfController::class, 'aktifkan_
 
 
 Route::post('/pelanggan/{id}/pembayaran', [PelangganController::class, 'pembayaran'])->name('pelanggan.pembayaran');
-
 Route::patch('/pelanggan/{id}/toggle-visibility', [PelangganController::class, 'toggleVisibility'])->name('pelanggan.toggleVisibility');
 Route::get('/pelanggan/{id}/history', [PelangganController::class, 'history'])->name('pelanggan.history');
 
@@ -111,7 +109,7 @@ Route::post('isolir/{id}/reactivate', [IsolirController::class, 'reactivatePelan
 Route::post('pelanggan/{id}/aktifkanPSB', [PelangganController::class, 'aktifkanPSB'])->name('pelanggan.aktifkanPSB');
 
 Route::post('pelanggan/{id}/bayar', [PelangganController::class, 'bayar'])->name('pelanggan.bayar');
-Route::post('pelanggan/{id}/bayar2', [PelangganController::class, 'bayar2'])->name('pelanggan.bayar2');
+Route::post('pelanggan/{id}/bayar_mudah_hp', [PelangganController::class, 'bayar_mudah_hp'])->name('pelanggan.bayar_mudah_hp');
 //Route::post('isolir/{id}/bayar', [IsolirController::class, 'bayar'])->name('isolir.bayar');
 Route::get('/pelanggan/{id}/historypembayaran', [PelangganController::class, 'historypembayaran'])->name('pelanggan.historypembayaran');
 Route::get('/isolir/{id}/historypembayaran', [IsolirController::class, 'historypembayaran'])->name('isolir.historypembayaran');
@@ -124,7 +122,6 @@ Route::post('/pembayaran/hapus/{id}', [PembayaranController::class, 'destroy'])-
 
 Route::get('/broadcast', [BroadcastController::class, 'index'])->name('broadcast.index');
 Route::post('/broadcast/send', [BroadcastController::class, 'send'])->name('broadcast.send');
-
 // Rute untuk menampilkan halaman pengiriman pesan
 Route::get('/send-message', [MessageController::class, 'create'])->name('message.create');
 // Rute untuk menyimpan pesan
@@ -133,9 +130,6 @@ Route::post('/send-message', [MessageController::class, 'store'])->name('message
 Route::get('/peringatan', [MessageController::class, 'create2'])->name('peringatan.create');
 // Rute untuk menyimpan pesan
 Route::post('/peringatan', [MessageController::class, 'store2'])->name('peringatan.store');
-
-
-
 //PEMBAYARAN GLOBAL
 Route::get('/pembayaran', [PembayaranController::class, 'index'])->name('pembayaran.index');
 //chart bulanan
@@ -156,10 +150,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
 });
 
+//ini baru 19/12/2024
+// Arahkan teknisi ke halaman absensi/index
+Route::middleware(['auth', 'role:teknisi'])->get('/absensi/index', function () {
+    return view('absensi.index'); // Halaman absensi untuk teknisi
+});
 
+// Route untuk mengarahkan /home ke /masuk/admin
 Route::get('/home', function () {
     return redirect('/masuk/admin');
 });
+
 Route::get('/teknisi/baru', [TeknisiController::class, 'index'])->name('teknisi');
 Route::get('/homebaru', [PelangganController::class, 'home'])->name('index');
 
@@ -182,26 +183,17 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('/masuk/teknisi', [TeknisiController::class, 'index'])->name('teknisi.index');
-
 Route::get('coba', [TeknisiController::class, 'coba']);
-
 Route::get('/pelanggan/belum_bayar', [PelangganController::class, 'belumBayar'])->name('pelanggan.belum_bayar');
-
-
 Route::get('/cekdulu', [CobaController::class, 'create']);
 //landing page
 Route::get('/home2', [PerbaikanController::class, 'home2']);
-
 Route::get('/search-pelanggan', [PerbaikanController::class, 'searchPelanggan'])->name('pelanggan.search');
 Route::get('/get-pelanggan/{id}', [PerbaikanController::class, 'getPelanggan'])->name('pelanggan.get');
-
-
-
 Route::get('/rekap-teknisi', [PerbaikanController::class, 'rekapTeknisi'])->name('perbaikan.rekapTeknisi');
 
 Route::get('/teknisi/rekap-teknisi', [TeknisiController::class, 'rekapTeknisi'])->name('teknisi.rekap_teknisi');
 Route::post('/rekap-teknisi/print', [PerbaikanController::class, 'printRekapTeknisi'])->name('perbaikan.printRekapTeknisi');
-
 Route::post('/perbaikan/{id}/selesai', [PerbaikanController::class, 'selesai'])->name('perbaikan.selesai');
 
 //Alamat Karyawan
@@ -265,8 +257,6 @@ Route::get('/isolir/aktifkan/{id}', [IsolirController::class, 'showOff'])->name(
 //Route::post('/isolir/reactivate/{id}', [IsolirController::class, 'reactivatePelanggan'])->name('pelanggan.reactivate');
 
 
-
-
 Route::post('/isolir/{id}/activate', [IsolirController::class, 'activate'])->name('isolir.activate');
 Route::get('/isolir/cleanup', [IsolirController::class, 'cleanUp'])->name('isolir.cleanup');
 
@@ -275,23 +265,16 @@ Route::post('pelanggan/to-isolir/{id}', [PelangganController::class, 'toIsolir']
 // web.php
 Route::post('pelanggan/to-off/{id}', [IsolirController::class, 'toOff'])->name('pelanggan.toOff');
 
-
-
-
 //rekap mutasi harian
 Route::get('/rekap-mutasi-harian', [RekapMutasiHarianController::class, 'index'])->name('rekap.mutasi.harian');
 
 
 Route::post('pelanggan/{id}/update-status', [PelangganController::class, 'updateStatus'])->name('pelanggan.updateStatus');
-
 Route::get('/rekap-harian', [JumlahLainLainController::class, 'lihatRekapHarian'])->name('rekap-harian');
-
 //filter pelanggan harian tgl_tagih_plg
 Route::get('/pelanggan/tagihan', [PelangganController::class, 'filterByTanggalTagih'])->name('pelanggan.filterTagih');
 //filter di index  pelanggan
 Route::get('/pelanggan/filter-tagih', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
-
-
 Route::get('/pelanggan/tagihan/index', [PelangganController::class, 'filterByTanggalTagihindex'])->name('pelanggan.filterTagihindex');
 //filter di pembayaran
 Route::get('/pembayaran/filter/', [PembayaranController::class, 'index'])->name('pembayaran.filter');
@@ -305,11 +288,9 @@ Route::get('/check-isolir', [PelangganController::class, 'checkAndMoveToIsolir']
 Route::get('/update-payment-status', [PelangganController::class, 'updatePaymentStatus'])->name('update.payment.status');
 //reactive bayar
 Route::post('/reactivate-bayar', [IsolirController::class, 'reactivateAndBayar'])->name('pelanggan.reactivateAndBayar');
-
 //pelanggan bayar
 Route::get('/pembayaran/csbayar', [PelangganBayarSendiriController::class, 'index'])->name('pembayaran.csbayar');
 Route::get('/costumer', [PelangganBayarSendiriController::class, 'index'])->name('costumer.index');
-
 
 // Route untuk admin
 // Route::middleware(['role:admin'])->group(function () {
@@ -347,12 +328,10 @@ Route::get('/pelanggan/sudahbayar', [HomeController::class, 'showPelangganBelumB
 Route::get('/pelanggan/belumbayar', [HomeController::class, 'showPelangganSudahBayar'])->name('pelanggan.sudahbayar');
 Route::get('/pelanggan/historyhariini', [HomeController::class, 'historyhariini'])->name('pelanggan.historyhariini');
 
-
 Route::get('/target', [TargetController::class, 'index'])->name('target.index');
 Route::post('/simpan-target', [TargetController::class, 'store'])->name('target.store');
 Route::post('/target/update/{id}', [TargetController::class, 'update'])->name('target.update');
 Route::delete('/target/{id}', [TargetController::class, 'destroy'])->name('target.destroy');
-
 
 //file Storage
 Route::get('/file/index', [FileController::class, 'index'])->name('file.index');
@@ -383,7 +362,6 @@ Route::get('/pembayaran/mudah', [PembayaranMudahController::class, 'index'])->na
 Route::get('/pembayaran/mudah/coba', [PembayaranMudahController::class, 'coba'])->name('pembayaran_mudah.coba');
 Route::get('/pembayaran/mudah/bayar_hp', [PembayaranMudahController::class, 'bayar_hp'])->name(name: 'pembayaran_mudah.bayar_hp');
 
-
 //absensi
 Route::post('/absensi', [AbsensiController::class, 'store']);
 Route::get('/hitung-gaji/{user_id}', [AbsensiController::class, 'hitungGaji']);
@@ -395,7 +373,6 @@ Route::get('/absensi/splash', [AbsensiController::class, 'splash'])->name('absen
 Route::get('/absensi/absen', [AbsensiController::class, 'absen'])->name('absensi.absen');
 
 Route::get('/absensi/dashboard', [AbsensiController::class, 'getAbsensiData'])->name('absensi.dashboard');
-
 
 //midleware
 Route::middleware(['guest'])->group(function () {
@@ -409,3 +386,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/absensi/pulang', [AbsensiController::class, 'updatePulang']);
 });
 
+Route::post('/absensi/hapus/{id}', [AbsensiController::class, 'destroy'])->name('absensi.destroy');
+
+//Payment Notifiaksi ke telegram
+Route::post('/store-payment', [NotificationController::class, 'storePayment'])->name('store.payment');
+Route::get('/send-notification', [NotificationController::class, 'notifyLatesPayment'])->name('send.notification');
+
+
+//merubah tanggal di web
+Route::get('/ubah-tanggal', [TanggalController::class, 'index'])->name('ubah-tanggal.index');
+Route::post('/ubah-tanggal/update', [TanggalController::class, 'update'])->name('ubah-tanggal.update');
