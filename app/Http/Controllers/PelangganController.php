@@ -1851,6 +1851,7 @@ class PelangganController extends Controller
             "💰 *Sisa Pembayaran:* Rp " . number_format($sisaPembayaran, 0, ',', '.') .  " 👥 *User:* {$sisaUser}\n" .
             "🙎🏻‍♂️ *Admin:* {$payment->admin_name}\n";
 
+
         $client = new Client();
 
         try {
@@ -1874,7 +1875,7 @@ class PelangganController extends Controller
             'id' => 'required|exists:pelanggan,id',
             'metode_transaksi' => 'required|string',
             'untuk_pembayaran' => 'required|string',
-            'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi
+            'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi disini
         ]);
 
         // Ambil data pelanggan berdasarkan id
