@@ -20,13 +20,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td class="custom-cell info"
-                        onclick="copyToClipboard('Total Sudah Bayar: {{ $totalSudahBayar }} (Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }})')">
+                    <td class="custom-cell info">
                         Rp {{ number_format($totalPembayaranSudahBayar, 0, ',', '.') }} User: {{ $totalSudahBayar }}
                     </td>
 
-                    <td class="custom-cell warning"
-                        onclick="copyToClipboard('Total Belum Bayar: {{ $totalBelumBayar }} (Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }})')">
+                    <td class="custom-cell warning">
                         Rp {{ number_format($totalPembayaranBelumBayar, 0, ',', '.') }} User: {{ $totalBelumBayar }}
                     </td>
 
@@ -54,14 +52,12 @@
                         Rp {{ number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') }} User:
                         {{ number_format($totalPelangganKeseluruhan, 0, ',', '.') }}
                     </td>
-                    <td class="custom-cell primary-red"
-                        onclick="copyToClipboard('Total Masuk: Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} || User: {{ number_format($totalPelangganBayar, 0, ',', '.') }}')">
+                    <td class="custom-cell primary-red">
                         Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} User:
                         {{ number_format($sisaUser, 0, ',', '.') }}
                     </td>
 
-                    <td class="custom-cell primary-green"
-                        onclick="copyToClipboard('Tersisa: Rp {{ number_format($sisaPembayaran, 0, ',', '.') }} || User: {{ number_format($sisaUser, 0, ',', '.') }}')">
+                    <td class="custom-cell primary-green">
                         Rp {{ number_format($totalJumlahPembayaran, 0, ',', '.') }} User:
                         {{ number_format($totalPelangganBayar, 0, ',', '.') }}
                     </td>
@@ -187,11 +183,23 @@
                     Ekspor
                 </button>
                 <div class="dropdown-menu">
-                    <a href="{{ route('pelanggan.export', ['format' => 'pdf', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                        class="dropdown-item">PDF</a>
-                    <a href="{{ route('pelanggan.export', ['format' => 'excel', 'tgl_tagih_plg' => request('tgl_tagih_plg')]) }}"
-                        class="dropdown-item">Excel</a>
+                    <a href="{{ route('pelanggan.export', [
+                        'format' => 'pdf',
+                        'tgl_tagih_plg' => request('tgl_tagih_plg'),
+                        'paket_plg' => request('paket_plg'),
+                        'harga_paket' => request('harga_paket'),
+                        'status_pembayaran' => request('status_pembayaran'),
+                    ]) }}" class="dropdown-item">PDF</a>
+
+                    <a href="{{ route('pelanggan.export', [
+                        'format' => 'excel',
+                        'tgl_tagih_plg' => request('tgl_tagih_plg'),
+                        'paket_plg' => request('paket_plg'),
+                        'harga_paket' => request('harga_paket'),
+                        'status_pembayaran' => request('status_pembayaran'),
+                    ]) }}" class="dropdown-item">Excel</a>
                 </div>
+
             </div>
         </div>
 

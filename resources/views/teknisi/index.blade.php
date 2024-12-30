@@ -1,10 +1,11 @@
 @extends($layout)
 
 @section('konten')
-    <div class="mb-4 mt-5 text-right">
+    <div class=" p-5 ">
 
+        <!--
         <div>
-            <div class="ml-2 d-none d-lg-inline text-white small text-right">
+            <div class="ml-2 d-none d-lg-inline text-black text-right">
                 <ul class="list-group list-group-flush">
                     @if (Auth::user()->role == 'teknisi')
                         <li class="list-group-item">Menu Teknisi</li>
@@ -17,8 +18,8 @@
                     @endif
                 </ul>
             </div>
-        </div>
-        
+        </div> -->
+
         <!-- Form Filter dan Pencarian -->
         <div class="row mb-4">
             <div class="col-md-9">
@@ -36,8 +37,8 @@
             <div class="col-md-3 text-right">
                 <div class="d-flex justify-content-end gap-2">
 
-                    <a class="btn btn-primary btn-sm" href="">Rekap Pemasangan dan Perbaikan</a>
-                    <a class="btn btn-danger btn-sm mb-2" href="/logout">
+
+                    <a class="mt-2 btn btn-danger btn-sm mb-2" href="/logout">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         Logout
                     </a>
@@ -54,6 +55,8 @@
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+
+        <!--table-responsive -->
 
         <table class="table table-bordered " style="color: black;">
             <thead class="table table-danger" style="color: black;">

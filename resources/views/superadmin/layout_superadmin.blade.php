@@ -150,13 +150,13 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap21"
-                    aria-expanded="true" aria-controls="collapseBootstrap21">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap22"
+                    aria-expanded="true" aria-controls="collapseBootstrap22">
                     <img src="{{ asset('asset/img/icon/absen.png') }}" alt="Gambar Pelanggan"
                         style="width: 35px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Absen Kehadiran</span>
                 </a>
-                <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
+                <div id="collapseBootstrap22" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/absensi/dashboard">Data Kehadiran</a>
@@ -180,8 +180,7 @@
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pemasukan/">Riwayat Pemasukan</a>
                         <a class="collapse-item" href="/pengeluaran/">Riwayat Pengeluaran</a>
-                        <a class="collapse-item" href="/pemasukan/create">Buat Pemasukan</a>
-                        <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
+
 
 
                     </div>

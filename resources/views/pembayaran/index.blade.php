@@ -10,17 +10,17 @@
                 style="background-color: #f8f9fa; color: black; border: 1px solid #ddd;">
 
                 <div class="p-3 text-center" style="background-color: #007bff; color: white; flex: 1; margin-right: 10px;">
-                    <strong>Total Jumlah Pembayaran:</strong>
+                    <strong>Jumlah Pembayaran:</strong>
                     <div style="font-size: 1.5em;">{{ number_format($totalJumlahPembayaran) }}</div>
                 </div>
- 
+
                 <div class="p-3 text-center" style="background-color: #28a745; color: white; flex: 1;">
-                    <strong>Total Jumlah Pelanggan Bayar:</strong>
+                    <strong>Jumlah Pelanggan:</strong>
                     <div style="font-size: 1.5em;">{{ $totalPelanggan }}</div>
                 </div>
             </div>
         </div>
-        
+
         <th class="mt-4 mb-4">
             <form action="{{ route('pembayaran.index') }}" method="GET" class="d-flex align-items-center">
                 <input type="text" name="search" id="search" class="form-control me-2"
@@ -114,34 +114,34 @@
             <thead class="table table-primary " style="color: black;">
                 <tr>
                     <th  style="width: 1%; padding: 2px;">No</th>
-                
+
                     <th  style="width: 1%; padding: 2px;">Nama Pelanggan</th>
-                    <th  style="width: 1%; padding: 2px;">No Telp</th>
+                    <th  style="width: 1%; padding: 2px;">No Telepon</th>
                     <th  style="width: 1%; padding: 2px;">Alamat</th>
                     <th  style="width: 1%; padding: 2px;">
-                      
+
                         Paket
                     </th>
                     <th  style="width: 1%; padding: 2px;">
-  
-                        <label for="bulan">Bulan Bayar Terakhir</label>
+
+                        <label for="bulan">Bulan Bayar</label>
                     </th>
                     <th  style="width: 1%; padding: 2px;">
 
                         Tanggal Pembayaran
                     </th>
                     <th  style="width: 1%; padding: 2px;">
-                    
+
                         Tanggal Tagih
                     </th>
                     <th  style="width: 1%; padding: 2px;">
-                   
+
                         Jumlah Pembayaran
                     </th>
                     <th  style="width: 1%; padding: 2px;">Metode Pembayaran</th>
                     <th  style="width: 1%; padding: 2px;">Pembayaran</th>
                     <th  style="width: 1%; padding: 2px;">Keterangan</th>
-                    
+
                     <th  style="width: 1%; padding: 2px;">Admin</th>
                     <th  style="width: 1%; padding: 2px;">Edit</th>
                     <th  style="width: 1%; padding: 2px;">Hapus</th>
@@ -152,7 +152,7 @@
                 @forelse ($pembayaran as $no => $item)
                     <tr class="">
                         <td style="padding: 2px;">{{ ($pembayaran->currentPage() - 1) * $pembayaran->perPage() + $loop->iteration }}</td>
-                        
+
                         <td style="padding: 2px;">{{ $item->nama_plg }}</td>
                         <td style="padding: 2px;">{{ $item->no_telepon_plg }}</td>
                         <td style="padding: 2px;">{{ $item->alamat_plg }}</td>
@@ -177,7 +177,7 @@
                                 class="d-inline-block">
                                 @csrf
 
-                                <button 
+                                <button
                                     onclick="return confirm('Yakin ingin menghapus data ini?')" class="btn btn-danger btn-sm">
                                     <img src="{{ asset('asset/img/icon/delete.png') }}" style="height: 30px; width: 30px;" alt="Hapus" ></button>
                             </form>
@@ -201,7 +201,7 @@
         {{ $pembayaran->links('pagination::bootstrap-4') }}
     </div>
 
-    <script> 
+    <script>
     function printPayment(rowNumber, namaPelanggan) {
         var row = document.querySelectorAll('table tbody tr')[rowNumber - 1];
         var nama = row.cells[1].innerText;
@@ -297,8 +297,8 @@
         <div style="border: 1px solid #000; padding: 10px; margin: 0 auto; width: 95%; background-color: #f9f9f9; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
             <p style="margin: 0; line-height: 1.6;">
                 <strong>Terima kasih atas kepercayaan Anda menggunakan layanan kami!</strong><br>
-                Kami berkomitmen untuk terus memberikan pelayanan terbaik kepada Anda. Apabila terdapat kendala atau pertanyaan lebih lanjut, 
-                jangan ragu untuk menghubungi layanan pelanggan kami melalui telepon atau email yang tertera di portal resmi kami. 
+                Kami berkomitmen untuk terus memberikan pelayanan terbaik kepada Anda. Apabila terdapat kendala atau pertanyaan lebih lanjut,
+                jangan ragu untuk menghubungi layanan pelanggan kami melalui telepon atau email yang tertera di portal resmi kami.
                 Kepuasan Anda adalah prioritas utama kami.
             </p>
         </div>

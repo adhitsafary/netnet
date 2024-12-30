@@ -26,14 +26,21 @@
             </div>
             <div class="form-group">
                 <label for="password">Password (Biarkan kosong jika tidak ingin mengganti):</label>
-                <input type="password" class="form-control" id="password" name="password">
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-outline-secondary" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="form-group">
                 <label for="foto">Foto (Biarkan kosong jika tidak ingin mengganti):</label>
                 <input type="file" class="form-control-file" id="foto" name="foto" accept="image/*">
                 @if ($user->foto)
                     <div class="mt-2">
-                        <img src="{{ asset('storage/' . $user->foto) }}" alt="Foto Pengguna"
+                        <img src="{{ asset($user->foto) }}" alt="Foto Pengguna"
                             style="max-width: 100px; border-radius: 5px;">
                     </div>
                 @endif
@@ -43,3 +50,21 @@
         </form>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
+@endpush
