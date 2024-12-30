@@ -76,8 +76,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap13"
-                    aria-expanded="true" aria-controls="collapseBootstrap13">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap13" aria-expanded="true" aria-controls="collapseBootstrap13">
                     <img src="{{ asset('asset/img/baru.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Rekap Pemasangan</span>
@@ -93,8 +93,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap1"
-                    aria-expanded="true" aria-controls="collapseBootstrap1">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap1" aria-expanded="true" aria-controls="collapseBootstrap1">
                     <img src="{{ asset('asset/img/perbaikan.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">PSB dan Perbaikan</span>
@@ -112,15 +112,14 @@
                 </div>
             </li>
 
-
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap21"
-                    aria-expanded="true" aria-controls="collapseBootstrap21">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap22" aria-expanded="true" aria-controls="collapseBootstrap22">
                     <img src="{{ asset('asset/img/icon/absen.png') }}" alt="Gambar Pelanggan"
                         style="width: 35px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Absen Kehadiran</span>
                 </a>
-                <div id="collapseBootstrap21" class="collapse" aria-labelledby="headingBootstrap17"
+                <div id="collapseBootstrap22" class="collapse" aria-labelledby="headingBootstrap17"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded  font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/absensi/dashboard">Data Kehadiran</a>
@@ -133,8 +132,8 @@
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap12"
-                    aria-expanded="true" aria-controls="collapseBootstrap12">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap12" aria-expanded="true" aria-controls="collapseBootstrap12">
                     <img src="{{ asset('asset/img/pengeluaran.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pmsukan Pgeluarn</span>
@@ -144,9 +143,6 @@
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <a class="collapse-item" href="/pemasukan/">Riwayat Pemasukan</a>
                         <a class="collapse-item" href="/pengeluaran/">Riwayat Pengeluaran</a>
-                        <a class="collapse-item" href="/pemasukan/create">Buat Pemasukan</a>
-                        <a class="collapse-item" href="/pengeluaran/create">Buat Pengeluaran</a>
-
 
                     </div>
                 </div>
@@ -162,10 +158,12 @@
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">RIWAYAT</span>
                 </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+                <div id="collapsePage" class="collapse" aria-labelledby="headingPage"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded font-weight-bold" style="color: black">
                         <h6 class="collapse-header"></h6>
                         <a class="collapse-item" href="/pembayaran">Riwayat Pembayaran</a>
+                        <a class="collapse-item" href="/pembayaran">Lihat di HP</a>
 
                         <a class="collapse-item" href="/rekap-harian/">Rekap harian</a>
 
@@ -176,8 +174,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap17"
-                    aria-expanded="true" aria-controls="collapseBootstrap17">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap17" aria-expanded="true" aria-controls="collapseBootstrap17">
                     <img src="{{ asset('asset/img/update.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Update DATA</span>
@@ -193,8 +191,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap18"
-                    aria-expanded="true" aria-controls="collapseBootstrap18">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap18" aria-expanded="true" aria-controls="collapseBootstrap18">
                     <img src="{{ asset('asset/img/target.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Target Perusahaan</span>
@@ -209,8 +207,8 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap19"
-                    aria-expanded="true" aria-controls="collapseBootstrap19">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap19" aria-expanded="true" aria-controls="collapseBootstrap19">
                     <img src="{{ asset('asset/img/wa.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">BOT Whatsapp</span>
@@ -227,8 +225,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap20"
-                    aria-expanded="true" aria-controls="collapseBootstrap20">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap20" aria-expanded="true" aria-controls="collapseBootstrap20">
                     <img src="{{ asset('asset/img/folder.png') }}" alt="Gambar Pelanggan"
                         style="width: 30px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">File</span>
@@ -243,8 +241,8 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap21"
-                    aria-expanded="true" aria-controls="collapseBootstrap21">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse"
+                    data-target="#collapseBootstrap21" aria-expanded="true" aria-controls="collapseBootstrap21">
                     <img src="{{ asset('asset/img/pemberitahuan.png') }}" alt="Gambar Pelanggan"
                         style="width: 40px; height: auto; margin-left: 10px;" class="mr-2">
                     <span class=" font-weight-bold">Pemberitahuan</span>
@@ -364,7 +362,8 @@
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                                        <img class="rounded-circle" src="img/girl.png" style="max-width: 60px"
+                                            alt="">
                                         <div class="status-indicator bg-default"></div>
                                     </div>
                                     <div>
@@ -393,8 +392,9 @@
                                             <div class="small float-right"><b>50%</b></div>
                                         </div>
                                         <div class="progress" style="height: 12px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-success" role="progressbar"
+                                                style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </a>
@@ -408,38 +408,41 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{-- Cek apakah pengguna memiliki foto di database --}}
-                                <img class="img-profile rounded-circle"
-                                    src="{{ Auth::check() && Auth::user()->foto ? asset('storage/' . Auth::user()->foto) : asset('/template2/img/boy.png') }}"
-                                    style="max-width: 100px">
+                                <img src="{{ asset(Auth::check() && Auth::user()->foto ? Auth::user()->foto : 'asset/img/user/user.png') }}"
+                                alt="Foto Pengguna"
+                                style="max-width: 50px; max-height: 50px; border-radius: 50%;">
+
+
                                 <div class="ml-2 mt-4 d-none d-lg-inline text-white small">
                                     @if (Auth::check())
-                                    {{-- Mengecek apakah pengguna sudah login --}}
-                                    <span style="font-weight: bold; color: white;">{{ Auth::user()->name }}</span>
-                                    {{-- Tampilkan nama pengguna --}}
-                                    <ul class="list-group list-group-flush" style="background-color: transparent;">
-                                        @if (Auth::user()->role == 'teknisi')
-                                        <li class="list-group-item"
-                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                        {{-- Mengecek apakah pengguna sudah login --}}
+                                        <span style="font-weight: bold; color: white;">{{ Auth::user()->name }}</span>
+                                        {{-- Tampilkan nama pengguna --}}
+                                        <ul class="list-group list-group-flush"
+                                            style="background-color: transparent;">
+                                            @if (Auth::user()->role == 'teknisi')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                        </li>
-                                        @endif
+                                                </li>
+                                            @endif
 
-                                        @if (Auth::user()->role == 'admin')
-                                        <li class="list-group-item"
-                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                            @if (Auth::user()->role == 'admin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                        </li>
-                                        @endif
+                                                </li>
+                                            @endif
 
-                                        @if (Auth::user()->role == 'superadmin')
-                                        <li class="list-group-item"
-                                            style="background-color: transparent; border: none; color: white; font-weight: bold;">
+                                            @if (Auth::user()->role == 'superadmin')
+                                                <li class="list-group-item"
+                                                    style="background-color: transparent; border: none; color: white; font-weight: bold;">
 
-                                        </li>
-                                        @endif
-                                    </ul>
+                                                </li>
+                                            @endif
+                                        </ul>
                                     @else
-                                    {{-- Pengalihan atau pesan error jika pengguna belum login --}}
+                                        {{-- Pengalihan atau pesan error jika pengguna belum login --}}
                         <li class="list-group-item" style="background-color: transparent; border: none; color: red;">
                             Silakan login untuk melihat menu.
                         </li>

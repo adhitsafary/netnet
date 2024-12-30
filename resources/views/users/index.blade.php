@@ -38,7 +38,7 @@
                 @forelse ($users as $user)
                     <tr class="font font-weight-bold" style="color: black">
                         <td>
-                            <img src="{{ asset('storage/' . $user->foto) }}" alt="Foto Pengguna"
+                            <img src="{{ asset($user->foto) }}" alt="Foto Pengguna"
                                 style="max-width: 60px; max-height: 60px; border-radius: 50%;">
                         </td>
                         <td>{{ $user->name }}</td>

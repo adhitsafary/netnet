@@ -1820,9 +1820,13 @@ class PelangganController extends Controller
         $chat_id = '-1002333302498';
         $url = "https://api.telegram.org/bot{$token}/sendMessage";
 
+        //inisialisai Query
+        $query = Pelanggan::whereIn('status_pembayaran', ['Sudah Bayar', 'Belum Bayar']);
+        $query_tnppsb = Pelanggan::whereNot('status_pembayaran', ['PSB']);
+
         // Mendapatkan data tambahan untuk dikirim ke Telegram
-        $totalJumlahPembayaranKeseluruhan = BayarPelanggan::sum('jumlah_pembayaran');
-        $totalPelangganKeseluruhan = Pelanggan::count();
+        $totalJumlahPembayaranKeseluruhan = $query_tnppsb->sum('harga_paket');
+        $totalPelangganKeseluruhan = $query_tnppsb->count();
         $totalJumlahPembayaran = BayarPelanggan::whereMonth('tanggal_pembayaran', now()->month)
             ->whereYear('tanggal_pembayaran', now()->year)
             ->sum('jumlah_pembayaran');
@@ -1838,18 +1842,21 @@ class PelangganController extends Controller
         $sisaUser = $totalPelangganKeseluruhan - $totalPelangganBayar;
 
         // Menyiapkan pesan untuk Telegram
-        $message = "💰 *Notifikasi Pembayaran Baru*\n\n" .
-            "👤 *Nama Pelanggan:* {$payment->nama_plg}\n" .
-            "👤 *Alamat:* {$payment->alamat_plg}\n" .
-            "💵 *Jumlah Pembayaran:* Rp " . number_format($payment->jumlah_pembayaran, 0, ',', '.') . "\n" .
-            "📅 *Tanggal Pembayaran:* {$payment->created_at}\n" .
-            "💳 *Metode Transaksi:* {$payment->metode_transaksi}\n" .
-            "📝 *Untuk Pembayaran:* {$payment->untuk_pembayaran}\n" .
-            "============================================\n" .
-            "📊 *Total Tagihan:* Rp " . number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.') . " 👥 *User:* {$totalPelangganKeseluruhan}\n" .
-            "💸 *Pemabayaran Masuk:* Rp " . number_format($totalJumlahPembayaran, 0, ',', '.') . " 👥 *User:* {$totalPelangganBayar}\n" .
-            "💰 *Sisa Pembayaran:* Rp " . number_format($sisaPembayaran, 0, ',', '.') .  " 👥 *User:* {$sisaUser}\n" .
-            "🙎🏻‍♂️ *Admin:* {$payment->admin_name}\n";
+        $message =
+            "💰 *Notifikasi Pembayaran Baru*\n" .
+            "========================\n" .
+            "👤 *Pelanggan :* {$payment->nama_plg}\n" .
+            "📍 *Alamat :* {$payment->alamat_plg}\n" .
+            "💵 *Pembayaran :* Rp " . number_format($payment->jumlah_pembayaran, 0, ',', '.') . "\n" .
+            "📅 *Tanggal:* {$payment->created_at}\n" .
+            "💳 *Metode :* {$payment->metode_transaksi}\n" .
+            "📝 *Untuk Pembayaran :* {$payment->untuk_pembayaran}\n" .
+            "=========================\n" .
+            "📊 *Total Tagihan :* Rp " . number_format($totalJumlahPembayaranKeseluruhan, 0, ',', '.' ) . " # 👥 * : * {$totalPelangganKeseluruhan}\n" .
+            "💸 *Pemabayaran Masuk :* Rp " . number_format($totalJumlahPembayaran, 0, ',', '.' ) . " # 👥 * : * {$totalPelangganBayar}\n" .
+            "💰 *Sisa Pembayaran :* Rp " . number_format($sisaPembayaran, 0, ',', '.' ) .  " # 👥 * : * {$sisaUser}\n" .
+            "🙎🏻‍♂️ *Admin :* {$payment->admin_name}\n";
+
 
         $client = new Client();
 
@@ -1874,7 +1881,7 @@ class PelangganController extends Controller
             'id' => 'required|exists:pelanggan,id',
             'metode_transaksi' => 'required|string',
             'untuk_pembayaran' => 'required|string',
-            'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi
+            'tanggal_pembayaran' => 'nullable|date_format:Y-m' // nullable untuk membolehkan tidak diisi disini
         ]);
 
         // Ambil data pelanggan berdasarkan id
@@ -2673,6 +2680,82 @@ class PelangganController extends Controller
 
     public function export(Request $request, $format)
     {
+        // Ambil filter dari request
+        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $status_pembayaran = $request->input('status_pembayaran');
+
+        // Query awal
+        $query = Pelanggan::query();
+
+        // Tambahkan filter
+        $query = $query->when($tgl_tagih_plg, function ($query) use ($tgl_tagih_plg) {
+            return $query->where('tgl_tagih_plg', $tgl_tagih_plg);
+        })
+        ->when($paket_plg, function ($query) use ($paket_plg) {
+            return $query->where('paket_plg', $paket_plg);
+        })
+        ->when($status_pembayaran, function ($query) use ($status_pembayaran) {
+            return $query->where('status_pembayaran', $status_pembayaran);
+        })
+        ->when($harga_paket, function ($query) use ($harga_paket) {
+            return $query->where('harga_paket', $harga_paket);
+        });
+
+        // Ambil data sesuai filter
+        $pelanggan = $query->get();
+
+        // Ekspor data
+        if ($format === 'pdf') {
+            $pdf = PDF::loadView('pelanggan.pdf', ['pelanggan' => $pelanggan]);
+            return $pdf->download('pelanggan_' . now()->format('Y-m-d') . '.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new PelangganExport($pelanggan), 'pelanggan_' . now()->format('Y-m-d') . '.xlsx');
+        }
+    }
+
+
+
+    public function export2(Request $request, $format)
+    {
+        $tgl_tagih_plg = $request->input('tgl_tagih_plg');
+        $paket_plg = $request->input('paket_plg');
+        $harga_paket = $request->input('harga_paket');
+        $status_pembayaran = $request->input('status_pembayaran');
+
+        // Membuat query awal untuk pelanggan dengan status tertentu
+        $query = Pelanggan::whereIn('status_pembayaran', ['Sudah Bayar', 'Belum Bayar']);
+
+        // Menambahkan filter berdasarkan input yang diterima
+        $query = $query->when($tgl_tagih_plg, function ($query) use ($tgl_tagih_plg) {
+            return $query->where('tgl_tagih_plg', $tgl_tagih_plg);
+        })
+            ->when($paket_plg, function ($query) use ($paket_plg) {
+                return $query->where('paket_plg', $paket_plg);
+            })
+            ->when($harga_paket, function ($query) use ($harga_paket) {
+                return $query->where('harga_paket', $harga_paket);
+            })
+            ->when($status_pembayaran, function ($query) use ($status_pembayaran) {
+                return $query->where('status_pembayaran', $status_pembayaran);
+            });
+
+        // Mendapatkan hasil query
+        $pelanggan = $query->get();
+
+        // Menghasilkan file sesuai dengan format yang diminta
+        if ($format === 'pdf') {
+            $pdf = PDF::loadView('pelanggan.pdf', ['pelanggan' => $pelanggan]);
+            return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
+        } elseif ($format === 'excel') {
+            return Excel::download(new PelangganController($pelanggan), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
+        }
+    }
+
+
+    public function export_isolir(Request $request, $format)
+    {
         $tgl_tagih_plg = $request->input('tgl_tagih_plg');
         $paket_plg = $request->input('paket_plg');
         $harga_paket = $request->input('harga_paket');
@@ -2689,21 +2772,21 @@ class PelangganController extends Controller
                 return $query->where('paket_plg', $paket_plg);
             })
             ->when($harga_paket, function ($query) use ($harga_paket) {
-                return $query->where('jumlah_pembayaran', $harga_paket);
+                return $query->where('harga_paket', $harga_paket);
             })
             ->when($status_pembayaran, function ($query) use ($status_pembayaran) {
                 return $query->where('status_pembayaran', $status_pembayaran);
             });
 
         // Mendapatkan hasil query
-        $pembayaran = $query->get();
+        $pelanggan = $query->get();
 
         // Menghasilkan file sesuai dengan format yang diminta
         if ($format === 'pdf') {
-            $pdf = PDF::loadView('pembayaran.pdf', ['pembayaran' => $pembayaran]);
+            $pdf = PDF::loadView('pelanggan.pdf', ['pelanggan' => $pelanggan]);
             return $pdf->download('bayar_pelanggan_' . now()->format('Y-m-d') . '.pdf');
         } elseif ($format === 'excel') {
-            return Excel::download(new PelangganController($pembayaran), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
+            return Excel::download(new PelangganController($pelanggan), 'bayar_pelanggan_' . now()->format('Y-m-d') . '.xlsx');
         }
     }
 }
